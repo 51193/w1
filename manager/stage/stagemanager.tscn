@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://krve65rxaau4"]
+
+[ext_resource type="Script" path="res://manager/stage/StageManager.cs" id="1_3w7fg"]
+
+[node name="StageManager" type="Node"]
+script = ExtResource("1_3w7fg")

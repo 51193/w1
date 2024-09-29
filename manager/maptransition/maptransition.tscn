@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ch2dmkohs60hi"]
+
+[ext_resource type="Script" path="res://manager/maptransition/MapTransition.cs" id="1_8gvrd"]
+
+[node name="MapTransition" type="Node"]
+script = ExtResource("1_8gvrd")

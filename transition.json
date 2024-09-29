@@ -1,0 +1,16 @@
+[
+	{
+		"Departure": "Map00",
+		"Exit": "Exit00",
+		"Destination": "Map01",
+		"EntryFrom": "Entry00From",
+		"EntryTo": "Entry00To"
+	},
+	{
+		"Departure": "Map01",
+		"Exit": "Exit00",
+		"Destination": "Map00",
+		"EntryFrom": "Entry00From",
+		"EntryTo": "Entry00To"
+	}
+]
