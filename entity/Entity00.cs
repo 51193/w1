@@ -10,7 +10,7 @@ namespace MyGame.Entity
 
 		public Entity00()
 		{
-			isTransitable = true;
+			IsTransitable = true;
 
 			_name = "Entity00";
 

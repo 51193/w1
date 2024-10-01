@@ -9,4 +9,7 @@
     <Content Include="transition.json" />
     <Content Include="path.json" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="manager\zindex\" />
+  </ItemGroup>
 </Project>

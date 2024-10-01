@@ -7,15 +7,15 @@ namespace MyGame.Map
 	public partial class TransitionArea : Area2D
 	{
 		[Export]
-		string exitName;
+		string ExitName;
 
-		BaseMap map;
+		private BaseMap _map;
 
 		private void OnBodyEntered(Node body)
 		{
-			if (body is BaseEntity entity && entity.isTransitable && !entity.isLocked)
+			if (body is BaseEntity entity && entity.IsTransitable)
 			{
-				GlobalObjectManager.EmitTransitMapSignal(map.GetMapName(), exitName, Position, entity);
+				GlobalObjectManager.EmitTransitMapSignal(_map.GetMapName(), ExitName, Position, entity);
 				GD.Print("Transitable entity entered transition area.");
 			}
 		}
@@ -27,7 +27,7 @@ namespace MyGame.Map
 
 		public override void _Ready()
 		{
-			map = GetParent<BaseMap>();
+			_map = GetParent<BaseMap>();
 			BodyEntered += OnBodyEntered;
 		}
 

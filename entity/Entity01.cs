@@ -1,5 +1,4 @@
 using Godot;
-using System.Threading.Tasks;
 
 namespace MyGame.Entity
 {
@@ -10,7 +9,7 @@ namespace MyGame.Entity
 
 		public Entity01()
 		{
-			isTransitable = false;
+			IsTransitable = false;
 
 			_name = "Entity01";
 
@@ -96,14 +95,6 @@ namespace MyGame.Entity
 
 		public override void _Process(double delta)
 		{
-			if((Position - new Vector2(-100, -100)).Length() < 100)
-			{
-				SetTookOverPosition(100, new Vector2(100, 100));
-			}
-			if ((Position - new Vector2(100, 100)).Length() < 100)
-			{
-				SetTookOverPosition(100, new Vector2(-100, -100));
-			}
 		}
 	}
 }

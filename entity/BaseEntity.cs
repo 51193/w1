@@ -1,12 +1,13 @@
 ﻿using Godot;
+using MyGame.Manager;
 using System;
 
 namespace MyGame.Entity
 {
     public abstract partial class BaseEntity: CharacterBody2D
     {
-        public bool isTransitable = false;
-        public bool isLocked = false;
+        public string RenderingOrderGroupName;
+        public bool IsTransitable = false;
 
         protected string _name = "BaseEntity(shouldn't display)";
 
@@ -84,6 +85,11 @@ namespace MyGame.Entity
             Velocity *= (Math.Min(1, maxVelocity / Velocity.Length()));
 
             _direction = Vector2.Zero;
+
+            if (!Velocity.IsZeroApprox() && RenderingOrderGroupName != null)
+            {
+                GlobalObjectManager.EmitResortRenderingOrderSignal(RenderingOrderGroupName);
+            }
         }
 
         private void UpdatePosition()

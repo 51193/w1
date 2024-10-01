@@ -44,6 +44,7 @@ namespace MyGame.Manager
 		{
 			SpawnAllWaitingEntitiesFromMapRecord(mapName);
 			_currentMapName = mapName;
+            AddAllLivingEntitiesToRenderingOrderSortGroup(_currentMapName);
             SetAllLivingEntitiesPhysicsProcess(false);
             EmitSignal(SignalName.EntityTransitionComplete);
         }
@@ -123,6 +124,7 @@ namespace MyGame.Manager
 			_instances.Add(entity);
 			AddChild(entity);
 			entity.Position = position;
+			GlobalObjectManager.EmitIncludeNodeIntoRenderingOrderGroupSignal(_currentMapName, entity);
             GD.Print($"Entity instantiated: {entity.GetEntityName()}({entity.Position.X}, {entity.Position.Y})");
             return entity;
 		}
@@ -141,13 +143,13 @@ namespace MyGame.Manager
 
 			entity.SetTookOverPosition((fromPosition - toPosition).Length() * 2, toPosition);
 			entity.CollisionMask = 0;
-			entity.isLocked = true;
+			entity.IsTransitable = false;
 
 			await Task.Delay(500);
 
 			entity.DisableTookOver();
 			entity.CollisionMask = originalCollisionMask;
-			entity.isLocked = false;
+			entity.IsTransitable = true;
         }
 
         private void SpawnAllWaitingEntitiesFromMapRecord(string mapName)
@@ -169,6 +171,15 @@ namespace MyGame.Manager
 			}
 		}
 
+		private void AddAllLivingEntitiesToRenderingOrderSortGroup(string groupName)
+		{
+			foreach(var entity in _instances)
+			{
+				GlobalObjectManager.EmitIncludeNodeIntoRenderingOrderGroupSignal(groupName, entity);
+				entity.RenderingOrderGroupName = groupName;
+			}
+		}
+
 		private void OnMapChanged(BaseEntity entity, string mapName, Vector2 fromPosition, Vector2 ToPosition)
 		{
 			if (_currentMapName == null)
@@ -177,14 +188,18 @@ namespace MyGame.Manager
 				return;
 			}
 
-			ClearAllEntitiesFromMapRecord(_currentMapName);
+            GlobalObjectManager.EmitClearNodeFromRenderingOrderGroupSignal(_currentMapName);
+
+            ClearAllEntitiesFromMapRecord(_currentMapName);
 			string entityName = entity.GetEntityName();
 			FreeLivingEntity(entity);
 			RecordAllLivingEntitiesToMapRecord(_currentMapName);
-			ClearAllLivingEntities();
+            _currentMapName = mapName;
+            ClearAllLivingEntities();
 			SpawnAllWaitingEntitiesFromMapRecord(mapName);
 			SpawnEntityWithEntranceAnimation(entityName, fromPosition, ToPosition);
-            _currentMapName = mapName;
+
+			AddAllLivingEntitiesToRenderingOrderSortGroup(_currentMapName);
 
 			SetAllLivingEntitiesPhysicsProcess(false);
 
@@ -198,7 +213,6 @@ namespace MyGame.Manager
 			SetAllLivingEntitiesPhysicsProcess(true);
 			GD.Print($"Entity transit to {_currentMapName} complete");
 		}
-
 
 		public override void _EnterTree()
 		{

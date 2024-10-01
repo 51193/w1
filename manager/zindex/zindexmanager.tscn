@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://5dxc1rr4ikgg"]
+
+[ext_resource type="Script" path="res://manager/zindex/ZIndexManager.cs" id="1_vi4bx"]
+
+[node name="ZIndexManager" type="Node"]
+script = ExtResource("1_vi4bx")

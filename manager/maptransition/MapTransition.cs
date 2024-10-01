@@ -75,7 +75,7 @@ namespace MyGame.Manager
 
 		private async void TransitionProcess(string departureName, string exitName, Vector2 exitPosition, BaseEntity entity)
 		{
-			entity.isLocked = true;
+			entity.IsTransitable = false;
 			entity.SetTookOverPosition((entity.Position - exitPosition).Length() * (float)1.5, exitPosition);
 			entity.CollisionMask = 0;
 			await Task.Delay(500);

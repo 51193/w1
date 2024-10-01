@@ -1,10 +1,9 @@
 ﻿using Godot;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace MyGame.Map
 {
-    public partial class BaseMap : Node
+    public partial class BaseMap : Node2D
     {
         protected string _name = "BaseMap(shouldn't display)";
 
