@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://map/Map00.cs" id="1_0ykwf"]
 [ext_resource type="TileSet" uid="uid://cni3xq14wbcgt" path="res://assets/tileset/terrain00.tres" id="1_lbll3"]
-[ext_resource type="PackedScene" uid="uid://b0fnj068wewmq" path="res://map/transition/transitionarea.tscn" id="3_81k1c"]
-[ext_resource type="PackedScene" uid="uid://dbb2shc11r4pn" path="res://map/landmark/landmarkarea.tscn" id="4_3tbn1"]
+[ext_resource type="PackedScene" uid="uid://b0fnj068wewmq" path="res://map/transition/transition_area.tscn" id="3_81k1c"]
+[ext_resource type="PackedScene" uid="uid://dbb2shc11r4pn" path="res://map/landmark/landmark_area.tscn" id="4_3tbn1"]
 
 [node name="Map00" type="Node2D"]
 script = ExtResource("1_0ykwf")

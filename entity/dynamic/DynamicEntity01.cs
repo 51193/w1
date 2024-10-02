@@ -2,21 +2,22 @@ using Godot;
 
 namespace MyGame.Entity
 {
-	public partial class Entity00 : BaseEntity
+	public partial class DynamicEntity01 : BaseDynamicEntity
 	{
 		private AnimatedSprite2D _animatedSprite2D;
 		private CollisionShape2D _collisionShape2D;
-		private Camera2D _camera2D;
 
-		public Entity00()
+		public DynamicEntity01()
 		{
-			IsTransitable = true;
+			IsTransitable = false;
 
-			_name = "Entity00";
+			_name = "DynamicEntity01";
 
 			_maxVelocity = 400;
 			_accelertion = 8000;
 			_friction = 4000;
+
+			SetTookOverPosition(100, new Vector2(-100, -100));
 		}
 
 		private void PlayAnimation(string animationName)
@@ -44,40 +45,9 @@ namespace MyGame.Entity
 			}
 		}
 
-		private void UpdateInputEvent()
-		{
-			//TODO: this is a test function
-			if(Input.IsActionPressed("activate"))
-			{
-				PlayAnimation("death");
-			}
-		}
-
 		protected override void UpdateDirection()
 		{
 			_direction = Vector2.Zero;
-
-			if (Input.IsActionPressed("move_right"))
-			{
-				_direction.X += 1;
-			}
-
-			if (Input.IsActionPressed("move_left"))
-			{
-				_direction.X -= 1;
-			}
-
-			if (Input.IsActionPressed("move_down"))
-			{
-				_direction.Y += 1;
-			}
-
-			if (Input.IsActionPressed("move_up"))
-			{
-				_direction.Y -= 1;
-			}
-
-			_direction = _direction.Normalized();
 		}
 
 		protected override void UpdateAnimation()
@@ -107,26 +77,14 @@ namespace MyGame.Entity
 			}
 		}
 
-		public override void _EnterTree()
-		{
-			base._EnterTree();
-		}
-
-		public override void _ExitTree()
-		{
-			base._ExitTree();
-		}
-
 		public override void _Ready()
 		{
 			_animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 			_collisionShape2D = GetNode<CollisionShape2D>("CollisionShape2D");
-			_camera2D = GetNode<Camera2D>("Camera2D");
 		}
 
 		public override void _Process(double delta)
 		{
-			UpdateInputEvent();
 		}
 	}
 }

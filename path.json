@@ -1,37 +1,37 @@
 [
 	{
 		"Name": "MainMenuStage",
-		"Path": "res://stage/mainmenu/mainmenu.tscn",
+		"Path": "res://stage/mainmenu/main_menu.tscn",
 		"Description": "This is main menu."
 	},
 	{
 		"Name": "GamePlayStage",
-		"Path": "res://stage/gameplay/gameplay.tscn",
+		"Path": "res://stage/gameplay/game_play.tscn",
 		"Description": "This is where the game run."
 	},
 	{
-		"Name": "Camera",
-		"Path": "res://util/camera.tscn",
-		"Description": "This is a general camera."
-	},
-	{
 		"Name": "Map00",
-		"Path": "res://map/map00.tscn",
+		"Path": "res://map/map_00.tscn",
 		"Description": "This is a test map."
 	},
 	{
 		"Name": "Map01",
-		"Path": "res://map/map01.tscn",
+		"Path": "res://map/map_01.tscn",
 		"Description": "This is a test map."
 	},
 	{
-		"Name": "Entity00",
-		"Path": "res://entity/entity00.tscn",
+		"Name": "DynamicEntity00",
+		"Path": "res://entity/dynamic/dynamic_entity_00.tscn",
 		"Description": "This is a test entity."
 	},
 	{
-		"Name": "Entity01",
-		"Path": "res://entity/entity01.tscn",
+		"Name": "DynamicEntity01",
+		"Path": "res://entity/dynamic/dynamic_entity_01.tscn",
+		"Description": "This is a test entity."
+	},
+	{
+		"Name": "StaticEntity00",
+		"Path": "res://entity/static/staticentity00.tscn",
 		"Description": "This is a test entity."
 	}
 ]

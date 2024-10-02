@@ -13,7 +13,7 @@ namespace MyGame.Map
 
 		private void OnBodyEntered(Node body)
 		{
-			if (body is BaseEntity entity && entity.IsTransitable)
+			if (body is BaseDynamicEntity entity && entity.IsTransitable)
 			{
 				GlobalObjectManager.EmitTransitMapSignal(_map.GetMapName(), ExitName, Position, entity);
 				GD.Print("Transitable entity entered transition area.");
