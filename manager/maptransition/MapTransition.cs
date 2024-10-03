@@ -59,16 +59,16 @@ namespace MyGame.Manager
 
 		private void InitMapProcess(string mapName)
 		{
-			_mapManager.EmitSignal(nameof(_mapManager.ChangeMap), mapName);
-			_unifiedEntityManager.EmitSignal(nameof(_unifiedEntityManager.InitiateEntitiesOnMap), mapName);
+			_mapManager.LoadMap(mapName);
+			_unifiedEntityManager.InitiateEntities(mapName);
 		}
 
 		private void InvokeManagers(string destinationName, string fromLandmarkName, string toLandmarkName, BaseDynamicEntity entity)
 		{
-			_mapManager.EmitSignal(nameof(_mapManager.ChangeMap), destinationName);
+			_mapManager.LoadMap(destinationName);
 			Vector2 fromLandmarkPosition = _mapManager.GetLandmarkPosition(fromLandmarkName);
 			Vector2 toLandmarkPosition = _mapManager.GetLandmarkPosition(toLandmarkName);
-			_unifiedEntityManager.EmitSignal(nameof(_unifiedEntityManager.ExchangeEntityOnMap), entity, destinationName, fromLandmarkPosition, toLandmarkPosition);
+			_unifiedEntityManager.OnMapChanged(entity, destinationName, fromLandmarkPosition, toLandmarkPosition);
 		}
 
 		private async void TransitionProcess(string departureName, string exitName, Vector2 exitPosition, BaseDynamicEntity entity)

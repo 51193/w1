@@ -51,24 +51,29 @@ namespace MyGame.Entity
 			_direction = _direction.Normalized();
 		}
 
-		private double animationChangeCooldownTimer = 1;
+		private double _animationChangeCooldownTimer = 1;
+		private bool _canUpdateAnimation = false;
 		protected override void UpdateAnimation(double delta)
 		{
-			animationChangeCooldownTimer += delta;
-			if(animationChangeCooldownTimer < 0.1)
+			if (!_canUpdateAnimation)
+			{
+				_animationChangeCooldownTimer += delta;
+				if(_animationChangeCooldownTimer > 0.1)
+				{
+					_canUpdateAnimation = true;
+					_animationChangeCooldownTimer = 0;
+				}
+			}
+			if (!_canUpdateAnimation)
 			{
 				return;
-			}
-			else
-			{
-				animationChangeCooldownTimer = 0;
 			}
 
 			string currentAnimation = _animatedSprite2D.Animation;
 			string directionSuffix = currentAnimation[^2..];
 
 			if (_direction.IsZeroApprox())
-			{ 
+			{
 				if (currentAnimation.StartsWith("run") || currentAnimation.StartsWith("idle"))
 				{
 					string newIdleAnimation = "idle" + directionSuffix;
@@ -81,8 +86,8 @@ namespace MyGame.Entity
 				return;
 			}
 
-			float angle = Mathf.Atan2(_direction.Y, _direction.X); 
-			angle = Mathf.RadToDeg(angle); 
+			float angle = Mathf.Atan2(_direction.Y, _direction.X);
+			angle = Mathf.RadToDeg(angle);
 
 			if (angle >= -45 && angle < 45)
 			{
@@ -156,6 +161,8 @@ namespace MyGame.Entity
 					_animatedSprite2D.Play("run-8");
 				}
 			}
+
+			_canUpdateAnimation = _animatedSprite2D.Animation == currentAnimation;
 		}
 
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://fybw6e5njdb2"]
 
-[ext_resource type="Script" path="res://manager/entity/DynamicEntityManager.cs" id="1_1xlo7"]
+[ext_resource type="Script" path="res://manager/entity/DynamicEntityManager.cs" id="1_gm6mk"]
 
 [node name="DynamicEntityManager" type="Node"]
-script = ExtResource("1_1xlo7")
+script = ExtResource("1_gm6mk")

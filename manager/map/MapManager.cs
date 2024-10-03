@@ -10,8 +10,6 @@ namespace MyGame.Manager
 		private readonly Dictionary<string, PackedScene> _loadedScenes = new();
 
 		[Signal]
-		public delegate void ChangeMapEventHandler(string mapName);
-		[Signal]
 		public delegate void MapTransitionCompleteEventHandler();
 
 		public Vector2 GetLandmarkPosition(string landmarkName)
@@ -27,7 +25,7 @@ namespace MyGame.Manager
 			}
 		}
 
-		private void LoadMap(string mapName)
+		public void LoadMap(string mapName)
 		{
 			if (!_loadedScenes.TryGetValue(mapName, out var map))
 			{
@@ -51,16 +49,6 @@ namespace MyGame.Manager
 		public void AfterTransitionComplete()
 		{
 			GD.Print($"Map transit to {((BaseMap)_currentMap).GetMapName()} complete");
-		}
-
-		public override void _EnterTree()
-		{
-			ChangeMap += LoadMap;
-		}
-
-		public override void _ExitTree()
-		{
-			ChangeMap -= LoadMap;
 		}
 	}
 }

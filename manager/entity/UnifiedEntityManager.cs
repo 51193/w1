@@ -16,24 +16,20 @@ namespace MyGame.Manager
 		private bool _dynamicEntityManagerReady = false;
 
 		[Signal]
-		public delegate void InitiateEntitiesOnMapEventHandler(string mapName);
-		[Signal]
-		public delegate void ExchangeEntityOnMapEventHandler(BaseDynamicEntity entity, string mapName, Vector2 fromPosition, Vector2 toPosition);
-		[Signal]
 		public delegate void EntityTransitionCompleteEventHandler();
 
-		private void InitiateEntities(string mapName)
+		public void InitiateEntities(string mapName)
 		{
-			_staticEntityManager.EmitSignal(nameof(_staticEntityManager.InitiateEntitiesOnMap), mapName);
-			_dynamicEntityManager.EmitSignal(nameof(_dynamicEntityManager.InitiateEntitiesOnMap), mapName);
+			_staticEntityManager.InitiateEntities(mapName);
+			_dynamicEntityManager.InitiateEntities(mapName);
 			_currentMapName = mapName;
 		}
 
-		private void OnMapChanged(BaseDynamicEntity entity, string mapName, Vector2 fromPosition, Vector2 toPosition)
+		public void OnMapChanged(BaseDynamicEntity entity, string mapName, Vector2 fromPosition, Vector2 toPosition)
 		{
 			GlobalObjectManager.EmitClearNodeFromRenderingOrderGroupSignal(_currentMapName);
-			_staticEntityManager.EmitSignal(nameof(_staticEntityManager.ExchangeEntityOnMap), _currentMapName, mapName);
-			_dynamicEntityManager.EmitSignal(nameof(_dynamicEntityManager.ExchangeEntityOnMap), entity, _currentMapName, mapName, fromPosition, toPosition);
+			_staticEntityManager.OnMapChanged(_currentMapName, mapName);
+			_dynamicEntityManager.OnMapChanged(entity, _currentMapName, mapName, fromPosition, toPosition);
 			_currentMapName = mapName;
 		}
 
@@ -65,16 +61,8 @@ namespace MyGame.Manager
 			_dynamicEntityManager.AfterTransitionComplete();
 		}
 
-		public override void _EnterTree()
-		{
-			InitiateEntitiesOnMap += InitiateEntities;
-			ExchangeEntityOnMap += OnMapChanged;
-		}
-
 		public override void _ExitTree()
 		{
-			InitiateEntitiesOnMap -= InitiateEntities;
-			ExchangeEntityOnMap -= OnMapChanged;
 			_dynamicEntityManager.EntityTransitionComplete -= OnDynamicEntityManagerComplete;
 			_staticEntityManager.EntityTransitionComplete -= OnStaticEntityManagerComplete;
 		}

@@ -22,18 +22,24 @@ namespace MyGame.Manager
 				_canvasItems[name] = new();
 			}
 			_canvasItems[name].Add(node);
-			GD.Print($"Include a node in rendering order sort");
+			ResortNode(name);
+			GD.Print($"Include a node in rendering order sort, now have {_canvasItems[name].Count} node(s) inside");
 		}
 
 		public void ClearNode(string name)
 		{
-			if (!_canvasItems.Remove(name))
-			{
-				GD.PrintErr($"Invalid group name in ZIndexManager, unable to clear: {name}");
-			}
-		}
+            if (_canvasItems.ContainsKey(name))
+            {
+				_canvasItems[name].Clear();
+                GD.Print($"Group removed in ZIndexManager: {name}.");
+            }
+            else
+            {
+                GD.PrintErr($"Group already removed or does't exist in ZIndexManager: {name}.");
+            }
+        }
 
-		public void ResortNode(string name)
+        public void ResortNode(string name)
 		{
 			if(!_resortNameNextFrame.Contains(name))
 			{

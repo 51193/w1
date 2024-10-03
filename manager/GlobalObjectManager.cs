@@ -92,51 +92,51 @@ namespace MyGame.Manager
 			}
 		}
 
-        public static void EmitTransitMapSignal(string departureName, string exitName, Vector2 exitPosition, Node entity)
-        {
-            if (GetGlobalObject("MapTransition") is MapTransition mapTransition)
-            {
-                mapTransition.EmitSignal(nameof(mapTransition.TransitMap), departureName, exitName, exitPosition, entity);
-            }
-            else
-            {
-                GD.PrintErr("Invalid MapTransition");
-            }
-        }
+		public static void EmitTransitMapSignal(string departureName, string exitName, Vector2 exitPosition, Node entity)
+		{
+			if (GetGlobalObject("MapTransition") is MapTransition mapTransition)
+			{
+				mapTransition.EmitSignal(nameof(mapTransition.TransitMap), departureName, exitName, exitPosition, entity);
+			}
+			else
+			{
+				GD.PrintErr("Invalid MapTransition");
+			}
+		}
 
 		public static void EmitIncludeNodeIntoRenderingOrderGroupSignal(string name, Node2D canvasItem)
 		{
 			if (GetGlobalObject("ZIndexManager") is ZIndexManager zIndexManager)
 			{
-                zIndexManager.EmitSignal(nameof(zIndexManager.IncludeNodeIntoRenderingOrderGroup), name, canvasItem);
+				zIndexManager.EmitSignal(nameof(zIndexManager.IncludeNodeIntoRenderingOrderGroup), name, canvasItem);
 			}
 			else
 			{
 				GD.PrintErr("Invalid ZIndexManager");
 			}
-        }
-        public static void EmitClearNodeFromRenderingOrderGroupSignal(string name)
-        {
-            if (GetGlobalObject("ZIndexManager") is ZIndexManager zIndexManager)
-            {
-                zIndexManager.EmitSignal(nameof(zIndexManager.ClearNodeFromRenderingOrderGroup), name);
-            }
-            else
-            {
-                GD.PrintErr("Invalid ZIndexManager");
-            }
-        }
+		}
+		public static void EmitClearNodeFromRenderingOrderGroupSignal(string name)
+		{
+			if (GetGlobalObject("ZIndexManager") is ZIndexManager zIndexManager)
+			{
+				zIndexManager.EmitSignal(nameof(zIndexManager.ClearNodeFromRenderingOrderGroup), name);
+			}
+			else
+			{
+				GD.PrintErr("Invalid ZIndexManager");
+			}
+		}
 
-        public static void EmitResortRenderingOrderSignal(string name)
-        {
-            if (GetGlobalObject("ZIndexManager") is ZIndexManager zIndexManager)
-            {
-                zIndexManager.EmitSignal(nameof(zIndexManager.ResortRenderingOrder), name);
-            }
-            else
-            {
-                GD.PrintErr("Invalid ZIndexManager");
-            }
-        }
-    }
+		public static void EmitResortRenderingOrderSignal(string name)
+		{
+			if (GetGlobalObject("ZIndexManager") is ZIndexManager zIndexManager)
+			{
+				zIndexManager.EmitSignal(nameof(zIndexManager.ResortRenderingOrder), name);
+			}
+			else
+			{
+				GD.PrintErr("Invalid ZIndexManager");
+			}
+		}
+	}
 }

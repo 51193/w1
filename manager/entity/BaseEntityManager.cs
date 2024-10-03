@@ -139,6 +139,7 @@ namespace MyGame.Manager
                 }
             }
         }
+
         public override void _EnterTree()
         {
             GD.Print($"EntityManager enter: {_name}");

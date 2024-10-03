@@ -33,5 +33,15 @@
 		"Name": "StaticEntity00",
 		"Path": "res://entity/static/static_entity_00.tscn",
 		"Description": "This is a test entity."
+	},
+	{
+		"Name": "Map0Wall0",
+		"Path": "res://entity/static/map_0_wall_0.tscn",
+		"Description": "A static entity represent wall in map0."
+	},
+	{
+		"Name": "Map0Wall1",
+		"Path": "res://entity/static/map_0_wall_1.tscn",
+		"Description": "A static entity represent wall in map0."
 	}
 ]

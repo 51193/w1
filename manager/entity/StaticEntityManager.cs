@@ -8,10 +8,6 @@ namespace MyGame.Manager
 	public partial class StaticEntityManager : BaseEntityManager<BaseStaticEntity>
     {
         [Signal]
-        public delegate void InitiateEntitiesOnMapEventHandler(string mapName);
-        [Signal]
-        public delegate void ExchangeEntityOnMapEventHandler(string currentMapName, string nextMapName);
-        [Signal]
         public delegate void EntityTransitionCompleteEventHandler();
 
         public StaticEntityManager()
@@ -24,15 +20,18 @@ namespace MyGame.Manager
         {
             _globalEntityPosition["Map00"] = new()
             {
-                ["StaticEntity00"] = new()
-            {
-                new Vector2(50, -50),
-                new Vector2(30, -30)
-            }
+                ["Map0Wall0"] = new()
+                {
+                new Vector2(-32, -16)
+                },
+                ["Map0Wall1"] = new()
+                {
+                    new Vector2(48, 0)
+                }
             };
         }
 
-        private void InitiateEntities(string mapName)
+        public void InitiateEntities(string mapName)
         {
             SpawnAllWaitingEntitiesFromMapRecord(mapName);
             AddAllLivingEntitiesToRenderingOrderGroup(mapName);
@@ -40,8 +39,7 @@ namespace MyGame.Manager
             EmitSignal(SignalName.EntityTransitionComplete);
         }
 
-
-        private void OnMapChanged(string currentMapName, string nextMapName)
+        public void OnMapChanged(string currentMapName, string nextMapName)
         {
             if (currentMapName == null)
             {
@@ -69,20 +67,6 @@ namespace MyGame.Manager
             await Task.Delay(1);
             SetAllLivingEntitiesPhysicsProcess(true);
             GD.Print($"Static entities transition complete");
-        }
-
-        public override void _EnterTree()
-        {
-            base._EnterTree();
-            InitiateEntitiesOnMap += InitiateEntities;
-            ExchangeEntityOnMap += OnMapChanged;
-        }
-
-        public override void _ExitTree()
-        {
-            base._ExitTree();
-            InitiateEntitiesOnMap -= InitiateEntities;
-            ExchangeEntityOnMap -= OnMapChanged;
         }
     }
 }

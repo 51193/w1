@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=4 uid="uid://ctbtcdf18kdf2"]
+
+[ext_resource type="Script" path="res://entity/static/Map0Wall0.cs" id="1_p10xi"]
+[ext_resource type="TileSet" uid="uid://dsu38p6x84kq1" path="res://assets/tileset/terrain00.tres" id="2_7uh30"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a2j58"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f18vn"]
+size = Vector2(64, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wt5f8"]
+size = Vector2(32, 16)
+
+[node name="Map0Wall0" type="StaticBody2D"]
+script = ExtResource("1_p10xi")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAAAP//AQABAAwAAAABAP//AQABAAwAAAAAAP7/AQABAAsAAAABAP7/AQABAAsAAAACAP//AQACAAwAAAACAP7/AQACAAsAAAAEAP//AQAAAAwAAAAEAP7/AQAAAAsAAAAFAP7/AQAKAAAAAAAFAP//AQAAAAsAAAD///7/AQABAAsAAAD/////AQABAAwAAAA=")
+tile_set = ExtResource("2_7uh30")
+
+[node name="CollisionShape2D0" type="CollisionShape2D" parent="."]
+position = Vector2(-8, -24)
+shape = SubResource("RectangleShape2D_a2j58")
+
+[node name="CollisionShape2D1" type="CollisionShape2D" parent="."]
+position = Vector2(16, -8)
+shape = SubResource("RectangleShape2D_f18vn")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(80, -8)
+shape = SubResource("RectangleShape2D_wt5f8")

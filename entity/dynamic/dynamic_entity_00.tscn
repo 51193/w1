@@ -382,21 +382,24 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_i72q1"]
-radius = 8.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_sc62u"]
+radius = 5.0
 
 [node name="DynamicEntity00" type="CharacterBody2D"]
+up_direction = Vector2(0, 1)
+slide_on_ceiling = false
 platform_floor_layers = 4294967040
 script = ExtResource("1_e4uq4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -14)
 sprite_frames = SubResource("SpriteFrames_kt5ps")
 animation = &"run-2"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 9)
-shape = SubResource("CircleShape2D_i72q1")
+shape = SubResource("CircleShape2D_sc62u")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, 6)
 zoom = Vector2(5, 5)
 limit_smoothed = true
