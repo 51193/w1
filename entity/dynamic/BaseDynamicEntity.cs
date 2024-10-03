@@ -23,7 +23,7 @@ namespace MyGame.Entity
 
 		protected abstract void UpdateDirection();
 
-		protected abstract void UpdateAnimation();
+		protected abstract void UpdateAnimation(double delta);
 
 		public string GetEntityName() { return _name; }
 
@@ -125,7 +125,7 @@ namespace MyGame.Entity
 			{
 				UpdateDirection();
 			}
-			UpdateAnimation();
+			UpdateAnimation(delta);
 			UpdateVelocity(delta);
 			UpdatePosition();
 		}

@@ -50,7 +50,7 @@ namespace MyGame.Entity
 			_direction = Vector2.Zero;
 		}
 
-		protected override void UpdateAnimation()
+		protected override void UpdateAnimation(double delta)
 		{
 			if (_direction.IsZeroApprox())
 			{

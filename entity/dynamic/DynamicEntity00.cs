@@ -50,8 +50,20 @@ namespace MyGame.Entity
 
 			_direction = _direction.Normalized();
 		}
-		protected override void UpdateAnimation()
+
+		private double animationChangeCooldownTimer = 1;
+		protected override void UpdateAnimation(double delta)
 		{
+			animationChangeCooldownTimer += delta;
+			if(animationChangeCooldownTimer < 0.1)
+			{
+				return;
+			}
+			else
+			{
+				animationChangeCooldownTimer = 0;
+			}
+
 			string currentAnimation = _animatedSprite2D.Animation;
 			string directionSuffix = currentAnimation[^2..];
 

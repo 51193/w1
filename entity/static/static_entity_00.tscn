@@ -1,20 +1,32 @@
-[gd_scene load_steps=4 format=3 uid="uid://c3ehi2s7mkjbn"]
+[gd_scene load_steps=6 format=3 uid="uid://c3ehi2s7mkjbn"]
 
 [ext_resource type="Script" path="res://entity/static/StaticEntity00.cs" id="1_0v2cx"]
+[ext_resource type="Texture2D" uid="uid://blnae5ersq7kl" path="res://assets/spritesheet/furniture/modernoffice/Modern_Office_Black_Shadow.png" id="2_h6bn5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sajak"]
+atlas = ExtResource("2_h6bn5")
+region = Rect2(0, 128, 16, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fx1v3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sajak")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gvb5v"]
-size = Vector2(267.5, 111)
+size = Vector2(16, 7.5)
 
 [node name="StaticEntity00" type="StaticBody2D"]
 script = ExtResource("1_0v2cx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.12, 0.12)
 sprite_frames = SubResource("SpriteFrames_fx1v3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(8.88178e-16, 8)
-scale = Vector2(0.12, 0.12)
+position = Vector2(0, 9.75)
 shape = SubResource("RectangleShape2D_gvb5v")

@@ -7,7 +7,6 @@ namespace MyGame.Manager
 {
     public partial class BaseEntityManager<T>: Node where T: Node2D, IEntity
     {
-        protected string _currentMapName;
         protected readonly Dictionary<string, Dictionary<string, List<Vector2>>> _globalEntityPosition = new();
 
         protected readonly Dictionary<string, PackedScene> _entities = new();
@@ -90,7 +89,6 @@ namespace MyGame.Manager
             _instances.Add(entity);
             AddChild(entity);
             entity.Position = position;
-            GlobalObjectManager.EmitIncludeNodeIntoRenderingOrderGroupSignal(_currentMapName, entity);
             GD.Print($"Entity instantiated: {entity.GetEntityName()}({entity.Position.X}, {entity.Position.Y})");
             return entity;
         }
@@ -131,9 +129,8 @@ namespace MyGame.Manager
             }
         }
 
-        protected void ClearRenderingOrderGroup(string groupName)
+        protected void ClearAllLivinEntitiesRenderingOrderGroupName(string groupName)
         {
-            GlobalObjectManager.EmitClearNodeFromRenderingOrderGroupSignal(groupName);
             foreach (var entity in _instances)
             {
                 if (entity.GetRenderingGroupName() == groupName)

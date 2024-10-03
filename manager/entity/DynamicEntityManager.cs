@@ -9,7 +9,7 @@ namespace MyGame.Manager
 		[Signal]
 		public delegate void InitiateEntitiesOnMapEventHandler(string mapName);
 		[Signal]
-		public delegate void ExchangeEntityOnMapEventHandler(BaseDynamicEntity entity, string mapName, Vector2 fromPosition, Vector2 toPosition);
+		public delegate void ExchangeEntityOnMapEventHandler(BaseDynamicEntity entity, string currentMapName, string nextMapName, Vector2 fromPosition, Vector2 ToPosition);
 		[Signal]
 		public delegate void EntityTransitionCompleteEventHandler();
 
@@ -37,8 +37,7 @@ namespace MyGame.Manager
 		private void InitiateEntities(string mapName)
 		{
 			SpawnAllWaitingEntitiesFromMapRecord(mapName);
-			_currentMapName = mapName;
-			AddAllLivingEntitiesToRenderingOrderGroup(_currentMapName);
+			AddAllLivingEntitiesToRenderingOrderGroup(mapName);
 			SetAllLivingEntitiesPhysicsProcess(false);
 			EmitSignal(SignalName.EntityTransitionComplete);
 		}
@@ -59,44 +58,42 @@ namespace MyGame.Manager
 			entity.IsTransitable = true;
 		}
 
-		private void OnMapChanged(BaseDynamicEntity entity, string mapName, Vector2 fromPosition, Vector2 ToPosition)
+		private void OnMapChanged(BaseDynamicEntity entity, string currentMapName, string nextMapName, Vector2 fromPosition, Vector2 ToPosition)
 		{
-			if (_currentMapName == null)
+			if (currentMapName == null)
 			{
 				GD.PrintErr("Invalid current map, can't change map before initiate");
 				return;
 			}
 
-			ClearRenderingOrderGroup(_currentMapName);
+			ClearAllLivinEntitiesRenderingOrderGroupName(currentMapName);
 
-			ClearAllEntitiesFromMapRecord(_currentMapName);
+			ClearAllEntitiesFromMapRecord(currentMapName);
 			string entityName = entity.GetEntityName();
 			FreeLivingEntity(entity);
-			RecordAllLivingEntitiesToMapRecord(_currentMapName);
-			_currentMapName = mapName;
+			RecordAllLivingEntitiesToMapRecord(currentMapName);
 			ClearAllLivingEntities();
-			SpawnAllWaitingEntitiesFromMapRecord(mapName);
+			SpawnAllWaitingEntitiesFromMapRecord(nextMapName);
 			SpawnEntityWithEntranceAnimation(entityName, fromPosition, ToPosition);
 
-			AddAllLivingEntitiesToRenderingOrderGroup(_currentMapName);
+			AddAllLivingEntitiesToRenderingOrderGroup(nextMapName);
 
 			SetAllLivingEntitiesPhysicsProcess(false);
 
 			EmitSignal(SignalName.EntityTransitionComplete);
-			GD.Print($"Entities have swapped to {_currentMapName}");
+			GD.Print($"Dynamic entities have swapped to {currentMapName}");
 		}
 
 		public async void AfterTransitionComplete()
 		{
 			await Task.Delay(1);
 			SetAllLivingEntitiesPhysicsProcess(true);
-			GD.Print($"Entity transit to {_currentMapName} complete");
+			GD.Print($"Dynamic entities transition complete");
 		}
 
 		public override void _EnterTree()
 		{
 			base._EnterTree();
-			GlobalObjectManager.AddGlobalObject("EntityManager", this);
 			InitiateEntitiesOnMap += InitiateEntities;
 			ExchangeEntityOnMap += OnMapChanged;
 		}
@@ -106,7 +103,6 @@ namespace MyGame.Manager
 			base._ExitTree();
 			InitiateEntitiesOnMap -= InitiateEntities;
 			ExchangeEntityOnMap -= OnMapChanged;
-			GlobalObjectManager.RemoveGlobalObject("EntityManager");
 		}
 	}
 }

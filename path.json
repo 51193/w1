@@ -31,7 +31,7 @@
 	},
 	{
 		"Name": "StaticEntity00",
-		"Path": "res://entity/static/staticentity00.tscn",
+		"Path": "res://entity/static/static_entity_00.tscn",
 		"Description": "This is a test entity."
 	}
 ]

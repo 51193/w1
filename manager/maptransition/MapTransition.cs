@@ -21,7 +21,7 @@ namespace MyGame.Manager
 	public partial class MapTransition : Node
 	{
 		private MapManager _mapManager;
-		private DynamicEntityManager _entityManager;
+		private UnifiedEntityManager _unifiedEntityManager;
 
 		private Dictionary<(string Departure, string Exit), TransitionInfo> _transitionsDict;
 
@@ -32,8 +32,6 @@ namespace MyGame.Manager
 		public delegate void InitMapEventHandler(string mapName);
 		[Signal]
 		public delegate void TransitMapEventHandler(string departureName, string exitName, Vector2 exitPosition, BaseDynamicEntity entity);
-		[Signal]
-		public delegate void TransitionCompleteEventHandler();
 
 		private void LoadTransitionInfo(string path)
 		{
@@ -62,7 +60,7 @@ namespace MyGame.Manager
 		private void InitMapProcess(string mapName)
 		{
 			_mapManager.EmitSignal(nameof(_mapManager.ChangeMap), mapName);
-			_entityManager.EmitSignal(nameof(_entityManager.InitiateEntitiesOnMap), mapName);
+			_unifiedEntityManager.EmitSignal(nameof(_unifiedEntityManager.InitiateEntitiesOnMap), mapName);
 		}
 
 		private void InvokeManagers(string destinationName, string fromLandmarkName, string toLandmarkName, BaseDynamicEntity entity)
@@ -70,7 +68,7 @@ namespace MyGame.Manager
 			_mapManager.EmitSignal(nameof(_mapManager.ChangeMap), destinationName);
 			Vector2 fromLandmarkPosition = _mapManager.GetLandmarkPosition(fromLandmarkName);
 			Vector2 toLandmarkPosition = _mapManager.GetLandmarkPosition(toLandmarkName);
-			_entityManager.EmitSignal(nameof(_entityManager.ExchangeEntityOnMap), entity, destinationName, fromLandmarkPosition, toLandmarkPosition);
+			_unifiedEntityManager.EmitSignal(nameof(_unifiedEntityManager.ExchangeEntityOnMap), entity, destinationName, fromLandmarkPosition, toLandmarkPosition);
 		}
 
 		private async void TransitionProcess(string departureName, string exitName, Vector2 exitPosition, BaseDynamicEntity entity)
@@ -92,20 +90,20 @@ namespace MyGame.Manager
 		private void OnMapManagerComplete()
 		{
 			_mapManagerReady = true;
-			CheckTransitionState();
+			CheckManagerState();
 		}
 
 		private void OnEntityManagerComplete()
 		{
 			_entityManagerReady = true;
-			CheckTransitionState();
+			CheckManagerState();
 		}
 
-		private void CheckTransitionState()
+		private void CheckManagerState()
 		{
 			if(!_mapManagerReady || !_entityManagerReady) return;
 
-			EmitSignal(SignalName.TransitionComplete);
+			AfterTransitionComplete();
 
 			_mapManagerReady = false;
 			_entityManagerReady = false;
@@ -114,7 +112,7 @@ namespace MyGame.Manager
 		private void AfterTransitionComplete()
 		{
 			_mapManager.AfterTransitionComplete();
-			_entityManager.AfterTransitionComplete();
+			_unifiedEntityManager.AfterTransitionComplete();
 		}
 
 		public override void _EnterTree()
@@ -123,24 +121,24 @@ namespace MyGame.Manager
 			LoadTransitionInfo("transition.json");
 			InitMap += InitMapProcess;
 			TransitMap += TransitionProcess;
-			TransitionComplete += AfterTransitionComplete;
 		}
 
 		public override void _ExitTree()
 		{
 			InitMap -= InitMapProcess;
 			TransitMap -= TransitionProcess;
-			TransitionComplete -= AfterTransitionComplete;
+			_mapManager.MapTransitionComplete -= OnMapManagerComplete;
+			_unifiedEntityManager.EntityTransitionComplete -= OnEntityManagerComplete;
 			GlobalObjectManager.RemoveGlobalObject("MapTransition");
 		}
 
 		public override void _Ready()
 		{
 			_mapManager = GetNode<MapManager>("MapManager");
-			_entityManager = GetNode<DynamicEntityManager>("DynamicEntityManager");
+			_unifiedEntityManager = GetNode<UnifiedEntityManager>("UnifiedEntityManager");
 
 			_mapManager.MapTransitionComplete += OnMapManagerComplete;
-			_entityManager.EntityTransitionComplete += OnEntityManagerComplete;
+			_unifiedEntityManager.EntityTransitionComplete += OnEntityManagerComplete;
 		}
 	}
 }
