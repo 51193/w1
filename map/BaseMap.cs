@@ -19,8 +19,21 @@ namespace MyGame.Map
             }
             else
             {
-                GD.PrintErr($"Landmark {landmarkName} not found!");
+                GD.PrintErr($"Landmark {landmarkName} not found when getting position");
                 return Vector2.Zero;
+            }
+        }
+
+        public string GetAnimationPlayedAfterSpawn(string landmarkName)
+        {
+            if (_landmarks.ContainsKey(landmarkName))
+            {
+                return _landmarks[landmarkName].AniamtionPlayedAfterSpawn;
+            }
+            else
+            {
+                GD.PrintErr($"Landmark {landmarkName} not found when getting animation name");
+                return null;
             }
         }
 

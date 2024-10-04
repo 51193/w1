@@ -34,6 +34,7 @@ ExitName = "Exit00"
 [node name="Entry00From" parent="." instance=ExtResource("4_rw8pp")]
 position = Vector2(150, 48)
 LandmarkName = "Entry00From"
+AniamtionPlayedAfterSpawn = "run-4"
 
 [node name="Entry00To" parent="." instance=ExtResource("4_rw8pp")]
 position = Vector2(50, 48)

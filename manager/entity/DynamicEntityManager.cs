@@ -26,9 +26,12 @@ namespace MyGame.Manager
 			};
 		}
 
-		private async void SpawnEntityWithEntranceAnimation(string entityName, Vector2 fromPosition, Vector2 toPosition)
+		private async void SpawnEntityWithEntranceAnimation(string entityName, Vector2 fromPosition, Vector2 toPosition, string animationToPlayForNewSpawnEntity)
 		{
 			BaseDynamicEntity entity = SpawnEntity(entityName, fromPosition);
+
+			entity.PlayAnimation(animationToPlayForNewSpawnEntity);
+			
 			uint originalCollisionMask = entity.CollisionMask;
 
 			entity.SetTookOverPosition((fromPosition - toPosition).Length() * 2, toPosition);
@@ -41,6 +44,7 @@ namespace MyGame.Manager
 			entity.CollisionMask = originalCollisionMask;
 			entity.IsTransitable = true;
 		}
+
 		public void InitiateEntities(string mapName)
 		{
 			SpawnAllWaitingEntitiesFromMapRecord(mapName);
@@ -49,7 +53,7 @@ namespace MyGame.Manager
 			EmitSignal(SignalName.EntityTransitionComplete);
 		}
 
-		public void OnMapChanged(BaseDynamicEntity entity, string currentMapName, string nextMapName, Vector2 fromPosition, Vector2 ToPosition)
+		public void OnMapChanged(BaseDynamicEntity entity, string currentMapName, string nextMapName, Vector2 fromPosition, Vector2 ToPosition, string animationToPlayForNewSpawnEntity)
 		{
 			if (currentMapName == null)
 			{
@@ -65,7 +69,7 @@ namespace MyGame.Manager
 			RecordAllLivingEntitiesToMapRecord(currentMapName);
 			ClearAllLivingEntities();
 			SpawnAllWaitingEntitiesFromMapRecord(nextMapName);
-			SpawnEntityWithEntranceAnimation(entityName, fromPosition, ToPosition);
+			SpawnEntityWithEntranceAnimation(entityName, fromPosition, ToPosition, animationToPlayForNewSpawnEntity);
 
 			AddAllLivingEntitiesToRenderingOrderGroup(nextMapName);
 

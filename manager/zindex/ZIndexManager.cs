@@ -28,23 +28,22 @@ namespace MyGame.Manager
 
 		public void ClearNode(string name)
 		{
-            if (_canvasItems.ContainsKey(name))
-            {
+			if (_canvasItems.ContainsKey(name))
+			{
 				_canvasItems[name].Clear();
-                GD.Print($"Group removed in ZIndexManager: {name}.");
-            }
-            else
-            {
-                GD.PrintErr($"Group already removed or does't exist in ZIndexManager: {name}.");
-            }
-        }
+				GD.Print($"Group removed in ZIndexManager: {name}.");
+			}
+			else
+			{
+				GD.PrintErr($"Group already removed or does't exist in ZIndexManager: {name}.");
+			}
+		}
 
-        public void ResortNode(string name)
+		public void ResortNode(string name)
 		{
 			if(!_resortNameNextFrame.Contains(name))
 			{
 				_resortNameNextFrame.Add(name);
-				GD.Print($"{name}'s rendering order will be resorted in next frame");
 			}
 		}
 

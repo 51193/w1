@@ -23,7 +23,7 @@ namespace MyGame.Manager
 			try
 			{
 				string jsonContent = File.ReadAllText(path);
-                List<ResourcePath> resources = JsonSerializer.Deserialize<List<ResourcePath>>(jsonContent);
+				List<ResourcePath> resources = JsonSerializer.Deserialize<List<ResourcePath>>(jsonContent);
 
 				_pathDict = resources.ToDictionary(
 					t => t.Name,
@@ -80,12 +80,12 @@ namespace MyGame.Manager
 			LoadResourcePaths("path.json");
 		}
 
-        public override void _ExitTree()
-        {
+		public override void _ExitTree()
+		{
 			GlobalObjectManager.RemoveGlobalObject("ResourceManager");
-        }
+		}
 
-        public override void _Ready()
+		public override void _Ready()
 		{
 		}
 

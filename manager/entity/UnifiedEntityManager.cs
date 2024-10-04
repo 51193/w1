@@ -1,7 +1,5 @@
 using Godot;
 using MyGame.Entity;
-using MyGame.Manager;
-using System;
 
 namespace MyGame.Manager
 {
@@ -25,11 +23,11 @@ namespace MyGame.Manager
 			_currentMapName = mapName;
 		}
 
-		public void OnMapChanged(BaseDynamicEntity entity, string mapName, Vector2 fromPosition, Vector2 toPosition)
+		public void OnMapChanged(BaseDynamicEntity entity, string mapName, Vector2 fromPosition, Vector2 toPosition, string animationToPlayForNewSpawnEntity)
 		{
 			GlobalObjectManager.EmitClearNodeFromRenderingOrderGroupSignal(_currentMapName);
 			_staticEntityManager.OnMapChanged(_currentMapName, mapName);
-			_dynamicEntityManager.OnMapChanged(entity, _currentMapName, mapName, fromPosition, toPosition);
+			_dynamicEntityManager.OnMapChanged(entity, _currentMapName, mapName, fromPosition, toPosition, animationToPlayForNewSpawnEntity);
 			_currentMapName = mapName;
 		}
 

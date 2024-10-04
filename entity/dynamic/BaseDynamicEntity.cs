@@ -1,4 +1,5 @@
 using Godot;
+using MyGame.Component;
 using MyGame.Manager;
 using System;
 
@@ -6,6 +7,8 @@ namespace MyGame.Entity
 {
 	public abstract partial class BaseDynamicEntity: CharacterBody2D, IEntity
 	{
+		protected LazyLoader<IAnimationPlayer> _animationPlayer;
+
 		private string _renderingOrderGroupName;
 		public bool IsTransitable = false;
 
@@ -21,9 +24,7 @@ namespace MyGame.Entity
 		private float _tookOverMaxVelocity = 0;
 		private Vector2 _tookOverToPosition = Vector2.Zero;
 
-		protected abstract void UpdateDirection();
-
-		protected abstract void UpdateAnimation(double delta);
+        protected abstract void UpdateDirection();
 
 		public string GetEntityName() { return _name; }
 
@@ -44,9 +45,15 @@ namespace MyGame.Entity
 			_tookOverToPosition = Vector2.Zero;
 		}
 
+		public void PlayAnimation(string animationName)
+		{
+			if (_animationPlayer == null) return;
+			_animationPlayer.Invoke(player => player.PlayAnimation(animationName));
+		}
+
 		private void UpdateTookOverDirection()
 		{
-			if ((_tookOverToPosition - Position).Length() < _maxVelocity / 30)
+			if ((_tookOverToPosition - Position).Length() < _tookOverMaxVelocity / 30)
 			{
 				_direction = Vector2.Zero;
 			}
@@ -96,13 +103,15 @@ namespace MyGame.Entity
 			}
 		}
 
-		private void UpdatePosition()
+		private void UpdateAnimation(double delta)
+		{
+			if (_animationPlayer == null) return;
+			_animationPlayer.Invoke(player => player.UpdateAnimation(_direction, delta));
+		}
+
+        private void UpdatePosition()
 		{
 			MoveAndSlide();
-			//if (!Velocity.IsZeroApprox())
-			//{
-			//    GD.Print($"{_name}\ndirection: ({_direction.X}, {_direction.Y})\nvelocity: ({Velocity.X}, {Velocity.Y})\nposition: ({Position.X}, {Position.Y})");
-			//}
 		}
 
 		public override void _EnterTree()
@@ -115,7 +124,7 @@ namespace MyGame.Entity
 			GD.Print($"Dynamic entity exit: {_name}");
 		}
 
-		public override void _PhysicsProcess(double delta)
+        public override void _PhysicsProcess(double delta)
 		{
 			if (_isTookOver)
 			{

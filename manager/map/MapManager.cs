@@ -25,6 +25,19 @@ namespace MyGame.Manager
 			}
 		}
 
+		public string GetAnimationPlayedAfterSpawn(string landmarkName)
+		{
+			if (_currentMap is BaseMap map)
+			{
+				return map.GetAnimationPlayedAfterSpawn(landmarkName);
+			}
+			else
+			{
+				GD.PrintErr("Invalid current map when getting animation for landmark in MapManager");
+				return null;
+			}
+		}
+
 		public void LoadMap(string mapName)
 		{
 			if (!_loadedScenes.TryGetValue(mapName, out var map))
