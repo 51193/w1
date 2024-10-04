@@ -28,7 +28,7 @@ tile_map_data = PackedByteArray("AAD/////AQABAAgAAAD+////AQABAAgAAAD9////AQABAAg
 tile_set = ExtResource("2_n0p7l")
 
 [node name="TransitionArea" parent="." instance=ExtResource("3_g8156")]
-position = Vector2(150, 48)
+position = Vector2(220, 48)
 ExitName = "Exit00"
 
 [node name="Entry00From" parent="." instance=ExtResource("4_rw8pp")]

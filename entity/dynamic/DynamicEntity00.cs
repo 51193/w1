@@ -42,8 +42,11 @@ namespace MyGame.Entity
 		{
 			_animationPlayer = new LazyLoader<IAnimationPlayer>(() =>
 			{
-				var animationPlayer = new CharacterAnimationPlayer(GetNode<AnimatedSprite2D>("AnimatedSprite2D"));
-				return animationPlayer;
+				return new CharacterAnimationPlayer(GetNode<AnimatedSprite2D>("AnimatedSprite2D"));
+			});
+			_velocityAlgorithm = new LazyLoader<IVelocityAlgorithm>(() =>
+			{
+				return new FrictionVelocityAlgorithm(100, 2000, 1000);
 			});
 		}
 	}

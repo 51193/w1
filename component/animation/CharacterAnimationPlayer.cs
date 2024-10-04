@@ -24,11 +24,6 @@ namespace MyGame.Component
 
         public CharacterAnimationPlayer(AnimatedSprite2D animatedSprite2D)
         {
-            SetAnimatedSprite2D(animatedSprite2D);
-        }
-
-        public void SetAnimatedSprite2D(AnimatedSprite2D animatedSprite2D)
-        {
             _animatedSprite2D = animatedSprite2D;
         }
 
