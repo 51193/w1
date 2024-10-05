@@ -1,6 +1,5 @@
 ﻿using Godot;
 using System;
-using static Godot.TextServer;
 
 namespace MyGame.Component
 {

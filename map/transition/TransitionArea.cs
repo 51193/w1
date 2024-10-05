@@ -30,9 +30,5 @@ namespace MyGame.Map
 			_map = GetParent<BaseMap>();
 			BodyEntered += OnBodyEntered;
 		}
-
-		public override void _Process(double delta)
-		{
-		}
 	}
 }

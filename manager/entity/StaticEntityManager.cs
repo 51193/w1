@@ -22,13 +22,21 @@ namespace MyGame.Manager
 			{
 				["Map0Wall0"] = new()
 				{
-				new Vector2(-32, -16)
+					new Vector2(-32, -16)
 				},
 				["Map0Wall1"] = new()
 				{
 					new Vector2(48, 0)
-				}
-			};
+				},
+                ["InteractionTestEntity"] = new()
+				{
+					new Vector2(24, -64)
+				},
+                ["AnotherInteractionTestEntity"] = new()
+                {
+                    new Vector2(48, -64)
+                },
+            };
 		}
 
 		public void InitiateEntities(string mapName)

@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://dqs4h0gfshjyi"]
+
+[ext_resource type="Script" path="res://entity/static/AnotherInteractionTestEntity.cs" id="1_5jv8v"]
+[ext_resource type="Texture2D" uid="uid://blnae5ersq7kl" path="res://assets/spritesheet/furniture/modernoffice/Modern_Office_Black_Shadow.png" id="2_vbcfm"]
+[ext_resource type="PackedScene" uid="uid://dr6q1mng2r3km" path="res://component/interact/interaction_detector.tscn" id="3_t6j7m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gfngf"]
+size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p2q0b"]
+atlas = ExtResource("2_vbcfm")
+region = Rect2(96, 112, 16, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v6xa7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p2q0b")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_urdec"]
+radius = 40.0
+
+[node name="AnotherInteractionTestEntity" type="StaticBody2D"]
+script = ExtResource("1_5jv8v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gfngf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_v6xa7")
+
+[node name="InteractionDetector" parent="." instance=ExtResource("3_t6j7m")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionDetector"]
+shape = SubResource("CircleShape2D_urdec")

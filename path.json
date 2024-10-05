@@ -43,5 +43,15 @@
 		"Name": "Map0Wall1",
 		"Path": "res://entity/static/map_0_wall_1.tscn",
 		"Description": "A static entity represent wall in map0."
+	},
+	{
+		"Name": "InteractionTestEntity",
+		"Path": "res://entity/static/interaction_test_entity.tscn",
+		"Description": "A static entity for interaction test."
+	},
+	{
+		"Name": "AnotherInteractionTestEntity",
+		"Path": "res://entity/static/another_interaction_test_entity.tscn",
+		"Description": "A static entity for interaction test."
 	}
 ]

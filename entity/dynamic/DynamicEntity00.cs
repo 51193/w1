@@ -3,7 +3,7 @@ using MyGame.Component;
 
 namespace MyGame.Entity
 {
-	public partial class DynamicEntity00 : BaseDynamicEntity
+	public partial class DynamicEntity00 : BaseInteractableDynamicEntity
 	{
 		public DynamicEntity00()
 		{
