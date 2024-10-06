@@ -1,5 +1,6 @@
 using Godot;
 using MyGame.Entity;
+using System;
 using System.Threading.Tasks;
 
 namespace MyGame.Manager
@@ -12,7 +13,6 @@ namespace MyGame.Manager
 		public DynamicEntityManager()
 		{
 			Init();
-			_name = "DynamicEntityManager";
 		}
 
 		private void Init()
@@ -21,14 +21,14 @@ namespace MyGame.Manager
 			{
 				["DynamicEntity00"] = new()
 			{
-				new Vector2(0, 0)
+				Tuple.Create(new Vector2(0, 0), "")
 			}
 			};
 		}
 
 		private async void SpawnEntityWithEntranceAnimation(string entityName, Vector2 fromPosition, Vector2 toPosition, string animationToPlayForNewSpawnEntity)
 		{
-			BaseDynamicEntity entity = SpawnEntity(entityName, fromPosition);
+			BaseDynamicEntity entity = SpawnEntity(entityName, Tuple.Create(fromPosition, ""));
 
 			entity.PlayAnimation(animationToPlayForNewSpawnEntity);
 			

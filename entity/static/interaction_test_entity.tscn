@@ -39,3 +39,13 @@ sprite_frames = SubResource("SpriteFrames_g2te6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionDetector"]
 shape = SubResource("CircleShape2D_j1mw4")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -34.0
+offset_top = -30.0
+offset_right = 103.0
+offset_bottom = -7.0
+scale = Vector2(0.5, 0.5)
+text = "按E什么都不会发生"
+horizontal_alignment = 1
+vertical_alignment = 1

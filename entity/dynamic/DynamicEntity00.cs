@@ -8,7 +8,6 @@ namespace MyGame.Entity
 		public DynamicEntity00()
 		{
 			IsTransitable = true;
-			_name = "DynamicEntity00";
 		}
 
 		protected override void UpdateDirection()

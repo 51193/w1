@@ -1,17 +1,23 @@
 ﻿using Godot;
 using MyGame.Entity;
+using System;
 using System.Collections.Generic;
 
 namespace MyGame.Manager
 {
-    public partial class BaseEntityManager<T>: Node where T: Node2D, IEntity
+    public partial class BaseEntityManager<T> : Node where T : Node2D, IEntity
     {
-        protected readonly Dictionary<string, Dictionary<string, List<Vector2>>> _globalEntityPosition = new();
+        protected readonly Dictionary<string, Dictionary<string, List<Tuple<Vector2, string>>>> _globalEntityPosition = new();
 
         protected readonly Dictionary<string, PackedScene> _entities = new();
         protected readonly List<T> _instances = new();
 
-        protected string _name = "BaseEntityManager(shouldn't display)";
+        private string _name;
+
+        public BaseEntityManager()
+        {
+            _name = GetType().Name;
+        }
 
         protected void ClearAllEntitiesFromMapRecord(string mapName)
         {
@@ -21,17 +27,17 @@ namespace MyGame.Manager
             }
         }
 
-        protected void AddEntityToMapRecord(string mapName, string entityName, Vector2 position)
+        protected void AddEntityToMapRecord(string mapName, string entityName, Tuple<Vector2, string>infoTuple)
         {
             if (!_globalEntityPosition.ContainsKey(mapName))
             {
-                _globalEntityPosition[mapName] = new Dictionary<string, List<Vector2>>();
+                _globalEntityPosition[mapName] = new();
             }
             if (!_globalEntityPosition[mapName].ContainsKey(entityName))
             {
-                _globalEntityPosition[mapName][entityName] = new List<Vector2>();
+                _globalEntityPosition[mapName][entityName] = new();
             }
-            _globalEntityPosition[mapName][entityName].Add(position);
+            _globalEntityPosition[mapName][entityName].Add(infoTuple);
         }
 
         protected void FreeLivingEntity(T entity)
@@ -42,7 +48,7 @@ namespace MyGame.Manager
 
         protected void MoveLivingEntityToMapRecord(T entity, string mapName, Vector2 position)
         {
-            AddEntityToMapRecord(mapName, entity.GetEntityName(), position);
+            AddEntityToMapRecord(mapName, entity.GetEntityName(), Tuple.Create(position, entity.GetState()));
             FreeLivingEntity(entity);
         }
 
@@ -50,7 +56,7 @@ namespace MyGame.Manager
         {
             foreach (var instance in _instances)
             {
-                AddEntityToMapRecord(mapName, instance.GetEntityName(), instance.Position);
+                AddEntityToMapRecord(mapName, instance.GetEntityName(), Tuple.Create(instance.Position, instance.GetState()));
             }
         }
 
@@ -77,7 +83,7 @@ namespace MyGame.Manager
             }
         }
 
-        protected T SpawnEntity(string entityName, Vector2 position)
+        protected T SpawnEntity(string entityName, Tuple<Vector2, string> info)
         {
             if (!_entities.ContainsKey(entityName))
             {
@@ -87,16 +93,19 @@ namespace MyGame.Manager
 
             _instances.Add(entity);
             AddChild(entity);
-            entity.Position = position;
+
+            entity.Position = info.Item1;
+            entity.SetState(info.Item2);
+
             GD.Print($"Entity instantiated: {entity.GetEntityName()}({entity.Position.X}, {entity.Position.Y})");
             return entity;
         }
 
-        protected void SpawnEntities(string entityName, List<Vector2> positions)
+        protected void SpawnEntities(string entityName, List<Tuple<Vector2, string>> infos)
         {
-            foreach (var position in positions)
+            foreach (var info in infos)
             {
-                SpawnEntity(entityName, position);
+                SpawnEntity(entityName, info);
             }
         }
 

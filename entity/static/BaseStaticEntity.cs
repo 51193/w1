@@ -6,13 +6,25 @@ namespace MyGame.Entity
     {
         private string _renderingOrderGroupName;
 
-        protected string _name = "BaseStaticEntity(shouldn't display)";
+        private string _name;
+
+        public BaseStaticEntity()
+        {
+            _name = GetType().Name;
+        }
 
         public string GetEntityName() { return _name; }
 
         public string GetRenderingGroupName() { return _renderingOrderGroupName; }
 
         public void SetRenderingGroupName(string groupName) { _renderingOrderGroupName = groupName; }
+
+        public virtual string GetState()
+        {
+            return null;
+        }
+
+        public virtual void SetState(string state) { }
 
         public override void _EnterTree()
         {

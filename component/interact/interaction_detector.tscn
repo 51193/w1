@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://component/interact/InteractionDetector.cs" id="1_rs1e0"]
 
-[node name="TestInteractionDetector" type="Area2D"]
+[node name="InteractionDetector" type="Area2D"]
 script = ExtResource("1_rs1e0")

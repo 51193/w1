@@ -53,5 +53,10 @@
 		"Name": "AnotherInteractionTestEntity",
 		"Path": "res://entity/static/another_interaction_test_entity.tscn",
 		"Description": "A static entity for interaction test."
+	},
+	{
+		"Name": "DoorOpenable",
+		"Path": "res://entity/static/furniture/door_openable.tscn",
+		"Description": "A door can open."
 	}
 ]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b0fnj068wewmq"]
 
-[ext_resource type="Script" path="res://map/transition/TransitionArea.cs" id="1_jpvgx"]
+[ext_resource type="Script" path="res://component/transition/TransitionArea.cs" id="1_jpvgx"]
 
 [node name="TransitionArea" type="Area2D"]
 script = ExtResource("1_jpvgx")

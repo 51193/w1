@@ -1,12 +1,13 @@
 using Godot;
 using MyGame.Entity;
+using System;
 using System.Collections.Generic;
 
 namespace MyGame.Manager
 {
 	public partial class InteractManager : Node
 	{
-		private readonly List<KeyValuePair<BaseInteractableDynamicEntity, BaseInteractableStaticEntity>> _interactablePairs = new();
+		private readonly List<Tuple<BaseInteractableDynamicEntity, BaseInteractableStaticEntity>> _interactablePairs = new();
 
 		[Signal]
 		public delegate void RegistrateInteractablePairEventHandler(BaseInteractableDynamicEntity dynamicEntity, BaseInteractableStaticEntity staticEntity);
@@ -15,18 +16,21 @@ namespace MyGame.Manager
 
 		private void AddPair(BaseInteractableDynamicEntity dynamicEntity, BaseInteractableStaticEntity staticEntity)
 		{
-			_interactablePairs.Add(new KeyValuePair<BaseInteractableDynamicEntity, BaseInteractableStaticEntity>(dynamicEntity, staticEntity));
+			_interactablePairs.Add(Tuple.Create(dynamicEntity, staticEntity));
 		}
 
-		private void RemovePair(BaseInteractableDynamicEntity dynamicEntity, BaseInteractableStaticEntity staticEntity)
-		{
-			_interactablePairs.RemoveAll(item =>
-			{
-				return item.Key == dynamicEntity && item.Value == staticEntity;
-			});
-		}
+        private void RemovePair(BaseInteractableDynamicEntity dynamicEntity, BaseInteractableStaticEntity staticEntity)
+        {
+            staticEntity.HideInteractionPrompt();
 
-		public override void _EnterTree()
+            var index = _interactablePairs.FindIndex(item => item.Item1 == dynamicEntity && item.Item2 == staticEntity);
+            if (index != -1)
+            {
+                _interactablePairs.RemoveAt(index);
+            }
+        }
+
+        public override void _EnterTree()
 		{
 			GlobalObjectManager.AddGlobalObject("InteractManager", this);
 			RegistrateInteractablePair += AddPair;
@@ -42,14 +46,26 @@ namespace MyGame.Manager
 
 		public override void _Process(double delta)
 		{
-			_interactablePairs.Sort((a, b) =>
+			foreach (var pair in _interactablePairs)
 			{
-				return (a.Key.Position - a.Value.Position).Length().CompareTo((b.Key.Position - b.Value.Position).Length());
-			});
-			if (_interactablePairs.Count > 0)
-			{
-				GD.Print(_interactablePairs[0].Value.GetEntityName());
+				pair.Item2.HideInteractionPrompt();
 			}
+
+			if(_interactablePairs.Count > 0)
+			{
+                _interactablePairs.Sort((a, b) =>
+                {
+                    return (a.Item1.Position - a.Item2.Position).Length().CompareTo((b.Item1.Position - b.Item2.Position).Length());
+                });
+
+				var closestPair = _interactablePairs[0];
+				closestPair.Item2.ShowInteractionPrompt();
+
+				if(Input.IsActionJustReleased("activate"))
+				{
+					closestPair.Item2.Interact(closestPair.Item1);
+				}
+            }
 		}
 	}
 }

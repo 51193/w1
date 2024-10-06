@@ -12,13 +12,19 @@ namespace MyGame.Entity
 		private string _renderingOrderGroupName;
 		public bool IsTransitable = false;
 
-		protected string _name = "BaseDynamicEntity(shouldn't display)";
+		private string _name;
 
 		protected Vector2 _direction = Vector2.Zero;
+		private Vector2 _lastFramePosition = Vector2.Zero;
 
 		private bool _isTookOver = false;
 		private float _tookOverMaxVelocity = 0;
 		private Vector2 _tookOverToPosition = Vector2.Zero;
+
+		public BaseDynamicEntity()
+		{
+			_name = GetType().Name;
+		}
 
         protected abstract void UpdateDirection();
 
@@ -27,6 +33,13 @@ namespace MyGame.Entity
 		public string GetRenderingGroupName() {  return _renderingOrderGroupName; }
 
 		public void SetRenderingGroupName(string groupName) {  _renderingOrderGroupName = groupName; }
+
+		public virtual string GetState()
+		{
+			return null;
+		}
+
+		public virtual void SetState(string state) { }
 
 		public void SetTookOverPosition(float maxVelocity, Vector2 position)
 		{
@@ -64,10 +77,6 @@ namespace MyGame.Entity
 			if (_velocityAlgorithm == null) return;
 			Velocity = _velocityAlgorithm.Invoke(algorithm => algorithm.UpdateVelocity(Velocity, _direction, delta));
 			_direction = Vector2.Zero;
-			if (!Velocity.IsZeroApprox() && _renderingOrderGroupName != null)
-			{
-				GlobalObjectManager.EmitResortRenderingOrderSignal(_renderingOrderGroupName);
-			}
 		}
 
 		private void UpdateAnimation(double delta)
@@ -79,7 +88,15 @@ namespace MyGame.Entity
         private void UpdatePosition()
 		{
 			MoveAndSlide();
-		}
+			if(_lastFramePosition != Position)
+			{
+				if (_renderingOrderGroupName != null)
+				{
+					GlobalObjectManager.EmitResortRenderingOrderSignal(_renderingOrderGroupName);
+				}
+				_lastFramePosition = Position;
+            }
+        }
 
 		public override void _EnterTree()
 		{

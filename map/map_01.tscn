@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://map/Map01.cs" id="1_6esmm"]
 [ext_resource type="TileSet" uid="uid://dsu38p6x84kq1" path="res://assets/tileset/terrain00.tres" id="2_n0p7l"]
-[ext_resource type="PackedScene" uid="uid://b0fnj068wewmq" path="res://map/transition/transition_area.tscn" id="3_g8156"]
-[ext_resource type="PackedScene" uid="uid://dbb2shc11r4pn" path="res://map/landmark/landmark_area.tscn" id="4_rw8pp"]
+[ext_resource type="PackedScene" uid="uid://b0fnj068wewmq" path="res://component/transition/transition_area.tscn" id="3_g8156"]
+[ext_resource type="PackedScene" uid="uid://dbb2shc11r4pn" path="res://component/landmark/landmark_area.tscn" id="4_rw8pp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pfmfe"]
 radius = 100.0

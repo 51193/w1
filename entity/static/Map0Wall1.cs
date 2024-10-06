@@ -1,11 +1,6 @@
-using Godot;
-using MyGame.Entity;
-using System;
-
-public partial class Map0Wall1 : BaseStaticEntity
+namespace MyGame.Entity
 {
-	public Map0Wall1()
-	{
-		_name = "Map0Wall1";
-	}
+    public partial class Map0Wall1 : BaseStaticEntity
+    {
+    }
 }

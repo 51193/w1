@@ -5,9 +5,20 @@ namespace MyGame.Component
 {
     public class TestStrategy : IInteractionStrategy
     {
-        public void Interaction(BaseInteractableStaticEntity staticEntity, BaseInteractableDynamicEntity dynamicEntity)
+        public void Interaction(BaseInteractableDynamicEntity dynamicEntity)
         {
-            GD.Print($"{dynamicEntity.GetEntityName()} interact with {staticEntity.GetEntityName()}");
+
+        }
+
+        public string GetState()
+        {
+            return null;
+        }
+
+
+        public void SetState(string state)
+        {
+
         }
     }
 }

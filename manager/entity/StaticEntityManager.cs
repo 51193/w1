@@ -2,6 +2,7 @@ using Godot;
 using MyGame.Manager;
 using MyGame.Entity;
 using System.Threading.Tasks;
+using System;
 
 namespace MyGame.Manager
 {
@@ -13,7 +14,6 @@ namespace MyGame.Manager
 		public StaticEntityManager()
 		{
 			Init();
-			_name = "StaticEntityManager";
 		}
 
 		private void Init()
@@ -22,21 +22,25 @@ namespace MyGame.Manager
 			{
 				["Map0Wall0"] = new()
 				{
-					new Vector2(-32, -16)
+					Tuple.Create(new Vector2(-32, -16), "")
 				},
 				["Map0Wall1"] = new()
 				{
-					new Vector2(48, 0)
-				},
-                ["InteractionTestEntity"] = new()
-				{
-					new Vector2(24, -64)
-				},
-                ["AnotherInteractionTestEntity"] = new()
-                {
-                    new Vector2(48, -64)
+                    Tuple.Create(new Vector2(48, 0), "")
                 },
-            };
+				["InteractionTestEntity"] = new()
+				{
+                    Tuple.Create(new Vector2(24, -64), "")
+                },
+				["AnotherInteractionTestEntity"] = new()
+				{
+                    Tuple.Create(new Vector2(48, -64), "")
+                },
+				["DoorOpenable"] = new()
+				{
+                    Tuple.Create(new Vector2(24, -16), "")
+				},
+			};
 		}
 
 		public void InitiateEntities(string mapName)

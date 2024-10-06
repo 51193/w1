@@ -20,16 +20,16 @@ namespace MyGame.Component
 			{
 				GlobalObjectManager.EmitRegistrateInteractablePairSignal(dynamicEntity, _parentInteractableStaticEntity);
 			}
-        }
-        protected void OnInteractableObjectExited(Node node)
-        {
-            if (node is BaseInteractableDynamicEntity dynamicEntity)
-            {
-                GlobalObjectManager.EmitUnregistrateInteractablePairSignal(dynamicEntity, _parentInteractableStaticEntity);
-            }
-        }
+		}
+		protected void OnInteractableObjectExited(Node node)
+		{
+			if (node is BaseInteractableDynamicEntity dynamicEntity)
+			{
+				GlobalObjectManager.EmitUnregistrateInteractablePairSignal(dynamicEntity, _parentInteractableStaticEntity);
+			}
+		}
 
-        public override void _Ready()
+		public override void _Ready()
 		{
 			_parentInteractableStaticEntity = GetParent<BaseInteractableStaticEntity>();
 		}
