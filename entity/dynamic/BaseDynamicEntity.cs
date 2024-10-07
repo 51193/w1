@@ -1,32 +1,40 @@
 using Godot;
 using MyGame.Component;
 using MyGame.Manager;
+using System;
 
 namespace MyGame.Entity
 {
 	public abstract partial class BaseDynamicEntity: CharacterBody2D, IEntity
 	{
 		protected LazyLoader<IAnimationPlayer> _animationPlayer;
+		public void LoadStrategy(Func<IAnimationPlayer> factory)
+		{
+			_animationPlayer = new LazyLoader<IAnimationPlayer>(factory);
+		}
 		protected LazyLoader<IVelocityAlgorithm> _velocityAlgorithm;
+        public void LoadStrategy(Func<IVelocityAlgorithm> factory)
+        {
+            _velocityAlgorithm = new LazyLoader<IVelocityAlgorithm>(factory);
+        }
+        protected LazyLoader<INavigator> _navigator;
+		public void LoadStrategy(Func<INavigator> factory)
+		{
+			_navigator = new LazyLoader<INavigator>(factory);
+		}
 
-		private string _renderingOrderGroupName;
+        private string _renderingOrderGroupName;
 		public bool IsTransitable = false;
 
 		private string _name;
 
-		protected Vector2 _direction = Vector2.Zero;
+		public Vector2 Direction = Vector2.Zero;
 		private Vector2 _lastFramePosition = Vector2.Zero;
-
-		private bool _isTookOver = false;
-		private float _tookOverMaxVelocity = 0;
-		private Vector2 _tookOverToPosition = Vector2.Zero;
 
 		public BaseDynamicEntity()
 		{
 			_name = GetType().Name;
 		}
-
-        protected abstract void UpdateDirection();
 
 		public string GetEntityName() { return _name; }
 
@@ -41,48 +49,28 @@ namespace MyGame.Entity
 
 		public virtual void SetState(string state) { }
 
-		public void SetTookOverPosition(float maxVelocity, Vector2 position)
-		{
-			_isTookOver = true;
-			_tookOverMaxVelocity = maxVelocity;
-			_tookOverToPosition = position;
-		}
-
-		public void DisableTookOver()
-		{
-			_isTookOver = false;
-			_tookOverToPosition = Vector2.Zero;
-		}
-
 		public void PlayAnimation(string animationName)
 		{
 			if (_animationPlayer == null) return;
 			_animationPlayer.Invoke(player => player.PlayAnimation(animationName));
 		}
 
-		private void UpdateTookOverDirection()
+		private void UpdateDirection()
 		{
-			if ((_tookOverToPosition - Position).Length() < _tookOverMaxVelocity / 30)
-			{
-				_direction = Vector2.Zero;
-			}
-			else
-			{
-				_direction = (_tookOverToPosition - Position).Normalized();
-			}
+			if(_navigator == null) return;
+			Direction = _navigator.Invoke(navigator => navigator.UpdateDirection());
 		}
 
 		private void UpdateVelocity(double delta)
 		{
 			if (_velocityAlgorithm == null) return;
-			Velocity = _velocityAlgorithm.Invoke(algorithm => algorithm.UpdateVelocity(Velocity, _direction, delta));
-			_direction = Vector2.Zero;
+			Velocity = _velocityAlgorithm.Invoke(algorithm => algorithm.UpdateVelocity(delta));
 		}
 
 		private void UpdateAnimation(double delta)
 		{
 			if (_animationPlayer == null) return;
-			_animationPlayer.Invoke(player => player.UpdateAnimation(_direction, delta));
+			_animationPlayer.Invoke(player => player.UpdateAnimation(Direction, delta));
 		}
 
         private void UpdatePosition()
@@ -108,16 +96,9 @@ namespace MyGame.Entity
 			GD.Print($"Dynamic entity exit: {_name}");
 		}
 
-        public override void _PhysicsProcess(double delta)
+		public override void _PhysicsProcess(double delta)
 		{
-			if (_isTookOver)
-			{
-				UpdateTookOverDirection();
-			}
-			else
-			{
-				UpdateDirection();
-			}
+			UpdateDirection();
 			UpdateAnimation(delta);
 			UpdateVelocity(delta);
 			UpdatePosition();

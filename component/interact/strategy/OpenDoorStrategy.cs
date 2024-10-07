@@ -1,6 +1,5 @@
 ﻿using Godot;
 using MyGame.Entity;
-using System;
 
 namespace MyGame.Component
 {
@@ -27,11 +26,11 @@ namespace MyGame.Component
         {
             switch (animName)
             {
-                case "close":
+                case "closing":
                     _state = DOOR_STATE.CLOSED;
                     _animationPlayer.Play("closed");
                     break;
-                case "open":
+                case "opening":
                     _state = DOOR_STATE.OPENED;
                     _animationPlayer.Play("opened");
                     break;
@@ -43,11 +42,11 @@ namespace MyGame.Component
             switch (_state)
             {
                 case DOOR_STATE.CLOSED:
-                    _animationPlayer.Play("open");
+                    _animationPlayer.Play("opening");
                     _state = DOOR_STATE.OPENING;
                     break;
                 case DOOR_STATE.OPENED:
-                    _animationPlayer.Play("close");
+                    _animationPlayer.Play("closing");
                     _state = DOOR_STATE.CLOSING;
                     break;
                 default:

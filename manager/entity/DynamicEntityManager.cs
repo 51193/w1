@@ -1,4 +1,5 @@
 using Godot;
+using MyGame.Component;
 using MyGame.Entity;
 using System;
 using System.Threading.Tasks;
@@ -26,7 +27,17 @@ namespace MyGame.Manager
 			};
 		}
 
-		private async void SpawnEntityWithEntranceAnimation(string entityName, Vector2 fromPosition, Vector2 toPosition, string animationToPlayForNewSpawnEntity)
+		private static void OnNavigationFinished(BaseDynamicEntity entity, uint originalCollisionMask)
+		{
+            entity.CollisionMask = originalCollisionMask;
+            entity.IsTransitable = true;
+            entity.LoadStrategy(() =>
+            {
+                return new InputNavigator();
+            });
+        }
+
+		private void SpawnEntityWithEntranceAnimation(string entityName, Vector2 fromPosition, Vector2 toPosition, string animationToPlayForNewSpawnEntity)
 		{
 			BaseDynamicEntity entity = SpawnEntity(entityName, Tuple.Create(fromPosition, ""));
 
@@ -34,15 +45,15 @@ namespace MyGame.Manager
 			
 			uint originalCollisionMask = entity.CollisionMask;
 
-			entity.SetTookOverPosition((fromPosition - toPosition).Length() * 2, toPosition);
+			entity.LoadStrategy(() =>
+			{
+				return new StraightToTargetNavigator(entity, toPosition, () =>
+				{
+					CallDeferred(nameof(OnNavigationFinished), entity, originalCollisionMask);
+				});
+			});
 			entity.CollisionMask = 0;
 			entity.IsTransitable = false;
-
-			await Task.Delay(500);
-
-			entity.DisableTookOver();
-			entity.CollisionMask = originalCollisionMask;
-			entity.IsTransitable = true;
 		}
 
 		public void InitiateEntities(string mapName)

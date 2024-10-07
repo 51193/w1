@@ -8,7 +8,7 @@ namespace MyGame.Entity
 		public override void _Ready()
 		{
 			InitInteractionPrompt(GetNode<Label>("Label"));
-			_interactionStrategy = new LazyLoader<IInteractionStrategy>(() =>
+			LoadStrategy(() =>
 			{
 				return new TestStrategy();
 			});

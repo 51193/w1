@@ -1,11 +1,16 @@
 ﻿using Godot;
 using MyGame.Component;
+using System;
 
 namespace MyGame.Entity
 {
     public partial class BaseInteractableStaticEntity : BaseStaticEntity
     {
         protected LazyLoader<IInteractionStrategy> _interactionStrategy;
+        public void LoadStrategy(Func<IInteractionStrategy> factory)
+        {
+            _interactionStrategy = new LazyLoader<IInteractionStrategy>(factory);
+        }
         protected Label _interactionPrompt;
 
         public void Interact(BaseInteractableDynamicEntity dynamicEntity)

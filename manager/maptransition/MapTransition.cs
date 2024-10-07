@@ -1,4 +1,5 @@
 using Godot;
+using MyGame.Component;
 using MyGame.Entity;
 using System;
 using System.Collections.Generic;
@@ -72,20 +73,21 @@ namespace MyGame.Manager
 			_unifiedEntityManager.OnMapChanged(entity, destinationName, fromLandmarkPosition, toLandmarkPosition, animationToPlayForNewSpawnEntity);
 		}
 
-		private async void TransitionProcess(string departureName, string exitName, Vector2 exitPosition, BaseDynamicEntity entity)
-		{
-			entity.IsTransitable = false;
-			entity.SetTookOverPosition((entity.Position - exitPosition).Length() * (float)1.5, exitPosition);
-			entity.CollisionMask = 0;
-			await Task.Delay(500);
-			if (_transitionsDict.TryGetValue((departureName, exitName), out var transition))
-			{
-				CallDeferred(nameof(InvokeManagers), transition.Destination, transition.EntryFrom, transition.EntryTo, entity);
-			}
-			else
+		private void TransitionProcess(string departureName, string exitName, Vector2 exitPosition, BaseDynamicEntity entity)
+        {
+			if (!_transitionsDict.TryGetValue((departureName, exitName), out var transition))
 			{
 				GD.PrintErr($"No transition found for: {departureName}-{exitName}");
 			}
+            entity.IsTransitable = false;
+			entity.LoadStrategy(() =>
+			{
+				return new StraightToTargetNavigator(entity, exitPosition, () =>
+				{
+					CallDeferred(nameof(InvokeManagers), transition.Destination, transition.EntryFrom, transition.EntryTo, entity);
+				});
+			});
+			entity.CollisionMask = 0;
 		}
 
 		private void OnMapManagerComplete()
