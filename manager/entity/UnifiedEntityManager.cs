@@ -23,11 +23,11 @@ namespace MyGame.Manager
 			_currentMapName = mapName;
 		}
 
-		public void OnMapChanged(BaseDynamicEntity entity, string mapName, Vector2 fromPosition, Vector2 toPosition, string animationToPlayForNewSpawnEntity)
+		public void OnMapChanged(BaseDynamicEntity entity, string mapName, Vector2 fromPosition, Vector2 toPosition)
 		{
 			GlobalObjectManager.EmitClearNodeFromRenderingOrderGroupSignal(_currentMapName);
 			_staticEntityManager.OnMapChanged(_currentMapName, mapName);
-			_dynamicEntityManager.OnMapChanged(entity, _currentMapName, mapName, fromPosition, toPosition, animationToPlayForNewSpawnEntity);
+			_dynamicEntityManager.OnMapChanged(entity, _currentMapName, mapName, fromPosition, toPosition);
 			_currentMapName = mapName;
 		}
 

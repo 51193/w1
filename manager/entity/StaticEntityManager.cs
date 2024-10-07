@@ -68,6 +68,8 @@ namespace MyGame.Manager
 
 			AddAllLivingEntitiesToRenderingOrderGroup(nextMapName);
 
+			UpdateAllLivingEntitiesOnce();
+
 			SetAllLivingEntitiesPhysicsProcess(false);
 
 			EmitSignal(SignalName.EntityTransitionComplete);

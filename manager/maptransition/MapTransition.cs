@@ -69,8 +69,7 @@ namespace MyGame.Manager
 			_mapManager.LoadMap(destinationName);
 			Vector2 fromLandmarkPosition = _mapManager.GetLandmarkPosition(fromLandmarkName);
 			Vector2 toLandmarkPosition = _mapManager.GetLandmarkPosition(toLandmarkName);
-			string animationToPlayForNewSpawnEntity = _mapManager.GetAnimationPlayedAfterSpawn(fromLandmarkName);
-			_unifiedEntityManager.OnMapChanged(entity, destinationName, fromLandmarkPosition, toLandmarkPosition, animationToPlayForNewSpawnEntity);
+			_unifiedEntityManager.OnMapChanged(entity, destinationName, fromLandmarkPosition, toLandmarkPosition);
 		}
 
 		private void TransitionProcess(string departureName, string exitName, Vector2 exitPosition, BaseDynamicEntity entity)

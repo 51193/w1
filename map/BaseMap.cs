@@ -24,19 +24,6 @@ namespace MyGame.Map
             }
         }
 
-        public string GetAnimationPlayedAfterSpawn(string landmarkName)
-        {
-            if (_landmarks.ContainsKey(landmarkName))
-            {
-                return _landmarks[landmarkName].AniamtionPlayedAfterSpawn;
-            }
-            else
-            {
-                GD.PrintErr($"Landmark {landmarkName} not found when getting animation name");
-                return null;
-            }
-        }
-
         private void GetLandmarks()
         {
             foreach (Node node in GetChildren())

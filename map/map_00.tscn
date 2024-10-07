@@ -35,7 +35,6 @@ shape = SubResource("CircleShape2D_13dpv")
 [node name="Entry00From" parent="." instance=ExtResource("4_3tbn1")]
 position = Vector2(-125, 16)
 LandmarkName = "Entry00From"
-AniamtionPlayedAfterSpawn = "run-6"
 
 [node name="Entry00To" parent="." instance=ExtResource("4_3tbn1")]
 position = Vector2(-50, 16)

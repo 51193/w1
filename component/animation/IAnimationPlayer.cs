@@ -4,7 +4,7 @@ namespace MyGame.Component
 {
     public interface IAnimationPlayer
     {
-        void PlayAnimation(string animationName);
-        void UpdateAnimation(Vector2 directioin, double delta);
+        public void UpdateAnimation(Vector2 direction, double delta);
+        public void UpdateAnimationWithoutConstraint(Vector2 direction);
     }
 }

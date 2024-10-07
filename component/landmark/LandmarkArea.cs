@@ -7,7 +7,5 @@ namespace MyGame.Map
 	{
 		[Export]
 		public string LandmarkName = "LandMark";
-		[Export]
-		public string AniamtionPlayedAfterSpawn;
 	}
 }

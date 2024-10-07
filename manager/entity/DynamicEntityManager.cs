@@ -37,12 +37,10 @@ namespace MyGame.Manager
             });
         }
 
-		private void SpawnEntityWithEntranceAnimation(string entityName, Vector2 fromPosition, Vector2 toPosition, string animationToPlayForNewSpawnEntity)
+		private void SpawnEntityWithEntranceAnimation(string entityName, Vector2 fromPosition, Vector2 toPosition)
 		{
 			BaseDynamicEntity entity = SpawnEntity(entityName, Tuple.Create(fromPosition, ""));
 
-			entity.PlayAnimation(animationToPlayForNewSpawnEntity);
-			
 			uint originalCollisionMask = entity.CollisionMask;
 
 			entity.LoadStrategy(() =>
@@ -64,7 +62,7 @@ namespace MyGame.Manager
 			EmitSignal(SignalName.EntityTransitionComplete);
 		}
 
-		public void OnMapChanged(BaseDynamicEntity entity, string currentMapName, string nextMapName, Vector2 fromPosition, Vector2 ToPosition, string animationToPlayForNewSpawnEntity)
+		public void OnMapChanged(BaseDynamicEntity entity, string currentMapName, string nextMapName, Vector2 fromPosition, Vector2 ToPosition)
 		{
 			if (currentMapName == null)
 			{
@@ -80,9 +78,11 @@ namespace MyGame.Manager
 			RecordAllLivingEntitiesToMapRecord(currentMapName);
 			ClearAllLivingEntities();
 			SpawnAllWaitingEntitiesFromMapRecord(nextMapName);
-			SpawnEntityWithEntranceAnimation(entityName, fromPosition, ToPosition, animationToPlayForNewSpawnEntity);
+			SpawnEntityWithEntranceAnimation(entityName, fromPosition, ToPosition);
 
 			AddAllLivingEntitiesToRenderingOrderGroup(nextMapName);
+
+			UpdateAllLivingEntitiesOnce();
 
 			SetAllLivingEntitiesPhysicsProcess(false);
 

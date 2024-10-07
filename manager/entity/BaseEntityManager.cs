@@ -148,6 +148,14 @@ namespace MyGame.Manager
             }
         }
 
+        protected void UpdateAllLivingEntitiesOnce()
+        {
+            foreach (var entity in _instances)
+            {
+                entity.EntityInitiateProcess();
+            }
+        }
+
         public override void _EnterTree()
         {
             GD.Print($"EntityManager enter: {_name}");

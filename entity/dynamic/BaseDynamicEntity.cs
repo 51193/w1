@@ -8,17 +8,18 @@ namespace MyGame.Entity
 	public abstract partial class BaseDynamicEntity: CharacterBody2D, IEntity
 	{
 		protected LazyLoader<IAnimationPlayer> _animationPlayer;
-		public void LoadStrategy(Func<IAnimationPlayer> factory)
-		{
-			_animationPlayer = new LazyLoader<IAnimationPlayer>(factory);
-		}
 		protected LazyLoader<IVelocityAlgorithm> _velocityAlgorithm;
+        protected LazyLoader<INavigator> _navigator;
+
+        public void LoadStrategy(Func<IAnimationPlayer> factory)
+        {
+            _animationPlayer = new LazyLoader<IAnimationPlayer>(factory);
+        }
         public void LoadStrategy(Func<IVelocityAlgorithm> factory)
         {
             _velocityAlgorithm = new LazyLoader<IVelocityAlgorithm>(factory);
         }
-        protected LazyLoader<INavigator> _navigator;
-		public void LoadStrategy(Func<INavigator> factory)
+        public void LoadStrategy(Func<INavigator> factory)
 		{
 			_navigator = new LazyLoader<INavigator>(factory);
 		}
@@ -49,12 +50,6 @@ namespace MyGame.Entity
 
 		public virtual void SetState(string state) { }
 
-		public void PlayAnimation(string animationName)
-		{
-			if (_animationPlayer == null) return;
-			_animationPlayer.Invoke(player => player.PlayAnimation(animationName));
-		}
-
 		private void UpdateDirection()
 		{
 			if(_navigator == null) return;
@@ -71,6 +66,12 @@ namespace MyGame.Entity
 		{
 			if (_animationPlayer == null) return;
 			_animationPlayer.Invoke(player => player.UpdateAnimation(Direction, delta));
+		}
+
+		private void UpdateAnimation()
+		{
+			if( _animationPlayer == null) return;
+			_animationPlayer.Invoke(player => player.UpdateAnimationWithoutConstraint(Direction));
 		}
 
         private void UpdatePosition()
@@ -101,6 +102,14 @@ namespace MyGame.Entity
 			UpdateDirection();
 			UpdateAnimation(delta);
 			UpdateVelocity(delta);
+			UpdatePosition();
+		}
+
+		public void EntityInitiateProcess()
+		{
+			UpdateDirection();
+			UpdateAnimation();
+			UpdateVelocity(0.001);
 			UpdatePosition();
 		}
 	}

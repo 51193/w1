@@ -27,7 +27,7 @@ namespace MyGame.Component
             _animatedSprite2D = animatedSprite2D;
         }
 
-        public void PlayAnimation(string animationName)
+        private void PlayAnimation(string animationName)
         {
             if (animationName == null) return;
             _animatedSprite2D.Play(animationName);
@@ -110,6 +110,19 @@ namespace MyGame.Component
         {
             UpdateAnimationChangeCooldownTimer(delta);
             ModifyAnimation(direction);
+        }
+
+        public void UpdateAnimationWithoutConstraint(Vector2 direction)
+        {
+            int nextAnimationSuffix = GetTargetDirectionSuffix(direction);
+            if (direction.IsZeroApprox())
+            {
+                PlayAnimation("idle-" + nextAnimationSuffix);
+            }
+            else
+            {
+                PlayAnimation("run-" + nextAnimationSuffix);
+            }
         }
     }
 }

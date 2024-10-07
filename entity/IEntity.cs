@@ -7,5 +7,6 @@
         public string GetEntityName();
         public string GetState();
         public void SetState(string state);
+        public void EntityInitiateProcess();
     }
 }
