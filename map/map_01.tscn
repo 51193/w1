@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dbb2shc11r4pn" path="res://component/landmark/landmark_area.tscn" id="4_rw8pp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pfmfe"]
-radius = 100.0
+radius = 50.0
 
 [node name="Map01" type="Node2D"]
 script = ExtResource("1_6esmm")
@@ -31,7 +31,7 @@ tile_map_data = PackedByteArray("AAD/////AQABAAgAAAD+////AQABAAgAAAD9////AQABAAg
 tile_set = ExtResource("2_n0p7l")
 
 [node name="TransitionArea" parent="." instance=ExtResource("3_g8156")]
-position = Vector2(220, 48)
+position = Vector2(150, 48)
 ExitName = "Exit00"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionArea"]
@@ -40,8 +40,7 @@ shape = SubResource("CircleShape2D_pfmfe")
 [node name="Entry00From" parent="." instance=ExtResource("4_rw8pp")]
 position = Vector2(150, 48)
 LandmarkName = "Entry00From"
-AniamtionPlayedAfterSpawn = "run-4"
 
 [node name="Entry00To" parent="." instance=ExtResource("4_rw8pp")]
-position = Vector2(50, 48)
+position = Vector2(70, 48)
 LandmarkName = "Entry00To"
