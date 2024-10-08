@@ -11,7 +11,7 @@ namespace MyGame.Entity
 
         private string _renderingOrderGroupName;
 
-        private string _name;
+        private readonly string _name;
 
         public BaseStaticEntity()
         {
@@ -41,9 +41,9 @@ namespace MyGame.Entity
             return _stateManager.GetStates();
         }
 
-        public void HandleStateTransition(string stateName, string input = null)
+        public void HandleStateTransition(string stateName, string input, params object[] args)
         {
-            _stateManager.HandleStateTransition(stateName, input);
+            _stateManager.HandleStateTransition(stateName, input, args);
         }
 
         public override void _EnterTree()

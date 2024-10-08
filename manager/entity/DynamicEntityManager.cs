@@ -24,31 +24,10 @@ namespace MyGame.Manager
 			};
 		}
 
-		private static void OnNavigationFinished(BaseDynamicEntity entity, uint originalCollisionMask)
-		{
-            entity.CollisionMask = originalCollisionMask;
-            entity.IsTransitable = true;
-            entity.LoadStrategy(() =>
-            {
-                return new InputNavigator();
-            });
-        }
-
 		private void SpawnEntityWithEntranceAnimation(EntityInstance instanceInfo, Vector2 toPosition)
 		{
 			BaseDynamicEntity entity = SpawnEntity(instanceInfo);
-
-			uint originalCollisionMask = entity.CollisionMask;
-
-			entity.LoadStrategy(() =>
-			{
-				return new StraightToTargetNavigator(entity, toPosition, () =>
-				{
-					CallDeferred(nameof(OnNavigationFinished), entity, originalCollisionMask);
-				});
-			});
-			entity.CollisionMask = 0;
-			entity.IsTransitable = false;
+			entity.HandleStateTransition("ControlState", "GoStraight", toPosition);
 		}
 
 		public void InitiateEntities(string mapName)

@@ -15,7 +15,7 @@ namespace MyGame.Component
 
         public void Interaction(BaseInteractableDynamicEntity dynamicEntity)
         {
-            _entity.HandleStateTransition(_name);
+            _entity.HandleStateTransition(_name, null);
         }
     }
 }

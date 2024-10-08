@@ -30,7 +30,7 @@ namespace MyGame.Entity
         private string _renderingOrderGroupName;
 		public bool IsTransitable = false;
 
-		private string _name;
+		private readonly string _name;
 
 		public Vector2 Direction = Vector2.Zero;
 		private Vector2 _lastFramePosition = Vector2.Zero;
@@ -63,9 +63,9 @@ namespace MyGame.Entity
 			return _stateManager.GetStates();
 		}
 
-        public void HandleStateTransition(string stateName, string input = null)
+        public void HandleStateTransition(string stateName, string input, params object[] args)
         {
-			_stateManager.HandleStateTransition(stateName, input);
+			_stateManager.HandleStateTransition(stateName, input, args);
         }
 
         private void UpdateDirection()

@@ -6,6 +6,6 @@ namespace MyGame.Component
     {
         public void Enter(IEntity entity);
         public void Exit(IEntity entity);
-        public void HandleStateTransition(IEntity entity, string input);
+        public void HandleStateTransition(IEntity entity, string input, params object[] args);
     }
 }

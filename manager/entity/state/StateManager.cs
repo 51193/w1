@@ -27,11 +27,11 @@ namespace MyGame.Manager
             }
         }
 
-        public void HandleStateTransition(string stateName, string input)
+        public void HandleStateTransition(string stateName, string input, params object[] args)
         {
             if (_states.ContainsKey(stateName))
             {
-                _states[stateName].HandleStateTransition(_entity, input);
+                _states[stateName].HandleStateTransition(_entity, input, args);
             }
             else
             {

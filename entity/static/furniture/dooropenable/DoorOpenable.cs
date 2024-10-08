@@ -6,7 +6,7 @@ namespace MyGame.Entity
 {
 	public partial class DoorOpenable : BaseInteractableStaticEntity
 	{
-		private AnimationPlayer _animationPlayer;
+		private AnimationPlayer _animationPlayerNode;
 
         public override void InitiateStates(Dictionary<string, IState> states = null)
         {
@@ -33,7 +33,7 @@ namespace MyGame.Entity
 
         public override void _Ready()
 		{
-			_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+			_animationPlayerNode = GetNode<AnimationPlayer>("AnimationPlayer");
 			InitInteractionPrompt(GetNode<Label>("Label"));
 			LoadStrategy(() =>
 			{
