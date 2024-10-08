@@ -21,7 +21,7 @@
 	},
 	{
 		"Name": "DynamicEntity00",
-		"Path": "res://entity/dynamic/dynamic_entity_00.tscn",
+		"Path": "res://entity/dynamic/character/dynamic_entity_00.tscn",
 		"Description": "This is a test entity."
 	},
 	{
@@ -36,12 +36,12 @@
 	},
 	{
 		"Name": "Map0Wall0",
-		"Path": "res://entity/static/map_0_wall_0.tscn",
+		"Path": "res://entity/static/wall/map_0_wall_0.tscn",
 		"Description": "A static entity represent wall in map0."
 	},
 	{
 		"Name": "Map0Wall1",
-		"Path": "res://entity/static/map_0_wall_1.tscn",
+		"Path": "res://entity/static/wall/map_0_wall_1.tscn",
 		"Description": "A static entity represent wall in map0."
 	},
 	{

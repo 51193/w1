@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=4 uid="uid://wjtpcf88qoll"]
 
-[ext_resource type="Script" path="res://entity/static/Map0Wall1.cs" id="1_26npj"]
+[ext_resource type="Script" path="res://entity/static/wall/Map0Wall1.cs" id="1_26npj"]
 [ext_resource type="TileSet" uid="uid://dsu38p6x84kq1" path="res://assets/tileset/terrain00.tres" id="2_n74ox"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ss7cg"]
