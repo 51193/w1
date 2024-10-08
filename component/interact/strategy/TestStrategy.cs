@@ -8,16 +8,5 @@ namespace MyGame.Component
         {
 
         }
-
-        public string GetState()
-        {
-            return null;
-        }
-
-
-        public void SetState(string state)
-        {
-
-        }
     }
 }

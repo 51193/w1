@@ -1,7 +1,7 @@
 using Godot;
 using MyGame.Component;
 using MyGame.Entity;
-using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MyGame.Manager
@@ -18,12 +18,9 @@ namespace MyGame.Manager
 
 		private void Init()
 		{
-			_globalEntityPosition["Map00"] = new()
+			_globalEntityInfomation["Map00"] = new()
 			{
-				["DynamicEntity00"] = new()
-			{
-				Tuple.Create(new Vector2(0, 0), "")
-			}
+				new EntityInstance("DynamicEntity00", new Vector2(0, 0), null)
 			};
 		}
 
@@ -37,9 +34,9 @@ namespace MyGame.Manager
             });
         }
 
-		private void SpawnEntityWithEntranceAnimation(string entityName, Vector2 fromPosition, Vector2 toPosition)
+		private void SpawnEntityWithEntranceAnimation(EntityInstance instanceInfo, Vector2 toPosition)
 		{
-			BaseDynamicEntity entity = SpawnEntity(entityName, Tuple.Create(fromPosition, ""));
+			BaseDynamicEntity entity = SpawnEntity(instanceInfo);
 
 			uint originalCollisionMask = entity.CollisionMask;
 
@@ -74,11 +71,12 @@ namespace MyGame.Manager
 
 			ClearAllEntitiesFromMapRecord(currentMapName);
 			string entityName = entity.GetEntityName();
+			Dictionary<string, IState> entityStates = entity.GetStates();
 			FreeLivingEntity(entity);
 			RecordAllLivingEntitiesToMapRecord(currentMapName);
 			ClearAllLivingEntities();
 			SpawnAllWaitingEntitiesFromMapRecord(nextMapName);
-			SpawnEntityWithEntranceAnimation(entityName, fromPosition, ToPosition);
+			SpawnEntityWithEntranceAnimation(new EntityInstance(entityName, fromPosition, entityStates), ToPosition);
 
 			AddAllLivingEntitiesToRenderingOrderGroup(nextMapName);
 

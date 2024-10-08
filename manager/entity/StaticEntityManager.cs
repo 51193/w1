@@ -18,28 +18,13 @@ namespace MyGame.Manager
 
 		private void Init()
 		{
-			_globalEntityPosition["Map00"] = new()
+			_globalEntityInfomation["Map00"] = new()
 			{
-				["Map0Wall0"] = new()
-				{
-					Tuple.Create(new Vector2(-32, -16), "")
-				},
-				["Map0Wall1"] = new()
-				{
-                    Tuple.Create(new Vector2(48, 0), "")
-                },
-				["InteractionTestEntity"] = new()
-				{
-                    Tuple.Create(new Vector2(24, -64), "")
-                },
-				["AnotherInteractionTestEntity"] = new()
-				{
-                    Tuple.Create(new Vector2(48, -64), "")
-                },
-				["DoorOpenable"] = new()
-				{
-                    Tuple.Create(new Vector2(24, -16), "")
-				},
+				new EntityInstance("Map0Wall0", new Vector2(-32, -16), null),
+				new EntityInstance("Map0Wall1", new Vector2(48, 0), null),
+				new EntityInstance("InteractionTestEntity", new Vector2(24, -64), null),
+				new EntityInstance("AnotherInteractionTestEntity", new Vector2(48, -64), null),
+				new EntityInstance("DoorOpenable", new Vector2(24, -16), null)
 			};
 		}
 

@@ -2,11 +2,14 @@ using Godot;
 using MyGame.Component;
 using MyGame.Manager;
 using System;
+using System.Collections.Generic;
 
 namespace MyGame.Entity
 {
 	public abstract partial class BaseDynamicEntity: CharacterBody2D, IEntity
 	{
+		protected StateManager _stateManager;
+
 		protected LazyLoader<IAnimationPlayer> _animationPlayer;
 		protected LazyLoader<IVelocityAlgorithm> _velocityAlgorithm;
         protected LazyLoader<INavigator> _navigator;
@@ -43,14 +46,29 @@ namespace MyGame.Entity
 
 		public void SetRenderingGroupName(string groupName) {  _renderingOrderGroupName = groupName; }
 
-		public virtual string GetState()
+		public virtual void InitiateStates(Dictionary<string, IState> states = null)
 		{
-			return null;
+            if (states == null)
+            {
+                _stateManager = new(this);
+            }
+            else
+            {
+                _stateManager = new(this, states);
+            }
+        }
+
+		public Dictionary<string, IState> GetStates()
+		{
+			return _stateManager.GetStates();
 		}
 
-		public virtual void SetState(string state) { }
+        public void HandleStateTransition(string stateName, string input = null)
+        {
+			_stateManager.HandleStateTransition(stateName, input);
+        }
 
-		private void UpdateDirection()
+        private void UpdateDirection()
 		{
 			if(_navigator == null) return;
 			Direction = _navigator.Invoke(navigator => navigator.UpdateDirection());
@@ -112,5 +130,5 @@ namespace MyGame.Entity
 			UpdateVelocity(0.001);
 			UpdatePosition();
 		}
-	}
+    }
 }

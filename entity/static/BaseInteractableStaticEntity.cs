@@ -35,16 +35,5 @@ namespace MyGame.Entity
             if (_interactionPrompt == null) return;
             _interactionPrompt.Visible = false;
         }
-
-        public override string GetState()
-        {
-            if (_interactionPrompt == null) return null;
-            return _interactionStrategy.Invoke(strategy => strategy.GetState());
-        }
-
-        public override void SetState(string newState)
-        {
-            _interactionStrategy.Invoke((strategy) => strategy.SetState(newState));
-        }
     }
 }

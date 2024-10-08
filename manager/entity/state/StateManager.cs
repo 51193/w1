@@ -1,33 +1,54 @@
-﻿using MyGame.Component;
+﻿using Godot;
+using MyGame.Component;
 using MyGame.Entity;
-using System;
 using System.Collections.Generic;
 
 namespace MyGame.Manager
 {
     public class StateManager
     {
-        private readonly List<IState> _states;
+        private readonly Dictionary<string, IState> _states;
         private readonly IEntity _entity;
 
-        public StateManager(IEntity entity)
+        public StateManager(IEntity entity, Dictionary<string, IState> states = null)
         {
             _entity = entity;
+            if (states != null)
+            {
+                _states = states;
+                foreach (var state in states.Values)
+                {
+                    state.Enter(_entity);
+                }
+            }
+            else
+            {
+                _states = new();
+            }
         }
 
-        public void AddState(IState state)
+        public void HandleStateTransition(string stateName, string input)
         {
-            _states.Add(state);
+            if (_states.ContainsKey(stateName))
+            {
+                _states[stateName].HandleStateTransition(_entity, input);
+            }
+            else
+            {
+                GD.PrintErr($"{stateName} not exist in {_entity.GetEntityName()}, unable to transit state");
+            }
+        }
+
+        public void ChangeState(string stateName, IState state)
+        {
+            if (_states.TryGetValue(stateName, out var currentState))
+            {
+                currentState.Exit(_entity);
+            }
+            _states[stateName] = state;
             state.Enter(_entity);
         }
 
-        public void Update(double delta)
-        {
-            for (int i = 0; i < _states.Count; i++)
-            {
-                _states[i].Update(_entity, delta);
-                _states[i] = _states[i].HandleStateTransition(_entity);
-            }
-        }
+        public Dictionary<string, IState> GetStates() { return _states; }
     }
 }

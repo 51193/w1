@@ -6,7 +6,7 @@ namespace MyGame.Component
 {
     public class CharacterAnimationPlayer : IAnimationPlayer
     {
-        private AnimatedSprite2D _animatedSprite2D;
+        private readonly AnimatedSprite2D _animatedSprite2D;
 
         protected double _animationChangeCooldown = 0.1;
 

@@ -6,20 +6,6 @@ namespace MyGame.Component
     {
         public void Enter(IEntity entity);
         public void Exit(IEntity entity);
-        public void Update(IEntity entity, double delta);
-        public IState HandleStateTransition(IEntity entity);
-
-        public string SaveState()
-        {
-            return GetType().Name;
-        }
-
-        public void LoadState(string state);
-
-        public void TransitToNewState(IEntity entity, IState newState)
-        {
-            Exit(entity);
-            newState.Enter(entity);
-        }
+        public void HandleStateTransition(IEntity entity, string input);
     }
 }

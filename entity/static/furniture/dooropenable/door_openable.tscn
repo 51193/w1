@@ -1,8 +1,8 @@
 [gd_scene load_steps=17 format=3 uid="uid://dwq3inbi6xfyd"]
 
-[ext_resource type="Script" path="res://entity/static/furniture/DoorOpenable.cs" id="1_85arx"]
-[ext_resource type="Texture2D" uid="uid://8kfwynx2rwf7" path="res://assets/spritesheet/furniture/moderninterior/animated_door_big_1.png" id="2_3mdp1"]
-[ext_resource type="PackedScene" uid="uid://dr6q1mng2r3km" path="res://component/interact/interaction_detector.tscn" id="2_tdktk"]
+[ext_resource type="Script" path="res://entity/static/furniture/dooropenable/DoorOpenable.cs" id="1_skhds"]
+[ext_resource type="Texture2D" uid="uid://8kfwynx2rwf7" path="res://assets/spritesheet/furniture/moderninterior/animated_door_big_1.png" id="2_omisn"]
+[ext_resource type="PackedScene" uid="uid://dr6q1mng2r3km" path="res://component/interact/interaction_detector.tscn" id="3_wxcma"]
 
 [sub_resource type="Animation" id="Animation_nlein"]
 resource_name = "closed"
@@ -169,23 +169,23 @@ _data = {
 }
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c0r1i"]
-atlas = ExtResource("2_3mdp1")
+atlas = ExtResource("2_omisn")
 region = Rect2(0, 0, 16, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sk1rf"]
-atlas = ExtResource("2_3mdp1")
+atlas = ExtResource("2_omisn")
 region = Rect2(16, 0, 16, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vuc8h"]
-atlas = ExtResource("2_3mdp1")
+atlas = ExtResource("2_omisn")
 region = Rect2(32, 0, 16, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5nngh"]
-atlas = ExtResource("2_3mdp1")
+atlas = ExtResource("2_omisn")
 region = Rect2(48, 0, 16, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wotb4"]
-atlas = ExtResource("2_3mdp1")
+atlas = ExtResource("2_omisn")
 region = Rect2(64, 0, 16, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4p6pr"]
@@ -218,7 +218,7 @@ size = Vector2(16, 6)
 radius = 14.0
 
 [node name="DoorOpenable" type="StaticBody2D"]
-script = ExtResource("1_85arx")
+script = ExtResource("1_skhds")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -234,7 +234,7 @@ animation = &"open"
 position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_o6oie")
 
-[node name="InteractionDetector" parent="." instance=ExtResource("2_tdktk")]
+[node name="InteractionDetector" parent="." instance=ExtResource("3_wxcma")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionDetector"]
 position = Vector2(0, -3)

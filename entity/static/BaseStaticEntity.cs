@@ -1,9 +1,14 @@
 using Godot;
+using MyGame.Component;
+using MyGame.Manager;
+using System.Collections.Generic;
 
 namespace MyGame.Entity
 {
 	public partial class BaseStaticEntity : StaticBody2D, IEntity
     {
+        protected StateManager _stateManager;
+
         private string _renderingOrderGroupName;
 
         private string _name;
@@ -19,12 +24,27 @@ namespace MyGame.Entity
 
         public void SetRenderingGroupName(string groupName) { _renderingOrderGroupName = groupName; }
 
-        public virtual string GetState()
+        public virtual void InitiateStates(Dictionary<string, IState> states = null)
         {
-            return null;
+            if (states == null) 
+            {
+                _stateManager = new(this);
+            }
+            else
+            {
+                _stateManager = new(this, states);
+            }
         }
 
-        public virtual void SetState(string state) { }
+        public Dictionary<string, IState> GetStates()
+        {
+            return _stateManager.GetStates();
+        }
+
+        public void HandleStateTransition(string stateName, string input = null)
+        {
+            _stateManager.HandleStateTransition(stateName, input);
+        }
 
         public override void _EnterTree()
         {
