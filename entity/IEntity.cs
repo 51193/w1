@@ -1,4 +1,5 @@
 ﻿using MyGame.Component;
+using System;
 using System.Collections.Generic;
 
 namespace MyGame.Entity
@@ -11,6 +12,7 @@ namespace MyGame.Entity
         public void InitiateStates(Dictionary<string, IState> states = null);
         public Dictionary<string, IState> GetStates();
         public void HandleStateTransition(string stateName, string input, params object[] args);
+        public void RegistrateEvent(string eventName, Action action);
         public void EntityInitiateProcess();
     }
 }

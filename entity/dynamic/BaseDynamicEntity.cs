@@ -9,8 +9,9 @@ namespace MyGame.Entity
 	public abstract partial class BaseDynamicEntity: CharacterBody2D, IEntity
 	{
 		protected StateManager _stateManager;
+        protected readonly EventManager _eventManager = new();
 
-		protected LazyLoader<IAnimationPlayer> _animationPlayer;
+        protected LazyLoader<IAnimationPlayer> _animationPlayer;
 		protected LazyLoader<IVelocityAlgorithm> _velocityAlgorithm;
         protected LazyLoader<INavigator> _navigator;
 
@@ -66,6 +67,11 @@ namespace MyGame.Entity
         public void HandleStateTransition(string stateName, string input, params object[] args)
         {
 			_stateManager.HandleStateTransition(stateName, input, args);
+        }
+
+		public void RegistrateEvent(string eventName, Action action)
+        {
+            _eventManager.RegistrateEvent(eventName, action);
         }
 
         private void UpdateDirection()

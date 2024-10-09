@@ -78,16 +78,12 @@ namespace MyGame.Manager
 			{
 				GD.PrintErr($"No transition found for: {departureName}-{exitName}");
 			}
-            entity.IsTransitable = false;
-			entity.LoadStrategy(() =>
+			entity.RegistrateEvent("OnReachedTarget", new Action(() =>
 			{
-				return new StraightToTargetNavigator(entity, exitPosition, () =>
-				{
-					CallDeferred(nameof(InvokeManagers), transition.Destination, transition.EntryFrom, transition.EntryTo, entity);
-				});
-			});
-			entity.CollisionMask = 0;
-		}
+				CallDeferred(nameof(InvokeManagers), transition.Destination, transition.EntryFrom, transition.EntryTo, entity);
+			}));
+            entity.HandleStateTransition("ControlState", "GoStraight", exitPosition);
+        }
 
 		private void OnMapManagerComplete()
 		{

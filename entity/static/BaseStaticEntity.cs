@@ -1,6 +1,7 @@
 using Godot;
 using MyGame.Component;
 using MyGame.Manager;
+using System;
 using System.Collections.Generic;
 
 namespace MyGame.Entity
@@ -8,6 +9,7 @@ namespace MyGame.Entity
 	public partial class BaseStaticEntity : StaticBody2D, IEntity
     {
         protected StateManager _stateManager;
+        protected readonly EventManager _eventManager = new();
 
         private string _renderingOrderGroupName;
 
@@ -44,6 +46,11 @@ namespace MyGame.Entity
         public void HandleStateTransition(string stateName, string input, params object[] args)
         {
             _stateManager.HandleStateTransition(stateName, input, args);
+        }
+
+        public void RegistrateEvent(string eventName, Action action)
+        {
+            _eventManager.RegistrateEvent(eventName, action);
         }
 
         public override void _EnterTree()
