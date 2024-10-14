@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://manager/entity/UnifiedEntityManager.cs" id="1_6vk3x"]
 [ext_resource type="PackedScene" uid="uid://fybw6e5njdb2" path="res://manager/entity/dynamic_entity_manager.tscn" id="2_oifbw"]
 [ext_resource type="PackedScene" uid="uid://3w52fncumy42" path="res://manager/entity/static_entity_manager.tscn" id="3_1rdwf"]
-[ext_resource type="PackedScene" uid="uid://b7g2dynwywgpc" path="res://manager/interact/interact_manager.tscn" id="4_ioae6"]
+[ext_resource type="PackedScene" uid="uid://b7g2dynwywgpc" path="res://manager/interaction/interaction_manager.tscn" id="4_ioae6"]
 [ext_resource type="PackedScene" uid="uid://5dxc1rr4ikgg" path="res://manager/zindex/z_index_manager.tscn" id="5_hs685"]
 
 [node name="UnifiedEntityManager" type="Node"]
@@ -13,6 +13,6 @@ script = ExtResource("1_6vk3x")
 
 [node name="StaticEntityManager" parent="." instance=ExtResource("3_1rdwf")]
 
-[node name="InteractManager" parent="." instance=ExtResource("4_ioae6")]
+[node name="InteractionManager" parent="." instance=ExtResource("4_ioae6")]
 
 [node name="ZIndexManager" parent="." instance=ExtResource("5_hs685")]

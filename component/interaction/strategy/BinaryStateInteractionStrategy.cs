@@ -13,7 +13,7 @@ namespace MyGame.Component
             _name = binaryStateName;
         }
 
-        public void Interaction(BaseInteractableDynamicEntity dynamicEntity)
+        public void Interact(IInteractionParticipant participant)
         {
             _entity.HandleStateTransition(_name, null);
         }

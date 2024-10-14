@@ -1,5 +1,6 @@
 using Godot;
 using Godot.Collections;
+using MyGame.Component;
 using MyGame.Entity;
 
 namespace MyGame.Manager
@@ -139,11 +140,11 @@ namespace MyGame.Manager
 			}
 		}
 
-        public static void EmitRegistrateInteractablePairSignal(BaseInteractableDynamicEntity dynamicEntity, BaseInteractableStaticEntity staticEntity)
+        public static void EmitRegistrateInteractablePairSignal(IInteractionParticipant participant, IInteractableEntity interactableEntity)
         {
-            if (GetGlobalObject("InteractManager") is InteractManager interactManager)
+            if (GetGlobalObject("InteractManager") is InteractionManager interactManager)
             {
-                interactManager.EmitSignal(nameof(interactManager.RegistrateInteractablePair), dynamicEntity, staticEntity);
+				interactManager.AddPair(participant, interactableEntity);
             }
             else
             {
@@ -151,11 +152,11 @@ namespace MyGame.Manager
             }
         }
 
-        public static void EmitUnregistrateInteractablePairSignal(BaseInteractableDynamicEntity dynamicEntity, BaseInteractableStaticEntity staticEntity)
+        public static void EmitUnregistrateInteractablePairSignal(IInteractionParticipant participant, IInteractableEntity interactableEntity)
         {
-            if (GetGlobalObject("InteractManager") is InteractManager interactManager)
+            if (GetGlobalObject("InteractManager") is InteractionManager interactManager)
             {
-                interactManager.EmitSignal(nameof(interactManager.UnregistrateInteractablePair), dynamicEntity, staticEntity);
+				interactManager.RemovePair(participant, interactableEntity);
             }
             else
             {

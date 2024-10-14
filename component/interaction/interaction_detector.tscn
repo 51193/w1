@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dr6q1mng2r3km"]
 
-[ext_resource type="Script" path="res://component/interact/InteractionDetector.cs" id="1_rs1e0"]
+[ext_resource type="Script" path="res://component/interaction/InteractionDetector.cs" id="1_rs1e0"]
 
 [node name="InteractionDetector" type="Area2D"]
 script = ExtResource("1_rs1e0")

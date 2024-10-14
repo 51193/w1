@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://entity/static/InteractionTestEntity.cs" id="1_ven5t"]
 [ext_resource type="Texture2D" uid="uid://blnae5ersq7kl" path="res://assets/spritesheet/furniture/modernoffice/Modern_Office_Black_Shadow.png" id="2_45cpo"]
-[ext_resource type="PackedScene" uid="uid://dr6q1mng2r3km" path="res://component/interact/interaction_detector.tscn" id="3_076mt"]
+[ext_resource type="PackedScene" uid="uid://dr6q1mng2r3km" path="res://component/interaction/interaction_detector.tscn" id="3_076mt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ff8m4"]
 size = Vector2(16, 16)

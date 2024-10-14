@@ -4,7 +4,7 @@ namespace MyGame.Component
 {
     public class TestStrategy : IInteractionStrategy
     {
-        public void Interaction(BaseInteractableDynamicEntity dynamicEntity)
+        public void Interact(IInteractionParticipant participant)
         {
 
         }

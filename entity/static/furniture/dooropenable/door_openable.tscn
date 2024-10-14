@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://entity/static/furniture/dooropenable/DoorOpenable.cs" id="1_skhds"]
 [ext_resource type="Texture2D" uid="uid://8kfwynx2rwf7" path="res://assets/spritesheet/furniture/moderninterior/animated_door_big_1.png" id="2_omisn"]
-[ext_resource type="PackedScene" uid="uid://dr6q1mng2r3km" path="res://component/interact/interaction_detector.tscn" id="3_wxcma"]
+[ext_resource type="PackedScene" uid="uid://dr6q1mng2r3km" path="res://component/interaction/interaction_detector.tscn" id="3_wxcma"]
 
 [sub_resource type="Animation" id="Animation_nlein"]
 resource_name = "closed"
@@ -246,4 +246,3 @@ offset_top = -30.0
 offset_right = 43.0
 offset_bottom = -7.0
 scale = Vector2(0.5, 0.5)
-text = "按E开门"

@@ -1,39 +1,28 @@
 ﻿using Godot;
 using MyGame.Component;
 using System;
+using System.Collections.Generic;
 
 namespace MyGame.Entity
 {
-    public partial class BaseInteractableStaticEntity : BaseStaticEntity
+    public abstract partial class BaseInteractableStaticEntity : BaseStaticEntity, IInteractableEntity
     {
         protected LazyLoader<IInteractionStrategy> _interactionStrategy;
+
+        public abstract HashSet<string> GetInteractableTags();
+
         public void LoadStrategy(Func<IInteractionStrategy> factory)
         {
             _interactionStrategy = new LazyLoader<IInteractionStrategy>(factory);
         }
-        protected Label _interactionPrompt;
 
-        public void Interact(BaseInteractableDynamicEntity dynamicEntity)
-        {
-            _interactionStrategy.Invoke(strategy => strategy.Interaction(dynamicEntity));
-        }
+        public abstract void WhenParticipantIsNearest();
 
-        protected void InitInteractionPrompt(Label interactionLabel)
-        {
-            _interactionPrompt = interactionLabel;
-            HideInteractionPrompt();
-        }
+        public abstract void WhenParticipantIsNotNearest();
 
-        public void ShowInteractionPrompt()
+        public void Interact(IInteractionParticipant participant)
         {
-            if(_interactionPrompt == null) return;
-            _interactionPrompt.Visible = true;
-        }
-
-        public void HideInteractionPrompt()
-        {
-            if (_interactionPrompt == null) return;
-            _interactionPrompt.Visible = false;
+            _interactionStrategy.Invoke(strategy => strategy.Interact(participant));
         }
     }
 }

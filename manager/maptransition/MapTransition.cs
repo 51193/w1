@@ -73,7 +73,7 @@ namespace MyGame.Manager
 		}
 
 		private void TransitionProcess(string departureName, string exitName, Vector2 exitPosition, BaseDynamicEntity entity)
-        {
+		{
 			if (!_transitionsDict.TryGetValue((departureName, exitName), out var transition))
 			{
 				GD.PrintErr($"No transition found for: {departureName}-{exitName}");
@@ -82,8 +82,8 @@ namespace MyGame.Manager
 			{
 				CallDeferred(nameof(InvokeManagers), transition.Destination, transition.EntryFrom, transition.EntryTo, entity);
 			}));
-            entity.HandleStateTransition("ControlState", "GoStraight", exitPosition);
-        }
+			entity.HandleStateTransition("ControlState", "GoStraight", exitPosition);
+		}
 
 		private void OnMapManagerComplete()
 		{

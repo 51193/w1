@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace MyGame.Entity
 {
-	public partial class DynamicEntity00 : BaseInteractableDynamicEntity
+	public partial class DynamicEntity00 : BaseDynamicEntity, IInteractionParticipant
 	{
 		private AnimatedSprite2D _animationSprite2DNode;
 
@@ -12,6 +12,19 @@ namespace MyGame.Entity
 		{
 			IsTransitable = true;
 		}
+
+        public bool CanRegistrateToInteractionManager()
+        {
+			return true;
+        }
+
+        public HashSet<string> GetInteractionTags()
+        {
+			return new()
+			{
+				"Human"
+			};
+        }
 
         public override void InitiateStates(Dictionary<string, IState> states = null)
         {
