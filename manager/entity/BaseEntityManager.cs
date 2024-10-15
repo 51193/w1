@@ -1,28 +1,25 @@
 ﻿using Godot;
 using MyGame.Component;
 using MyGame.Entity;
-using System;
 using System.Collections.Generic;
 
 namespace MyGame.Manager
 {
-    public class EntityInstance
+    public class EntityInstanceInfo
     {
         public string EntityType;
-        public Vector2 Position;
-        public Dictionary<string, IState> States;
+        public ISaveComponent SaveHead;
 
-        public EntityInstance(string entityType, Vector2 position, Dictionary<string, IState> states)
+        public EntityInstanceInfo(string entityType, ISaveComponent saveHead)
         {
             EntityType = entityType;
-            Position = position;
-            States = states;
+            SaveHead = saveHead;
         }
     }
 
     public partial class BaseEntityManager<T> : Node where T : Node2D, IEntity
     {
-        protected readonly Dictionary<string, List<EntityInstance>> _globalEntityInfomation = new();
+        protected readonly Dictionary<string, List<EntityInstanceInfo>> _globalEntityInfomation = new();
 
         protected readonly Dictionary<string, PackedScene> _entities = new();
         protected readonly List<T> _instances = new();
@@ -42,7 +39,7 @@ namespace MyGame.Manager
             }
         }
 
-        protected void AddEntityToMapRecord(string mapName, EntityInstance instance)
+        protected void AddEntityToMapRecord(string mapName, EntityInstanceInfo instance)
         {
             if (!_globalEntityInfomation.ContainsKey(mapName))
             {
@@ -57,17 +54,11 @@ namespace MyGame.Manager
             entity.QueueFree();
         }
 
-        protected void MoveLivingEntityToMapRecord(T entity, string mapName, Vector2 position)
-        {
-            AddEntityToMapRecord(mapName, new EntityInstance(entity.GetEntityName(), position, entity.GetStates()));
-            FreeLivingEntity(entity);
-        }
-
         protected void RecordAllLivingEntitiesToMapRecord(string mapName)
         {
             foreach (var instance in _instances)
             {
-                AddEntityToMapRecord(mapName, new EntityInstance(instance.GetEntityName(), instance.Position, instance.GetStates()));
+                AddEntityToMapRecord(mapName, new EntityInstanceInfo(instance.GetEntityName(), instance.SaveData()));
             }
         }
 
@@ -94,7 +85,7 @@ namespace MyGame.Manager
             }
         }
 
-        protected T SpawnEntity(EntityInstance instanceInfo)
+        protected T SpawnEntity(EntityInstanceInfo instanceInfo)
         {
             if (!_entities.ContainsKey(instanceInfo.EntityType))
             {
@@ -105,14 +96,13 @@ namespace MyGame.Manager
             _instances.Add(entity);
             AddChild(entity);
 
-            entity.Position = instanceInfo.Position;
-            entity.InitiateStates(instanceInfo.States);
+            entity.LoadData(instanceInfo.SaveHead);
 
             GD.Print($"Entity instantiated: {entity.GetEntityName()}({entity.Position.X}, {entity.Position.Y})");
             return entity;
         }
 
-        protected void SpawnEntities(List<EntityInstance> entityInstances)
+        protected void SpawnEntities(List<EntityInstanceInfo> entityInstances)
         {
             foreach (var entityInstance in entityInstances)
             {
@@ -156,7 +146,7 @@ namespace MyGame.Manager
             }
         }
 
-        protected void UpdateAllLivingEntitiesOnce()
+        protected void CallAllLivingEntitiesInitiateProcess()
         {
             foreach (var entity in _instances)
             {

@@ -1,8 +1,7 @@
 using Godot;
-using MyGame.Manager;
+using MyGame.Component;
 using MyGame.Entity;
 using System.Threading.Tasks;
-using System;
 
 namespace MyGame.Manager
 {
@@ -20,13 +19,27 @@ namespace MyGame.Manager
 		{
 			_globalEntityInfomation["Map00"] = new()
 			{
-				new EntityInstance("Map0Wall0", new Vector2(-32, -16), null),
-				new EntityInstance("Map0Wall1", new Vector2(48, 0), null),
-				new EntityInstance("InteractionTestEntity", new Vector2(24, -64), null),
-				new EntityInstance("AnotherInteractionTestEntity", new Vector2(48, -64), null),
-				new EntityInstance("DoorOpenable", new Vector2(24, -16), null)
+				new EntityInstanceInfo("Map0Wall0",
+					new BaseSaveComponent()
+					{
+						Position = new Vector2(-32, -16),
+						States = null
+					}),
+				new EntityInstanceInfo("Map0Wall1",
+					new BaseSaveComponent()
+					{
+						Position = new Vector2(48, 0),
+						States = null
+					}),
+				new EntityInstanceInfo("DoorOpenable",
+					new BaseSaveComponent()
+					{
+						Position = new Vector2(24, -16),
+						States = null
+					})
 			};
-		}
+
+        }
 
 		public void InitiateEntities(string mapName)
 		{
@@ -53,7 +66,7 @@ namespace MyGame.Manager
 
 			AddAllLivingEntitiesToRenderingOrderGroup(nextMapName);
 
-			UpdateAllLivingEntitiesOnce();
+			CallAllLivingEntitiesInitiateProcess();
 
 			SetAllLivingEntitiesPhysicsProcess(false);
 

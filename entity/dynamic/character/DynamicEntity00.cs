@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace MyGame.Entity
 {
-	public partial class DynamicEntity00 : BaseDynamicEntity, IInteractionParticipant
+	public partial class DynamicEntity00 : BaseCharacter, IInteractionParticipant
 	{
 		private AnimatedSprite2D _animationSprite2DNode;
 
@@ -16,6 +16,11 @@ namespace MyGame.Entity
         public bool CanRegistrateToInteractionManager()
         {
 			return true;
+        }
+
+        public override HashSet<string> GetInteractableTags()
+        {
+            return new HashSet<string>();
         }
 
         public HashSet<string> GetInteractionTags()
@@ -40,6 +45,16 @@ namespace MyGame.Entity
 			{
 				_stateManager = new(this, states);
 			}
+        }
+
+        public override void WhenParticipantIsNearest()
+        {
+            //Do nothing
+        }
+
+        public override void WhenParticipantIsNotNearest()
+        {
+            //Do nothing
         }
 
         public override void _Ready()

@@ -4,7 +4,7 @@ using System;
 
 namespace MyGame.Entity
 {
-    public partial class DynamicEntity00 : BaseDynamicEntity, IInteractionParticipant
+    public partial class DynamicEntity00 : BaseCharacter, IInteractionParticipant
     {
         private class HardwareInputControlState : IState
         {

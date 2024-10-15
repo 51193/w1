@@ -64,6 +64,20 @@ namespace MyGame.Entity
 			return _stateManager.GetStates();
 		}
 
+		public virtual ISaveComponent SaveData(ISaveComponent saveComponent = null)
+		{
+			BaseSaveComponent save = new();
+			save.SaveData(this);
+			save.Next = saveComponent;
+			return save;
+		}
+
+		public virtual ISaveComponent LoadData(ISaveComponent saveComponent)
+		{
+			saveComponent.LoadData(this);
+			return saveComponent.Next;
+		}
+
         public void HandleStateTransition(string stateName, string input, params object[] args)
         {
 			_stateManager.HandleStateTransition(stateName, input, args);
