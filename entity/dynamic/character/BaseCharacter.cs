@@ -7,17 +7,12 @@ namespace MyGame.Entity
     {
         public override ISaveComponent SaveData(ISaveComponent saveComponent = null)
         {
-            CharacterSaveComponent save = new();
-            save.SaveData(this);
-            save.Next = saveComponent;
-            return base.SaveData(save);
+            return HandleSaveData<CharacterSaveComponent>(saveComponent);
         }
 
         public override ISaveComponent LoadData(ISaveComponent saveComponent)
         {
-            CharacterSaveComponent save = (CharacterSaveComponent)base.LoadData(saveComponent);
-            save.LoadData(this);
-            return save.Next;
+            return HandleLoadData<CharacterSaveComponent>(saveComponent);
         }
     }
 }

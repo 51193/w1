@@ -1,11 +1,10 @@
-﻿using Godot;
-using MyGame.Component;
+﻿using MyGame.Component;
 using System;
 using System.Collections.Generic;
 
 namespace MyGame.Entity
 {
-    public abstract partial class BaseInteractableDynamicEntity : BaseDynamicEntity, IInteractableEntity
+    public abstract partial class BaseInteractableDynamicEntity : DynamicEntity, IInteractableEntity
     {
         protected LazyLoader<IInteractionStrategy> _interactionStrategy;
 

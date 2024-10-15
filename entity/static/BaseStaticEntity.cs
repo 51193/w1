@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace MyGame.Entity
 {
-	public partial class BaseStaticEntity : StaticBody2D, IEntity
+	public abstract partial class BaseStaticEntity : StaticBody2D, IEntity
     {
         protected StateManager _stateManager;
         protected readonly EventManager _eventManager = new();

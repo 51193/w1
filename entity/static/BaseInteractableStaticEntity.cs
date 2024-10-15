@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace MyGame.Entity
 {
-    public abstract partial class BaseInteractableStaticEntity : BaseStaticEntity, IInteractableEntity
+    public abstract partial class BaseInteractableStaticEntity : StaticEntity, IInteractableEntity
     {
         protected LazyLoader<IInteractionStrategy> _interactionStrategy;
 
