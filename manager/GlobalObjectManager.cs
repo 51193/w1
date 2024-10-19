@@ -69,11 +69,11 @@ namespace MyGame.Manager
 			}
 		}
 
-		public static void EmitEnterStageSignal(string stageName)
+		public static void EnterStage(string stageName)
 		{
 			if (GetGlobalObject("StageManager") is StageManager stageManager)
 			{
-				stageManager.EmitSignal(nameof(stageManager.EnterStage), stageName);
+				stageManager.PushStage(stageName);
 			}
 			else
 			{
@@ -81,11 +81,11 @@ namespace MyGame.Manager
 			}
 		}
 
-		public static void EmitExitStageSignal()
+		public static void ExitStage()
 		{
 			if (GetGlobalObject("StageManager") is StageManager stageManager)
 			{
-				stageManager.EmitSignal(nameof(stageManager.ExitStage));
+				stageManager.PopStage();
 			}
 			else
 			{
@@ -93,11 +93,11 @@ namespace MyGame.Manager
 			}
 		}
 
-		public static void EmitTransitMapSignal(string departureName, string exitName, Vector2 exitPosition, Node entity)
+		public static void TransitMap(string departureName, string exitName, Vector2 exitPosition, Node entity)
 		{
 			if (GetGlobalObject("MapTransition") is MapTransition mapTransition)
 			{
-				mapTransition.EmitSignal(nameof(mapTransition.TransitMap), departureName, exitName, exitPosition, entity);
+				mapTransition.TransitionProcess(departureName, exitName, exitPosition, (BaseDynamicEntity)entity);
 			}
 			else
 			{
@@ -105,22 +105,11 @@ namespace MyGame.Manager
 			}
 		}
 
-		public static void EmitIncludeNodeIntoRenderingOrderGroupSignal(string name, Node2D canvasItem)
+		public static void IncludeNodeIntoRenderingOrderGroup(string name, Node2D canvasItem)
 		{
 			if (GetGlobalObject("ZIndexManager") is ZIndexManager zIndexManager)
 			{
-				zIndexManager.EmitSignal(nameof(zIndexManager.IncludeNodeIntoRenderingOrderGroup), name, canvasItem);
-			}
-			else
-			{
-				GD.PrintErr("Invalid ZIndexManager");
-			}
-		}
-		public static void EmitClearNodeFromRenderingOrderGroupSignal(string name)
-		{
-			if (GetGlobalObject("ZIndexManager") is ZIndexManager zIndexManager)
-			{
-				zIndexManager.EmitSignal(nameof(zIndexManager.ClearNodeFromRenderingOrderGroup), name);
+				zIndexManager.IncludeNode(name, canvasItem);
 			}
 			else
 			{
@@ -128,11 +117,11 @@ namespace MyGame.Manager
 			}
 		}
 
-		public static void EmitResortRenderingOrderSignal(string name)
+		public static void ClearNodeInRenderingOrderGroup(string name)
 		{
 			if (GetGlobalObject("ZIndexManager") is ZIndexManager zIndexManager)
 			{
-				zIndexManager.EmitSignal(nameof(zIndexManager.ResortRenderingOrder), name);
+				zIndexManager.ClearNode(name);
 			}
 			else
 			{
@@ -140,7 +129,19 @@ namespace MyGame.Manager
 			}
 		}
 
-        public static void EmitRegistrateInteractablePairSignal(IInteractionParticipant participant, IInteractableEntity interactableEntity)
+		public static void ResortRenderingOrder(string name)
+		{
+			if (GetGlobalObject("ZIndexManager") is ZIndexManager zIndexManager)
+			{
+				zIndexManager.ResortNode(name);
+			}
+			else
+			{
+				GD.PrintErr("Invalid ZIndexManager");
+			}
+		}
+
+        public static void RegistrateInteractablePair(IInteractionParticipant participant, IInteractableEntity interactableEntity)
         {
             if (GetGlobalObject("InteractManager") is InteractionManager interactManager)
             {
@@ -152,7 +153,7 @@ namespace MyGame.Manager
             }
         }
 
-        public static void EmitUnregistrateInteractablePairSignal(IInteractionParticipant participant, IInteractableEntity interactableEntity)
+        public static void UnregistrateInteractablePair(IInteractionParticipant participant, IInteractableEntity interactableEntity)
         {
             if (GetGlobalObject("InteractManager") is InteractionManager interactManager)
             {

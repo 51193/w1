@@ -130,7 +130,7 @@ namespace MyGame.Manager
         {
             foreach (var entity in _instances)
             {
-                GlobalObjectManager.EmitIncludeNodeIntoRenderingOrderGroupSignal(groupName, entity);
+                GlobalObjectManager.IncludeNodeIntoRenderingOrderGroup(groupName, entity);
                 entity.SetRenderingGroupName(groupName);
             }
         }

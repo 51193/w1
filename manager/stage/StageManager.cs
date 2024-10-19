@@ -9,12 +9,7 @@ namespace MyGame.Manager
 		private readonly Stack<PackedScene> _stageStack = new();
 		private Node _currentStage;
 
-		[Signal]
-		public delegate void EnterStageEventHandler(String stageName);
-		[Signal]
-		public delegate void ExitStageEventHandler();
-
-		private void PushStage(String name)
+		public void PushStage(String name)
 		{
 			PackedScene scene = GlobalObjectManager.GetResource(name);
 
@@ -31,7 +26,7 @@ namespace MyGame.Manager
 			GD.Print($"Stage stack have {_stageStack.Count} instance(s) inside");
 		}
 
-		private void PopStage()
+        public void PopStage()
 		{
 			if (_currentStage != null)
 			{
@@ -55,20 +50,16 @@ namespace MyGame.Manager
 		public override void _EnterTree()
 		{
 			GlobalObjectManager.AddGlobalObject("StageManager", this);
-			EnterStage += PushStage;
-			ExitStage += PopStage;
 		}
 
 		public override void _ExitTree()
 		{
-			EnterStage -= PushStage;
-			ExitStage -= PopStage;
 			GlobalObjectManager.RemoveGlobalObject("StageManager");
 		}
 
 		public override void _Ready()
 		{
-			EmitSignal(SignalName.EnterStage, "MainMenuStage");
+			PushStage("MainMenuStage");
 		}
 	}
 }

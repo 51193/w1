@@ -35,16 +35,6 @@
 		"Description": "A static entity represent wall in map0."
 	},
 	{
-		"Name": "InteractionTestEntity",
-		"Path": "res://entity/static/interaction_test_entity.tscn",
-		"Description": "A static entity for interaction test."
-	},
-	{
-		"Name": "AnotherInteractionTestEntity",
-		"Path": "res://entity/static/another_interaction_test_entity.tscn",
-		"Description": "A static entity for interaction test."
-	},
-	{
 		"Name": "DoorOpenable",
 		"Path": "res://entity/static/furniture/dooropenable/door_openable.tscn",
 		"Description": "A door can open."

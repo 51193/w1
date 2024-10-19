@@ -8,13 +8,6 @@ namespace MyGame.Manager
 		private Dictionary<string, List<Node2D>> _canvasItems = new();
 		private List<string> _resortNameNextFrame = new();
 
-		[Signal]
-		public delegate void IncludeNodeIntoRenderingOrderGroupEventHandler(string name, Node2D node);
-		[Signal]
-		public delegate void ClearNodeFromRenderingOrderGroupEventHandler(string name);
-		[Signal]
-		public delegate void ResortRenderingOrderEventHandler(string name);
-
 		public void IncludeNode(string name, Node2D node)
 		{
 			if(!_canvasItems.ContainsKey(name))
@@ -50,16 +43,10 @@ namespace MyGame.Manager
 		public override void _EnterTree()
 		{
 			GlobalObjectManager.AddGlobalObject("ZIndexManager", this);
-			IncludeNodeIntoRenderingOrderGroup += IncludeNode;
-			ClearNodeFromRenderingOrderGroup += ClearNode;
-			ResortRenderingOrder += ResortNode;
 		}
 
 		public override void _ExitTree()
 		{
-			IncludeNodeIntoRenderingOrderGroup -= IncludeNode;
-			ClearNodeFromRenderingOrderGroup -= ClearNode;
-			ResortRenderingOrder -= ResortNode;
 			GlobalObjectManager.RemoveGlobalObject("ZIndexManager");
 		}
 

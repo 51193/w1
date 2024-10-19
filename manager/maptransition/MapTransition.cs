@@ -1,12 +1,10 @@
 using Godot;
-using MyGame.Component;
 using MyGame.Entity;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace MyGame.Manager
 {
@@ -28,11 +26,6 @@ namespace MyGame.Manager
 
 		private bool _mapManagerReady = false;
 		private bool _entityManagerReady = false;
-
-		[Signal]
-		public delegate void InitMapEventHandler(string mapName);
-		[Signal]
-		public delegate void TransitMapEventHandler(string departureName, string exitName, Vector2 exitPosition, BaseDynamicEntity entity);
 
 		private void LoadTransitionInfo(string path)
 		{
@@ -58,7 +51,7 @@ namespace MyGame.Manager
 			}
 		}
 
-		private void InitMapProcess(string mapName)
+		public void InitMapProcess(string mapName)
 		{
 			_mapManager.LoadMap(mapName);
 			_unifiedEntityManager.InitiateEntities(mapName);
@@ -72,7 +65,7 @@ namespace MyGame.Manager
 			_unifiedEntityManager.OnMapChanged(entity, destinationName, fromLandmarkPosition, toLandmarkPosition);
 		}
 
-		private void TransitionProcess(string departureName, string exitName, Vector2 exitPosition, BaseDynamicEntity entity)
+		public void TransitionProcess(string departureName, string exitName, Vector2 exitPosition, BaseDynamicEntity entity)
 		{
 			if (!_transitionsDict.TryGetValue((departureName, exitName), out var transition))
 			{
@@ -117,14 +110,10 @@ namespace MyGame.Manager
 		{
 			GlobalObjectManager.AddGlobalObject("MapTransition", this);
 			LoadTransitionInfo("transition.json");
-			InitMap += InitMapProcess;
-			TransitMap += TransitionProcess;
 		}
 
 		public override void _ExitTree()
 		{
-			InitMap -= InitMapProcess;
-			TransitMap -= TransitionProcess;
 			_mapManager.MapTransitionComplete -= OnMapManagerComplete;
 			_unifiedEntityManager.EntityTransitionComplete -= OnEntityManagerComplete;
 			GlobalObjectManager.RemoveGlobalObject("MapTransition");

@@ -15,7 +15,7 @@ namespace MyGame.Map
 		{
 			if (body is BaseDynamicEntity entity && entity.IsTransitable)
 			{
-				GlobalObjectManager.EmitTransitMapSignal(_map.GetMapName(), ExitName, Position, entity);
+				GlobalObjectManager.TransitMap(_map.GetMapName(), ExitName, Position, entity);
 				GD.Print("Transitable entity entered transition area.");
 			}
 		}

@@ -119,7 +119,7 @@ namespace MyGame.Entity
 			{
 				if (_renderingOrderGroupName != null)
 				{
-					GlobalObjectManager.EmitResortRenderingOrderSignal(_renderingOrderGroupName);
+					GlobalObjectManager.ResortRenderingOrder(_renderingOrderGroupName);
 				}
 				_lastFramePosition = Position;
             }

@@ -11,7 +11,7 @@ namespace MyGame.Component
 		{
 			if(node is IInteractionParticipant participant && participant.CanRegistrateToInteractionManager() && _parentInteractableEntity.CanInteractWith(participant))
 			{
-				GlobalObjectManager.EmitRegistrateInteractablePairSignal(participant, _parentInteractableEntity);
+				GlobalObjectManager.RegistrateInteractablePair(participant, _parentInteractableEntity);
 			}
 		}
 
@@ -19,7 +19,7 @@ namespace MyGame.Component
 		{
 			if (node is IInteractionParticipant participant && participant.CanRegistrateToInteractionManager() && _parentInteractableEntity.CanInteractWith(participant))
 			{
-				GlobalObjectManager.EmitUnregistrateInteractablePairSignal(participant, _parentInteractableEntity);
+				GlobalObjectManager.UnregistrateInteractablePair(participant, _parentInteractableEntity);
 			}
 		}
 
