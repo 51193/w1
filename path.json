@@ -10,38 +10,28 @@
 		"Description": "This is where the game run."
 	},
 	{
-		"Name": "Map00",
-		"Path": "res://map/map_00.tscn",
+		"Name": "Map0",
+		"Path": "res://map/map0/map_0.tscn",
 		"Description": "This is a test map."
 	},
 	{
-		"Name": "Map01",
-		"Path": "res://map/map_01.tscn",
+		"Name": "Map1",
+		"Path": "res://map/map1/map_1.tscn",
 		"Description": "This is a test map."
 	},
 	{
-		"Name": "DynamicEntity00",
-		"Path": "res://entity/dynamic/character/dynamic_entity_00.tscn",
-		"Description": "This is a test entity."
-	},
-	{
-		"Name": "DynamicEntity01",
-		"Path": "res://entity/dynamic/dynamic_entity_01.tscn",
-		"Description": "This is a test entity."
-	},
-	{
-		"Name": "StaticEntity00",
-		"Path": "res://entity/static/static_entity_00.tscn",
+		"Name": "DynamicEntity0",
+		"Path": "res://entity/dynamic/character/dynamic_entity_0.tscn",
 		"Description": "This is a test entity."
 	},
 	{
 		"Name": "Map0Wall0",
-		"Path": "res://entity/static/wall/map_0_wall_0.tscn",
+		"Path": "res://entity/static/wall/map0/map_0_wall_0.tscn",
 		"Description": "A static entity represent wall in map0."
 	},
 	{
 		"Name": "Map0Wall1",
-		"Path": "res://entity/static/wall/map_0_wall_1.tscn",
+		"Path": "res://entity/static/wall/map0/map_0_wall_1.tscn",
 		"Description": "A static entity represent wall in map0."
 	},
 	{

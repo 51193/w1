@@ -5,9 +5,14 @@ namespace MyGame.Map
 {
     public partial class BaseMap : Node2D
     {
-        protected string _name = "BaseMap(shouldn't display)";
+        protected string _name;
 
         protected Dictionary<string, LandmarkArea> _landmarks = new();
+
+        public BaseMap()
+        {
+            _name = GetType().Name;
+        }
 
         public string GetMapName() {  return _name; }
 

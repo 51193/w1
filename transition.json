@@ -1,16 +1,16 @@
 [
 	{
-		"Departure": "Map00",
-		"Exit": "Exit00",
-		"Destination": "Map01",
-		"EntryFrom": "Entry00From",
-		"EntryTo": "Entry00To"
+		"Departure": "Map0",
+		"Exit": "Exit0",
+		"Destination": "Map1",
+		"EntryFrom": "Entry0From",
+		"EntryTo": "Entry0To"
 	},
 	{
-		"Departure": "Map01",
-		"Exit": "Exit00",
-		"Destination": "Map00",
-		"EntryFrom": "Entry00From",
-		"EntryTo": "Entry00To"
+		"Departure": "Map1",
+		"Exit": "Exit0",
+		"Destination": "Map0",
+		"EntryFrom": "Entry0From",
+		"EntryTo": "Entry0To"
 	}
 ]

@@ -11,6 +11,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="manager\zindex\" />
+    <Folder Include="item\" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />

@@ -30,9 +30,9 @@ namespace MyGame.Manager
 
             baseSave.Next = characterSave;
 
-			_globalEntityInfomation["Map00"] = new()
+			_globalEntityInfomation["Map0"] = new()
 			{
-				new EntityInstanceInfo("DynamicEntity00", baseSave)
+				new EntityInstanceInfo("DynamicEntity0", baseSave)
 			};
 		}
 

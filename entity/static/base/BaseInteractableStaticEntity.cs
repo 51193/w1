@@ -1,5 +1,4 @@
-﻿using Godot;
-using MyGame.Component;
+﻿using MyGame.Component;
 using System;
 using System.Collections.Generic;
 

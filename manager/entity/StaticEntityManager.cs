@@ -17,7 +17,7 @@ namespace MyGame.Manager
 
 		private void Init()
 		{
-			_globalEntityInfomation["Map00"] = new()
+			_globalEntityInfomation["Map0"] = new()
 			{
 				new EntityInstanceInfo("Map0Wall0",
 					new BaseSaveComponent()

@@ -20,7 +20,7 @@ namespace MyGame.Stage
 		public override void _Ready()
 		{
 			_mapTransition = GetNode<MapTransition>("MapTransition");
-			InitMap("Map00");
+			InitMap("Map0");
 		}
 
 		public override void _Process(double delta)
