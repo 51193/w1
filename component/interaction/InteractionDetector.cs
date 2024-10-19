@@ -9,7 +9,7 @@ namespace MyGame.Component
 
 		protected void OnInteractableObjectEntered(Node node)
 		{
-			if(node is IInteractionParticipant participant && participant.CanRegistrateToInteractionManager() && _parentInteractableEntity.CanInteractWith(participant))
+			if(node is IInteractionParticipant participant && participant.CanRegistrateToInteractionManager())
 			{
 				GlobalObjectManager.RegistrateInteractablePair(participant, _parentInteractableEntity);
 			}
@@ -17,7 +17,7 @@ namespace MyGame.Component
 
 		protected void OnInteractableObjectExited(Node node)
 		{
-			if (node is IInteractionParticipant participant && participant.CanRegistrateToInteractionManager() && _parentInteractableEntity.CanInteractWith(participant))
+			if (node is IInteractionParticipant participant && participant.CanRegistrateToInteractionManager())
 			{
 				GlobalObjectManager.UnregistrateInteractablePair(participant, _parentInteractableEntity);
 			}

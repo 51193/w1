@@ -6,7 +6,7 @@ namespace MyGame.Manager
 {
     public class EventManager
     {
-        Dictionary<string, Action> _events = new();
+        private readonly Dictionary<string, Action> _events = new();
 
         public void RegistrateEvent(string name, Action action)
         {

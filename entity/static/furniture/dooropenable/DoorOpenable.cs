@@ -9,14 +9,6 @@ namespace MyGame.Entity
 		private AnimationPlayer _animationPlayerNode;
 		private Label _label;
 
-		public override HashSet<string> GetInteractableTags()
-		{
-			return new()
-			{
-				"Human"
-			};
-		}
-
         public override void WhenParticipantIsNearest()
         {
 			_label.Show();

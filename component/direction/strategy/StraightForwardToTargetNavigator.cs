@@ -4,13 +4,13 @@ using System;
 
 namespace MyGame.Component
 {
-    public class StraightToTargetNavigator : INavigator
+    public class StraightForwardToTargetNavigator : INavigator
     {
         private readonly BaseDynamicEntity _entity;
         private readonly Vector2 _targetPosition;
         private readonly Action _onTargetReached;
 
-        public StraightToTargetNavigator(BaseDynamicEntity entity, Vector2 targetPosition, Action onTargetReached = null)
+        public StraightForwardToTargetNavigator(BaseDynamicEntity entity, Vector2 targetPosition, Action onTargetReached = null)
         {
             _entity = entity;
             _targetPosition = targetPosition;

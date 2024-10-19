@@ -1,11 +1,11 @@
 [
 	{
-		"Name": "MainMenuStage",
+		"Name": "MainMenu",
 		"Path": "res://stage/mainmenu/main_menu.tscn",
 		"Description": "This is main menu."
 	},
 	{
-		"Name": "GamePlayStage",
+		"Name": "GamePlay",
 		"Path": "res://stage/gameplay/game_play.tscn",
 		"Description": "This is where the game run."
 	},

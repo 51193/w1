@@ -10,12 +10,11 @@ namespace MyGame.Manager
 		private static GlobalObjectManager _instance;
 		public static GlobalObjectManager Instance => _instance;
 
-		private Dictionary<string, Node> _globalNodes;
+		private readonly Dictionary<string, Node> _globalNodes = new();
 
-		public override void _EnterTree()
+		public GlobalObjectManager()
 		{
 			_instance ??= this;
-			_globalNodes = new Dictionary<string, Node>();
 		}
 
 		public static void AddGlobalObject(string name, Node node)

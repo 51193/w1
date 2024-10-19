@@ -8,13 +8,13 @@ namespace MyGame.Component
     {
         private readonly AnimatedSprite2D _animatedSprite2D;
 
-        protected double _animationChangeCooldown = 0.1;
+        protected readonly double _animationChangeCooldown = 0.1;
 
         private double _animationChangeTimer = 0;
         private bool _animationChangeReady = true;
 
-        protected int[] _directionSuffix = { 6, 8, 4, 2 };
-        protected Dictionary<int, (float min, float max)> _angleToDirectionSuffix = new()
+        protected readonly int[] _directionSuffix = { 6, 8, 4, 2 };
+        protected readonly Dictionary<int, (float min, float max)> _angleToDirectionSuffix = new()
         {
             { 6, (-45f, 45f) },
             { 8, (45f, 135f) },

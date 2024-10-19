@@ -6,11 +6,7 @@ namespace MyGame.Stage {
 	{
 		public override void _Ready()
 		{
-			ButtonUp += () => GlobalObjectManager.EnterStage("GamePlayStage");
-		}
-
-		public override void _Process(double delta)
-		{
+			ButtonUp += () => GlobalObjectManager.EnterStage("GamePlay");
 		}
 	}
 }

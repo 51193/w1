@@ -54,7 +54,7 @@ namespace MyGame.Entity
 				((DynamicEntity0)entity).IsTransitable = false;
 				((DynamicEntity0)entity).LoadStrategy(() =>
 				{
-					return new StraightToTargetNavigator((DynamicEntity0)entity, _targetPosition, () =>
+					return new StraightForwardToTargetNavigator((DynamicEntity0)entity, _targetPosition, () =>
 					{
 						((DynamicEntity0)entity)._eventManager.TriggerEvent(_callbackName);
 					});

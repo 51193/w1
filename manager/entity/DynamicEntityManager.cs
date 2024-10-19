@@ -57,25 +57,19 @@ namespace MyGame.Manager
 				GD.PrintErr("Invalid current map, can't change map before initiate");
 				return;
 			}
-
 			ClearAllLivinEntitiesRenderingOrderGroupName(currentMapName);
-
 			ClearAllEntitiesFromMapRecord(currentMapName);
 			string entityName = entity.GetEntityName();
 			ISaveComponent save = entity.SaveData();
-			((BaseSaveComponent)save).Position = fromPosition;
+			save.SearchDataType<BaseSaveComponent>().Position = fromPosition;
 			FreeLivingEntity(entity);
 			RecordAllLivingEntitiesToMapRecord(currentMapName);
 			ClearAllLivingEntities();
 			SpawnAllWaitingEntitiesFromMapRecord(nextMapName);
 			SpawnEntityWithEntranceAnimation(new EntityInstanceInfo(entityName, save), ToPosition);
-
 			AddAllLivingEntitiesToRenderingOrderGroup(nextMapName);
-
 			CallAllLivingEntitiesInitiateProcess();
-
 			SetAllLivingEntitiesPhysicsProcess(false);
-
 			EmitSignal(SignalName.EntityTransitionComplete);
 			GD.Print($"Dynamic entities have swapped to {currentMapName}");
 		}

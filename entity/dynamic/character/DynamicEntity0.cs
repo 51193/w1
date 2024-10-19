@@ -18,11 +18,6 @@ namespace MyGame.Entity
 			return true;
 		}
 
-		public override HashSet<string> GetInteractableTags()
-		{
-			return new HashSet<string>();
-		}
-
 		public HashSet<string> GetInteractionTags()
 		{
 			return new()

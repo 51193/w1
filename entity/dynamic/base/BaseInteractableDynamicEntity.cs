@@ -1,14 +1,11 @@
 ﻿using MyGame.Component;
 using System;
-using System.Collections.Generic;
 
 namespace MyGame.Entity
 {
     public abstract partial class BaseInteractableDynamicEntity : DynamicEntity, IInteractableEntity
     {
         protected LazyLoader<IInteractionStrategy> _interactionStrategy;
-
-        public abstract HashSet<string> GetInteractableTags();
 
         public void LoadStrategy(Func<IInteractionStrategy> factory)
         {

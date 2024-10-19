@@ -6,11 +6,6 @@ namespace MyGame.Stage
 	{
 		private MapTransition _mapTransition;
 
-		public GamePlay()
-		{
-			_name = "GamePlayStage";
-		}
-
 		private void InitMap(string mapName)
 		{
 			_mapTransition.InitMapProcess(mapName);

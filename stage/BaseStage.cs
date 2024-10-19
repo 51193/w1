@@ -4,7 +4,12 @@ namespace MyGame.Stage
 {
     public partial class BaseStage : Node
     {
-        protected string _name = "BaseStage(shouldn't display)";
+        protected string _name;
+
+        public BaseStage()
+        {
+            _name = GetType().Name;
+        }
 
         public override void _EnterTree()
         {

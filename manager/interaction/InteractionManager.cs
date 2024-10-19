@@ -47,19 +47,11 @@ namespace MyGame.Manager
 				{
 					return (a.Item1.Position - a.Item2.Position).Length().CompareTo((b.Item1.Position - b.Item2.Position).Length());
 				});
-
 				var closestPair = _interactablePairs[0];
 				closestPair.Item2.WhenParticipantIsNearest();
-				if(Input.IsActionJustReleased("activate"))
+				if (Input.IsActionJustReleased("activate"))
 				{
-					if (closestPair.Item2.CanInteractWith(closestPair.Item1))
-					{
-						closestPair.Item2.Interact(closestPair.Item1);
-					}
-					else
-					{
-						GD.PrintErr("Activate an invalid interaction pair");
-					}
+					closestPair.Item2.Interact(closestPair.Item1);
 				}
 			}
 		}

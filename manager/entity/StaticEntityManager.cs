@@ -56,20 +56,14 @@ namespace MyGame.Manager
 				GD.PrintErr("Invalid current map, can't change map before initiate");
 				return;
 			}
-
 			ClearAllLivinEntitiesRenderingOrderGroupName(currentMapName);
-
 			ClearAllEntitiesFromMapRecord(currentMapName);
 			RecordAllLivingEntitiesToMapRecord(currentMapName);
 			ClearAllLivingEntities();
 			SpawnAllWaitingEntitiesFromMapRecord(nextMapName);
-
 			AddAllLivingEntitiesToRenderingOrderGroup(nextMapName);
-
 			CallAllLivingEntitiesInitiateProcess();
-
 			SetAllLivingEntitiesPhysicsProcess(false);
-
 			EmitSignal(SignalName.EntityTransitionComplete);
 			GD.Print($"Static entities have swapped to {nextMapName}");
 		}

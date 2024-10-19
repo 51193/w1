@@ -5,8 +5,8 @@ namespace MyGame.Manager
 {
 	public partial class ZIndexManager : Node
 	{
-		private Dictionary<string, List<Node2D>> _canvasItems = new();
-		private List<string> _resortNameNextFrame = new();
+		private readonly Dictionary<string, List<Node2D>> _canvasItems = new();
+		private readonly List<string> _resortNameNextFrame = new();
 
 		public void IncludeNode(string name, Node2D node)
 		{

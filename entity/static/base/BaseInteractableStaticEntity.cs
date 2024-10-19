@@ -8,8 +8,6 @@ namespace MyGame.Entity
     {
         protected LazyLoader<IInteractionStrategy> _interactionStrategy;
 
-        public abstract HashSet<string> GetInteractableTags();
-
         public void LoadStrategy(Func<IInteractionStrategy> factory)
         {
             _interactionStrategy = new LazyLoader<IInteractionStrategy>(factory);

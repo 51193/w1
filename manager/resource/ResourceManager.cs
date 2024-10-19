@@ -84,13 +84,5 @@ namespace MyGame.Manager
 		{
 			GlobalObjectManager.RemoveGlobalObject("ResourceManager");
 		}
-
-		public override void _Ready()
-		{
-		}
-
-		public override void _Process(double delta)
-		{
-		}
 	}
 }

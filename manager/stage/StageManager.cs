@@ -59,7 +59,7 @@ namespace MyGame.Manager
 
 		public override void _Ready()
 		{
-			PushStage("MainMenuStage");
+			PushStage("MainMenu");
 		}
 	}
 }
