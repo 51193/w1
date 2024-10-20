@@ -4,21 +4,17 @@ using System.Collections.Generic;
 
 namespace MyGame.Entity
 {
-	public partial class DynamicEntity0 : BaseCharacter, IInteractionParticipant
+	public partial class DynamicEntity0 : BaseCharacter
 	{
 		private AnimatedSprite2D _animationSprite2DNode;
 
 		public DynamicEntity0()
 		{
+			InteractionManager.SetDisplay(true);
 			IsTransitable = true;
 		}
 
-		public bool CanRegistrateToInteractionManager()
-		{
-			return true;
-		}
-
-		public HashSet<string> GetInteractionTags()
+		public override HashSet<string> GetInteractionTags()
 		{
 			return new()
 			{
@@ -42,12 +38,12 @@ namespace MyGame.Entity
 			}
 		}
 
-		public override void WhenParticipantIsNearest()
+		public override void ShowTips()
 		{
 			//Do nothing
 		}
 
-		public override void WhenParticipantIsNotNearest()
+		public override void HideTips()
 		{
 			//Do nothing
 		}
@@ -56,5 +52,5 @@ namespace MyGame.Entity
 		{
 			_animationSprite2DNode = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		}
-	}
+    }
 }

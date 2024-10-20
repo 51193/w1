@@ -1,5 +1,4 @@
 using Godot;
-using MyGame.Manager;
 
 namespace MyGame.Component
 {
@@ -9,17 +8,17 @@ namespace MyGame.Component
 
 		protected void OnInteractableObjectEntered(Node node)
 		{
-			if(node is IInteractionParticipant participant && participant.CanRegistrateToInteractionManager())
+			if(node is IInteractionParticipant participant)
 			{
-				GlobalObjectManager.RegistrateInteractablePair(participant, _parentInteractableEntity);
+				participant.InteractionManager.AddInteractableEntity(_parentInteractableEntity);
 			}
 		}
 
 		protected void OnInteractableObjectExited(Node node)
 		{
-			if (node is IInteractionParticipant participant && participant.CanRegistrateToInteractionManager())
+			if (node is IInteractionParticipant participant)
 			{
-				GlobalObjectManager.UnregistrateInteractablePair(participant, _parentInteractableEntity);
+				participant.InteractionManager.RemoveInteractableEntity( _parentInteractableEntity);
 			}
 		}
 

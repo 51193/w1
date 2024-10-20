@@ -116,12 +116,17 @@ namespace MyGame.Entity
 		{
 			MoveAndSlide();
 			if(_lastFramePosition != Position)
-			{
-				if (_renderingOrderGroupName != null)
-				{
-					GlobalObjectManager.ResortRenderingOrder(_renderingOrderGroupName);
-				}
-				_lastFramePosition = Position;
+            {
+				WhenPositionChange();
+                _lastFramePosition = Position;
+            }
+        }
+
+		protected virtual void WhenPositionChange()
+		{
+            if (_renderingOrderGroupName != null)
+            {
+                GlobalObjectManager.ResortRenderingOrder(_renderingOrderGroupName);
             }
         }
 

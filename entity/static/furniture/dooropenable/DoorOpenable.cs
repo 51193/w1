@@ -9,12 +9,12 @@ namespace MyGame.Entity
 		private AnimationPlayer _animationPlayerNode;
 		private Label _label;
 
-        public override void WhenParticipantIsNearest()
+        public override void ShowTips()
         {
 			_label.Show();
         }
 
-        public override void WhenParticipantIsNotNearest()
+        public override void HideTips()
         {
 			_label.Hide();
         }

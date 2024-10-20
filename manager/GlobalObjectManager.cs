@@ -139,29 +139,5 @@ namespace MyGame.Manager
 				GD.PrintErr("Invalid ZIndexManager");
 			}
 		}
-
-        public static void RegistrateInteractablePair(IInteractionParticipant participant, IInteractableEntity interactableEntity)
-        {
-            if (GetGlobalObject("InteractManager") is InteractionManager interactManager)
-            {
-				interactManager.AddPair(participant, interactableEntity);
-            }
-            else
-            {
-                GD.PrintErr("Invalid InteractManager");
-            }
-        }
-
-        public static void UnregistrateInteractablePair(IInteractionParticipant participant, IInteractableEntity interactableEntity)
-        {
-            if (GetGlobalObject("InteractManager") is InteractionManager interactManager)
-            {
-				interactManager.RemovePair(participant, interactableEntity);
-            }
-            else
-            {
-                GD.PrintErr("Invalid InteractManager");
-            }
-        }
     }
 }

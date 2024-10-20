@@ -12,9 +12,9 @@ namespace MyGame.Entity
             _interactionStrategy = new LazyLoader<IInteractionStrategy>(factory);
         }
 
-        public abstract void WhenParticipantIsNearest();
+        public abstract void ShowTips();
 
-        public abstract void WhenParticipantIsNotNearest();
+        public abstract void HideTips();
 
         public void Interact(IInteractionParticipant participant)
         {
