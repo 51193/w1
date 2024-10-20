@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmrtsxytx1tcd"]
+
+[ext_resource type="Script" path="res://manager/entity/FocusedCharacterManager.cs" id="1_vv0v7"]
+
+[node name="FocusedCharacterManager" type="Node"]
+script = ExtResource("1_vv0v7")

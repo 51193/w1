@@ -6,19 +6,12 @@ namespace MyGame.Manager
 {
 	public class InteractionManager
 	{
-		private bool _isDisplay = false;
-
 		private readonly IInteractionParticipant _interactionParticipant;
 		private readonly List<IInteractableEntity> _interactableEntities = new();
 
 		public InteractionManager(IInteractionParticipant participant)
 		{
 			_interactionParticipant = participant;
-		}
-
-		public void SetDisplay(bool enable)
-		{
-			_isDisplay = enable;
 		}
 
 		public void AddInteractableEntity(IInteractableEntity interactableEntity)
@@ -28,8 +21,14 @@ namespace MyGame.Manager
 
 		public void RemoveInteractableEntity(IInteractableEntity interactableEntity)
 		{
-			interactableEntity.HideTips();
+			interactableEntity.HideTip();
 			_interactableEntities.Remove(interactableEntity);
+		}
+
+		public void ShowNearestTip()
+        {
+            if (_interactableEntities.Count == 0) return;
+            _interactableEntities[0].ShowTip();
 		}
 
 		public void Interact()
@@ -42,7 +41,7 @@ namespace MyGame.Manager
 		{
             foreach (var entity in _interactableEntities)
             {
-                entity.HideTips();
+                entity.HideTip();
             }
             if (_interactableEntities.Count > 0)
             {
@@ -50,7 +49,6 @@ namespace MyGame.Manager
                 {
                     return (_interactionParticipant.Position - a.Position).Length().CompareTo((_interactionParticipant.Position - b.Position).Length());
                 });
-                if (_isDisplay) _interactableEntities[0].ShowTips();
             }
         }
 	}

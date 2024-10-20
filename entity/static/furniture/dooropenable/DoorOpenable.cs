@@ -9,12 +9,12 @@ namespace MyGame.Entity
 		private AnimationPlayer _animationPlayerNode;
 		private Label _label;
 
-        public override void ShowTips()
+        public override void ShowTip()
         {
 			_label.Show();
         }
 
-        public override void HideTips()
+        public override void HideTip()
         {
 			_label.Hide();
         }

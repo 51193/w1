@@ -1,6 +1,5 @@
 using Godot;
 using Godot.Collections;
-using MyGame.Component;
 using MyGame.Entity;
 
 namespace MyGame.Manager
@@ -137,6 +136,32 @@ namespace MyGame.Manager
 			else
 			{
 				GD.PrintErr("Invalid ZIndexManager");
+			}
+        }
+
+        public static void FocusOnCharacter(BaseCharacter character)
+        {
+            if (GetGlobalObject("FocusedCharacterManager") is FocusedCharacterManager focusedCharacterManager)
+            {
+                focusedCharacterManager.FocusOnCharacter(character);
+            }
+            else
+            {
+                GD.PrintErr("Invalid FocusedCharacterManager");
+            }
+        }
+
+		public static BaseCharacter GetFocusedCharacter()
+		{
+
+			if (GetGlobalObject("FocusedCharacterManager") is FocusedCharacterManager focusedCharacterManager)
+			{
+				return focusedCharacterManager.GetFocusedCharacter();
+			}
+			else
+			{
+				GD.PrintErr("Invalid FocusedCharacterManager");
+				return null;
 			}
 		}
     }

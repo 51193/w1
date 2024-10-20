@@ -1,5 +1,6 @@
 using Godot;
 using MyGame.Component;
+using MyGame.Manager;
 using System.Collections.Generic;
 
 namespace MyGame.Entity
@@ -10,7 +11,7 @@ namespace MyGame.Entity
 
 		public DynamicEntity0()
 		{
-			InteractionManager.SetDisplay(true);
+			GlobalObjectManager.FocusOnCharacter(this);
 			IsTransitable = true;
 		}
 
@@ -38,12 +39,12 @@ namespace MyGame.Entity
 			}
 		}
 
-		public override void ShowTips()
+		public override void ShowTip()
 		{
 			//Do nothing
 		}
 
-		public override void HideTips()
+		public override void HideTip()
 		{
 			//Do nothing
 		}

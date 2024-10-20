@@ -13,9 +13,9 @@ namespace MyGame.Entity
             _interactionStrategy = new LazyLoader<IInteractionStrategy>(factory);
         }
 
-        public abstract void ShowTips();
+        public abstract void ShowTip();
 
-        public abstract void HideTips();
+        public abstract void HideTip();
 
         public void Interact(IInteractionParticipant participant)
         {

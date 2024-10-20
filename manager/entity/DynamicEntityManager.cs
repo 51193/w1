@@ -17,18 +17,18 @@ namespace MyGame.Manager
 
 		private void Init()
 		{
-            BaseSaveComponent baseSave = new()
-            {
-                Position = new Vector2(0, 0),
-                States = null
-            };
+			BaseSaveComponent baseSave = new()
+			{
+				Position = new Vector2(0, 0),
+				States = null
+			};
 
-            CharacterSaveComponent characterSave = new()
-            {
-                TestText = "DynamicEntity00"
-            };
+			CharacterSaveComponent characterSave = new()
+			{
+				TestText = "DynamicEntity00"
+			};
 
-            baseSave.Next = characterSave;
+			baseSave.Next = characterSave;
 
 			_globalEntityInfomation["Map0"] = new()
 			{
