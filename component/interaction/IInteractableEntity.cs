@@ -5,8 +5,16 @@ namespace MyGame.Component
     public interface IInteractableEntity
     {
         public Vector2 Position { get; set; }
+        public LazyLoader<IInteractionStrategy> InteractionStrategy { get; }
         public void ShowTip();
         public void HideTip();
-        public void Interact(IInteractionParticipant participant);
+        public bool IsInteractableWith(IInteractionParticipant participant)
+        {
+            return InteractionStrategy.Invoke(strategy => strategy.IsInteractableWith(participant));
+        }
+        public void Interact(IInteractionParticipant participant)
+        {
+            InteractionStrategy.Invoke(strategy => strategy.Interact(participant));
+        }
     }
 }

@@ -26,7 +26,7 @@ namespace MyGame.Manager
 			GD.Print($"Stage stack have {_stageStack.Count} instance(s) inside");
 		}
 
-        public void PopStage()
+		public void PopStage()
 		{
 			if (_currentStage != null)
 			{

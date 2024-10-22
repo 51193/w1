@@ -4,18 +4,26 @@ namespace MyGame.Component
 {
     public class BinaryStateInteractionStrategy : IInteractionStrategy
     {
-        private readonly BaseStaticEntity _entity;
+        private readonly IInteractableEntity _entity;
         private readonly string _name;
 
-        public BinaryStateInteractionStrategy(BaseStaticEntity entity, string binaryStateName)
+        public BinaryStateInteractionStrategy(IInteractableEntity entity, string binaryStateName)
         {
             _entity = entity;
             _name = binaryStateName;
         }
 
+        public bool IsInteractableWith(IInteractionParticipant participant)
+        {
+            return true;
+        }
+
         public void Interact(IInteractionParticipant participant)
         {
-            _entity.HandleStateTransition(_name, null);
+            if (_entity is IEntity entity)
+            {
+                entity.HandleStateTransition(_name, null);
+            }
         }
     }
 }

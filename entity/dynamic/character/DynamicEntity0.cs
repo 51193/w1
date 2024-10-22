@@ -12,7 +12,6 @@ namespace MyGame.Entity
 		public DynamicEntity0()
 		{
 			GlobalObjectManager.FocusOnCharacter(this);
-			IsTransitable = true;
 		}
 
 		public override HashSet<string> GetInteractionTags()
@@ -27,7 +26,7 @@ namespace MyGame.Entity
 		{
 			if(states == null)
 			{
-				_stateManager = new(this, new()
+				StateManager = new(this, new()
 				{
 					["OverallState"] = new NormalState(),
 					["ControlState"] = new HardwareInputControlState()
@@ -35,7 +34,7 @@ namespace MyGame.Entity
 			}
 			else
 			{
-				_stateManager = new(this, states);
+				StateManager = new(this, states);
 			}
 		}
 

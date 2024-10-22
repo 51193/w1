@@ -23,7 +23,7 @@ namespace MyGame.Entity
         {
 			if (states == null)
 			{
-				_stateManager = new(this, new Dictionary<string, IState>()
+				StateManager = new(this, new Dictionary<string, IState>()
 				{
 					["OpenState"] = new DoorClosedState(),
 					["StrategyState"] = new DefaultStrategeyState()
@@ -39,7 +39,7 @@ namespace MyGame.Entity
 				{
 					states["OpenState"] = new DoorOpenedState();
                 }
-                _stateManager = new(this, states);
+                StateManager = new(this, states);
             }
         }
 

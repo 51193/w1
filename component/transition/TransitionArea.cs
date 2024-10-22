@@ -14,10 +14,13 @@ namespace MyGame.Map
 		private void OnBodyEntered(Node body)
 		{
 			if (body is BaseDynamicEntity entity && entity.IsTransitable)
-			{
-				//Need upgrade in future, need to distinguish method-call for focused character and non-focused character.
-				GlobalObjectManager.TransitMap(_map.GetMapName(), ExitName, Position, entity);
-				GD.Print("Transitable entity entered transition area.");
+            {
+                //May upgrade in future, need use different method-call for focused character and non-focused character.
+                if (entity == GlobalObjectManager.GetFocusedCharacter())
+				{
+					GlobalObjectManager.TransitMap(_map.GetMapName(), ExitName, Position, entity);
+					GD.Print("Transitable entity entered transition area.");
+				}
 			}
 		}
 

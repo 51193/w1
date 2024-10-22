@@ -8,8 +8,8 @@ namespace MyGame.Entity
 {
 	public abstract partial class BaseDynamicEntity: CharacterBody2D, IEntity
 	{
-		protected StateManager _stateManager;
-        protected readonly EventManager _eventManager = new();
+		public StateManager StateManager { get; set; }
+        public EventManager EventManager { get; init; } = new();
 
         protected LazyLoader<IAnimationPlayer> _animationPlayer;
 		protected LazyLoader<IVelocityAlgorithm> _velocityAlgorithm;
@@ -28,41 +28,32 @@ namespace MyGame.Entity
 			_navigator = new LazyLoader<INavigator>(factory);
 		}
 
-        private string _renderingOrderGroupName;
-		public bool IsTransitable = false;
+        public string RenderingOrderGroupName { get; set; }
+		public bool IsTransitable = true;
 
-		private readonly string _name;
+		public string EntityName { get; init; }
 
 		public Vector2 Direction = Vector2.Zero;
 		private Vector2 _lastFramePosition = Vector2.Zero;
 
-		public BaseDynamicEntity()
+        public BaseDynamicEntity()
 		{
-			_name = GetType().Name;
+			EntityName = GetType().Name;
 		}
 
-		public string GetEntityName() { return _name; }
-
-		public string GetRenderingGroupName() {  return _renderingOrderGroupName; }
-
-		public void SetRenderingGroupName(string groupName) {  _renderingOrderGroupName = groupName; }
-
-		public virtual void InitiateStates(Dictionary<string, IState> states = null)
+		public virtual void InitiateStates(Dictionary<string, IState> states)
 		{
-            if (states == null)
             {
-                _stateManager = new(this);
-            }
-            else
-            {
-                _stateManager = new(this, states);
+                if (states == null)
+                {
+                    StateManager = new(this);
+                }
+                else
+                {
+                    StateManager = new(this, states);
+                }
             }
         }
-
-		public Dictionary<string, IState> GetStates()
-		{
-			return _stateManager.GetStates();
-		}
 
 		public virtual ISaveComponent SaveData(ISaveComponent saveComponent = null)
 		{
@@ -77,16 +68,6 @@ namespace MyGame.Entity
 			saveComponent.LoadData(this);
 			return saveComponent.Next;
 		}
-
-        public void HandleStateTransition(string stateName, string input, params object[] args)
-        {
-			_stateManager.HandleStateTransition(stateName, input, args);
-        }
-
-		public void RegistrateEvent(string eventName, Action action)
-        {
-            _eventManager.RegistrateEvent(eventName, action);
-        }
 
         private void UpdateDirection()
 		{
@@ -124,20 +105,20 @@ namespace MyGame.Entity
 
 		protected virtual void WhenPositionChange()
 		{
-            if (_renderingOrderGroupName != null)
+            if (RenderingOrderGroupName != null)
             {
-                GlobalObjectManager.ResortRenderingOrder(_renderingOrderGroupName);
+                GlobalObjectManager.ResortRenderingOrder(RenderingOrderGroupName);
             }
         }
 
 		public override void _EnterTree()
 		{
-			GD.Print($"Dynamic entity enter: {_name}");
+			GD.Print($"Dynamic entity enter: {EntityName}");
 		}
 
 		public override void _ExitTree()
 		{
-			GD.Print($"Dynamic entity exit: {_name}");
+			GD.Print($"Dynamic entity exit: {EntityName}");
 		}
 
 		public override void _PhysicsProcess(double delta)

@@ -6,6 +6,7 @@ namespace MyGame.Entity
     public abstract partial class BaseInteractableDynamicEntity : DynamicEntity, IInteractableEntity
     {
         protected LazyLoader<IInteractionStrategy> _interactionStrategy;
+        public LazyLoader<IInteractionStrategy> InteractionStrategy { get { return _interactionStrategy; } }
 
         public void LoadStrategy(Func<IInteractionStrategy> factory)
         {
@@ -15,10 +16,5 @@ namespace MyGame.Entity
         public abstract void ShowTip();
 
         public abstract void HideTip();
-
-        public void Interact(IInteractionParticipant participant)
-        {
-            _interactionStrategy.Invoke(strategy => strategy.Interact(participant));
-        }
     }
 }

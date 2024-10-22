@@ -1,4 +1,3 @@
-using Godot;
 using MyGame.Component;
 using System.Collections.Generic;
 
@@ -27,14 +26,36 @@ namespace MyGame.Manager
 
 		public void ShowNearestTip()
         {
-            if (_interactableEntities.Count == 0) return;
-            _interactableEntities[0].ShowTip();
+			int index = 0;
+			while(index < _interactableEntities.Count)
+			{
+				if (_interactableEntities[index].IsInteractableWith(_interactionParticipant))
+				{
+					_interactableEntities[index].ShowTip();
+					return;
+				}
+				else
+				{
+					index++;
+				}
+			}
 		}
 
 		public void Interact()
-		{
-			if (_interactableEntities.Count == 0) return;
-			_interactableEntities[0].Interact(_interactionParticipant);
+        {
+            int index = 0;
+            while (index < _interactableEntities.Count)
+            {
+                if (_interactableEntities[index].IsInteractableWith(_interactionParticipant))
+                {
+                    _interactableEntities[index].Interact(_interactionParticipant);
+                    return;
+                }
+                else
+                {
+                    index++;
+                }
+            }
 		}
 
 		public void ResortEntitiesOrder()

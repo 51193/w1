@@ -1,46 +1,36 @@
 using Godot;
 using MyGame.Component;
 using MyGame.Manager;
-using System;
 using System.Collections.Generic;
 
 namespace MyGame.Entity
 {
 	public abstract partial class BaseStaticEntity : StaticBody2D, IEntity
     {
-        protected StateManager _stateManager;
-        protected readonly EventManager _eventManager = new();
+        public StateManager StateManager { get; set; }
+        public EventManager EventManager { get; init; } = new();
 
-        private string _renderingOrderGroupName;
+        public string RenderingOrderGroupName { get; set; }
 
-        private readonly string _name;
+        public string EntityName { get; init;}
 
         public BaseStaticEntity()
         {
-            _name = GetType().Name;
+            EntityName = GetType().Name;
         }
 
-        public string GetEntityName() { return _name; }
-
-        public string GetRenderingGroupName() { return _renderingOrderGroupName; }
-
-        public void SetRenderingGroupName(string groupName) { _renderingOrderGroupName = groupName; }
-
-        public virtual void InitiateStates(Dictionary<string, IState> states = null)
+        public virtual void InitiateStates(Dictionary<string, IState> states)
         {
-            if (states == null) 
             {
-                _stateManager = new(this);
+                if (states == null)
+                {
+                    StateManager = new(this);
+                }
+                else
+                {
+                    StateManager = new(this, states);
+                }
             }
-            else
-            {
-                _stateManager = new(this, states);
-            }
-        }
-
-        public Dictionary<string, IState> GetStates()
-        {
-            return _stateManager.GetStates();
         }
 
         public virtual ISaveComponent SaveData(ISaveComponent saveComponent = null)
@@ -57,24 +47,14 @@ namespace MyGame.Entity
             return saveComponent.Next;
         }
 
-        public void HandleStateTransition(string stateName, string input, params object[] args)
-        {
-            _stateManager.HandleStateTransition(stateName, input, args);
-        }
-
-        public void RegistrateEvent(string eventName, Action action)
-        {
-            _eventManager.RegistrateEvent(eventName, action);
-        }
-
         public override void _EnterTree()
         {
-            GD.Print($"Static entity enter: {_name}");
+            GD.Print($"Static entity enter: {EntityName}");
         }
 
         public override void _ExitTree()
         {
-            GD.Print($"Static entity exit: {_name}");
+            GD.Print($"Static entity exit: {EntityName}");
         }
 
         public void EntityInitiateProcess() { }

@@ -8,27 +8,27 @@ namespace MyGame.Entity
 	{
 		private class HardwareInputControlState : IState
 		{
-			public void Enter(IEntity entity)
+			public void OnEnter(IEntity entity)
 			{
 				((DynamicEntity0)entity).LoadStrategy(() =>
 				{
 					return new InputNavigator();
 				});
 			}
-			public void Exit(IEntity entity) { }
-			public void HandleStateTransition(IEntity entity, string input, params object[] args)
+			public void OnExit(IEntity entity) { }
+			public void OnHandleStateTransition(IEntity entity, string input, params object[] args)
 			{
 				switch (input)
 				{
 					case "GoStraight":
 						if (args.Length > 0 && args[0] is Vector2 position)
 						{
-							((DynamicEntity0)entity)._eventManager.RegistrateEvent("OnReachedTarget",
+							((DynamicEntity0)entity).EventManager.RegistrateEvent("OnReachedTarget",
 								new Action(() =>
 								{
-									((DynamicEntity0)entity)._stateManager.ChangeState("ControlState", new HardwareInputControlState());
+									((DynamicEntity0)entity).StateManager.ChangeState("ControlState", new HardwareInputControlState());
 								}));
-							((DynamicEntity0)entity)._stateManager.ChangeState("ControlState", new StraightForwardControlState(position, "OnReachedTarget"));
+							((DynamicEntity0)entity).StateManager.ChangeState("ControlState", new StraightForwardControlState(position, "OnReachedTarget"));
 						}
 						break;
 				}
@@ -46,7 +46,7 @@ namespace MyGame.Entity
 				_targetPosition = targetPosition;
 				_callbackName = callbackName;
 			}
-			public void Enter(IEntity entity)
+			public void OnEnter(IEntity entity)
 			{
 				_entityOriginalCollisionMask = ((DynamicEntity0)entity).CollisionMask;
 				_entityOriginalTransitableState = ((DynamicEntity0)entity).IsTransitable;
@@ -56,21 +56,21 @@ namespace MyGame.Entity
 				{
 					return new StraightForwardToTargetNavigator((DynamicEntity0)entity, _targetPosition, () =>
 					{
-						((DynamicEntity0)entity)._eventManager.TriggerEvent(_callbackName);
+						((DynamicEntity0)entity).EventManager.TriggerEvent(_callbackName);
 					});
 				});
 			}
-			public void Exit(IEntity entity)
+			public void OnExit(IEntity entity)
 			{
 				((DynamicEntity0)entity).CollisionMask = _entityOriginalCollisionMask;
 				((DynamicEntity0)entity).IsTransitable = _entityOriginalTransitableState;
-				((DynamicEntity0)entity)._eventManager.UnregistrateEvent(_callbackName);
+				((DynamicEntity0)entity).EventManager.UnregistrateEvent(_callbackName);
 			}
-			public void HandleStateTransition(IEntity entity, string input, params object[] args) { }
+			public void OnHandleStateTransition(IEntity entity, string input, params object[] args) { }
 		}
 		private class NormalState : IState
 		{
-			public void Enter(IEntity entity)
+			public void OnEnter(IEntity entity)
 			{
 				((DynamicEntity0)entity).LoadStrategy(() =>
 				{
@@ -81,8 +81,8 @@ namespace MyGame.Entity
 					return new FrictionVelocityAlgorithm(((DynamicEntity0)entity), 100, 2000, 1000);
 				});
 			}
-			public void Exit(IEntity entity) { }
-			public void HandleStateTransition(IEntity entity, string input, params object[] args) { }
+			public void OnExit(IEntity entity) { }
+			public void OnHandleStateTransition(IEntity entity, string input, params object[] args) { }
 		}
 	}
 }

@@ -1,6 +1,5 @@
 using Godot;
 using MyGame.Entity;
-using static Godot.TextServer;
 
 namespace MyGame.Manager
 {
@@ -31,7 +30,7 @@ namespace MyGame.Manager
 		public override void _Process(double delta)
 		{
 			_focusedCharacter.InteractionManager.ShowNearestTip();
-			if (Input.IsActionPressed("activate"))
+			if (Input.IsActionJustReleased("activate"))
 			{
 				_focusedCharacter.InteractionManager.Interact();
 			}

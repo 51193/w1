@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxg5hmoh60ci5"]
+
+[ext_resource type="Script" path="res://stage/game_play/GamePlay.cs" id="1_5xubu"]
+[ext_resource type="PackedScene" uid="uid://ch2dmkohs60hi" path="res://manager/map_transition/map_transition.tscn" id="2_2ixxv"]
+
+[node name="GamePlay" type="Node"]
+script = ExtResource("1_5xubu")
+
+[node name="MapTransition" parent="." instance=ExtResource("2_2ixxv")]

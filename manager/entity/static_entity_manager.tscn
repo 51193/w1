@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://3w52fncumy42"]
-
-[ext_resource type="Script" path="res://manager/entity/StaticEntityManager.cs" id="1_pt3j5"]
-
-[node name="StaticEntityManager" type="Node"]
-script = ExtResource("1_pt3j5")

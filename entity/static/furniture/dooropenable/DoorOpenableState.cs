@@ -7,40 +7,40 @@ namespace MyGame.Entity
     {
         private class DefaultStrategeyState : IState
         {
-            public void Enter(IEntity entity)
+            public void OnEnter(IEntity entity)
             {
                 ((DoorOpenable)entity).LoadStrategy(() =>
                 {
                     return new BinaryStateInteractionStrategy((DoorOpenable)entity, "OpenState");
                 });
             }
-            public void Exit(IEntity entity) { }
-            public void HandleStateTransition(IEntity entity, string input, params object[] args) { }
+            public void OnExit(IEntity entity) { }
+            public void OnHandleStateTransition(IEntity entity, string input, params object[] args) { }
         }
         private class DoorOpenedState : IState
         {
-            public void Enter(IEntity entity)
+            public void OnEnter(IEntity entity)
             {
                 ((DoorOpenable)entity)._animationPlayerNode.Play("opened");
                 ((DoorOpenable)entity)._label.Text = "按E关门";
             }
-            public void Exit(IEntity entity) { }
-            public void HandleStateTransition(IEntity entity, string input, params object[] args)
+            public void OnExit(IEntity entity) { }
+            public void OnHandleStateTransition(IEntity entity, string input, params object[] args)
             {
-                ((DoorOpenable)entity)._stateManager.ChangeState("OpenState", new DoorClosingState((DoorOpenable)entity));
+                ((DoorOpenable)entity).StateManager.ChangeState("OpenState", new DoorClosingState((DoorOpenable)entity));
             }
         }
         private class DoorClosedState : IState
         {
-            public void Enter(IEntity entity)
+            public void OnEnter(IEntity entity)
             {
                 ((DoorOpenable)entity)._animationPlayerNode.Play("closed");
                 ((DoorOpenable)entity)._label.Text = "按E开门";
             }
-            public void Exit(IEntity entity) { }
-            public void HandleStateTransition(IEntity entity, string input, params object[] args)
+            public void OnExit(IEntity entity) { }
+            public void OnHandleStateTransition(IEntity entity, string input, params object[] args)
             {
-                ((DoorOpenable)entity)._stateManager.ChangeState("OpenState", new DoorOpeningState((DoorOpenable)entity));
+                ((DoorOpenable)entity).StateManager.ChangeState("OpenState", new DoorOpeningState((DoorOpenable)entity));
             }
         }
         private class DoorOpeningState : IState
@@ -53,15 +53,16 @@ namespace MyGame.Entity
             }
             private void OnAnimationFinished(StringName animName)
             {
-                _doorEntity._stateManager.ChangeState("OpenState", new DoorOpenedState());
+                _doorEntity._animationPlayerNode.AnimationFinished -= OnAnimationFinished;
+                _doorEntity.StateManager.ChangeState("OpenState", new DoorOpenedState());
             }
-            public void Enter(IEntity entity)
+            public void OnEnter(IEntity entity)
             {
                 ((DoorOpenable)entity)._animationPlayerNode.Play("opening");
                 _doorEntity._label.Text = "";
             }
-            public void Exit(IEntity entity) { }
-            public void HandleStateTransition(IEntity entity, string input, params object[] args) { }
+            public void OnExit(IEntity entity) { }
+            public void OnHandleStateTransition(IEntity entity, string input, params object[] args) { }
         }
         private class DoorClosingState : IState
         {
@@ -73,15 +74,16 @@ namespace MyGame.Entity
             }
             private void OnAnimationFinished(StringName animName)
             {
-                _doorEntity._stateManager.ChangeState("OpenState", new DoorClosedState());
+                _doorEntity._animationPlayerNode.AnimationFinished -= OnAnimationFinished;
+                _doorEntity.StateManager.ChangeState("OpenState", new DoorClosedState());
             }
-            public void Enter(IEntity entity)
+            public void OnEnter(IEntity entity)
             {
                 ((DoorOpenable)entity)._animationPlayerNode.Play("closing");
                 _doorEntity._label.Text = "";
             }
-            public void Exit(IEntity entity) { }
-            public void HandleStateTransition(IEntity entity, string input, params object[] args) { }
+            public void OnExit(IEntity entity) { }
+            public void OnHandleStateTransition(IEntity entity, string input, params object[] args) { }
         }
     }
 }

@@ -43,7 +43,7 @@ namespace MyGame.Manager
 			AddChild(_currentMap);
 
 			EmitSignal(SignalName.MapTransitionComplete);
-			GD.Print($"Map loaded successfully: {((BaseMap)_currentMap).GetMapName()}");
+			GD.Print($"Map loaded successfully: {mapName}");
 		}
 
 		public void AfterTransitionComplete()
