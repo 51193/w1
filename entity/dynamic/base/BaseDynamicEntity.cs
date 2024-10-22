@@ -11,21 +11,21 @@ namespace MyGame.Entity
 		public StateManager StateManager { get; set; }
         public EventManager EventManager { get; init; } = new();
 
-        protected LazyLoader<IAnimationPlayer> _animationPlayer;
-		protected LazyLoader<IVelocityAlgorithm> _velocityAlgorithm;
-        protected LazyLoader<INavigator> _navigator;
+        public LazyLoader<IAnimationPlayer> AnimationPlayer;
+        public LazyLoader<IVelocityAlgorithm> VelocityAlgorithm;
+        public LazyLoader<INavigator> Navigator;
 
         public void LoadStrategy(Func<IAnimationPlayer> factory)
         {
-            _animationPlayer = new LazyLoader<IAnimationPlayer>(factory);
+            AnimationPlayer = new LazyLoader<IAnimationPlayer>(factory);
         }
         public void LoadStrategy(Func<IVelocityAlgorithm> factory)
         {
-            _velocityAlgorithm = new LazyLoader<IVelocityAlgorithm>(factory);
+            VelocityAlgorithm = new LazyLoader<IVelocityAlgorithm>(factory);
         }
         public void LoadStrategy(Func<INavigator> factory)
 		{
-			_navigator = new LazyLoader<INavigator>(factory);
+			Navigator = new LazyLoader<INavigator>(factory);
 		}
 
         public string RenderingOrderGroupName { get; set; }
@@ -71,26 +71,26 @@ namespace MyGame.Entity
 
         private void UpdateDirection()
 		{
-			if(_navigator == null) return;
-			Direction = _navigator.Invoke(navigator => navigator.UpdateDirection());
+			if(Navigator == null) return;
+			Direction = Navigator.Invoke(navigator => navigator.UpdateDirection());
 		}
 
 		private void UpdateVelocity(double delta)
 		{
-			if (_velocityAlgorithm == null) return;
-			Velocity = _velocityAlgorithm.Invoke(algorithm => algorithm.UpdateVelocity(delta));
+			if (VelocityAlgorithm == null) return;
+			Velocity = VelocityAlgorithm.Invoke(algorithm => algorithm.UpdateVelocity(delta));
 		}
 
 		private void UpdateAnimation(double delta)
 		{
-			if (_animationPlayer == null) return;
-			_animationPlayer.Invoke(player => player.UpdateAnimation(Direction, delta));
+			if (AnimationPlayer == null) return;
+			AnimationPlayer.Invoke(player => player.UpdateAnimation(Direction, delta));
 		}
 
 		private void UpdateAnimation()
 		{
-			if( _animationPlayer == null) return;
-			_animationPlayer.Invoke(player => player.UpdateAnimationWithoutConstraint(Direction));
+			if( AnimationPlayer == null) return;
+			AnimationPlayer.Invoke(player => player.UpdateAnimationWithoutConstraint(Direction));
 		}
 
         private void UpdatePosition()

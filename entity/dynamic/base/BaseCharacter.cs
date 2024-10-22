@@ -6,13 +6,11 @@ namespace MyGame.Entity
 {
     public abstract partial class BaseCharacter : BaseInteractableDynamicEntity, IInteractionParticipant
     {
-        private readonly InteractionManager _interactionManager;
-
-        public InteractionManager InteractionManager {  get { return _interactionManager; } }
+        public InteractionManager InteractionManager { get; init; }
 
         public BaseCharacter()
         {
-            _interactionManager = new(this);
+            InteractionManager = new(this);
         }
 
         public override ISaveComponent SaveData(ISaveComponent saveComponent = null)
