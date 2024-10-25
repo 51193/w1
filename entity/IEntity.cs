@@ -15,7 +15,7 @@ namespace MyGame.Entity
         }
         public Vector2 Position { get; set; }
         public StateManager StateManager { get; set; }
-        public EventManager EventManager { get; init; }
+        public EventManager EventManager { get; set; }
         public string RenderingOrderGroupName { get; set; }
         public string EntityName { get; init; }
         public string GetRenderingGroupName() { return RenderingOrderGroupName; }
@@ -26,15 +26,23 @@ namespace MyGame.Entity
         {
             return StateManager.GetStates();
         }
-        public ISaveComponent SaveData(ISaveComponent saveComponent = null);
-        public ISaveComponent LoadData(ISaveComponent saveComponent);
         public void HandleStateTransition(string stateName, string input, params object[] args)
         {
             StateManager.HandleStateTransition(stateName, input, args);
         }
-        public void RegistrateEvent(string eventName, Action action)
+        public ISaveComponent SaveData(ISaveComponent saveComponent = null);
+        public ISaveComponent LoadData(ISaveComponent saveComponent);
+        public void InitiateEvent(Dictionary<string, Stack<EventIndex>> events = null)
         {
-            EventManager.RegistrateEvent(eventName, action);
+            EventManager = new(events);
+        }
+        public void RegistrateEvent(string eventName, Type type, string actionKey, params object[] parameters)
+        {
+            EventManager.RegistrateEvent(eventName, type, actionKey, parameters);
+        }
+        public Dictionary<string, Stack<EventIndex>> GetEvents()
+        {
+            return EventManager.GetEvents();
         }
         public void EntityInitiateProcess();
     }

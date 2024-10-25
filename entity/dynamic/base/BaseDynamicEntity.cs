@@ -9,7 +9,7 @@ namespace MyGame.Entity
 	public abstract partial class BaseDynamicEntity: CharacterBody2D, IEntity
 	{
 		public StateManager StateManager { get; set; }
-        public EventManager EventManager { get; init; } = new();
+        public EventManager EventManager { get; set; }
 
         public LazyLoader<IAnimationPlayer> AnimationPlayer;
         public LazyLoader<IVelocityAlgorithm> VelocityAlgorithm;

@@ -1,5 +1,6 @@
 ﻿using Godot;
 using MyGame.Entity;
+using MyGame.Manager;
 using System.Collections.Generic;
 
 namespace MyGame.Component
@@ -8,6 +9,7 @@ namespace MyGame.Component
     {
         public Vector2 Position;
         public Dictionary<string, IState> States;
+        public Dictionary<string, Stack<EventIndex>> Events;
 
         private ISaveComponent _next;
 
@@ -17,12 +19,14 @@ namespace MyGame.Component
         {
             Position = entity.Position;
             States = entity.GetStates();
+            Events = entity.GetEvents();
         }
 
         public void LoadData(IEntity entity)
         {
             entity.Position = Position;
             entity.InitiateStates(States);
+            entity.InitiateEvent(Events);
         }
     }
 }

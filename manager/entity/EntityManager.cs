@@ -136,7 +136,7 @@ namespace MyGame.Manager
 			Node node = _entities[instanceInfo.EntityType].Instantiate();
 			IEntity entity = node as IEntity;
 
-            _instances.Add(entity);
+			_instances.Add(entity);
 			AddChild(entity.GetNode());
 
 			entity.LoadData(instanceInfo.SaveHead);
@@ -219,8 +219,8 @@ namespace MyGame.Manager
 				return;
 			}
 			ClearAllLivinEntitiesRenderingOrderGroupName(currentMapName);
-            GlobalObjectManager.ClearNodeInRenderingOrderGroup(currentMapName);
-            ClearAllEntitiesFromMapRecord(currentMapName);
+			GlobalObjectManager.ClearNodeInRenderingOrderGroup(currentMapName);
+			ClearAllEntitiesFromMapRecord(currentMapName);
 			string entityName = entity.GetEntityName();
 			ISaveComponent save = entity.SaveData();
 			save.SearchDataType<BaseSaveComponent>().Position = fromPosition;
@@ -232,15 +232,15 @@ namespace MyGame.Manager
 			AddAllLivingEntitiesToRenderingOrderGroup(nextMapName);
 			CallAllLivingEntitiesInitiateProcess();
 			SetAllLivingEntitiesPhysicsProcess(false);
-            EmitSignal(SignalName.EntityTransitionComplete);
-			GD.Print($"Dynamic entities have swapped to {currentMapName}");
+			EmitSignal(SignalName.EntityTransitionComplete);
+			GD.Print($"Entities have swapped to {currentMapName}");
 		}
 
 		public async void AfterTransitionComplete()
 		{
 			await Task.Delay(1);
 			SetAllLivingEntitiesPhysicsProcess(true);
-			GD.Print($"Static entities transition complete");
+			GD.Print($"Entities transition complete");
 		}
 
 		public override void _EnterTree()

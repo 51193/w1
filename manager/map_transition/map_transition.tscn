@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://manager/map_transition/MapTransition.cs" id="1_8gvrd"]
 [ext_resource type="PackedScene" uid="uid://dnnltoeicsh36" path="res://manager/map/map_manager.tscn" id="2_tvav1"]
-[ext_resource type="PackedScene" uid="uid://bicuac541j5nx" path="res://manager/entity/base/entity_manager.tscn" id="3_2fv42"]
+[ext_resource type="PackedScene" uid="uid://bqjy86ul5sr4g" path="res://manager/entity/entity_manager.tscn" id="3_jpfh3"]
 
 [node name="MapTransition" type="Node"]
 script = ExtResource("1_8gvrd")
 
 [node name="MapManager" parent="." instance=ExtResource("2_tvav1")]
 
-[node name="EntityManager" parent="." instance=ExtResource("3_2fv42")]
+[node name="EntityManager" parent="." instance=ExtResource("3_jpfh3")]

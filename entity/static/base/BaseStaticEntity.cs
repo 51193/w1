@@ -8,7 +8,7 @@ namespace MyGame.Entity
 	public abstract partial class BaseStaticEntity : StaticBody2D, IEntity
     {
         public StateManager StateManager { get; set; }
-        public EventManager EventManager { get; init; } = new();
+        public EventManager EventManager { get; set; }
 
         public string RenderingOrderGroupName { get; set; }
 
