@@ -1,5 +1,6 @@
 using Godot;
 using MyGame.Component;
+using MyGame.Util;
 using System;
 
 namespace MyGame.Entity
@@ -23,7 +24,7 @@ namespace MyGame.Entity
 					case "GoStraight":
 						if (args.Length > 0 && args[0] is Vector2 position)
 						{
-							entity.RegistrateEvent("OnReachedTarget", typeof(BaseCharacter), "ChangeControlStateToHardwareInputControlState", entity);
+							entity.RegistrateEvent("OnReachedTarget", typeof(BaseCharacterEvents), "ChangeControlStateToHardwareInputControlState", entity);
 							entity.StateManager.ChangeState("ControlState", new StraightForwardControlState(position, "OnReachedTarget"));
 						}
 						break;

@@ -1,13 +1,14 @@
-﻿using System;
+﻿using MyGame.Entity;
+using System;
 using static MyGame.Entity.DynamicEntity0;
 
-namespace MyGame.Entity
+namespace MyGame.Util
 {
-    public static class BaseCharacterEvents
+    public class BaseCharacterEvents : IEventProvider
     {
-        public static Action GetEvent(string key, params object[] parameters)
+        public Action GetEvent(string key, params object[] parameters)
         {
-            switch(key)
+            switch (key)
             {
                 case "ChangeControlStateToHardwareInputControlState":
                     {

@@ -1,4 +1,5 @@
 ﻿using Godot;
+using MyGame.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,30 +10,20 @@ namespace MyGame.Manager
     public class EventIndex
     {
         public string TypeName;
-        public string ActionKey;
+        public string EventName;
         public object[] Parameters;
 
 
-        public EventIndex(Type type, string actionKey, object[] parameters)
+        public EventIndex(Type type, string eventName, object[] parameters)
         {
             TypeName = type.FullName;
-            ActionKey = actionKey;
+            EventName = eventName;
             Parameters = parameters;
         }
 
-        public Action GetAction()
+        public Action GetEvent()
         {
-            Type type = Type.GetType($"{TypeName}Events");
-            MethodInfo eventInfo = type.GetMethod("GetEvent", BindingFlags.Public | BindingFlags.Static);
-            if (eventInfo != null)
-            {
-                return (Action)eventInfo.Invoke(null, new object[] { ActionKey, Parameters });
-            }
-            else
-            {
-                GD.PrintErr($"Fail to get event in ActionIndex: {TypeName}-{ActionKey}");
-                return null;
-            }
+            return EventInitiator.GetEvent(TypeName, EventName, Parameters);
         }
     }
 
@@ -69,13 +60,13 @@ namespace MyGame.Manager
 
         public void TriggerEvent(string name)
         {
-            if (_events.TryGetValue(name, out var callbacks))
+            if (_events.TryGetValue(name, out var events))
             {
-                while (callbacks.Count > 0)
+                while (events.Count > 0)
                 {
-                    EventIndex callback = callbacks.Pop();
-                    GD.Print($"EventManager invoke {callback.TypeName}-{callback.ActionKey}");
-                    callback.GetAction().Invoke();
+                    EventIndex eventIndex = events.Pop();
+                    GD.Print($"EventManager invoke {eventIndex.TypeName}-{eventIndex.EventName}");
+                    eventIndex.GetEvent().Invoke();
                 }
             }
             else

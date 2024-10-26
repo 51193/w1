@@ -1,11 +1,12 @@
 ﻿using MyGame.Entity;
+using MyGame.Manager;
 using System;
 
-namespace MyGame.Manager
+namespace MyGame.Util
 {
-    public static class MapTransitionEvents
+    public class MapTransitionEvents : IEventProvider
     {
-        public static Action GetEvent(string key, params object[] parameters)
+        public Action GetEvent(string key, params object[] parameters)
         {
             switch (key)
             {

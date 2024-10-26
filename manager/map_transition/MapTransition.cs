@@ -1,5 +1,6 @@
 using Godot;
 using MyGame.Entity;
+using MyGame.Util;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -77,7 +78,7 @@ namespace MyGame.Manager
             }
 			if (entity is BaseDynamicEntity dynamicEntity)
 			{
-				entity.RegistrateEvent("OnReachedTarget", typeof(MapTransition), "InvokeManagers", this, transition, dynamicEntity);
+				entity.RegistrateEvent("OnReachedTarget", typeof(MapTransitionEvents), "InvokeManagers", this, transition, dynamicEntity);
 			}
 			entity.HandleStateTransition("ControlState", "GoStraight", exitPosition);
 		}
