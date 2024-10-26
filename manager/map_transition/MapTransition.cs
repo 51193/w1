@@ -121,7 +121,7 @@ namespace MyGame.Manager
         {
             _mapManager.AfterTransitionComplete();
 			_entityManager.AfterTransitionComplete();
-            SaveManager.WriteToFile("test.json", SaveManager.SerializeSaveData(GetSaveData()));
+            JsonUtil.WriteToFile("test.json", JsonUtil.SerializeSaveData(GetSaveData()));
         }
 
 		public SaveData GetSaveData()

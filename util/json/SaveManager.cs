@@ -1,10 +1,11 @@
 using Godot;
+using MyGame.Manager;
 using System.IO;
 using System.Text.Json;
 
-namespace MyGame.Manager
+namespace MyGame.Util
 {
-    public partial class SaveManager : Node
+    public partial class JsonUtil : Node
     {
         public static string SerializeSaveData(SaveData saveData)
         {
