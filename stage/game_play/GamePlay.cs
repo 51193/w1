@@ -6,15 +6,15 @@ namespace MyGame.Stage
 	{
 		private MapTransition _mapTransition;
 
-		private void InitMap(string mapName)
+		private void InitMap()
 		{
-			_mapTransition.InitMapProcess(mapName);
+			_mapTransition.InitMapProcess("Map0");
 		}
 
 		public override void _Ready()
 		{
 			_mapTransition = GetNode<MapTransition>("MapTransition");
-			InitMap("Map0");
+			InitMap();
 		}
 	}
 }

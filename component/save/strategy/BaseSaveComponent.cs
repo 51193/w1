@@ -11,9 +11,7 @@ namespace MyGame.Component
         public Dictionary<string, IState> States;
         public Dictionary<string, Stack<EventIndex>> Events;
 
-        private ISaveComponent _next;
-
-        public ISaveComponent Next { get => _next; set => _next = value; }
+        public ISaveComponent Next { get; set; }
 
         public void SaveData(IEntity entity)
         {

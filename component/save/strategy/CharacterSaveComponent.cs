@@ -7,9 +7,7 @@ namespace MyGame.Component
     {
         public string TestText;
 
-        private ISaveComponent _next;
-
-        public ISaveComponent Next { get => _next; set => _next = value; }
+        public ISaveComponent Next { get; set; }
 
         public void SaveData(IEntity entity)
         {

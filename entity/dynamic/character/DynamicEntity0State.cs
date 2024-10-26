@@ -33,15 +33,15 @@ namespace MyGame.Entity
 		}
 		private class StraightForwardControlState : IState
 		{
-			private readonly Vector2 _targetPosition;
-			private readonly string _callbackName;
+			public Vector2 TargetPosition;
+			public string EventName;
 
 			private uint _entityOriginalCollisionMask = 0;
 			private bool _entityOriginalTransitableState = false;
-			public StraightForwardControlState(Vector2 targetPosition, string callbackName)
+			public StraightForwardControlState(Vector2 targetPosition, string eventName)
 			{
-				_targetPosition = targetPosition;
-				_callbackName = callbackName;
+				TargetPosition = targetPosition;
+				EventName = eventName;
 			}
 			public void OnEnter(IEntity entity)
 			{
@@ -51,9 +51,9 @@ namespace MyGame.Entity
 				((DynamicEntity0)entity).IsTransitable = false;
 				((DynamicEntity0)entity).LoadStrategy(() =>
 				{
-					return new StraightForwardToTargetNavigator((BaseDynamicEntity)entity, _targetPosition, () =>
+					return new StraightForwardToTargetNavigator((BaseDynamicEntity)entity, TargetPosition, () =>
 					{
-						entity.EventManager.TriggerEvent(_callbackName);
+						entity.EventManager.TriggerEvent(EventName);
 					});
 				});
 			}

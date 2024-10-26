@@ -2,8 +2,6 @@
 using MyGame.Util;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 
 namespace MyGame.Manager
 {
@@ -29,7 +27,7 @@ namespace MyGame.Manager
 
     public class EventManager
     {
-        private readonly Dictionary<string, Stack<EventIndex>> _events;
+        public Dictionary<string, Stack<EventIndex>> _events;
 
         public EventManager(Dictionary<string, Stack<EventIndex>> events)
         {
@@ -55,7 +53,7 @@ namespace MyGame.Manager
                 _events[name] = new();
             }
             _events[name].Push(new EventIndex(type, actionKey, parameters));
-            GD.Print($"New event have registrated to EventManager [{name}: {type}-{actionKey}], now {_events[name].Count} method(s) in {name}'s group");
+            GD.Print($"New event have registrated to EventManager [{name}: {type.FullName}-{actionKey}], now {_events[name].Count} method(s) in {name}'s group");
         }
 
         public void TriggerEvent(string name)

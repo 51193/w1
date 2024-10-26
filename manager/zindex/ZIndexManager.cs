@@ -28,7 +28,7 @@ namespace MyGame.Manager
 			}
 			else
 			{
-				GD.PrintErr($"Group already removed or does't exist in ZIndexManager: {name}.");
+				GD.PrintErr($"Group already removed or does't exist in ZIndexManager: {name}");
 			}
 		}
 

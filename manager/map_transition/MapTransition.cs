@@ -18,6 +18,18 @@ namespace MyGame.Manager
 		public string EntryTo { get; set; }
 	}
 
+	public class SaveData
+	{
+		public string CurrentMapName;
+		public EntitySaveData EntitySaveData;
+
+		public SaveData(string currentMapName, EntitySaveData entitySaveData)
+		{
+			CurrentMapName = currentMapName;
+			EntitySaveData = entitySaveData;
+		}
+	}
+
 	public partial class MapTransition : Node
 	{
 		private MapManager _mapManager;
@@ -55,10 +67,10 @@ namespace MyGame.Manager
 		}
 
 		public void InitMapProcess(string mapName)
-		{
-			_mapManager.LoadMap(mapName);
+        {
+            _currentMapName = mapName;
+            _mapManager.LoadMap(mapName);
 			_entityManager.InitiateEntities(mapName);
-			_currentMapName = mapName;
 		}
 
 		public void InvokeManagers(string destinationName, string fromLandmarkName, string toLandmarkName, BaseDynamicEntity entity)
@@ -106,9 +118,21 @@ namespace MyGame.Manager
 		}
 
 		private void AfterTransitionComplete()
-		{
-			_mapManager.AfterTransitionComplete();
+        {
+            _mapManager.AfterTransitionComplete();
 			_entityManager.AfterTransitionComplete();
+            SaveManager.WriteToFile("test.json", SaveManager.SerializeSaveData(GetSaveData()));
+        }
+
+		public SaveData GetSaveData()
+		{
+			return new SaveData(_currentMapName, _entityManager.GetEntitySaveData());
+		}
+
+		public void ApplySaveData(SaveData saveData)
+		{
+			_entityManager.ApplyEntitySaveData(saveData.EntitySaveData);
+			InitMapProcess(saveData.CurrentMapName);
 		}
 
 		public override void _EnterTree()
