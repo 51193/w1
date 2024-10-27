@@ -24,7 +24,7 @@ namespace MyGame.Entity
 
 		public override void InitiateStates(Dictionary<string, IState> states = null)
 		{
-			if(states == null)
+			if (states == null || states.Count == 0)
 			{
 				StateManager = new(this, new()
 				{

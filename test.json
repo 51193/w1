@@ -1,112 +1,111 @@
 {
-  "CurrentMapName": "Map0",
-  "EntitySaveData": {
-    "GlobalEntityInfoData": {
-      "Map0": [
-        {
-          "EntityType": "DynamicEntity0",
-          "SaveNodesList": [
-            {
-              "SaveComponentType": "MyGame.Component.BaseSaveComponent",
-              "Properties": {
-                "Position": {
-                  "X": -124.96667,
-                  "Y": 16
+  "CurrentMapName": "Map1",
+  "EntityInstanceInfoDataDictionary": {
+    "Map0": [
+      {
+        "EntityType": "Map0Wall0",
+        "SaveNodeList": [
+          {
+            "SaveComponentType": "MyGame.Component.BaseSaveComponent",
+            "Properties": {
+              "Position": {
+                "X": -32,
+                "Y": -16
+              },
+              "States": {},
+              "Events": {}
+            }
+          }
+        ]
+      },
+      {
+        "EntityType": "Map0Wall1",
+        "SaveNodeList": [
+          {
+            "SaveComponentType": "MyGame.Component.BaseSaveComponent",
+            "Properties": {
+              "Position": {
+                "X": 48,
+                "Y": 0
+              },
+              "States": {},
+              "Events": {}
+            }
+          }
+        ]
+      },
+      {
+        "EntityType": "DoorOpenable",
+        "SaveNodeList": [
+          {
+            "SaveComponentType": "MyGame.Component.BaseSaveComponent",
+            "Properties": {
+              "Position": {
+                "X": 24,
+                "Y": -16
+              },
+              "States": {
+                "OpenState": {
+                  "StateTypeName": "MyGame.Entity.DoorOpenableDoorClosedState",
+                  "Properties": {}
                 },
-                "States": {
-                  "OverallState": {
-                    "StateTypeName": "MyGame.Entity.CharacterDefaultState",
-                    "Properties": {}
-                  },
-                  "ControlState": {
-                    "StateTypeName": "MyGame.Entity.CharacterStraightForwardControlState",
-                    "Properties": {
-                      "TargetPosition": {
-                        "X": -50,
-                        "Y": 16
-                      },
-                      "EventName": "OnReachedTarget"
-                    }
-                  }
-                },
-                "Events": {
-                  "OnReachedTarget": [
-                    {
-                      "TypeName": "MyGame.Util.BaseCharacterEvents",
-                      "EventName": "ChangeControlStateToHardwareInputControlState",
-                      "Parameters": []
-                    }
-                  ]
+                "StrategyState": {
+                  "StateTypeName": "MyGame.Entity.DoorOpenableDefaultStrategyState",
+                  "Properties": {}
                 }
-              }
-            },
-            {
-              "SaveComponentType": "MyGame.Component.CharacterSaveComponent",
-              "Properties": {
-                "TestText": "DynamicEntity0"
-              }
+              },
+              "Events": {}
             }
-          ]
-        },
-        {
-          "EntityType": "Map0Wall0",
-          "SaveNodesList": [
-            {
-              "SaveComponentType": "MyGame.Component.BaseSaveComponent",
-              "Properties": {
-                "Position": {
-                  "X": -32,
-                  "Y": -16
+          }
+        ]
+      }
+    ],
+    "Map1": [
+      {
+        "EntityType": "DynamicEntity0",
+        "SaveNodeList": [
+          {
+            "SaveComponentType": "MyGame.Component.BaseSaveComponent",
+            "Properties": {
+              "Position": {
+                "X": 149.96666,
+                "Y": 48
+              },
+              "States": {
+                "OverallState": {
+                  "StateTypeName": "MyGame.Entity.CharacterDefaultState",
+                  "Properties": {}
                 },
-                "States": {},
-                "Events": {}
-              }
-            }
-          ]
-        },
-        {
-          "EntityType": "Map0Wall1",
-          "SaveNodesList": [
-            {
-              "SaveComponentType": "MyGame.Component.BaseSaveComponent",
-              "Properties": {
-                "Position": {
-                  "X": 48,
-                  "Y": 0
-                },
-                "States": {},
-                "Events": {}
-              }
-            }
-          ]
-        },
-        {
-          "EntityType": "DoorOpenable",
-          "SaveNodesList": [
-            {
-              "SaveComponentType": "MyGame.Component.BaseSaveComponent",
-              "Properties": {
-                "Position": {
-                  "X": 24,
-                  "Y": -16
-                },
-                "States": {
-                  "OpenState": {
-                    "StateTypeName": "MyGame.Entity.DoorOpenableDoorClosedState",
-                    "Properties": {}
-                  },
-                  "StrategyState": {
-                    "StateTypeName": "MyGame.Entity.DoorOpenableDefaultStrategyState",
-                    "Properties": {}
+                "ControlState": {
+                  "StateTypeName": "MyGame.Entity.CharacterStraightForwardControlState",
+                  "Properties": {
+                    "Position": {
+                      "X": 70,
+                      "Y": 48
+                    },
+                    "EventName": "OnReachedTarget"
                   }
-                },
-                "Events": {}
+                }
+              },
+              "Events": {
+                "OnReachedTarget": [
+                  {
+                    "TypeName": "MyGame.Util.BaseCharacterEvents",
+                    "EventName": "ChangeControlStateToHardwareInputControlState",
+                    "Parameters": []
+                  }
+                ]
               }
             }
-          ]
-        }
-      ],
-      "Map1": []
-    }
+          },
+          {
+            "SaveComponentType": "MyGame.Component.CharacterSaveComponent",
+            "Properties": {
+              "TestText": "DynamicEntity0"
+            }
+          }
+        ]
+      }
+    ]
   }
 }

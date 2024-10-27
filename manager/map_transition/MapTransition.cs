@@ -20,14 +20,8 @@ namespace MyGame.Manager
 
 	public class SaveData
 	{
-		public string CurrentMapName;
-		public EntityData EntitySaveData;
-
-		public SaveData(string currentMapName, EntityData entitySaveData)
-		{
-			CurrentMapName = currentMapName;
-			EntitySaveData = entitySaveData;
-		}
+		public string CurrentMapName { get; set; }
+		public Dictionary<string, List<EntityInstanceInfoData>> EntityInstanceInfoDataDictionary { get; set; }
 	}
 
 	public partial class MapTransition : Node
@@ -122,12 +116,22 @@ namespace MyGame.Manager
         {
             _mapManager.AfterTransitionComplete();
 			_entityManager.AfterTransitionComplete();
-            JsonUtil.WriteToFile("test.json", JsonUtil.SerializeSaveData(GetSaveData()));
+            JsonUtil.WriteToFile("test.json", JsonUtil.SerializeSaveData(ToSaveData()));
         }
 
-		public SaveData GetSaveData()
+		public SaveData ToSaveData()
 		{
-			return new SaveData(_currentMapName, _entityManager.GetEntityData());
+			return new SaveData
+			{
+				CurrentMapName = _currentMapName,
+				EntityInstanceInfoDataDictionary = _entityManager.ToEntityInstanceInfoDataDictionary()
+			};
+		}
+
+		public void FromSaveData(SaveData saveData)
+		{
+			_entityManager.FromEntityInstanceInfoDataDictionary(saveData.EntityInstanceInfoDataDictionary);
+			InitMapProcess(saveData.CurrentMapName);
 		}
 
 		public override void _EnterTree()

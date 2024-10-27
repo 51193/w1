@@ -45,12 +45,12 @@ namespace MyGame.Manager
 					}),
 				new EntityInstanceInfo("Map0Wall1",
 					new BaseSaveComponent()
-					{
+                    {
 						Position = new Vector2(48, 0)
 					}),
 				new EntityInstanceInfo("DoorOpenable",
 					new BaseSaveComponent()
-					{
+                    {
 						Position = new Vector2(24, -16)
 					})
 			};
@@ -85,7 +85,7 @@ namespace MyGame.Manager
 			string entityName = entity.GetEntityName();
 			ISaveComponent save = entity.SaveData();
 			save.SearchDataType<BaseSaveComponent>().Position = fromPosition;
-			FreeLivingEntity(entity);
+            FreeLivingEntity(entity);
 
 			RecordAllLivingEntitiesToMapRecord(currentMapName);
 			ClearAllLivingEntities();

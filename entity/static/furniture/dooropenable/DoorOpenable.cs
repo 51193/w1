@@ -21,7 +21,7 @@ namespace MyGame.Entity
 
         public override void InitiateStates(Dictionary<string, IState> states = null)
         {
-			if (states == null)
+			if (states == null || states.Count == 0)
 			{
 				StateManager = new(this, new Dictionary<string, IState>()
 				{
@@ -31,16 +31,16 @@ namespace MyGame.Entity
 			}
 			else
 			{
-                if (states["OpenState"] is DoorOpenableDoorClosingState)
+				if (states["OpenState"] is DoorOpenableDoorClosingState)
 				{
 					states["OpenState"] = new DoorOpenableDoorClosedState();
-                }
+				}
 				else if (states["OpenState"] is DoorOpenableDoorOpeningState)
 				{
 					states["OpenState"] = new DoorOpenableDoorOpenedState();
-                }
-                StateManager = new(this, states);
-            }
+				}
+				StateManager = new(this, states);
+			}
         }
 
         public override void _Ready()

@@ -17,18 +17,18 @@ namespace MyGame.Manager
 
     public class EntityInstanceInfoData
     {
+        /*
+         * This type is different from other type when jsonfy and unjsonfy,
+         * this is used in path.json to instantiate godot scene,
+         * while others are used to instantiate object by reflection.
+         */
         public string EntityType;
-        public List<SaveComponentData> SaveNodesList;
+        public List<SaveComponentData> SaveNodeList;
 
-        public EntityInstanceInfoData(string entityType, List<SaveComponentData> saveNodesList)
+        public EntityInstanceInfoData(string entityType, List<SaveComponentData> saveNodeList)
         {
             EntityType = entityType;
-            SaveNodesList = saveNodesList;
+            SaveNodeList = saveNodeList;
         }
-    }
-
-    public class EntityData
-    {
-        public Dictionary<string, List<EntityInstanceInfoData>> GlobalEntityInfoData = new();
     }
 }

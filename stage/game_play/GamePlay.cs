@@ -1,4 +1,5 @@
 using MyGame.Manager;
+using MyGame.Util;
 
 namespace MyGame.Stage
 {
@@ -8,6 +9,7 @@ namespace MyGame.Stage
 
 		private void InitMap()
 		{
+			//_mapTransition.FromSaveData(JsonUtil.DeserializeSaveData(JsonUtil.ReadFromFile("test.json")));
 			_mapTransition.InitMapProcess("Map0");
 		}
 
