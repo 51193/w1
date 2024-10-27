@@ -15,31 +15,19 @@ namespace MyGame.Manager
         }
     }
 
-    public class SaveComponentNodeData
-    {
-        public string Type;
-        public Dictionary<string, object> Properties;
-
-        public SaveComponentNodeData(string type, Dictionary<string, object> properties)
-        {
-            Type = type;
-            Properties = properties;
-        }
-    }
-
     public class EntityInstanceInfoData
     {
         public string EntityType;
-        public List<SaveComponentNodeData> SaveNodesList;
+        public List<SaveComponentData> SaveNodesList;
 
-        public EntityInstanceInfoData(string entityType, List<SaveComponentNodeData> saveNodesList)
+        public EntityInstanceInfoData(string entityType, List<SaveComponentData> saveNodesList)
         {
             EntityType = entityType;
             SaveNodesList = saveNodesList;
         }
     }
 
-    public class EntitySaveData
+    public class EntityData
     {
         public Dictionary<string, List<EntityInstanceInfoData>> GlobalEntityInfoData = new();
     }

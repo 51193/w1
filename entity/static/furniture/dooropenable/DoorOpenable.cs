@@ -6,17 +6,17 @@ namespace MyGame.Entity
 {
 	public partial class DoorOpenable : BaseInteractableStaticEntity
 	{
-		private AnimationPlayer _animationPlayerNode;
-		private Label _label;
+		public AnimationPlayer AnimationPlayerNode;
+		public Label LabelNode;
 
         public override void ShowTip()
         {
-			_label.Show();
+			LabelNode.Show();
         }
 
         public override void HideTip()
         {
-			_label.Hide();
+			LabelNode.Hide();
         }
 
         public override void InitiateStates(Dictionary<string, IState> states = null)
@@ -25,19 +25,19 @@ namespace MyGame.Entity
 			{
 				StateManager = new(this, new Dictionary<string, IState>()
 				{
-					["OpenState"] = new DoorClosedState(),
-					["StrategyState"] = new DefaultStrategeyState()
+					["OpenState"] = new DoorOpenableDoorClosedState(),
+					["StrategyState"] = new DoorOpenableDefaultStrategyState()
 				});
 			}
 			else
 			{
-                if (states["OpenState"] is DoorClosingState)
+                if (states["OpenState"] is DoorOpenableDoorClosingState)
 				{
-					states["OpenState"] = new DoorClosedState();
+					states["OpenState"] = new DoorOpenableDoorClosedState();
                 }
-				else if (states["OpenState"] is DoorOpeningState)
+				else if (states["OpenState"] is DoorOpenableDoorOpeningState)
 				{
-					states["OpenState"] = new DoorOpenedState();
+					states["OpenState"] = new DoorOpenableDoorOpenedState();
                 }
                 StateManager = new(this, states);
             }
@@ -45,9 +45,9 @@ namespace MyGame.Entity
 
         public override void _Ready()
 		{
-            _animationPlayerNode = GetNode<AnimationPlayer>("AnimationPlayer");
-			_label = GetNode<Label>("Label");
-			_label.Hide();
+            AnimationPlayerNode = GetNode<AnimationPlayer>("AnimationPlayer");
+			LabelNode = GetNode<Label>("Label");
+			LabelNode.Hide();
 		}
 	}
 }

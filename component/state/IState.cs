@@ -23,5 +23,20 @@ namespace MyGame.Component
             OnHandleStateTransition(entity, input, args);
         }
         public void OnHandleStateTransition(IEntity entity, string input, params object[] args);
+
+        public StateData ToStateData()
+        {
+            StateData stateData = new()
+            {
+                StateTypeName = GetType().FullName
+            };
+
+            foreach (var property in GetType().GetProperties())
+            {
+                stateData.Properties[property.Name] = property.GetValue(this);
+            }
+
+            return stateData;
+        }
     }
 }

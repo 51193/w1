@@ -21,9 +21,9 @@ namespace MyGame.Manager
 	public class SaveData
 	{
 		public string CurrentMapName;
-		public EntitySaveData EntitySaveData;
+		public EntityData EntitySaveData;
 
-		public SaveData(string currentMapName, EntitySaveData entitySaveData)
+		public SaveData(string currentMapName, EntityData entitySaveData)
 		{
 			CurrentMapName = currentMapName;
 			EntitySaveData = entitySaveData;
@@ -126,13 +126,7 @@ namespace MyGame.Manager
 
 		public SaveData GetSaveData()
 		{
-			return new SaveData(_currentMapName, _entityManager.GetEntitySaveData());
-		}
-
-		public void ApplySaveData(SaveData saveData)
-		{
-			_entityManager.ApplyEntitySaveData(saveData.EntitySaveData);
-			InitMapProcess(saveData.CurrentMapName);
+			return new SaveData(_currentMapName, _entityManager.GetEntityData());
 		}
 
 		public override void _EnterTree()

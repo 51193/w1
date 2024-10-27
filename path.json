@@ -21,7 +21,7 @@
 	},
 	{
 		"Name": "DynamicEntity0",
-		"Path": "res://entity/dynamic/character/dynamic_entity_0.tscn",
+		"Path": "res://entity/dynamic/character/dynamic_entity_0/dynamic_entity_0.tscn",
 		"Description": "This is a test entity."
 	},
 	{

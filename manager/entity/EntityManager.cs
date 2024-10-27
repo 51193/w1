@@ -24,8 +24,7 @@ namespace MyGame.Manager
 
 			BaseSaveComponent baseSave = new()
 			{
-				Position = new Vector2(0, 0),
-				States = null
+				Position = new Vector2(0, 0)
 			};
 
 			CharacterSaveComponent characterSave = new()
@@ -42,20 +41,17 @@ namespace MyGame.Manager
 				new EntityInstanceInfo("Map0Wall0",
 					new BaseSaveComponent()
 					{
-						Position = new Vector2(-32, -16),
-						States = null
+						Position = new Vector2(-32, -16)
 					}),
 				new EntityInstanceInfo("Map0Wall1",
 					new BaseSaveComponent()
 					{
-						Position = new Vector2(48, 0),
-						States = null
+						Position = new Vector2(48, 0)
 					}),
 				new EntityInstanceInfo("DoorOpenable",
 					new BaseSaveComponent()
 					{
-						Position = new Vector2(24, -16),
-						States = null
+						Position = new Vector2(24, -16)
 					})
 			};
 		}

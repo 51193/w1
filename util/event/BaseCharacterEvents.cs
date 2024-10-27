@@ -14,7 +14,7 @@ namespace MyGame.Util
                     {
                         if (parameters.Length > 0 && parameters[0] is IEntity entity)
                         {
-                            return () => { entity.StateManager.ChangeState("ControlState", new HardwareInputControlState()); };
+                            return () => { entity.StateManager.ChangeState("ControlState", new CharacterHardwareInputControlState()); };
                         }
                         break;
                     }

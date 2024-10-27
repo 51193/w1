@@ -5,7 +5,7 @@ namespace MyGame.Component
 {
     public class CharacterSaveComponent : ISaveComponent
     {
-        public string TestText;
+        public string TestText { get; set; }
 
         public ISaveComponent Next { get; set; }
 

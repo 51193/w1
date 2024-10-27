@@ -7,7 +7,7 @@ namespace MyGame.Entity
 {
 	public partial class DynamicEntity0 : BaseCharacter
 	{
-		private AnimatedSprite2D _animationSprite2DNode;
+		public AnimatedSprite2D AnimationSprite2DNode;
 
 		public DynamicEntity0()
 		{
@@ -28,8 +28,8 @@ namespace MyGame.Entity
 			{
 				StateManager = new(this, new()
 				{
-					["OverallState"] = new NormalState(),
-					["ControlState"] = new HardwareInputControlState()
+					["OverallState"] = new CharacterDefaultState(),
+					["ControlState"] = new CharacterHardwareInputControlState()
 				});
 			}
 			else
@@ -50,7 +50,7 @@ namespace MyGame.Entity
 
 		public override void _Ready()
 		{
-			_animationSprite2DNode = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+			AnimationSprite2DNode = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		}
     }
 }

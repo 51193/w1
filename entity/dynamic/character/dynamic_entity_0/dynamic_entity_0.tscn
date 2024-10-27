@@ -1,6 +1,6 @@
 [gd_scene load_steps=53 format=3 uid="uid://cf0wdm7mxq0eu"]
 
-[ext_resource type="Script" path="res://entity/dynamic/character/DynamicEntity0.cs" id="1_221tw"]
+[ext_resource type="Script" path="res://entity/dynamic/character/dynamic_entity_0/DynamicEntity0.cs" id="1_221tw"]
 [ext_resource type="Texture2D" uid="uid://c0ori51psg66d" path="res://assets/spritesheet/character/teacher/teacher.png" id="2_pbl4b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_85fob"]
