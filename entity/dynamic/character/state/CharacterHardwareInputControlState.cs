@@ -21,7 +21,7 @@ namespace MyGame.Entity
                 case "GoStraight":
                     if (args.Length > 0 && args[0] is Vector2 position)
                     {
-                        entity.RegistrateEvent("OnReachedTarget", typeof(BaseCharacterEvents), "ChangeControlStateToHardwareInputControlState", entity);
+                        entity.RegistrateEvent("OnReachedTarget", typeof(BaseCharacterEvents), "ChangeControlStateToHardwareInputControlState");
                         entity.StateManager.ChangeState("ControlState", new CharacterStraightForwardControlState(position, "OnReachedTarget"));
                     }
                     break;

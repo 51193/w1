@@ -7,8 +7,8 @@ namespace MyGame.Manager
 {
     public class StateManager
     {
-        private readonly Dictionary<string, IState> _states;
         private readonly IEntity _entity;
+        private readonly Dictionary<string, IState> _states;
 
         public StateManager(IEntity entity, Dictionary<string, IState> states = null)
         {

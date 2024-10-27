@@ -22,7 +22,7 @@ namespace MyGame.Component
                 );
             }
         }
-        public Dictionary<string, Stack<EventIndex>> Events;
+        public Dictionary<string, Stack<EventIndex>> Events { get; set; }
 
         public ISaveComponent Next { get; set; }
 

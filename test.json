@@ -1,5 +1,5 @@
 {
-  "CurrentMapName": "Map1",
+  "CurrentMapName": "Map0",
   "EntitySaveData": {
     "GlobalEntityInfoData": {
       "Map0": [
@@ -28,6 +28,15 @@
                       "EventName": "OnReachedTarget"
                     }
                   }
+                },
+                "Events": {
+                  "OnReachedTarget": [
+                    {
+                      "TypeName": "MyGame.Util.BaseCharacterEvents",
+                      "EventName": "ChangeControlStateToHardwareInputControlState",
+                      "Parameters": []
+                    }
+                  ]
                 }
               }
             },
@@ -49,7 +58,8 @@
                   "X": -32,
                   "Y": -16
                 },
-                "States": {}
+                "States": {},
+                "Events": {}
               }
             }
           ]
@@ -64,7 +74,8 @@
                   "X": 48,
                   "Y": 0
                 },
-                "States": {}
+                "States": {},
+                "Events": {}
               }
             }
           ]
@@ -88,7 +99,8 @@
                     "StateTypeName": "MyGame.Entity.DoorOpenableDefaultStrategyState",
                     "Properties": {}
                   }
-                }
+                },
+                "Events": {}
               }
             }
           ]

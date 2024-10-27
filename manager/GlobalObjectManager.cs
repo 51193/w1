@@ -91,6 +91,20 @@ namespace MyGame.Manager
 			}
 		}
 
+		public static MapTransition GetMapTransition()
+		{
+
+            if (GetGlobalObject("MapTransition") is MapTransition mapTransition)
+            {
+				return mapTransition;
+			}
+            else
+            {
+                GD.PrintErr("Invalid MapTransition");
+				return null;
+            }
+        }
+
 		public static void TransitMap(string departureName, string exitName, Vector2 exitPosition, Node entity)
 		{
 			if (GetGlobalObject("MapTransition") is MapTransition mapTransition)

@@ -1,7 +1,9 @@
 ﻿using Godot;
+using MyGame.Entity;
 using MyGame.Util;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MyGame.Manager
 {
@@ -19,18 +21,20 @@ namespace MyGame.Manager
             Parameters = parameters;
         }
 
-        public Action GetEvent()
+        public Action GetEvent(IEntity entity)
         {
-            return EventInitiator.GetEvent(TypeName, EventName, Parameters);
+            return EventInitiator.GetEvent(TypeName, EventName, new object[] { entity }.Concat(Parameters).ToArray());
         }
     }
 
     public class EventManager
     {
-        public Dictionary<string, Stack<EventIndex>> _events;
+        private readonly IEntity _entity;
+        private readonly Dictionary<string, Stack<EventIndex>> _events;
 
-        public EventManager(Dictionary<string, Stack<EventIndex>> events)
+        public EventManager(IEntity entity, Dictionary<string, Stack<EventIndex>> events = null)
         {
+            _entity = entity;
             if (events == null)
             {
                 _events = new();
@@ -64,7 +68,7 @@ namespace MyGame.Manager
                 {
                     EventIndex eventIndex = events.Pop();
                     GD.Print($"EventManager invoke {eventIndex.TypeName}-{eventIndex.EventName}");
-                    eventIndex.GetEvent().Invoke();
+                    eventIndex.GetEvent(_entity).Invoke();
                 }
             }
             else

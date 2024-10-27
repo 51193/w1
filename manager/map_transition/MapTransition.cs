@@ -75,11 +75,12 @@ namespace MyGame.Manager
 
 		public void InvokeManagers(string destinationName, string fromLandmarkName, string toLandmarkName, BaseDynamicEntity entity)
 		{
-			_mapManager.LoadMap(destinationName);
+			string currentMapName = _currentMapName;
+            _currentMapName = destinationName;
+            _mapManager.LoadMap(destinationName);
 			Vector2 fromLandmarkPosition = _mapManager.GetLandmarkPosition(fromLandmarkName);
 			Vector2 toLandmarkPosition = _mapManager.GetLandmarkPosition(toLandmarkName);
-			_entityManager.OnMapChanged(entity, _currentMapName, destinationName, fromLandmarkPosition, toLandmarkPosition);
-			_currentMapName = destinationName;
+			_entityManager.OnMapChanged(entity, currentMapName, destinationName, fromLandmarkPosition, toLandmarkPosition);
 		}
 
 		public void TransitionProcess(string departureName, string exitName, Vector2 exitPosition, IEntity entity)
@@ -88,9 +89,9 @@ namespace MyGame.Manager
 			{
 				GD.PrintErr($"No transition found for: {departureName}-{exitName}");
             }
-			if (entity is BaseDynamicEntity dynamicEntity)
+			if (entity is BaseDynamicEntity)
 			{
-				entity.RegistrateEvent("OnReachedTarget", typeof(MapTransitionEvents), "InvokeManagers", this, transition, dynamicEntity);
+				entity.RegistrateEvent("OnReachedTarget", typeof(MapTransitionEvents), "InvokeManagers", transition);
 			}
 			entity.HandleStateTransition("ControlState", "GoStraight", exitPosition);
 		}

@@ -1,4 +1,5 @@
-﻿using MyGame.Entity;
+﻿using Godot;
+using MyGame.Entity;
 using MyGame.Manager;
 using System;
 
@@ -12,11 +13,11 @@ namespace MyGame.Util
             {
                 case "InvokeManagers":
                     {
-                        if (parameters.Length > 2 &&
-                            parameters[0] is MapTransition mapTransition &&
-                            parameters[1] is TransitionInfo transitionInfo &&
-                            parameters[2] is BaseDynamicEntity dynamicEntity)
+                        if (parameters.Length > 1 &&
+                            parameters[0] is BaseDynamicEntity dynamicEntity &&
+                            parameters[1] is TransitionInfo transitionInfo)
                         {
+                            MapTransition mapTransition = GlobalObjectManager.GetMapTransition();
                             return () =>
                             {
                                 mapTransition.CallDeferred(

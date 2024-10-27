@@ -34,7 +34,7 @@ namespace MyGame.Entity
         public ISaveComponent LoadData(ISaveComponent saveComponent);
         public void InitiateEvent(Dictionary<string, Stack<EventIndex>> events = null)
         {
-            EventManager = new(events);
+            EventManager = new(this, events);
         }
         public void RegistrateEvent(string eventName, Type type, string actionKey, params object[] parameters)
         {
