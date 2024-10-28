@@ -17,7 +17,7 @@ namespace MyGame.Util
                 return default;
             }
 
-            var parameters = new List<object>();
+            List<object> parameters = new();
 
             while (reader.Read())
             {
@@ -29,8 +29,6 @@ namespace MyGame.Util
                 if (reader.TokenType == JsonTokenType.StartObject)
                 {
                     string typeName = null;
-                    object parameterInstance = null;
-
                     while (reader.Read())
                     {
                         if (reader.TokenType == JsonTokenType.EndObject)
@@ -49,31 +47,10 @@ namespace MyGame.Util
                             }
                             else if (propertyName == "Property")
                             {
-                                parameterInstance = JsonSerializer.Deserialize(ref reader, Type.GetType(typeName), options);
+                                object parameterInstance = JsonSerializer.Deserialize(ref reader, Type.GetType(typeName), options);
+                                parameters.Add(parameterInstance);
                             }
                         }
-                    }
-
-                    if (typeName == null)
-                    {
-                        GD.PrintErr("Missing Type property in JSON.");
-                        return default;
-                    }
-
-                    Type parameterType = Type.GetType(typeName);
-                    if (parameterType == null)
-                    {
-                        GD.PrintErr($"Type {typeName} not found.");
-                        return default;
-                    }
-
-                    if (parameterInstance != null && parameterType.IsAssignableFrom(parameterInstance.GetType()))
-                    {
-                        parameters.Add(parameterInstance);
-                    }
-                    else
-                    {
-                        GD.PrintErr($"Invalid parameter instance for type {typeName}.");
                     }
                 }
             }

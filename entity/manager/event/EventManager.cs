@@ -9,8 +9,16 @@ namespace MyGame.Manager
 {
     public class VariableLengthParameter
     {
-        public object[] Parameters { get; set; }
+        public List<object> Parameters { get; set; }
         public VariableLengthParameter(params object[] parameters)
+        {
+            Parameters = new();
+            foreach (object parameter in parameters)
+            {
+                Parameters.Add(parameter);
+            }
+        }
+        public VariableLengthParameter(List<object> parameters)
         {
             Parameters = parameters;
         }
@@ -33,7 +41,7 @@ namespace MyGame.Manager
 
         public Action GetEvent(IEntity entity)
         {
-            return EventInitiator.GetEvent(TypeName, EventName, new object[] { entity }.Concat(Parameters.Parameters).ToArray());
+            return EventInitiator.GetEvent(TypeName, EventName, new object[] { entity }.Concat(Parameters.Parameters.ToArray()).ToArray());
         }
     }
 

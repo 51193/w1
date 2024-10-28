@@ -1,7 +1,52 @@
 {
-  "CurrentMapName": "Map1",
+  "CurrentMapName": "Map0",
   "GlobalEntityInstanceInfo": {
     "Map0": [
+      {
+        "EntityType": "DynamicEntity0",
+        "SaveHead": [
+          {
+            "Type": "MyGame.Component.BaseSaveComponent",
+            "Property": {
+              "Position": {
+                "X": -124.96667,
+                "Y": 16
+              },
+              "States": {
+                "OverallState": {
+                  "Type": "MyGame.Entity.CharacterDefaultState",
+                  "Property": {}
+                },
+                "ControlState": {
+                  "Type": "MyGame.Entity.CharacterStraightForwardControlState",
+                  "Property": {
+                    "Position": {
+                      "X": -50,
+                      "Y": 16
+                    },
+                    "EventName": "OnReachedTarget"
+                  }
+                }
+              },
+              "Events": {
+                "OnReachedTarget": [
+                  {
+                    "TypeName": "MyGame.Util.BaseCharacterEvents",
+                    "EventName": "ChangeControlStateToHardwareInputControlState",
+                    "Parameters": []
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "Type": "MyGame.Component.CharacterSaveComponent",
+            "Property": {
+              "TestText": "DynamicEntity0"
+            }
+          }
+        ]
+      },
       {
         "EntityType": "Map0Wall0",
         "SaveHead": [
@@ -46,7 +91,7 @@
               },
               "States": {
                 "OpenState": {
-                  "Type": "MyGame.Entity.DoorOpenableDoorOpenedState",
+                  "Type": "MyGame.Entity.DoorOpenableDoorClosedState",
                   "Property": {}
                 },
                 "StrategyState": {
@@ -60,57 +105,6 @@
         ]
       }
     ],
-    "Map1": [
-      {
-        "EntityType": "DynamicEntity0",
-        "SaveHead": [
-          {
-            "Type": "MyGame.Component.BaseSaveComponent",
-            "Property": {
-              "Position": {
-                "X": 149.96666,
-                "Y": 48
-              },
-              "States": {
-                "OverallState": {
-                  "Type": "MyGame.Entity.CharacterDefaultState",
-                  "Property": {}
-                },
-                "ControlState": {
-                  "Type": "MyGame.Entity.CharacterStraightForwardControlState",
-                  "Property": {
-                    "Position": {
-                      "X": 70,
-                      "Y": 48
-                    },
-                    "EventName": "OnReachedTarget"
-                  }
-                }
-              },
-              "Events": {
-                "OnReachedTarget": [
-                  {
-                    "TypeName": "MyGame.Util.BaseCharacterEvents",
-                    "EventName": "ChangeControlStateToHardwareInputControlState",
-                    "Parameters": [
-                      {
-                        "Type": "System.Collections.Generic.List\u00601[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-                        "Property": []
-                      }
-                    ]
-                  }
-                ]
-              }
-            }
-          },
-          {
-            "Type": "MyGame.Component.CharacterSaveComponent",
-            "Property": {
-              "TestText": "DynamicEntity0"
-            }
-          }
-        ]
-      }
-    ]
+    "Map1": []
   }
 }
