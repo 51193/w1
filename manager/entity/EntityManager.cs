@@ -17,7 +17,8 @@ namespace MyGame.Manager
 		public void InitiateEntities(string mapName)
 		{
 			SpawnAllWaitingEntitiesFromMapRecord(mapName);
-			AddAllLivingEntitiesToRenderingOrderGroup(mapName);
+			CallAllLivingEntitiesInitiateProcess();
+            AddAllLivingEntitiesToRenderingOrderGroup(mapName);
 			SetAllLivingEntitiesPhysicsProcess(false);
 			EmitSignal(SignalName.EntityTransitionComplete);
 		}
