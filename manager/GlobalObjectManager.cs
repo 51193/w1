@@ -117,6 +117,30 @@ namespace MyGame.Manager
 			}
 		}
 
+		public static void Save(string fileName)
+		{
+            if (GetGlobalObject("MapTransition") is MapTransition mapTransition)
+            {
+                mapTransition.ToSaveData(fileName);
+            }
+            else
+            {
+                GD.PrintErr("Invalid MapTransition");
+            }
+        }
+
+		public static void Load(string fileName)
+        {
+            if (GetGlobalObject("MapTransition") is MapTransition mapTransition)
+            {
+                mapTransition.FromSaveData(fileName);
+            }
+            else
+            {
+                GD.PrintErr("Invalid MapTransition");
+            }
+        }
+
 		public static void IncludeNodeIntoRenderingOrderGroup(string name, Node2D canvasItem)
 		{
 			if (GetGlobalObject("ZIndexManager") is ZIndexManager zIndexManager)

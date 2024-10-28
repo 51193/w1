@@ -1,17 +1,33 @@
-﻿using MyGame.Component;
+﻿using Godot;
+using MyGame.Component;
+using MyGame.Util;
 namespace MyGame.Entity
 {
     public class CharacterDefaultState : IState
     {
+        private Ref<string> _animationPlayed = new();
+        public string AnimationPlayed
+        {
+            get
+            {
+                return _animationPlayed.Value;
+            }
+            set
+            {
+                _animationPlayed.Value = value;
+            }
+        }
+
         public void OnEnter(IEntity entity)
         {
-            ((DynamicEntity0)entity).LoadStrategy(() =>
+            BaseCharacter character = entity as BaseCharacter;
+            character.LoadStrategy(() =>
             {
-                return new CharacterAnimationPlayer(((DynamicEntity0)entity).AnimationSprite2DNode);
+                return new CharacterAnimationPlayer(character.AnimationSprite2DNode, _animationPlayed);
             });
-            ((DynamicEntity0)entity).LoadStrategy(() =>
+            character.LoadStrategy(() =>
             {
-                return new FrictionVelocityAlgorithm(((DynamicEntity0)entity), 100, 2000, 1000);
+                return new FrictionVelocityAlgorithm(character, 100, 2000, 1000);
             });
         }
         public void OnExit(IEntity entity) { }

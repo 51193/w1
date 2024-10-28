@@ -29,12 +29,24 @@ namespace MyGame.Manager
 
 		public override void _Process(double delta)
 		{
-			if (_focusedCharacter == null) return;
-			_focusedCharacter.InteractionManager.ShowNearestTip();
-			if (Input.IsActionJustReleased("activate"))
+			if (_focusedCharacter != null)
 			{
-				_focusedCharacter.InteractionManager.Interact();
+				_focusedCharacter.InteractionManager.ShowNearestTip();
+				if (Input.IsActionJustReleased("activate"))
+				{
+					_focusedCharacter.InteractionManager.Interact();
+				}
 			}
-		}
+
+			if (Input.IsActionJustReleased("save"))
+			{
+				GlobalObjectManager.Save("test.json");
+            }
+
+            if (Input.IsActionJustReleased("load"))
+            {
+                GlobalObjectManager.Load("test.json");
+            }
+        }
 	}
 }

@@ -9,33 +9,23 @@
             "Type": "MyGame.Component.BaseSaveComponent",
             "Property": {
               "Position": {
-                "X": -124.96667,
-                "Y": 16
+                "X": -55.277855,
+                "Y": 1.2777766
               },
               "States": {
                 "OverallState": {
                   "Type": "MyGame.Entity.CharacterDefaultState",
-                  "Property": {}
+                  "Property": {
+                    "AnimationPlayed": "idle-8"
+                  }
                 },
                 "ControlState": {
-                  "Type": "MyGame.Entity.CharacterStraightForwardControlState",
-                  "Property": {
-                    "Position": {
-                      "X": -50,
-                      "Y": 16
-                    },
-                    "EventName": "OnReachedTarget"
-                  }
+                  "Type": "MyGame.Entity.CharacterHardwareInputControlState",
+                  "Property": {}
                 }
               },
               "Events": {
-                "OnReachedTarget": [
-                  {
-                    "TypeName": "MyGame.Util.BaseCharacterEvents",
-                    "EventName": "ChangeControlStateToHardwareInputControlState",
-                    "Parameters": []
-                  }
-                ]
+                "OnReachedTarget": []
               }
             }
           },
@@ -91,7 +81,7 @@
               },
               "States": {
                 "OpenState": {
-                  "Type": "MyGame.Entity.DoorOpenableDoorClosedState",
+                  "Type": "MyGame.Entity.DoorOpenableDoorOpenedState",
                   "Property": {}
                 },
                 "StrategyState": {

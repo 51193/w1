@@ -38,7 +38,7 @@ namespace MyGame.Manager
             }
         }
 
-        protected void ClearAllLivingEntities()
+        public void ClearAllLivingEntities()
         {
             _instances.RemoveAll
                 (i =>
@@ -112,7 +112,7 @@ namespace MyGame.Manager
             }
         }
 
-        protected void ClearAllLivinEntitiesRenderingOrderGroupName(string groupName)
+        public void ClearAllLivinEntitiesRenderingOrderGroupName(string groupName)
         {
             foreach (var entity in _instances)
             {

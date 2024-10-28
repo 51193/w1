@@ -80,9 +80,9 @@ namespace MyGame.Manager
 			if (entity is BaseDynamicEntity)
 			{
 				entity.RegistrateEvent("OnReachedTarget", typeof(MapTransitionEvents), "InvokeManagers", transition);
-			}
+            }
 			entity.HandleStateTransition("ControlState", "GoStraight", exitPosition);
-		}
+        }
 
 		private void OnMapManagerComplete()
 		{
@@ -110,24 +110,30 @@ namespace MyGame.Manager
         {
             _mapManager.AfterTransitionComplete();
 			_entityManager.AfterTransitionComplete();
-			ToSaveData("test.json");
         }
 
 		public void ToSaveData(string filePath)
-		{
-			SaveData saveData = new()
+        {
+            _entityManager.ClearAllEntitiesFromMapRecord(_currentMapName);
+            _entityManager.RecordAllLivingEntitiesToMapRecord(_currentMapName);
+
+            SaveData saveData = new()
 			{
 				CurrentMapName = _currentMapName,
 				GlobalEntityInstanceInfo = _entityManager.GlobalEntityInstanceInfoDictionary
 			};
 			JsonUtil.WriteToFile(filePath, JsonUtil.SerializeSaveData(saveData));
+
+			FromSaveData(filePath);
 		}
 
 		public void FromSaveData(string filePath)
 		{
 			SaveData saveData = JsonUtil.DeserializeSaveData(JsonUtil.ReadFromFile(filePath));
+			_currentMapName = saveData.CurrentMapName;
 			_entityManager.GlobalEntityInstanceInfoDictionary = saveData.GlobalEntityInstanceInfo;
-			InitMapProcess(saveData.CurrentMapName);
+			_entityManager.OnMapFresh(saveData.CurrentMapName);
+			_mapManager.LoadMap(saveData.CurrentMapName);
 		}
 
 		public override void _EnterTree()

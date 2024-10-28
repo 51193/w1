@@ -58,7 +58,6 @@ namespace MyGame.Util
             return new VariableLengthParameter(parameters);
         }
 
-
         public override void Write(Utf8JsonWriter writer, VariableLengthParameter value, JsonSerializerOptions options)
         {
             writer.WriteStartArray();

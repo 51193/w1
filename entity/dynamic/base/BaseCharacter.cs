@@ -1,4 +1,5 @@
-﻿using MyGame.Component;
+﻿using Godot;
+using MyGame.Component;
 using MyGame.Manager;
 using System.Collections.Generic;
 
@@ -7,6 +8,9 @@ namespace MyGame.Entity
     public abstract partial class BaseCharacter : BaseInteractableDynamicEntity, IInteractionParticipant
     {
         public InteractionManager InteractionManager { get; init; }
+
+        public AnimatedSprite2D AnimationSprite2DNode;
+
 
         public BaseCharacter()
         {
@@ -29,6 +33,11 @@ namespace MyGame.Entity
         {
             base.WhenPositionChange();
             InteractionManager.ResortEntitiesOrder();
+        }
+
+        public override void _Ready()
+        {
+            AnimationSprite2DNode = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
         }
     }
 }

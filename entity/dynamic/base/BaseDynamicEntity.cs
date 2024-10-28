@@ -90,7 +90,7 @@ namespace MyGame.Entity
 		private void UpdateAnimation()
 		{
 			if( AnimationPlayer == null) return;
-			AnimationPlayer.Invoke(player => player.UpdateAnimationWithoutConstraint(Direction));
+			AnimationPlayer.Invoke(player => player.InitiateAnimation(Direction));
 		}
 
         private void UpdatePosition()
@@ -131,10 +131,8 @@ namespace MyGame.Entity
 
 		public void EntityInitiateProcess()
 		{
-			UpdateDirection();
 			UpdateAnimation();
-			UpdateVelocity(0.001);
-			UpdatePosition();
+			WhenPositionChange();
 		}
     }
 }

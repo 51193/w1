@@ -31,11 +31,6 @@ namespace MyGame.Manager
 
 		public void OnMapChanged(IEntity entity, string currentMapName, string nextMapName, Vector2 fromPosition, Vector2 ToPosition)
 		{
-			if (currentMapName == null)
-			{
-				GD.PrintErr("Invalid current map, can't change map before initiate");
-				return;
-			}
 			ClearAllLivinEntitiesRenderingOrderGroupName(currentMapName);
 			GlobalObjectManager.ClearNodeInRenderingOrderGroup(currentMapName);
 
@@ -62,5 +57,20 @@ namespace MyGame.Manager
             EmitSignal(SignalName.EntityTransitionComplete);
             GD.Print($"Entities have swapped to {currentMapName}");
 		}
+
+		public void OnMapFresh(string currentMapName)
+		{
+            ClearAllLivinEntitiesRenderingOrderGroupName(currentMapName);
+            GlobalObjectManager.ClearNodeInRenderingOrderGroup(currentMapName);
+
+            ClearAllLivingEntities();
+            SpawnAllWaitingEntitiesFromMapRecord(currentMapName);
+            AddAllLivingEntitiesToRenderingOrderGroup(currentMapName);
+            SetAllLivingEntitiesPhysicsProcess(false);
+            CallAllLivingEntitiesInitiateProcess();
+
+            EmitSignal(SignalName.EntityTransitionComplete);
+            GD.Print($"Entities in {currentMapName} loaded");
+        }
 	}
 }

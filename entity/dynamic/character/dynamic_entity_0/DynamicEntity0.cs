@@ -7,8 +7,6 @@ namespace MyGame.Entity
 {
 	public partial class DynamicEntity0 : BaseCharacter
 	{
-		public AnimatedSprite2D AnimationSprite2DNode;
-
 		public DynamicEntity0()
 		{
 			GlobalObjectManager.FocusOnCharacter(this);
@@ -46,11 +44,6 @@ namespace MyGame.Entity
 		public override void HideTip()
 		{
 			//Do nothing
-		}
-
-		public override void _Ready()
-		{
-			AnimationSprite2DNode = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		}
     }
 }

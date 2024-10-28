@@ -1,4 +1,5 @@
 ﻿using Godot;
+using MyGame.Util;
 using System;
 using System.Collections.Generic;
 
@@ -7,6 +8,7 @@ namespace MyGame.Component
     public class CharacterAnimationPlayer : IAnimationPlayer
     {
         private readonly AnimatedSprite2D _animatedSprite2D;
+        private readonly Ref<string> _animationPlayed;
 
         protected readonly double _animationChangeCooldown = 0.1;
 
@@ -22,15 +24,17 @@ namespace MyGame.Component
             { 2, (-135f, -45f) }
         };
 
-        public CharacterAnimationPlayer(AnimatedSprite2D animatedSprite2D)
+        public CharacterAnimationPlayer(AnimatedSprite2D animatedSprite2D, Ref<string> animationPlayed)
         {
             _animatedSprite2D = animatedSprite2D;
+            _animationPlayed = animationPlayed;
         }
 
         private void PlayAnimation(string animationName)
         {
             if (animationName == null) return;
             _animatedSprite2D.Play(animationName);
+            _animationPlayed.Value = animationName;
         }
 
         private int GetTargetDirectionSuffix(Vector2 direction)
@@ -112,8 +116,14 @@ namespace MyGame.Component
             ModifyAnimation(direction);
         }
 
-        public void UpdateAnimationWithoutConstraint(Vector2 direction)
+        public void InitiateAnimation(Vector2 direction)
         {
+            if(_animationPlayed.Value != null)
+            {
+                PlayAnimation(_animationPlayed.Value);
+                return;
+            }
+
             int nextAnimationSuffix = GetTargetDirectionSuffix(direction);
             if (direction.IsZeroApprox())
             {
