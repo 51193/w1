@@ -18,12 +18,6 @@ namespace MyGame.Manager
 		public string EntryTo { get; set; }
 	}
 
-	public class SaveData
-	{
-		public string CurrentMapName { get; set; }
-		public Dictionary<string, List<EntityInstanceInfoData>> EntityInstanceInfoDataDictionary { get; set; }
-	}
-
 	public partial class MapTransition : Node
 	{
 		private MapManager _mapManager;
@@ -116,21 +110,23 @@ namespace MyGame.Manager
         {
             _mapManager.AfterTransitionComplete();
 			_entityManager.AfterTransitionComplete();
-            JsonUtil.WriteToFile("test.json", JsonUtil.SerializeSaveData(ToSaveData()));
+			ToSaveData("test.json");
         }
 
-		public SaveData ToSaveData()
+		public void ToSaveData(string filePath)
 		{
-			return new SaveData
+			SaveData saveData = new()
 			{
 				CurrentMapName = _currentMapName,
-				EntityInstanceInfoDataDictionary = _entityManager.ToEntityInstanceInfoDataDictionary()
+				GlobalEntityInstanceInfo = _entityManager.GlobalEntityInstanceInfoDictionary
 			};
+			JsonUtil.WriteToFile(filePath, JsonUtil.SerializeSaveData(saveData));
 		}
 
-		public void FromSaveData(SaveData saveData)
+		public void FromSaveData(string filePath)
 		{
-			_entityManager.FromEntityInstanceInfoDataDictionary(saveData.EntityInstanceInfoDataDictionary);
+			SaveData saveData = JsonUtil.DeserializeSaveData(JsonUtil.ReadFromFile(filePath));
+			_entityManager.GlobalEntityInstanceInfoDictionary = saveData.GlobalEntityInstanceInfo;
 			InitMapProcess(saveData.CurrentMapName);
 		}
 

@@ -1,5 +1,6 @@
 ﻿using Godot;
 using MyGame.Component;
+using MyGame.Util;
 
 namespace MyGame.Entity
 {
@@ -10,9 +11,10 @@ namespace MyGame.Entity
 
         private uint _entityOriginalCollisionMask = 0;
         private bool _entityOriginalTransitableState = false;
-        public CharacterStraightForwardControlState(Vector2 targetPosition, string eventName)
+        public CharacterStraightForwardControlState() { }
+        public CharacterStraightForwardControlState(Vector2 position, string eventName)
         {
-            Position = targetPosition;
+            Position = position;
             EventName = eventName;
         }
         public void OnEnter(IEntity entity)

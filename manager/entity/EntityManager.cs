@@ -7,54 +7,12 @@ namespace MyGame.Manager
 {
     public partial class EntityManager : Node
 	{
-		protected readonly Dictionary<string, List<EntityInstanceInfo>> _globalEntityInfomation = new();
+		public Dictionary<string, List<EntityInstanceInfo>> GlobalEntityInstanceInfoDictionary = new();
 		protected readonly Dictionary<string, PackedScene> _entities = new();
 		protected readonly List<IEntity> _instances = new();
 
 		[Signal]
 		public delegate void EntityTransitionCompleteEventHandler();
-
-		public EntityManager()
-		{
-			Init();
-		}
-
-		public void Init()
-		{
-
-			BaseSaveComponent baseSave = new()
-			{
-				Position = new Vector2(0, 0)
-			};
-
-			CharacterSaveComponent characterSave = new()
-			{
-				TestText = "DynamicEntity0"
-			};
-
-			baseSave.Next = characterSave;
-
-			_globalEntityInfomation["Map0"] = new()
-			{
-				new EntityInstanceInfo("DynamicEntity0", baseSave),
-
-				new EntityInstanceInfo("Map0Wall0",
-					new BaseSaveComponent()
-					{
-						Position = new Vector2(-32, -16)
-					}),
-				new EntityInstanceInfo("Map0Wall1",
-					new BaseSaveComponent()
-                    {
-						Position = new Vector2(48, 0)
-					}),
-				new EntityInstanceInfo("DoorOpenable",
-					new BaseSaveComponent()
-                    {
-						Position = new Vector2(24, -16)
-					})
-			};
-		}
 
 		public void InitiateEntities(string mapName)
 		{

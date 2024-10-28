@@ -1,6 +1,4 @@
-using Godot;
 using MyGame.Entity;
-using System.Collections.Generic;
 
 namespace MyGame.Component
 {
@@ -23,34 +21,6 @@ namespace MyGame.Component
 			{
 				return Next.SearchDataType<T>();
 			}
-		}
-
-		public SaveComponentData ToSaveComponentData()
-		{
-			SaveComponentData saveComponentData = new()
-			{
-				SaveComponentType = GetType().FullName
-			};
-
-            foreach (var property in GetType().GetProperties())
-            {
-                if (property.Name == nameof(Next)) continue;
-				saveComponentData.Properties[property.Name] = property.GetValue(this);
-            }
-
-            return saveComponentData;
-		}
-
-		public List<SaveComponentData> ToSaveComponentDataList()
-		{
-			List<SaveComponentData> saveComponentDataList = new();
-			ISaveComponent cur = this;
-			while (cur != null)
-			{
-				saveComponentDataList.Add(cur.ToSaveComponentData());
-				cur = cur.Next;
-			}
-			return saveComponentDataList;
 		}
 	}
 }

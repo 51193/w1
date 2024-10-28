@@ -9,19 +9,19 @@ namespace MyGame.Manager
     {
         public void ClearAllEntitiesFromMapRecord(string mapName)
         {
-            if (_globalEntityInfomation.ContainsKey(mapName))
+            if (GlobalEntityInstanceInfoDictionary.ContainsKey(mapName))
             {
-                _globalEntityInfomation[mapName].Clear();
+                GlobalEntityInstanceInfoDictionary[mapName].Clear();
             }
         }
 
         protected void AddEntityToMapRecord(string mapName, EntityInstanceInfo instance)
         {
-            if (!_globalEntityInfomation.ContainsKey(mapName))
+            if (!GlobalEntityInstanceInfoDictionary.ContainsKey(mapName))
             {
-                _globalEntityInfomation[mapName] = new();
+                GlobalEntityInstanceInfoDictionary[mapName] = new();
             }
-            _globalEntityInfomation[mapName].Add(instance);
+            GlobalEntityInstanceInfoDictionary[mapName].Add(instance);
         }
 
         protected void FreeLivingEntity(IEntity entity)
@@ -89,7 +89,7 @@ namespace MyGame.Manager
 
         protected void SpawnAllWaitingEntitiesFromMapRecord(string mapName)
         {
-            if (_globalEntityInfomation.TryGetValue(mapName, out var entities))
+            if (GlobalEntityInstanceInfoDictionary.TryGetValue(mapName, out var entities))
             {
                 SpawnEntities(entities);
             }

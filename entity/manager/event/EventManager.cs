@@ -7,23 +7,33 @@ using System.Linq;
 
 namespace MyGame.Manager
 {
+    public class VariableLengthParameter
+    {
+        public object[] Parameters { get; set; }
+        public VariableLengthParameter(params object[] parameters)
+        {
+            Parameters = parameters;
+        }
+    }
+
     public class EventIndex
     {
-        public string TypeName;
-        public string EventName;
-        public object[] Parameters;
+        public string TypeName { get; set; }
+        public string EventName { get; set; }
+        public VariableLengthParameter Parameters { get; set; }
 
+        public EventIndex() { }
 
         public EventIndex(Type type, string eventName, object[] parameters)
         {
             TypeName = type.FullName;
             EventName = eventName;
-            Parameters = parameters;
+            Parameters = new(parameters);
         }
 
         public Action GetEvent(IEntity entity)
         {
-            return EventInitiator.GetEvent(TypeName, EventName, new object[] { entity }.Concat(Parameters).ToArray());
+            return EventInitiator.GetEvent(TypeName, EventName, new object[] { entity }.Concat(Parameters.Parameters).ToArray());
         }
     }
 

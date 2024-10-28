@@ -29,6 +29,7 @@ namespace MyGame.Manager
 
 		public override void _Process(double delta)
 		{
+			if (_focusedCharacter == null) return;
 			_focusedCharacter.InteractionManager.ShowNearestTip();
 			if (Input.IsActionJustReleased("activate"))
 			{

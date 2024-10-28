@@ -1,6 +1,5 @@
-using Godot;
-using MyGame.Component;
 using MyGame.Manager;
+using MyGame.Util.MyGame.Util;
 using System.IO;
 using System.Text.Json;
 
@@ -15,6 +14,13 @@ namespace MyGame.Util
                 WriteIndented = true,
                 IncludeFields = true,
                 PropertyNameCaseInsensitive = true,
+                Converters =
+                {
+                    new Vector2Converter(),
+                    new VariableLengthParameterConverter(),
+                    new IStateConverter(),
+                    new ISaveComponentConverter()
+                }
             };
             return JsonSerializer.Serialize(saveData, options);
         }
@@ -24,7 +30,14 @@ namespace MyGame.Util
             var options = new JsonSerializerOptions
             {
                 IncludeFields = true,
-                PropertyNameCaseInsensitive = true
+                PropertyNameCaseInsensitive = true,
+                Converters =
+                {
+                    new Vector2Converter(),
+                    new VariableLengthParameterConverter(),
+                    new IStateConverter(),
+                    new ISaveComponentConverter()
+                }
             };
             return JsonSerializer.Deserialize<SaveData>(json, options);
         }
