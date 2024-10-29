@@ -141,42 +141,6 @@ namespace MyGame.Manager
             }
         }
 
-		public static void IncludeNodeIntoRenderingOrderGroup(string name, Node2D canvasItem)
-		{
-			if (GetGlobalObject("ZIndexManager") is ZIndexManager zIndexManager)
-			{
-				zIndexManager.IncludeNode(name, canvasItem);
-			}
-			else
-			{
-				GD.PrintErr("Invalid ZIndexManager");
-			}
-		}
-
-		public static void ClearNodeInRenderingOrderGroup(string name)
-		{
-			if (GetGlobalObject("ZIndexManager") is ZIndexManager zIndexManager)
-			{
-				zIndexManager.ClearNode(name);
-			}
-			else
-			{
-				GD.PrintErr("Invalid ZIndexManager");
-			}
-		}
-
-		public static void ResortRenderingOrder(string name)
-		{
-			if (GetGlobalObject("ZIndexManager") is ZIndexManager zIndexManager)
-			{
-				zIndexManager.ResortNode(name);
-			}
-			else
-			{
-				GD.PrintErr("Invalid ZIndexManager");
-			}
-        }
-
         public static void FocusOnCharacter(BaseCharacter character)
         {
             if (GetGlobalObject("FocusedCharacterManager") is FocusedCharacterManager focusedCharacterManager)

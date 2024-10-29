@@ -16,10 +16,7 @@ namespace MyGame.Entity
         public Vector2 Position { get; set; }
         public StateManager StateManager { get; set; }
         public EventManager EventManager { get; set; }
-        public string RenderingOrderGroupName { get; set; }
         public string EntityName { get; init; }
-        public string GetRenderingGroupName() { return RenderingOrderGroupName; }
-        public void SetRenderingGroupName(string groupName) { RenderingOrderGroupName = groupName; }
         public string GetEntityName() { return EntityName; }
         public void InitiateStates(Dictionary<string, IState> states = null);
         public Dictionary<string, IState> GetStates()

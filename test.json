@@ -1,42 +1,7 @@
 {
-  "CurrentMapName": "Map0",
+  "CurrentMapName": "Map1",
   "GlobalEntityInstanceInfo": {
     "Map0": [
-      {
-        "EntityType": "DynamicEntity0",
-        "SaveHead": [
-          {
-            "Type": "MyGame.Component.BaseSaveComponent",
-            "Property": {
-              "Position": {
-                "X": -55.277855,
-                "Y": 1.2777766
-              },
-              "States": {
-                "OverallState": {
-                  "Type": "MyGame.Entity.CharacterDefaultState",
-                  "Property": {
-                    "AnimationPlayed": "idle-8"
-                  }
-                },
-                "ControlState": {
-                  "Type": "MyGame.Entity.CharacterHardwareInputControlState",
-                  "Property": {}
-                }
-              },
-              "Events": {
-                "OnReachedTarget": []
-              }
-            }
-          },
-          {
-            "Type": "MyGame.Component.CharacterSaveComponent",
-            "Property": {
-              "TestText": "DynamicEntity0"
-            }
-          }
-        ]
-      },
       {
         "EntityType": "Map0Wall0",
         "SaveHead": [
@@ -95,6 +60,54 @@
         ]
       }
     ],
-    "Map1": []
+    "Map1": [
+      {
+        "EntityType": "DynamicEntity0",
+        "SaveHead": [
+          {
+            "Type": "MyGame.Component.BaseSaveComponent",
+            "Property": {
+              "Position": {
+                "X": 148.61111,
+                "Y": 48
+              },
+              "States": {
+                "OverallState": {
+                  "Type": "MyGame.Entity.CharacterDefaultState",
+                  "Property": {
+                    "AnimationPlayed": "run-4"
+                  }
+                },
+                "ControlState": {
+                  "Type": "MyGame.Entity.CharacterStraightForwardControlState",
+                  "Property": {
+                    "Position": {
+                      "X": 70,
+                      "Y": 48
+                    },
+                    "EventName": "OnReachedTarget"
+                  }
+                }
+              },
+              "Events": {
+                "OnReachedTarget": [
+                  {
+                    "TypeName": "MyGame.Util.BaseCharacterEvents",
+                    "EventName": "ChangeControlStateToHardwareInputControlState",
+                    "Parameters": []
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "Type": "MyGame.Component.CharacterSaveComponent",
+            "Property": {
+              "TestText": "DynamicEntity0"
+            }
+          }
+        ]
+      }
+    ]
   }
 }

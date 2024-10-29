@@ -6,11 +6,12 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="transition.json" />
-    <Content Include="path.json" />
+    <Compile Remove="manager\zindex\**" />
+    <EmbeddedResource Remove="manager\zindex\**" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="manager\zindex\" />
+    <Content Include="transition.json" />
+    <Content Include="path.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />

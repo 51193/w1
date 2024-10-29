@@ -1,12 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqjy86ul5sr4g"]
+[gd_scene load_steps=3 format=3 uid="uid://bqjy86ul5sr4g"]
 
 [ext_resource type="Script" path="res://manager/entity/EntityManager.cs" id="1_164wi"]
 [ext_resource type="PackedScene" uid="uid://cmrtsxytx1tcd" path="res://manager/entity/focused/focused_character_manager.tscn" id="2_qe8fl"]
-[ext_resource type="PackedScene" uid="uid://5dxc1rr4ikgg" path="res://manager/zindex/z_index_manager.tscn" id="3_k0v3a"]
 
 [node name="EntityManager" type="Node"]
 script = ExtResource("1_164wi")
 
-[node name="ZIndexManager" parent="." instance=ExtResource("3_k0v3a")]
-
 [node name="FocusedCharacterManager" parent="." instance=ExtResource("2_qe8fl")]
+
+[node name="EntityYSorter" type="Node2D" parent="."]
+y_sort_enabled = true

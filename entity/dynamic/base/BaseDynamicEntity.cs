@@ -105,10 +105,6 @@ namespace MyGame.Entity
 
 		protected virtual void WhenPositionChange()
 		{
-            if (RenderingOrderGroupName != null)
-            {
-                GlobalObjectManager.ResortRenderingOrder(RenderingOrderGroupName);
-            }
         }
 
 		public override void _EnterTree()

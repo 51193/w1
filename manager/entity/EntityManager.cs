@@ -5,8 +5,10 @@ using System.Collections.Generic;
 
 namespace MyGame.Manager
 {
-    public partial class EntityManager : Node
+	public partial class EntityManager : Node
 	{
+		public Node2D _entityYSorter;
+
 		public Dictionary<string, List<EntityInstanceInfo>> GlobalEntityInstanceInfoDictionary = new();
 		protected readonly Dictionary<string, PackedScene> _entities = new();
 		protected readonly List<IEntity> _instances = new();
@@ -18,7 +20,6 @@ namespace MyGame.Manager
 		{
 			SpawnAllWaitingEntitiesFromMapRecord(mapName);
 			CallAllLivingEntitiesInitiateProcess();
-            AddAllLivingEntitiesToRenderingOrderGroup(mapName);
 			SetAllLivingEntitiesPhysicsProcess(false);
 			EmitSignal(SignalName.EntityTransitionComplete);
 		}
@@ -31,46 +32,38 @@ namespace MyGame.Manager
 
 		public void OnMapChanged(IEntity entity, string currentMapName, string nextMapName, Vector2 fromPosition, Vector2 ToPosition)
 		{
-			ClearAllLivinEntitiesRenderingOrderGroupName(currentMapName);
-			GlobalObjectManager.ClearNodeInRenderingOrderGroup(currentMapName);
-
 			ClearAllEntitiesFromMapRecord(currentMapName);
 
 			string entityName = entity.GetEntityName();
 			ISaveComponent save = entity.SaveData();
 			save.SearchDataType<BaseSaveComponent>().Position = fromPosition;
-            FreeLivingEntity(entity);
+			FreeLivingEntity(entity);
 
 			RecordAllLivingEntitiesToMapRecord(currentMapName);
 			ClearAllLivingEntities();
 
 			SpawnEntityWithEntranceAnimation(new EntityInstanceInfo(entityName, save), ToPosition);
 
-            SpawnAllWaitingEntitiesFromMapRecord(nextMapName);
-            AddAllLivingEntitiesToRenderingOrderGroup(nextMapName);
-            SetAllLivingEntitiesPhysicsProcess(false);
-            CallAllLivingEntitiesInitiateProcess();
+			SpawnAllWaitingEntitiesFromMapRecord(nextMapName);
+			SetAllLivingEntitiesPhysicsProcess(false);
+			CallAllLivingEntitiesInitiateProcess();
 
 			ClearAllEntitiesFromMapRecord(nextMapName);
 			RecordAllLivingEntitiesToMapRecord(nextMapName);
 
-            EmitSignal(SignalName.EntityTransitionComplete);
-            GD.Print($"Entities have swapped to {currentMapName}");
+			EmitSignal(SignalName.EntityTransitionComplete);
+			GD.Print($"Entities have swapped to {currentMapName}");
 		}
 
 		public void OnMapFresh(string currentMapName)
 		{
-            ClearAllLivinEntitiesRenderingOrderGroupName(currentMapName);
-            GlobalObjectManager.ClearNodeInRenderingOrderGroup(currentMapName);
+			ClearAllLivingEntities();
+			SpawnAllWaitingEntitiesFromMapRecord(currentMapName);
+			SetAllLivingEntitiesPhysicsProcess(false);
+			CallAllLivingEntitiesInitiateProcess();
 
-            ClearAllLivingEntities();
-            SpawnAllWaitingEntitiesFromMapRecord(currentMapName);
-            AddAllLivingEntitiesToRenderingOrderGroup(currentMapName);
-            SetAllLivingEntitiesPhysicsProcess(false);
-            CallAllLivingEntitiesInitiateProcess();
-
-            EmitSignal(SignalName.EntityTransitionComplete);
-            GD.Print($"Entities in {currentMapName} loaded");
-        }
+			EmitSignal(SignalName.EntityTransitionComplete);
+			GD.Print($"Entities in {currentMapName} loaded");
+		}
 	}
 }

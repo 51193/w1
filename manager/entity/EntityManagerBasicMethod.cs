@@ -71,7 +71,7 @@ namespace MyGame.Manager
             IEntity entity = node as IEntity;
 
             _instances.Add(entity);
-            AddChild(entity.GetNode());
+            _entityYSorter.AddChild(entity.GetNode());
 
             entity.LoadData(instanceInfo.SaveHead);
 
@@ -103,26 +103,6 @@ namespace MyGame.Manager
             }
         }
 
-        protected void AddAllLivingEntitiesToRenderingOrderGroup(string groupName)
-        {
-            foreach (var entity in _instances)
-            {
-                GlobalObjectManager.IncludeNodeIntoRenderingOrderGroup(groupName, entity.GetNode());
-                entity.SetRenderingGroupName(groupName);
-            }
-        }
-
-        public void ClearAllLivinEntitiesRenderingOrderGroupName(string groupName)
-        {
-            foreach (var entity in _instances)
-            {
-                if (entity.GetRenderingGroupName() == groupName)
-                {
-                    entity.SetRenderingGroupName(null);
-                }
-            }
-        }
-
         protected void CallAllLivingEntitiesInitiateProcess()
         {
             foreach (var entity in _instances)
@@ -146,6 +126,11 @@ namespace MyGame.Manager
         public override void _ExitTree()
         {
             GD.Print($"EntityManager exit");
+        }
+
+        public override void _Ready()
+        {
+            _entityYSorter = GetNode<Node2D>("EntityYSorter");
         }
     }
 }

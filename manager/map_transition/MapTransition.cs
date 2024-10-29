@@ -55,17 +55,17 @@ namespace MyGame.Manager
 		}
 
 		public void InitMapProcess(string mapName)
-        {
-            _currentMapName = mapName;
-            _mapManager.LoadMap(mapName);
+		{
+			_currentMapName = mapName;
+			_mapManager.LoadMap(mapName);
 			_entityManager.InitiateEntities(mapName);
 		}
 
 		public void InvokeManagers(string destinationName, string fromLandmarkName, string toLandmarkName, BaseDynamicEntity entity)
 		{
 			string currentMapName = _currentMapName;
-            _currentMapName = destinationName;
-            _mapManager.LoadMap(destinationName);
+			_currentMapName = destinationName;
+			_mapManager.LoadMap(destinationName);
 			Vector2 fromLandmarkPosition = _mapManager.GetLandmarkPosition(fromLandmarkName);
 			Vector2 toLandmarkPosition = _mapManager.GetLandmarkPosition(toLandmarkName);
 			_entityManager.OnMapChanged(entity, currentMapName, destinationName, fromLandmarkPosition, toLandmarkPosition);
@@ -76,13 +76,13 @@ namespace MyGame.Manager
 			if (!_transitionsDict.TryGetValue((departureName, exitName), out var transition))
 			{
 				GD.PrintErr($"No transition found for: {departureName}-{exitName}");
-            }
+			}
 			if (entity is BaseDynamicEntity)
 			{
 				entity.RegistrateEvent("OnReachedTarget", typeof(MapTransitionEvents), "InvokeManagers", transition);
-            }
+			}
 			entity.HandleStateTransition("ControlState", "GoStraight", exitPosition);
-        }
+		}
 
 		private void OnMapManagerComplete()
 		{
@@ -107,24 +107,22 @@ namespace MyGame.Manager
 		}
 
 		private void AfterTransitionComplete()
-        {
-            _mapManager.AfterTransitionComplete();
+		{
+			_mapManager.AfterTransitionComplete();
 			_entityManager.AfterTransitionComplete();
-        }
+		}
 
 		public void ToSaveData(string filePath)
-        {
-            _entityManager.ClearAllEntitiesFromMapRecord(_currentMapName);
-            _entityManager.RecordAllLivingEntitiesToMapRecord(_currentMapName);
+		{
+			_entityManager.ClearAllEntitiesFromMapRecord(_currentMapName);
+			_entityManager.RecordAllLivingEntitiesToMapRecord(_currentMapName);
 
-            SaveData saveData = new()
+			SaveData saveData = new()
 			{
 				CurrentMapName = _currentMapName,
 				GlobalEntityInstanceInfo = _entityManager.GlobalEntityInstanceInfoDictionary
 			};
 			JsonUtil.WriteToFile(filePath, JsonUtil.SerializeSaveData(saveData));
-
-			FromSaveData(filePath);
 		}
 
 		public void FromSaveData(string filePath)
