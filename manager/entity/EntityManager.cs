@@ -10,7 +10,7 @@ namespace MyGame.Manager
 		public Node2D _entityYSorter;
 
 		public Dictionary<string, List<EntityInstanceInfo>> GlobalEntityInstanceInfoDictionary = new();
-		protected readonly Dictionary<string, PackedScene> _entities = new();
+		protected readonly Dictionary<string, PackedScene> _loadedEntities = new();
 		protected readonly List<IEntity> _instances = new();
 
 		[Signal]
@@ -34,7 +34,7 @@ namespace MyGame.Manager
 		{
 			ClearAllEntitiesFromMapRecord(currentMapName);
 
-			string entityName = entity.GetEntityName();
+			string entityName = entity.EntityName;
 			ISaveComponent save = entity.SaveData();
 			save.SearchDataType<BaseSaveComponent>().Position = fromPosition;
 			FreeLivingEntity(entity);

@@ -68,42 +68,30 @@
             "Type": "MyGame.Component.BaseSaveComponent",
             "Property": {
               "Position": {
-                "X": 148.61111,
-                "Y": 48
+                "X": 91.81958,
+                "Y": 40.325447
               },
               "States": {
                 "OverallState": {
                   "Type": "MyGame.Entity.CharacterDefaultState",
                   "Property": {
-                    "AnimationPlayed": "run-4"
+                    "AnimationPlayed": "idle-6"
                   }
                 },
                 "ControlState": {
-                  "Type": "MyGame.Entity.CharacterStraightForwardControlState",
-                  "Property": {
-                    "Position": {
-                      "X": 70,
-                      "Y": 48
-                    },
-                    "EventName": "OnReachedTarget"
-                  }
+                  "Type": "MyGame.Entity.CharacterHardwareInputControlState",
+                  "Property": {}
                 }
               },
               "Events": {
-                "OnReachedTarget": [
-                  {
-                    "TypeName": "MyGame.Util.BaseCharacterEvents",
-                    "EventName": "ChangeControlStateToHardwareInputControlState",
-                    "Parameters": []
-                  }
-                ]
+                "OnReachedTarget": []
               }
             }
           },
           {
             "Type": "MyGame.Component.CharacterSaveComponent",
             "Property": {
-              "TestText": "DynamicEntity0"
+              "ItemNameList": []
             }
           }
         ]

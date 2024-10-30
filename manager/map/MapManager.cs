@@ -7,7 +7,7 @@ namespace MyGame.Manager
 	public partial class MapManager : Node
 	{
 		private Node _currentMap;
-		private readonly Dictionary<string, PackedScene> _loadedScenes = new();
+		private readonly Dictionary<string, PackedScene> _loadedMaps = new();
 
 		[Signal]
 		public delegate void MapTransitionCompleteEventHandler();
@@ -27,10 +27,10 @@ namespace MyGame.Manager
 
 		public void LoadMap(string mapName)
 		{
-			if (!_loadedScenes.TryGetValue(mapName, out var map))
+			if (!_loadedMaps.TryGetValue(mapName, out var map))
 			{
 				map = GlobalObjectManager.GetResource(mapName);
-				_loadedScenes[mapName] = map;
+				_loadedMaps[mapName] = map;
 			}
 
 			if (_currentMap != null)

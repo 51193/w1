@@ -9,18 +9,18 @@ namespace MyGame.Entity
 		public AnimationPlayer AnimationPlayerNode;
 		public Label LabelNode;
 
-        public override void ShowTip()
-        {
+		public override void ShowTip()
+		{
 			LabelNode.Show();
-        }
+		}
 
-        public override void HideTip()
-        {
+		public override void HideTip()
+		{
 			LabelNode.Hide();
-        }
+		}
 
-        public override void InitiateStates(Dictionary<string, IState> states = null)
-        {
+		public override void InitiateStates(Dictionary<string, IState> states = null)
+		{
 			if (states == null || states.Count == 0)
 			{
 				StateManager = new(this, new Dictionary<string, IState>()
@@ -41,11 +41,11 @@ namespace MyGame.Entity
 				}
 				StateManager = new(this, states);
 			}
-        }
+		}
 
-        public override void _Ready()
+		public override void _Ready()
 		{
-            AnimationPlayerNode = GetNode<AnimationPlayer>("AnimationPlayer");
+			AnimationPlayerNode = GetNode<AnimationPlayer>("AnimationPlayer");
 			LabelNode = GetNode<Label>("Label");
 			LabelNode.Hide();
 		}

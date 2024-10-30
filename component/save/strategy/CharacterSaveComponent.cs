@@ -1,22 +1,22 @@
-﻿using Godot;
-using MyGame.Entity;
+﻿using MyGame.Entity;
+using System.Collections.Generic;
 
 namespace MyGame.Component
 {
     public class CharacterSaveComponent : ISaveComponent
     {
-        public string TestText { get; set; }
+        public List<string> ItemNameList { get; set; }
 
         public ISaveComponent Next { get; set; }
 
         public void SaveData(IEntity entity)
         {
-            TestText = entity.GetEntityName();
+            ItemNameList = ((BaseCharacter)entity).InventoryManager.GetItemNameList();
         }
 
         public void LoadData(IEntity entity)
         {
-            GD.PrintErr(TestText);
+            ((BaseCharacter)entity).InitiateInventory(ItemNameList);
         }
     }
 }

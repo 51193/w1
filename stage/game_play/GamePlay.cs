@@ -1,5 +1,4 @@
 using MyGame.Manager;
-using MyGame.Util;
 
 namespace MyGame.Stage
 {

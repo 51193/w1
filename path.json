@@ -38,5 +38,10 @@
 		"Name": "DoorOpenable",
 		"Path": "res://entity/static/furniture/dooropenable/door_openable.tscn",
 		"Description": "A door can open."
+	},
+	{
+		"Name": "TestItem0",
+		"Path": "res://item/test/test_item_0.tscn",
+		"Description": "A test item."
 	}
 ]

@@ -17,7 +17,6 @@ namespace MyGame.Entity
         public StateManager StateManager { get; set; }
         public EventManager EventManager { get; set; }
         public string EntityName { get; init; }
-        public string GetEntityName() { return EntityName; }
         public void InitiateStates(Dictionary<string, IState> states = null);
         public Dictionary<string, IState> GetStates()
         {

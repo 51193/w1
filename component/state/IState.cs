@@ -7,19 +7,19 @@ namespace MyGame.Component
     {
         public void Enter(IEntity entity)
         {
-            GD.Print($"{entity.GetEntityName()} : {GetType().Name}, enter");
+            GD.Print($"{entity.EntityName} : {GetType().Name}, enter");
             OnEnter(entity);
         }
         public void OnEnter(IEntity entity);
         public void Exit(IEntity entity)
         {
-            GD.Print($"{entity.GetEntityName()} : {GetType().Name}, exit");
+            GD.Print($"{entity.EntityName} : {GetType().Name}, exit");
             OnExit(entity);
         }
         public void OnExit(IEntity entity);
         public void HandleStateTransition(IEntity entity, string input, params object[] args)
         {
-            GD.Print($"{entity.GetEntityName()} : {GetType().Name}, transit");
+            GD.Print($"{entity.EntityName} : {GetType().Name}, transit");
             OnHandleStateTransition(entity, input, args);
         }
         public void OnHandleStateTransition(IEntity entity, string input, params object[] args);

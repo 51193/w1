@@ -35,7 +35,7 @@ namespace MyGame.Manager
             }
             else
             {
-                GD.PrintErr($"{stateName} not exist in {_entity.GetEntityName()}, unable to transit state");
+                GD.PrintErr($"{stateName} not exist in {_entity.EntityName}, unable to transit state");
             }
         }
 

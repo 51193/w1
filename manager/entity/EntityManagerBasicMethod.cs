@@ -34,7 +34,7 @@ namespace MyGame.Manager
         {
             foreach (var instance in _instances)
             {
-                AddEntityToMapRecord(mapName, new EntityInstanceInfo(instance.GetEntityName(), instance.SaveData()));
+                AddEntityToMapRecord(mapName, new EntityInstanceInfo(instance.EntityName, instance.SaveData()));
             }
         }
 
@@ -50,24 +50,24 @@ namespace MyGame.Manager
 
         protected void LoadEntity(string entityName)
         {
-            if (_entities.ContainsKey(entityName))
+            if (_loadedEntities.ContainsKey(entityName))
             {
                 GD.PrintErr($"Duplicate entity loaded: {entityName}");
             }
             else
             {
-                _entities[entityName] = GlobalObjectManager.GetResource(entityName);
+                _loadedEntities[entityName] = GlobalObjectManager.GetResource(entityName);
                 GD.Print($"Entity loaded: {entityName}");
             }
         }
 
         protected IEntity SpawnEntity(EntityInstanceInfo instanceInfo)
         {
-            if (!_entities.ContainsKey(instanceInfo.EntityType))
+            if (!_loadedEntities.ContainsKey(instanceInfo.EntityType))
             {
                 LoadEntity(instanceInfo.EntityType);
             }
-            Node node = _entities[instanceInfo.EntityType].Instantiate();
+            Node node = _loadedEntities[instanceInfo.EntityType].Instantiate();
             IEntity entity = node as IEntity;
 
             _instances.Add(entity);
@@ -75,7 +75,7 @@ namespace MyGame.Manager
 
             entity.LoadData(instanceInfo.SaveHead);
 
-            GD.Print($"Entity instantiated: {entity.GetEntityName()}({entity.Position.X}, {entity.Position.Y})");
+            GD.Print($"Entity instantiated: {entity.EntityName}({entity.Position.X}, {entity.Position.Y})");
             return entity;
         }
 
