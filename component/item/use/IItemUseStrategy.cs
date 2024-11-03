@@ -5,6 +5,6 @@ namespace MyGame.Component
 {
     public interface IItemUseStrategy
     {
-        public void UseItem(IEntity entity, BaseItem item);
+        public void UseItem(IEntity entity, BasicItem item);
     }
 }

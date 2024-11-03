@@ -1,7 +1,42 @@
 {
-  "CurrentMapName": "Map1",
+  "CurrentMapName": "Map0",
   "GlobalEntityInstanceInfo": {
     "Map0": [
+      {
+        "EntityType": "DynamicEntity0",
+        "SaveHead": [
+          {
+            "Type": "MyGame.Component.BaseSaveComponent",
+            "Property": {
+              "Position": {
+                "X": 24.813072,
+                "Y": 22.270271
+              },
+              "States": {
+                "OverallState": {
+                  "Type": "MyGame.Entity.CharacterDefaultState",
+                  "Property": {
+                    "AnimationPlayed": "idle-2"
+                  }
+                },
+                "ControlState": {
+                  "Type": "MyGame.Entity.CharacterHardwareInputControlState",
+                  "Property": {}
+                }
+              },
+              "Events": {
+                "OnReachedTarget": []
+              }
+            }
+          },
+          {
+            "Type": "MyGame.Component.CharacterSaveComponent",
+            "Property": {
+              "ItemNameList": ["TestItem0"]
+            }
+          }
+        ]
+      },
       {
         "EntityType": "Map0Wall0",
         "SaveHead": [
@@ -46,7 +81,7 @@
               },
               "States": {
                 "OpenState": {
-                  "Type": "MyGame.Entity.DoorOpenableDoorOpenedState",
+                  "Type": "MyGame.Entity.DoorOpenableDoorClosedState",
                   "Property": {}
                 },
                 "StrategyState": {
@@ -60,42 +95,6 @@
         ]
       }
     ],
-    "Map1": [
-      {
-        "EntityType": "DynamicEntity0",
-        "SaveHead": [
-          {
-            "Type": "MyGame.Component.BaseSaveComponent",
-            "Property": {
-              "Position": {
-                "X": 91.81958,
-                "Y": 40.325447
-              },
-              "States": {
-                "OverallState": {
-                  "Type": "MyGame.Entity.CharacterDefaultState",
-                  "Property": {
-                    "AnimationPlayed": "idle-6"
-                  }
-                },
-                "ControlState": {
-                  "Type": "MyGame.Entity.CharacterHardwareInputControlState",
-                  "Property": {}
-                }
-              },
-              "Events": {
-                "OnReachedTarget": []
-              }
-            }
-          },
-          {
-            "Type": "MyGame.Component.CharacterSaveComponent",
-            "Property": {
-              "ItemNameList": []
-            }
-          }
-        ]
-      }
-    ]
+    "Map1": []
   }
 }

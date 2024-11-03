@@ -2,7 +2,7 @@
 
 namespace MyGame.Entity
 {
-    public abstract partial class DynamicEntity : BaseDynamicEntity
+    public abstract partial class DynamicEntity : BasicDynamicEntity
     {
         protected ISaveComponent HandleSaveData<T>(ISaveComponent saveComponent) where T : ISaveComponent, new()
         {

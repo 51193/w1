@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4o2ea42owqab"]
+
+[ext_resource type="Script" path="res://interface/inventory/Inventory.cs" id="1_tvpxe"]
+
+[node name="Inventory" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_tvpxe")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+alignment = 1

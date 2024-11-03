@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwnwwuahfe1vf"]
+
+[ext_resource type="Script" path="res://interface/inventory/item_slot/ItemSlot.cs" id="1_jhotk"]
+
+[node name="ItemSlot" type="Button"]
+offset_right = 60.0
+offset_bottom = 60.0
+script = ExtResource("1_jhotk")

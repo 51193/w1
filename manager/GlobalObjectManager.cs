@@ -109,7 +109,7 @@ namespace MyGame.Manager
 		{
 			if (GetGlobalObject("MapTransition") is MapTransition mapTransition)
 			{
-				mapTransition.TransitionProcess(departureName, exitName, exitPosition, (BaseDynamicEntity)entity);
+				mapTransition.TransitionProcess(departureName, exitName, exitPosition, (BasicDynamicEntity)entity);
 			}
 			else
 			{
@@ -141,11 +141,11 @@ namespace MyGame.Manager
             }
         }
 
-        public static void FocusOnCharacter(BaseCharacter character)
+        public static void FocusOnCharacter(BasicCharacter character)
         {
             if (GetGlobalObject("FocusedCharacterManager") is FocusedCharacterManager focusedCharacterManager)
             {
-                focusedCharacterManager.FocusOnCharacter(character);
+				focusedCharacterManager.FocusedCharacter = character;
             }
             else
             {
@@ -153,12 +153,12 @@ namespace MyGame.Manager
             }
         }
 
-		public static BaseCharacter GetFocusedCharacter()
+		public static BasicCharacter GetFocusedCharacter()
 		{
 
 			if (GetGlobalObject("FocusedCharacterManager") is FocusedCharacterManager focusedCharacterManager)
 			{
-				return focusedCharacterManager.GetFocusedCharacter();
+				return focusedCharacterManager.FocusedCharacter;
 			}
 			else
 			{

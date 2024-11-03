@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace MyGame.Entity
 {
-	public abstract partial class BaseDynamicEntity: CharacterBody2D, IEntity
+	public abstract partial class BasicDynamicEntity: CharacterBody2D, IEntity
 	{
 		public StateManager StateManager { get; set; }
         public EventManager EventManager { get; set; }
@@ -36,12 +36,12 @@ namespace MyGame.Entity
 		public Vector2 Direction = Vector2.Zero;
 		private Vector2 _lastFramePosition = Vector2.Zero;
 
-        public BaseDynamicEntity()
+        public BasicDynamicEntity()
 		{
 			EntityName = GetType().Name;
 		}
 
-		public virtual void InitiateStates(Dictionary<string, IState> states)
+		public virtual void InitializeStates(Dictionary<string, IState> states)
 		{
             {
                 if (states == null)
@@ -90,7 +90,7 @@ namespace MyGame.Entity
 		private void UpdateAnimation()
 		{
 			if( AnimationPlayer == null) return;
-			AnimationPlayer.Invoke(player => player.InitiateAnimation(Direction));
+			AnimationPlayer.Invoke(player => player.InitializeAnimation(Direction));
 		}
 
         private void UpdatePosition()
@@ -125,10 +125,12 @@ namespace MyGame.Entity
 			UpdatePosition();
 		}
 
-		public void EntityInitiateProcess()
+		public void EntityInitializeProcess()
 		{
 			UpdateAnimation();
 			WhenPositionChange();
 		}
+
+		public virtual void AfterInitialize() { }
     }
 }

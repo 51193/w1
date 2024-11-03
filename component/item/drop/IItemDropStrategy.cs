@@ -5,6 +5,6 @@ namespace MyGame.Component
 {
     public interface IItemDropStrategy
     {
-        public void DropItem(IEntity entity, BaseItem item);
+        public void DropItem(IEntity entity, BasicItem item);
     }
 }

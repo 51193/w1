@@ -1,15 +1,21 @@
+using Godot;
 using MyGame.Component;
 
 namespace MyGame.Item
 {
-	public partial class TestItem0 : BaseItem
+	public partial class TestItem0 : BasicItem
 	{
-		public override void InitiateAnimation()
+		[Export]
+		private AnimatedSprite2D _animatedSprite2DNode;
+
+		public override Vector2 Size => _animatedSprite2DNode.SpriteFrames.GetFrameTexture("default", 0).GetSize();
+
+		public override void InitializeAnimation()
 		{
 			ChangeIconAnimation("default");
 		}
 
-		public override void InitiateStrategy()
+		public override void InitializeStrategy()
 		{
 			LoadStrategy(() => new TestItemDropStrategy());
 			LoadStrategy(() => new TestItemEquipStrategy());

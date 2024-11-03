@@ -6,7 +6,7 @@ namespace MyGame.Component
 {
     public class TestItemDropStrategy : IItemDropStrategy
     {
-        public void DropItem(IEntity entity, BaseItem item)
+        public void DropItem(IEntity entity, BasicItem item)
         {
             GD.Print($"{entity.EntityName} drop {item.ItemName}");
         }

@@ -14,7 +14,7 @@ namespace MyGame.Util
                 case "InvokeManagers":
                     {
                         if (parameters.Length > 1 &&
-                            parameters[0] is BaseDynamicEntity dynamicEntity &&
+                            parameters[0] is BasicDynamicEntity dynamicEntity &&
                             parameters[1] is TransitionInfo transitionInfo)
                         {
                             MapTransition mapTransition = GlobalObjectManager.GetMapTransition();

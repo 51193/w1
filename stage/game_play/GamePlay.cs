@@ -2,7 +2,7 @@ using MyGame.Manager;
 
 namespace MyGame.Stage
 {
-	public partial class GamePlay : BaseStage
+	public partial class GamePlay : BasicStage
 	{
 		private MapTransition _mapTransition;
 

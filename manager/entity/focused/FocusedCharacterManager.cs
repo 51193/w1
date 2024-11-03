@@ -1,20 +1,40 @@
 using Godot;
 using MyGame.Entity;
+using MyGame.Interface;
+using System;
 
 namespace MyGame.Manager
 {
 	public partial class FocusedCharacterManager : Node
 	{
-		private BaseCharacter _focusedCharacter;
+		private BasicCharacter _focusedCharacter;
+		private Inventory _inventory;
 
-		public void FocusOnCharacter(BaseCharacter character)
+		public BasicCharacter FocusedCharacter
 		{
-			_focusedCharacter = character;
+			get => _focusedCharacter;
+			set
+			{
+				_focusedCharacter = value;
+				DisplayItem();
+			}
 		}
 
-		public BaseCharacter GetFocusedCharacter()
+		private void DisplayItem()
 		{
-			return _focusedCharacter;
+			if (_focusedCharacter == null) return;
+
+			int itemCount = Math.Min(_focusedCharacter.InventoryManager.Items.Count, _inventory.VisibleSlotCount);
+
+			for (int i = 0; i < itemCount; i++)
+			{
+				_inventory.AttachItemToSlot(i, _focusedCharacter.InventoryManager.Items[i]);
+			}
+		}
+
+		public override void _Ready()
+		{
+			_inventory = GetNode<CanvasLayer>("CanvasLayer").GetNode<Inventory>("Inventory");
 		}
 
 		public override void _EnterTree()
@@ -29,24 +49,24 @@ namespace MyGame.Manager
 
 		public override void _Process(double delta)
 		{
-			if (_focusedCharacter != null)
+			if (FocusedCharacter != null)
 			{
-				_focusedCharacter.InteractionManager.ShowNearestTip();
+				FocusedCharacter.InteractionManager.ShowNearestTip();
 				if (Input.IsActionJustReleased("activate"))
 				{
-					_focusedCharacter.InteractionManager.Interact();
+					FocusedCharacter.InteractionManager.Interact();
 				}
 			}
 
 			if (Input.IsActionJustReleased("save"))
 			{
 				GlobalObjectManager.Save("test.json");
-            }
+			}
 
-            if (Input.IsActionJustReleased("load"))
-            {
-                GlobalObjectManager.Load("test.json");
-            }
-        }
+			if (Input.IsActionJustReleased("load"))
+			{
+				GlobalObjectManager.Load("test.json");
+			}
+		}
 	}
 }

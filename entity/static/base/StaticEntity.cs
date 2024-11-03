@@ -2,7 +2,7 @@
 
 namespace MyGame.Entity
 {
-    public abstract partial class StaticEntity : BaseStaticEntity
+    public abstract partial class StaticEntity : BasicStaticEntity
     {
         protected ISaveComponent HandleSaveData<T>(ISaveComponent saveComponent) where T : ISaveComponent, new()
         {

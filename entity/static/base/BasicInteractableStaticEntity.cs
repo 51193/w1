@@ -3,7 +3,7 @@ using System;
 
 namespace MyGame.Entity
 {
-    public abstract partial class BaseInteractableDynamicEntity : DynamicEntity, IInteractableEntity
+    public abstract partial class BasicInteractableStaticEntity : StaticEntity, IInteractableEntity
     {
         public LazyLoader<IInteractionStrategy> InteractionStrategy { get; set; }
 

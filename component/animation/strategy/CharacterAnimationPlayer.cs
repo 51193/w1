@@ -116,7 +116,7 @@ namespace MyGame.Component
             ModifyAnimation(direction);
         }
 
-        public void InitiateAnimation(Vector2 direction)
+        public void InitializeAnimation(Vector2 direction)
         {
             if(_animationPlayed.Value != null)
             {

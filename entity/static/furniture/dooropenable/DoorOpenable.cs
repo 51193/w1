@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace MyGame.Entity
 {
-	public partial class DoorOpenable : BaseInteractableStaticEntity
+	public partial class DoorOpenable : BasicInteractableStaticEntity
 	{
 		public AnimationPlayer AnimationPlayerNode;
 		public Label LabelNode;
@@ -19,7 +19,7 @@ namespace MyGame.Entity
 			LabelNode.Hide();
 		}
 
-		public override void InitiateStates(Dictionary<string, IState> states = null)
+		public override void InitializeStates(Dictionary<string, IState> states = null)
 		{
 			if (states == null || states.Count == 0)
 			{

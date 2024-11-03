@@ -20,7 +20,7 @@ namespace MyGame.Entity
 
         public void OnEnter(IEntity entity)
         {
-            BaseCharacter character = entity as BaseCharacter;
+            BasicCharacter character = entity as BasicCharacter;
             character.LoadStrategy(() =>
             {
                 return new CharacterAnimationPlayer(character.AnimationSprite2DNode, _animationPlayed);

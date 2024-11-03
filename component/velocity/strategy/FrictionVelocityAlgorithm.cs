@@ -6,12 +6,12 @@ namespace MyGame.Component
 {
     public class FrictionVelocityAlgorithm : IVelocityAlgorithm
     {
-        private readonly BaseDynamicEntity _entity;
+        private readonly BasicDynamicEntity _entity;
         private readonly float _maxVelocity;
         private readonly float _acceleration;
         private readonly float _friction;
 
-        public FrictionVelocityAlgorithm(BaseDynamicEntity entity, float maxVelocity, float accelertion, float friction)
+        public FrictionVelocityAlgorithm(BasicDynamicEntity entity, float maxVelocity, float accelertion, float friction)
         {
             _entity = entity;
             _maxVelocity = maxVelocity;

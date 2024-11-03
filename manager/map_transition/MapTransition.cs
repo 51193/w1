@@ -58,10 +58,10 @@ namespace MyGame.Manager
 		{
 			_currentMapName = mapName;
 			_mapManager.LoadMap(mapName);
-			_entityManager.InitiateEntities(mapName);
+			_entityManager.InitializeEntities(mapName);
 		}
 
-		public void InvokeManagers(string destinationName, string fromLandmarkName, string toLandmarkName, BaseDynamicEntity entity)
+		public void InvokeManagers(string destinationName, string fromLandmarkName, string toLandmarkName, BasicDynamicEntity entity)
 		{
 			string currentMapName = _currentMapName;
 			_currentMapName = destinationName;
@@ -77,7 +77,7 @@ namespace MyGame.Manager
 			{
 				GD.PrintErr($"No transition found for: {departureName}-{exitName}");
 			}
-			if (entity is BaseDynamicEntity)
+			if (entity is BasicDynamicEntity)
 			{
 				entity.RegistrateEvent("OnReachedTarget", typeof(MapTransitionEvents), "InvokeManagers", transition);
 			}

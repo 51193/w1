@@ -2,11 +2,11 @@ using Godot;
 
 namespace MyGame.Stage
 {
-	public partial class BaseStage : Node
+	public partial class BasicStage : Node
 	{
 		protected string _name;
 
-		public BaseStage()
+		public BasicStage()
 		{
 			_name = GetType().Name;
 		}

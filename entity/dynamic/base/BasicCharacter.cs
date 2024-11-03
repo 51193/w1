@@ -5,14 +5,14 @@ using System.Collections.Generic;
 
 namespace MyGame.Entity
 {
-    public abstract partial class BaseCharacter : BaseInteractableDynamicEntity, IInteractionParticipant
+    public abstract partial class BasicCharacter : BasicInteractableDynamicEntity, IInteractionParticipant
     {
         public InteractionManager InteractionManager { get; init; }
         public InventoryManager InventoryManager { get; set; }
 
         public AnimatedSprite2D AnimationSprite2DNode;
 
-        public BaseCharacter()
+        public BasicCharacter()
         {
             InteractionManager = new(this);
         }
@@ -35,7 +35,7 @@ namespace MyGame.Entity
             InteractionManager.ResortEntitiesOrder();
         }
 
-        public void InitiateInventory(List<string> ItemNameList)
+        public void InitializeInventory(List<string> ItemNameList)
         {
             InventoryManager = new(this, ItemNameList);
         }

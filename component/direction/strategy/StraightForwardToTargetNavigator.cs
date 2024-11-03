@@ -6,11 +6,11 @@ namespace MyGame.Component
 {
     public class StraightForwardToTargetNavigator : INavigator
     {
-        private readonly BaseDynamicEntity _entity;
+        private readonly BasicDynamicEntity _entity;
         private readonly Vector2 _targetPosition;
         private readonly Action _onTargetReached;
 
-        public StraightForwardToTargetNavigator(BaseDynamicEntity entity, Vector2 targetPosition, Action onTargetReached = null)
+        public StraightForwardToTargetNavigator(BasicDynamicEntity entity, Vector2 targetPosition, Action onTargetReached = null)
         {
             _entity = entity;
             _targetPosition = targetPosition;

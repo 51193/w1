@@ -1,6 +1,6 @@
 namespace MyGame.Entity
 {
-	public partial class Map0Wall0 : BaseStaticEntity
+	public partial class Map0Wall0 : BasicStaticEntity
 	{
 	}
 }

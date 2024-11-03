@@ -1,17 +1,11 @@
-using Godot;
 using MyGame.Component;
 using MyGame.Manager;
 using System.Collections.Generic;
 
 namespace MyGame.Entity
 {
-	public partial class DynamicEntity0 : BaseCharacter
+	public partial class DynamicEntity0 : BasicCharacter
 	{
-		public DynamicEntity0()
-		{
-			GlobalObjectManager.FocusOnCharacter(this);
-		}
-
 		public override HashSet<string> GetInteractionTags()
 		{
 			return new()
@@ -20,7 +14,7 @@ namespace MyGame.Entity
 			};
 		}
 
-		public override void InitiateStates(Dictionary<string, IState> states = null)
+		public override void InitializeStates(Dictionary<string, IState> states = null)
 		{
 			if (states == null || states.Count == 0)
 			{
@@ -45,5 +39,10 @@ namespace MyGame.Entity
 		{
 			//Do nothing
 		}
+
+        public override void AfterInitialize()
+        {
+            GlobalObjectManager.FocusOnCharacter(this);
+        }
     }
 }

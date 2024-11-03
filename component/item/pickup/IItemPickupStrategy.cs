@@ -5,6 +5,6 @@ namespace MyGame.Component
 {
     public interface IItemPickupStrategy
     {
-        public void PickupItem(IEntity entity, BaseItem item);
+        public void PickupItem(IEntity entity, BasicItem item);
     }
 }

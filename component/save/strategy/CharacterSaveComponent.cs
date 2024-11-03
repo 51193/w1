@@ -11,12 +11,12 @@ namespace MyGame.Component
 
         public void SaveData(IEntity entity)
         {
-            ItemNameList = ((BaseCharacter)entity).InventoryManager.GetItemNameList();
+            ItemNameList = ((BasicCharacter)entity).InventoryManager.GetItemNameList();
         }
 
         public void LoadData(IEntity entity)
         {
-            ((BaseCharacter)entity).InitiateInventory(ItemNameList);
+            ((BasicCharacter)entity).InitializeInventory(ItemNameList);
         }
     }
 }

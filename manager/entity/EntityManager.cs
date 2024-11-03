@@ -16,10 +16,10 @@ namespace MyGame.Manager
 		[Signal]
 		public delegate void EntityTransitionCompleteEventHandler();
 
-		public void InitiateEntities(string mapName)
+		public void InitializeEntities(string mapName)
 		{
 			SpawnAllWaitingEntitiesFromMapRecord(mapName);
-			CallAllLivingEntitiesInitiateProcess();
+			CallAllLivingEntitiesInitializeProcess();
 			SetAllLivingEntitiesPhysicsProcess(false);
 			EmitSignal(SignalName.EntityTransitionComplete);
 		}
@@ -46,7 +46,7 @@ namespace MyGame.Manager
 
 			SpawnAllWaitingEntitiesFromMapRecord(nextMapName);
 			SetAllLivingEntitiesPhysicsProcess(false);
-			CallAllLivingEntitiesInitiateProcess();
+			CallAllLivingEntitiesInitializeProcess();
 
 			ClearAllEntitiesFromMapRecord(nextMapName);
 			RecordAllLivingEntitiesToMapRecord(nextMapName);
@@ -60,7 +60,7 @@ namespace MyGame.Manager
 			ClearAllLivingEntities();
 			SpawnAllWaitingEntitiesFromMapRecord(currentMapName);
 			SetAllLivingEntitiesPhysicsProcess(false);
-			CallAllLivingEntitiesInitiateProcess();
+			CallAllLivingEntitiesInitializeProcess();
 
 			EmitSignal(SignalName.EntityTransitionComplete);
 			GD.Print($"Entities in {currentMapName} loaded");

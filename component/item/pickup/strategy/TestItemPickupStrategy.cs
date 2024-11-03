@@ -6,7 +6,7 @@ namespace MyGame.Component
 {
     public class TestItemPickupStrategy : IItemPickupStrategy
     {
-        public void PickupItem(IEntity entity, BaseItem item)
+        public void PickupItem(IEntity entity, BasicItem item)
         {
             GD.Print($"{entity.EntityName} pickup {item.ItemName}");
         }

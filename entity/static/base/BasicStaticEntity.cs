@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace MyGame.Entity
 {
-	public abstract partial class BaseStaticEntity : StaticBody2D, IEntity
+	public abstract partial class BasicStaticEntity : StaticBody2D, IEntity
     {
         public StateManager StateManager { get; set; }
         public EventManager EventManager { get; set; }
@@ -14,12 +14,12 @@ namespace MyGame.Entity
 
         public string EntityName { get; init;}
 
-        public BaseStaticEntity()
+        public BasicStaticEntity()
         {
             EntityName = GetType().Name;
         }
 
-        public virtual void InitiateStates(Dictionary<string, IState> states)
+        public virtual void InitializeStates(Dictionary<string, IState> states)
         {
             {
                 if (states == null)
@@ -57,7 +57,9 @@ namespace MyGame.Entity
             GD.Print($"Static entity exit: {EntityName}");
         }
 
-        public void EntityInitiateProcess() { }
+        public void EntityInitializeProcess() { }
+
+        public virtual void AfterInitialize() { }
     }
 }
 

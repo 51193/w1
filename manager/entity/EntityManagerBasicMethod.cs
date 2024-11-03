@@ -67,13 +67,13 @@ namespace MyGame.Manager
             {
                 LoadEntity(instanceInfo.EntityType);
             }
-            Node node = _loadedEntities[instanceInfo.EntityType].Instantiate();
-            IEntity entity = node as IEntity;
+            IEntity entity = _loadedEntities[instanceInfo.EntityType].Instantiate<IEntity>();
 
             _instances.Add(entity);
             _entityYSorter.AddChild(entity.GetNode());
 
             entity.LoadData(instanceInfo.SaveHead);
+            entity.AfterInitialize();
 
             GD.Print($"Entity instantiated: {entity.EntityName}({entity.Position.X}, {entity.Position.Y})");
             return entity;
@@ -103,11 +103,11 @@ namespace MyGame.Manager
             }
         }
 
-        protected void CallAllLivingEntitiesInitiateProcess()
+        protected void CallAllLivingEntitiesInitializeProcess()
         {
             foreach (var entity in _instances)
             {
-                entity.EntityInitiateProcess();
+                entity.EntityInitializeProcess();
             }
         }
 

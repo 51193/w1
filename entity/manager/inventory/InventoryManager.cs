@@ -10,16 +10,16 @@ namespace MyGame.Entity
     {
         private static readonly Dictionary<string, PackedScene> _loadedItems = new();
 
-        private IEntity _entity;
-        private readonly List<BaseItem> _items = new();
+        private readonly IEntity _entity;
+        public readonly List<BasicItem> Items = new();
 
         public InventoryManager(IEntity entity, List<string> itemNameList = null)
         {
             _entity = entity;
-            InitiateItems(itemNameList);
+            InitializeItems(itemNameList);
         }
 
-        private void InitiateItems(List<string> itemNameList)
+        private void InitializeItems(List<string> itemNameList)
         {
             foreach (var itemName in itemNameList)
             {
@@ -28,13 +28,13 @@ namespace MyGame.Entity
                     item = GlobalObjectManager.GetResource(itemName);
                     _loadedItems[itemName] = item;
                 }
-                _items.Add(item.Instantiate<BaseItem>());
+                Items.Add(item.Instantiate<BasicItem>());
             }
         }
 
         public List<string> GetItemNameList()
         {
-            return _items.Select(i => i.ItemName).ToList();
+            return Items.Select(i => i.ItemName).ToList();
         }
     }
 }

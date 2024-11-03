@@ -17,7 +17,7 @@ namespace MyGame.Entity
         public StateManager StateManager { get; set; }
         public EventManager EventManager { get; set; }
         public string EntityName { get; init; }
-        public void InitiateStates(Dictionary<string, IState> states = null);
+        public void InitializeStates(Dictionary<string, IState> states = null);
         public Dictionary<string, IState> GetStates()
         {
             return StateManager.GetStates();
@@ -28,7 +28,7 @@ namespace MyGame.Entity
         }
         public ISaveComponent SaveData(ISaveComponent saveComponent = null);
         public ISaveComponent LoadData(ISaveComponent saveComponent);
-        public void InitiateEvent(Dictionary<string, Stack<EventIndex>> events = null)
+        public void InitializeEvent(Dictionary<string, Stack<EventIndex>> events = null)
         {
             EventManager = new(this, events);
         }
@@ -40,6 +40,7 @@ namespace MyGame.Entity
         {
             return EventManager.GetEvents();
         }
-        public void EntityInitiateProcess();
+        public void EntityInitializeProcess();
+        public void AfterInitialize();
     }
 }

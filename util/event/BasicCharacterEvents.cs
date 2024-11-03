@@ -1,10 +1,9 @@
 ﻿using MyGame.Entity;
 using System;
-using static MyGame.Entity.DynamicEntity0;
 
 namespace MyGame.Util
 {
-    public class BaseCharacterEvents : IEventProvider
+    public class BasicCharacterEvents : IEventProvider
     {
         public Action GetEvent(string key, params object[] parameters)
         {

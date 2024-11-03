@@ -23,8 +23,8 @@ namespace MyGame.Component
         public void LoadData(IEntity entity)
         {
             entity.Position = Position;
-            entity.InitiateStates(States);
-            entity.InitiateEvent(Events);
+            entity.InitializeStates(States);
+            entity.InitializeEvent(Events);
         }
     }
 }

@@ -5,7 +5,7 @@ using System;
 
 namespace MyGame.Item
 {
-	public abstract partial class BaseItem : Node2D
+	public abstract partial class BasicItem : Node2D
 	{
 		private AnimationPlayer _iconAnimationPlayer;
 		
@@ -32,14 +32,16 @@ namespace MyGame.Item
 		}
 
 		public string ItemName;
+		public abstract Vector2 Size { get; }
 
-		public BaseItem()
+		public BasicItem()
 		{
 			ItemName = GetType().Name;
+			GD.Print($"{ItemName} initialized");
 		}
 
-		public abstract void InitiateStrategy();
-		public abstract void InitiateAnimation();
+		public abstract void InitializeStrategy();
+		public abstract void InitializeAnimation();
 
 		public void ChangeIconAnimation(string animationName)
 		{
@@ -66,11 +68,16 @@ namespace MyGame.Item
 			ItemDropStrategy.Invoke(strategy => strategy.DropItem(entity, this));
 		}
 
+		public AnimationPlayer GetIconAnimationPlayer()
+		{
+			return _iconAnimationPlayer;
+		}
+
 		public override void _Ready()
 		{
 			_iconAnimationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-			InitiateStrategy();
-			InitiateAnimation();
+			InitializeStrategy();
+			InitializeAnimation();
 		}
 	}
 }
