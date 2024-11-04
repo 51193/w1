@@ -36,5 +36,14 @@ namespace MyGame.Entity
         {
             return Items.Select(i => i.ItemName).ToList();
         }
+
+        public void DeleteAllItems()
+        {
+            foreach(var item in Items)
+            {
+                item.QueueFree();
+            }
+            Items.Clear();
+        }
     }
 }

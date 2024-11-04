@@ -21,7 +21,9 @@ namespace MyGame.Interface
 
 			Item = item;
 
-            float scaleFactor = Mathf.Min(CustomMinimumSize.X / Item.Size.X, CustomMinimumSize.Y / Item.Size.Y);
+			Vector2 actualSize = new(Mathf.Max(CustomMinimumSize.X, Size.X), Mathf.Max(CustomMinimumSize.Y, Size.Y));
+
+            float scaleFactor = Mathf.Min(actualSize.X / Item.Size.X, actualSize.Y / Item.Size.Y);
 			Item.Scale = new Vector2(scaleFactor, scaleFactor);
 
 			Vector2 offset = CustomMinimumSize / 2;

@@ -44,5 +44,11 @@ namespace MyGame.Entity
         {
             AnimationSprite2DNode = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
         }
+
+        public override void _ExitTree()
+        {
+            InventoryManager.DeleteAllItems();
+            base._ExitTree();
+        }
     }
 }

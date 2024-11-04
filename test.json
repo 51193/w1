@@ -68,8 +68,8 @@
             "Type": "MyGame.Component.BaseSaveComponent",
             "Property": {
               "Position": {
-                "X": 75.2778,
-                "Y": 48
+                "X": -18.331234,
+                "Y": 46.46363
               },
               "States": {
                 "OverallState": {
@@ -92,7 +92,6 @@
             "Type": "MyGame.Component.CharacterSaveComponent",
             "Property": {
               "ItemNameList": [
-                "TestItem0",
                 "TestItem0"
               ]
             }
