@@ -18,19 +18,17 @@ namespace MyGame.Interface
 		public void Initialize(BasicItem item)
 		{
 			ClearAllChildren();
-			//Scale and Position is incorrect now
+
 			Item = item;
 
-			float scaleFactor = Mathf.Min(Size.X / Item.Size.X, Size.Y / Item.Size.Y);
+            float scaleFactor = Mathf.Min(CustomMinimumSize.X / Item.Size.X, CustomMinimumSize.Y / Item.Size.Y);
 			Item.Scale = new Vector2(scaleFactor, scaleFactor);
 
-			Vector2 scaledSize = scaleFactor * Item.Size;
-			Vector2 offset = (Size - scaledSize) / 2;
+			Vector2 offset = CustomMinimumSize / 2;
 
-			Item.Position = Position + offset;
-
-			AddChild(Item);
-		}
+			Item.Position = offset;
+            AddChild(Item);
+        }
 
 		public override void _Pressed()
 		{

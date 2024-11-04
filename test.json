@@ -1,42 +1,7 @@
 {
-  "CurrentMapName": "Map0",
+  "CurrentMapName": "Map1",
   "GlobalEntityInstanceInfo": {
     "Map0": [
-      {
-        "EntityType": "DynamicEntity0",
-        "SaveHead": [
-          {
-            "Type": "MyGame.Component.BaseSaveComponent",
-            "Property": {
-              "Position": {
-                "X": 24.813072,
-                "Y": 22.270271
-              },
-              "States": {
-                "OverallState": {
-                  "Type": "MyGame.Entity.CharacterDefaultState",
-                  "Property": {
-                    "AnimationPlayed": "idle-2"
-                  }
-                },
-                "ControlState": {
-                  "Type": "MyGame.Entity.CharacterHardwareInputControlState",
-                  "Property": {}
-                }
-              },
-              "Events": {
-                "OnReachedTarget": []
-              }
-            }
-          },
-          {
-            "Type": "MyGame.Component.CharacterSaveComponent",
-            "Property": {
-              "ItemNameList": ["TestItem0"]
-            }
-          }
-        ]
-      },
       {
         "EntityType": "Map0Wall0",
         "SaveHead": [
@@ -95,6 +60,45 @@
         ]
       }
     ],
-    "Map1": []
+    "Map1": [
+      {
+        "EntityType": "DynamicEntity0",
+        "SaveHead": [
+          {
+            "Type": "MyGame.Component.BaseSaveComponent",
+            "Property": {
+              "Position": {
+                "X": 75.2778,
+                "Y": 48
+              },
+              "States": {
+                "OverallState": {
+                  "Type": "MyGame.Entity.CharacterDefaultState",
+                  "Property": {
+                    "AnimationPlayed": "idle-4"
+                  }
+                },
+                "ControlState": {
+                  "Type": "MyGame.Entity.CharacterHardwareInputControlState",
+                  "Property": {}
+                }
+              },
+              "Events": {
+                "OnReachedTarget": []
+              }
+            }
+          },
+          {
+            "Type": "MyGame.Component.CharacterSaveComponent",
+            "Property": {
+              "ItemNameList": [
+                "TestItem0",
+                "TestItem0"
+              ]
+            }
+          }
+        ]
+      }
+    ]
   }
 }
