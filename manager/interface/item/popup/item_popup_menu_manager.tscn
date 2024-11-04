@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://p60cynnrdy5a"]
+
+[ext_resource type="Script" path="res://manager/interface/item/popup/ItemPopupMenuManager.cs" id="1_l3gft"]
+
+[node name="ItemPopupMenuManager" type="Node"]
+script = ExtResource("1_l3gft")

@@ -20,7 +20,9 @@ namespace MyGame.Manager
 
 	public partial class MapTransition : Node
 	{
+		[Export]
 		private MapManager _mapManager;
+		[Export]
 		private EntityManager _entityManager;
 
 		private string _currentMapName;
@@ -149,9 +151,6 @@ namespace MyGame.Manager
 
 		public override void _Ready()
 		{
-			_mapManager = GetNode<MapManager>("MapManager");
-			_entityManager = GetNode<EntityManager>("EntityManager");
-
 			_mapManager.MapTransitionComplete += OnMapManagerComplete;
 			_entityManager.EntityTransitionComplete += OnEntityManagerComplete;
 		}

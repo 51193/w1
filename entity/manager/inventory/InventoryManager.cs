@@ -10,12 +10,10 @@ namespace MyGame.Entity
     {
         private static readonly Dictionary<string, PackedScene> _loadedItems = new();
 
-        private readonly IEntity _entity;
         public readonly List<BasicItem> Items = new();
 
-        public InventoryManager(IEntity entity, List<string> itemNameList = null)
+        public InventoryManager(List<string> itemNameList = null)
         {
-            _entity = entity;
             InitializeItems(itemNameList);
         }
 

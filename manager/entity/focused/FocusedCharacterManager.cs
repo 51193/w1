@@ -1,14 +1,11 @@
 using Godot;
 using MyGame.Entity;
-using MyGame.Interface;
-using System;
 
 namespace MyGame.Manager
 {
 	public partial class FocusedCharacterManager : Node
 	{
 		private BasicCharacter _focusedCharacter;
-		private Inventory _inventory;
 
 		public BasicCharacter FocusedCharacter
 		{
@@ -16,25 +13,8 @@ namespace MyGame.Manager
 			set
 			{
 				_focusedCharacter = value;
-				DisplayItem();
+				GlobalObjectManager.InitializeInventoryInterface(FocusedCharacter, 10);
 			}
-		}
-
-		private void DisplayItem()
-		{
-			if (_focusedCharacter == null) return;
-
-			int itemCount = Math.Min(_focusedCharacter.InventoryManager.Items.Count, _inventory.VisibleSlotCount);
-
-			for (int i = 0; i < itemCount; i++)
-			{
-				_inventory.AttachItemToSlot(i, _focusedCharacter.InventoryManager.Items[i]);
-			}
-		}
-
-		public override void _Ready()
-		{
-			_inventory = GetNode<CanvasLayer>("CanvasLayer").GetNode<Inventory>("Inventory");
 		}
 
 		public override void _EnterTree()

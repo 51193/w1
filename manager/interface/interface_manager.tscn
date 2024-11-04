@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxb7x8had3y5j"]
+
+[ext_resource type="Script" path="res://manager/interface/InterfaceManager.cs" id="1_aga0w"]
+[ext_resource type="PackedScene" uid="uid://b4o2ea42owqab" path="res://interface/inventory/inventory.tscn" id="2_3iu1u"]
+[ext_resource type="PackedScene" uid="uid://p60cynnrdy5a" path="res://manager/interface/item/popup/item_popup_menu_manager.tscn" id="2_grvgw"]
+
+[node name="InterfaceManager" type="Node" node_paths=PackedStringArray("_canvasLayer", "_inventory", "_itemPopupMenuManager")]
+script = ExtResource("1_aga0w")
+_canvasLayer = NodePath("CanvasLayer")
+_inventory = NodePath("CanvasLayer/Inventory")
+_itemPopupMenuManager = NodePath("CanvasLayer/ItemPopupMenuManager")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Inventory" parent="CanvasLayer" instance=ExtResource("2_3iu1u")]
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="ItemPopupMenuManager" parent="CanvasLayer" instance=ExtResource("2_grvgw")]

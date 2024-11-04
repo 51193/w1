@@ -7,6 +7,7 @@ namespace MyGame.Manager
 {
 	public partial class EntityManager : Node
 	{
+		[Export]
 		public Node2D _entityYSorter;
 
 		public Dictionary<string, List<EntityInstanceInfo>> GlobalEntityInstanceInfoDictionary = new();

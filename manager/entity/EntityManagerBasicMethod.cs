@@ -127,10 +127,5 @@ namespace MyGame.Manager
         {
             GD.Print($"EntityManager exit");
         }
-
-        public override void _Ready()
-        {
-            _entityYSorter = GetNode<Node2D>("EntityYSorter");
-        }
     }
 }

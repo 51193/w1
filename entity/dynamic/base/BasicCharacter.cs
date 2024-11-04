@@ -37,7 +37,7 @@ namespace MyGame.Entity
 
         public void InitializeInventory(List<string> ItemNameList)
         {
-            InventoryManager = new(this, ItemNameList);
+            InventoryManager = new(ItemNameList);
         }
 
         public override void _Ready()

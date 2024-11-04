@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
 using MyGame.Entity;
+using MyGame.Interface;
 
 namespace MyGame.Manager
 {
@@ -54,117 +55,72 @@ namespace MyGame.Manager
 			}
 		}
 
-		public static PackedScene GetResource(string name)
+		public static T HandleGlobalObject<T>(string objectName) where T : Node
 		{
-			if (GetGlobalObject("ResourceManager") is ResourceManager resourceManager)
+			if (GetGlobalObject(objectName) is T validateObject)
 			{
-				return resourceManager.GetResource(name);
+				return validateObject;
 			}
 			else
 			{
-				GD.PrintErr("Invalid ResourceManager");
+				GD.PrintErr($"Invalid {objectName}");
 				return null;
 			}
+		}
+
+		public static PackedScene GetResource(string name)
+		{
+			return HandleGlobalObject<ResourceManager>("ResourceManager").GetResource(name);
 		}
 
 		public static void EnterStage(string stageName)
 		{
-			if (GetGlobalObject("StageManager") is StageManager stageManager)
-			{
-				stageManager.PushStage(stageName);
-			}
-			else
-			{
-				GD.PrintErr("Invalid StageManager");
-			}
+			HandleGlobalObject<StageManager>("StageManager").PushStage(stageName);
 		}
 
 		public static void ExitStage()
 		{
-			if (GetGlobalObject("StageManager") is StageManager stageManager)
-			{
-				stageManager.PopStage();
-			}
-			else
-			{
-				GD.PrintErr("Invalid StageManager");
-			}
+			HandleGlobalObject<StageManager>("StageManager").PopStage();
 		}
 
 		public static MapTransition GetMapTransition()
 		{
-
-            if (GetGlobalObject("MapTransition") is MapTransition mapTransition)
-            {
-				return mapTransition;
-			}
-            else
-            {
-                GD.PrintErr("Invalid MapTransition");
-				return null;
-            }
+			return HandleGlobalObject<MapTransition>("MapTransition");
         }
 
 		public static void TransitMap(string departureName, string exitName, Vector2 exitPosition, Node entity)
 		{
-			if (GetGlobalObject("MapTransition") is MapTransition mapTransition)
-			{
-				mapTransition.TransitionProcess(departureName, exitName, exitPosition, (BasicDynamicEntity)entity);
-			}
-			else
-			{
-				GD.PrintErr("Invalid MapTransition");
-			}
+			HandleGlobalObject<MapTransition>("MapTransition").TransitionProcess(departureName, exitName, exitPosition, (BasicDynamicEntity)entity);
 		}
 
 		public static void Save(string fileName)
 		{
-            if (GetGlobalObject("MapTransition") is MapTransition mapTransition)
-            {
-                mapTransition.ToSaveData(fileName);
-            }
-            else
-            {
-                GD.PrintErr("Invalid MapTransition");
-            }
+            HandleGlobalObject<MapTransition>("MapTransition").ToSaveData(fileName);
         }
 
 		public static void Load(string fileName)
         {
-            if (GetGlobalObject("MapTransition") is MapTransition mapTransition)
-            {
-                mapTransition.FromSaveData(fileName);
-            }
-            else
-            {
-                GD.PrintErr("Invalid MapTransition");
-            }
+            HandleGlobalObject<MapTransition>("MapTransition").FromSaveData(fileName);
         }
 
         public static void FocusOnCharacter(BasicCharacter character)
         {
-            if (GetGlobalObject("FocusedCharacterManager") is FocusedCharacterManager focusedCharacterManager)
-            {
-				focusedCharacterManager.FocusedCharacter = character;
-            }
-            else
-            {
-                GD.PrintErr("Invalid FocusedCharacterManager");
-            }
+			HandleGlobalObject<FocusedCharacterManager>("FocusedCharacterManager").FocusedCharacter = character;
         }
 
 		public static BasicCharacter GetFocusedCharacter()
 		{
-
-			if (GetGlobalObject("FocusedCharacterManager") is FocusedCharacterManager focusedCharacterManager)
-			{
-				return focusedCharacterManager.FocusedCharacter;
-			}
-			else
-			{
-				GD.PrintErr("Invalid FocusedCharacterManager");
-				return null;
-			}
+			return HandleGlobalObject<FocusedCharacterManager>("FocusedCharacterManager").FocusedCharacter;
 		}
+
+		public static void InitializeInventoryInterface(BasicCharacter character, int visibleSlotCount)
+		{
+			HandleGlobalObject<InterfaceManager>("InterfaceManager").InitializeInventoryInterface(character, visibleSlotCount);
+		}
+
+		public static BasicItemPopupMenu GetItemPopupMenu(string itemPopupMenuName)
+		{
+			return HandleGlobalObject<InterfaceManager>("InterfaceManager").GetItemPopupMenu(itemPopupMenuName);
+        }
     }
 }

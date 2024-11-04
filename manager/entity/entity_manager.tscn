@@ -3,8 +3,9 @@
 [ext_resource type="Script" path="res://manager/entity/EntityManager.cs" id="1_164wi"]
 [ext_resource type="PackedScene" uid="uid://cmrtsxytx1tcd" path="res://manager/entity/focused/focused_character_manager.tscn" id="2_qe8fl"]
 
-[node name="EntityManager" type="Node"]
+[node name="EntityManager" type="Node" node_paths=PackedStringArray("_entityYSorter")]
 script = ExtResource("1_164wi")
+_entityYSorter = NodePath("EntityYSorter")
 
 [node name="FocusedCharacterManager" parent="." instance=ExtResource("2_qe8fl")]
 

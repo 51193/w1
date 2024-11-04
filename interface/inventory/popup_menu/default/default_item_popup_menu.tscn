@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://833wly2uoysj"]
+
+[ext_resource type="Script" path="res://interface/inventory/popup_menu/default/DefaultItemPopupMenu.cs" id="1_u6aka"]
+
+[node name="DefaultItemPopupMenu" type="PopupMenu"]
+size = Vector2i(100, 8)
+visible = true
+unfocusable = true
+script = ExtResource("1_u6aka")

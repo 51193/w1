@@ -43,5 +43,15 @@
 		"Name": "TestItem0",
 		"Path": "res://item/test/test_item_0.tscn",
 		"Description": "A test item."
+	},
+	{
+		"Name": "DefaultItemPopupMenu",
+		"Path": "res://interface/inventory/popup_menu/default/default_item_popup_menu.tscn",
+		"Description": "A default popup menu."
+	},
+	{
+		"Name": "TestItemPopupMenu",
+		"Path": "res://interface/inventory/popup_menu/test/test_item_popup_menu.tscn",
+		"Description": "A test popup menu."
 	}
 ]

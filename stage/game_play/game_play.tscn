@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://bxg5hmoh60ci5"]
+[gd_scene load_steps=4 format=3 uid="uid://bxg5hmoh60ci5"]
 
 [ext_resource type="Script" path="res://stage/game_play/GamePlay.cs" id="1_5xubu"]
 [ext_resource type="PackedScene" uid="uid://ch2dmkohs60hi" path="res://manager/map_transition/map_transition.tscn" id="2_2ixxv"]
+[ext_resource type="PackedScene" uid="uid://dxb7x8had3y5j" path="res://manager/interface/interface_manager.tscn" id="3_pndir"]
 
-[node name="GamePlay" type="Node"]
+[node name="GamePlay" type="Node" node_paths=PackedStringArray("_mapTransition")]
 script = ExtResource("1_5xubu")
+_mapTransition = NodePath("MapTransition")
+
+[node name="InterfaceManager" parent="." instance=ExtResource("3_pndir")]
 
 [node name="MapTransition" parent="." instance=ExtResource("2_2ixxv")]
