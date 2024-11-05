@@ -1,10 +1,14 @@
-﻿using MyGame.Component;
+﻿using Godot;
+using MyGame.Component;
 using System;
 
 namespace MyGame.Entity
 {
     public abstract partial class BasicInteractableStaticEntity : StaticEntity, IInteractableEntity
     {
+        [Export]
+        public Label Tip;
+
         public LazyLoader<IInteractionStrategy> InteractionStrategy { get; set; }
 
         public void LoadStrategy(Func<IInteractionStrategy> factory)
@@ -12,8 +16,14 @@ namespace MyGame.Entity
             InteractionStrategy = new LazyLoader<IInteractionStrategy>(factory);
         }
 
-        public abstract void ShowTip();
+        public virtual void ShowTip()
+        {
+            Tip.Show();
+        }
 
-        public abstract void HideTip();
+        public virtual void HideTip()
+        {
+            Tip.Hide();
+        }
     }
 }

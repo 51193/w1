@@ -9,6 +9,7 @@ namespace MyGame.Interface
 	{
 		private BasicCharacter _character;
 
+		[Export]
 		private HBoxContainer _itemSlotContainer;
 		private readonly List<ItemSlot> _itemSlots = new();
 		public int VisibleSlotCount;
@@ -45,17 +46,17 @@ namespace MyGame.Interface
 		{
 			ClearChildren();
 
-            for (int i = 0; i < VisibleSlotCount; i++)
-            {
-                ItemSlot itemSlot = new();
-                _itemSlotContainer.AddChild(itemSlot);
-                _itemSlots.Add(itemSlot);
-            }
+			for (int i = 0; i < VisibleSlotCount; i++)
+			{
+				ItemSlot itemSlot = new();
+				_itemSlotContainer.AddChild(itemSlot);
+				_itemSlots.Add(itemSlot);
+			}
 
-            UpdateItemSlotLayout();
+			UpdateItemSlotLayout();
 
-            DisplayCharacterInventory();
-        }
+			DisplayCharacterInventory();
+		}
 
 		private void DisplayCharacterInventory()
 		{
@@ -64,14 +65,9 @@ namespace MyGame.Interface
 			int itemCount = Math.Min(_character.InventoryManager.Items.Count, VisibleSlotCount);
 
 			for (int i = 0; i < itemCount; i++)
-            {
+			{
 				_itemSlots[i].Initialize(_character, _character.InventoryManager.Items[i]);
-            }
-		}
-
-		public override void _Ready()
-		{
-			_itemSlotContainer = GetNode<HBoxContainer>("HBoxContainer");
+			}
 		}
 	}
 }

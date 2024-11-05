@@ -1,5 +1,4 @@
-﻿using Godot;
-using MyGame.Entity;
+﻿using MyGame.Entity;
 using MyGame.Item;
 
 namespace MyGame.Component
@@ -8,7 +7,7 @@ namespace MyGame.Component
     {
         public void Activate(BasicCharacter character, BasicItem item)
         {
-            GD.Print($"{character.EntityName} is checking {item.ItemName}");
+            character.Say($"This item is {item.ItemName}.");
         }
     }
 }

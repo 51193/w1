@@ -2,10 +2,11 @@
 
 [ext_resource type="Script" path="res://interface/inventory/Inventory.cs" id="1_tvpxe"]
 
-[node name="Inventory" type="Control"]
+[node name="Inventory" type="Control" node_paths=PackedStringArray("_itemSlotContainer")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_tvpxe")
+_itemSlotContainer = NodePath("HBoxContainer")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1

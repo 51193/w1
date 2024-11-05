@@ -9,8 +9,9 @@ namespace MyGame.Item
 	public abstract partial class BasicItem : Node2D
 	{
 		private readonly Dictionary<string, LazyLoader<IItemOperation>> _itemStrategeies = new();
-		public virtual string ItemPopupMenuName { get; } = "DefaultItemPopupMenu";
-
+		[Export]
+		public string ItemPopupMenuName = "DefaultItemPopupMenu";
+		[Export]
 		private AnimationPlayer _iconAnimationPlayer;
 		
 		public string ItemName;
@@ -58,7 +59,6 @@ namespace MyGame.Item
 
 		public override void _Ready()
 		{
-			_iconAnimationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 			InitializeStrategy();
 			InitializeAnimation();
 		}

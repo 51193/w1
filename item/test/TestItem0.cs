@@ -8,9 +8,7 @@ namespace MyGame.Item
 		[Export]
 		private AnimatedSprite2D _animatedSprite2DNode;
 
-		public override string ItemPopupMenuName => "TestItemPopupMenu";
-
-        public override Vector2 Size => _animatedSprite2DNode.SpriteFrames.GetFrameTexture("default", 0).GetSize();
+		public override Vector2 Size => _animatedSprite2DNode.SpriteFrames.GetFrameTexture("default", 0).GetSize();
 
 		public override void InitializeAnimation()
 		{

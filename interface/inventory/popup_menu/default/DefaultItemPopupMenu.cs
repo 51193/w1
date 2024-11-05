@@ -6,7 +6,7 @@ namespace MyGame.Interface
 	{
 		protected override void InitializePopupItems()
 		{
-			AddItem("nothing", 0);
+			AddItem("Check", 0);
 		}
 
 		protected override void OnPopupMenuPressed(long id)
@@ -14,7 +14,7 @@ namespace MyGame.Interface
 			switch(id)
 			{
 				case 0:
-					GD.Print("Nothing happened");
+					_item.ActivateItemStrategy(_character, "check");
 					break;
 			}
 		}

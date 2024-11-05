@@ -40,9 +40,9 @@ namespace MyGame.Entity
 			//Do nothing
 		}
 
-        public override void AfterInitialize()
-        {
-            GlobalObjectManager.FocusOnCharacter(this);
-        }
-    }
+		public override void AfterInitialize()
+		{
+			GlobalObjectManager.FocusOnCharacter(this);
+		}
+	}
 }

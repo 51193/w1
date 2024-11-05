@@ -6,18 +6,8 @@ namespace MyGame.Entity
 {
 	public partial class DoorOpenable : BasicInteractableStaticEntity
 	{
+		[Export]
 		public AnimationPlayer AnimationPlayerNode;
-		public Label LabelNode;
-
-		public override void ShowTip()
-		{
-			LabelNode.Show();
-		}
-
-		public override void HideTip()
-		{
-			LabelNode.Hide();
-		}
 
 		public override void InitializeStates(Dictionary<string, IState> states = null)
 		{
@@ -41,13 +31,6 @@ namespace MyGame.Entity
 				}
 				StateManager = new(this, states);
 			}
-		}
-
-		public override void _Ready()
-		{
-			AnimationPlayerNode = GetNode<AnimationPlayer>("AnimationPlayer");
-			LabelNode = GetNode<Label>("Label");
-			LabelNode.Hide();
 		}
 	}
 }

@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://olnm4npv2vv8"]
-
-[ext_resource type="Script" path="res://interface/inventory/popup_menu/test/TestItemPopupMenu.cs" id="1_kb875"]
-
-[node name="TestItemPopupMenu" type="PopupMenu"]
-size = Vector2i(100, 8)
-visible = true
-unfocusable = true
-script = ExtResource("1_kb875")

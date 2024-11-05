@@ -107,9 +107,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="TestItem0" type="Node2D" node_paths=PackedStringArray("_animatedSprite2DNode")]
+[node name="TestItem0" type="Node2D" node_paths=PackedStringArray("_animatedSprite2DNode", "_iconAnimationPlayer")]
 script = ExtResource("1_osqtc")
 _animatedSprite2DNode = NodePath("AnimatedSprite2D")
+_iconAnimationPlayer = NodePath("AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
