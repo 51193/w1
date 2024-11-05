@@ -23,7 +23,7 @@ namespace MyGame.Entity
             BasicCharacter character = entity as BasicCharacter;
             character.LoadStrategy(() =>
             {
-                return new CharacterAnimationPlayer(character.AnimationSprite2DNode, _animationPlayed);
+                return new CharacterAnimationPlayer(character.AnimatedSprite2DNode, _animationPlayed);
             });
             character.LoadStrategy(() =>
             {

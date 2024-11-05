@@ -386,12 +386,12 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_sc62u"]
 radius = 5.0
 
-[node name="DynamicEntity0" type="CharacterBody2D" node_paths=PackedStringArray("AnimationSprite2DNode", "_speechBubble")]
+[node name="DynamicEntity0" type="CharacterBody2D" node_paths=PackedStringArray("AnimatedSprite2DNode", "_speechBubble")]
 up_direction = Vector2(0, 1)
 slide_on_ceiling = false
 platform_floor_layers = 4294967040
 script = ExtResource("1_221tw")
-AnimationSprite2DNode = NodePath("AnimatedSprite2D")
+AnimatedSprite2DNode = NodePath("AnimatedSprite2D")
 _speechBubble = NodePath("SpeechBubble")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
