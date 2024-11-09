@@ -74,15 +74,38 @@ namespace MyGame.Manager
 			return scene;
 		}
 
-		public override void _EnterTree()
-		{
-			GlobalObjectManager.AddGlobalObject("ResourceManager", this);
-			LoadResourcePaths("path.json");
-		}
+		private static ResourceManager _instance;
+		public static ResourceManager Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    GD.PrintErr("ResourceManager is not available");
+                }
+                return _instance;
+            }
+        }
 
-		public override void _ExitTree()
-		{
-			GlobalObjectManager.RemoveGlobalObject("ResourceManager");
-		}
+        public override void _EnterTree()
+        {
+            if (_instance == null)
+            {
+                _instance = this;
+            }
+            else
+            {
+                GD.PrintErr("Duplicate ResourceManager entered the tree, this is not allowed");
+            }
+            LoadResourcePaths("path.json");
+        }
+
+        public override void _ExitTree()
+        {
+            if (_instance == this)
+            {
+                _instance = null;
+            }
+        }
 	}
 }

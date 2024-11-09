@@ -56,7 +56,7 @@ namespace MyGame.Manager
             }
             else
             {
-                _loadedEntities[entityName] = GlobalObjectManager.GetResource(entityName);
+                _loadedEntities[entityName] = ResourceManager.Instance.GetResource(entityName);
                 GD.Print($"Entity loaded: {entityName}");
             }
         }

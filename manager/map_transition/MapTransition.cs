@@ -136,18 +136,42 @@ namespace MyGame.Manager
 			_mapManager.LoadMap(saveData.CurrentMapName);
 		}
 
-		public override void _EnterTree()
-		{
-			GlobalObjectManager.AddGlobalObject("MapTransition", this);
-			LoadTransitionInfo("transition.json");
-		}
 
-		public override void _ExitTree()
-		{
-			_mapManager.MapTransitionComplete -= OnMapManagerComplete;
-			_entityManager.EntityTransitionComplete -= OnEntityManagerComplete;
-			GlobalObjectManager.RemoveGlobalObject("MapTransition");
-		}
+        private static MapTransition _instance;
+        public static MapTransition Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    GD.PrintErr("MapTransition is not available");
+                }
+                return _instance;
+            }
+        }
+
+        public override void _EnterTree()
+        {
+            if (_instance == null)
+            {
+                _instance = this;
+            }
+            else
+            {
+                GD.PrintErr("Duplicate MapTransition entered the tree, this is not allowed");
+            }
+            LoadTransitionInfo("transition.json");
+        }
+
+        public override void _ExitTree()
+        {
+            _mapManager.MapTransitionComplete -= OnMapManagerComplete;
+            _entityManager.EntityTransitionComplete -= OnEntityManagerComplete;
+            if (_instance == this)
+            {
+                _instance = null;
+            }
+        }
 
 		public override void _Ready()
 		{

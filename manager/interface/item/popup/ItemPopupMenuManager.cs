@@ -16,7 +16,7 @@ namespace MyGame.Manager
 				return;
 			}
 
-			BasicItemPopupMenu popupMenu = GlobalObjectManager.GetResource(itemPopupMenuName).Instantiate<BasicItemPopupMenu>();
+			BasicItemPopupMenu popupMenu = ResourceManager.Instance.GetResource(itemPopupMenuName).Instantiate<BasicItemPopupMenu>();
 			popupMenu.Hide();
             AddChild(popupMenu);
             _loadedPopupMenu[itemPopupMenuName] = popupMenu;

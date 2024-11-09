@@ -23,7 +23,7 @@ namespace MyGame.Entity
             {
                 if (!_loadedItems.TryGetValue(itemName, out var item))
                 {
-                    item = GlobalObjectManager.GetResource(itemName);
+                    item = ResourceManager.Instance.GetResource(itemName);
                     _loadedItems[itemName] = item;
                 }
                 Items.Add(item.Instantiate<BasicItem>());

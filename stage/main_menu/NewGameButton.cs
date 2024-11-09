@@ -6,7 +6,7 @@ namespace MyGame.Stage {
     {
         public override void _Pressed()
         {
-            GlobalObjectManager.EnterStage("GamePlay");
+            StageManager.Instance.PushStage("GamePlay");
         }
     }
 }

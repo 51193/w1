@@ -17,7 +17,7 @@ namespace MyGame.Util
                             parameters[0] is BasicDynamicEntity dynamicEntity &&
                             parameters[1] is TransitionInfo transitionInfo)
                         {
-                            MapTransition mapTransition = GlobalObjectManager.GetMapTransition();
+                            MapTransition mapTransition = MapTransition.Instance;
                             return () =>
                             {
                                 mapTransition.CallDeferred(

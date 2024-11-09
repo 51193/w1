@@ -68,14 +68,14 @@
             "Type": "MyGame.Component.BaseSaveComponent",
             "Property": {
               "Position": {
-                "X": 38.017574,
-                "Y": 48.256104
+                "X": -29.319635,
+                "Y": 44.67559
               },
               "States": {
                 "OverallState": {
                   "Type": "MyGame.Entity.CharacterDefaultState",
                   "Property": {
-                    "AnimationPlayed": "idle-2"
+                    "AnimationPlayed": "idle-4"
                   }
                 },
                 "ControlState": {

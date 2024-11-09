@@ -42,7 +42,7 @@ namespace MyGame.Interface
 			if (_item != null)
 			{
 				GD.Print($"ItemSlot pressed, {_item.ItemName} inside the slot");
-				BasicItemPopupMenu itemPopupMenu =  GlobalObjectManager.GetItemPopupMenu(_item.ItemPopupMenuName);
+				BasicItemPopupMenu itemPopupMenu = InterfaceManager.Instance.GetItemPopupMenu(_item.ItemPopupMenuName);
 				itemPopupMenu.Initialize(_character, _item, this);
 			}
 			else

@@ -42,7 +42,7 @@ namespace MyGame.Entity
 
 		public override void AfterInitialize()
 		{
-			GlobalObjectManager.FocusOnCharacter(this);
+			FocusedCharacterManager.Instance.FocusedCharacter = this;
 		}
 	}
 }

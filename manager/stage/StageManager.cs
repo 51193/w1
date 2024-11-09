@@ -9,9 +9,9 @@ namespace MyGame.Manager
 		private readonly Stack<PackedScene> _stageStack = new();
 		private Node _currentStage;
 
-		public void PushStage(String name)
+		public void PushStage(string name)
 		{
-			PackedScene scene = GlobalObjectManager.GetResource(name);
+			PackedScene scene = ResourceManager.Instance.GetResource(name);
 
 			if (_currentStage != null)
 			{
@@ -47,15 +47,38 @@ namespace MyGame.Manager
 			GD.Print($"Stage stack have {_stageStack.Count} instance(s) inside");
 		}
 
-		public override void _EnterTree()
+		private static StageManager _instance;
+		public static StageManager Instance
 		{
-			GlobalObjectManager.AddGlobalObject("StageManager", this);
+			get
+			{
+				if (_instance == null)
+                {
+                    GD.PrintErr("StageManager is not available");
+                }
+				return _instance;
+			}
 		}
 
+		public override void _EnterTree()
+        {
+            if (_instance == null)
+            {
+                _instance = this;
+            }
+            else
+            {
+                GD.PrintErr("Duplicate StageManager entered the tree, this is not allowed");
+            }
+        }
+
 		public override void _ExitTree()
-		{
-			GlobalObjectManager.RemoveGlobalObject("StageManager");
-		}
+        {
+            if (_instance == this)
+            {
+                _instance = null;
+            }
+        }
 
 		public override void _Ready()
 		{

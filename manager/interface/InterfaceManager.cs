@@ -23,14 +23,37 @@ namespace MyGame.Interface
 			return _itemPopupMenuManager.GetItemPopupMenu(itemPopupMenuName);
 		}
 
-		public override void _EnterTree()
-		{
-			GlobalObjectManager.AddGlobalObject("InterfaceManager", this);
-		}
+        private static InterfaceManager _instance;
+        public static InterfaceManager Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    GD.PrintErr("InterfaceManager is not available");
+                }
+                return _instance;
+            }
+        }
 
-		public override void _ExitTree()
-		{
-			GlobalObjectManager.RemoveGlobalObject("InterfaceManager");
-		}
-	}
+        public override void _EnterTree()
+        {
+            if (_instance == null)
+            {
+                _instance = this;
+            }
+            else
+            {
+                GD.PrintErr("Duplicate InterfaceManager entered the tree, this is not allowed");
+            }
+        }
+
+        public override void _ExitTree()
+        {
+            if (_instance == this)
+            {
+                _instance = null;
+            }
+        }
+    }
 }

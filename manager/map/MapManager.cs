@@ -29,7 +29,7 @@ namespace MyGame.Manager
 		{
 			if (!_loadedMaps.TryGetValue(mapName, out var map))
 			{
-				map = GlobalObjectManager.GetResource(mapName);
+				map = ResourceManager.Instance.GetResource(mapName);
 				_loadedMaps[mapName] = map;
 			}
 
