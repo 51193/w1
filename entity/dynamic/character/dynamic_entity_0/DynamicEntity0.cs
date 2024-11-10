@@ -14,22 +14,6 @@ namespace MyGame.Entity
 			};
 		}
 
-		public override void InitializeStates(Dictionary<string, IState> states = null)
-		{
-			if (states == null || states.Count == 0)
-			{
-				StateManager = new(this, new()
-				{
-					["OverallState"] = new CharacterDefaultState(),
-					["ControlState"] = new CharacterHardwareInputControlState()
-				});
-			}
-			else
-			{
-				StateManager = new(this, states);
-			}
-		}
-
 		public override void ShowTip()
 		{
 			//Do nothing

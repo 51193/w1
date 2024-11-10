@@ -8,10 +8,5 @@ namespace MyGame.Entity
 	{
 		[Export]
 		public AnimationPlayer AnimationPlayerNode;
-
-		public override void InitializeStates(Dictionary<string, IState> states = null)
-		{
-			base.InitializeStates(states);
-		}
 	}
 }

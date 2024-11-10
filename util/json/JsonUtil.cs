@@ -18,7 +18,6 @@ namespace MyGame.Util
                 {
                     new Vector2Converter(),
                     new VariableLengthParameterConverter(),
-                    new IStateConverter(),
                     new ISaveComponentConverter()
                 }
             };
@@ -35,7 +34,6 @@ namespace MyGame.Util
                 {
                     new Vector2Converter(),
                     new VariableLengthParameterConverter(),
-                    new IStateConverter(),
                     new ISaveComponentConverter()
                 }
             };

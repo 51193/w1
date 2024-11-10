@@ -1,39 +1,32 @@
-﻿using Godot;
-using MyGame.Component;
+﻿using MyGame.State;
 using MyGame.Strategy;
-using MyGame.Util;
+using System;
 
 namespace MyGame.Entity
 {
-    public class CharacterStraightForwardControlState : IState
+    public class CharacterStraightForwardControlState : BasicState<BasicCharacter>
     {
-        public Vector2 Position { get; set; }
-        public string EventName { get; set; }
+        public override void Enter(BasicCharacter entity)
+        {
+            entity.IsTransitable = false;
+        }
 
-        private uint _entityOriginalCollisionMask = 0;
-        private bool _entityOriginalTransitableState = false;
-        public CharacterStraightForwardControlState() { }
-        public CharacterStraightForwardControlState(Vector2 position, string eventName)
+        public override void Exit(BasicCharacter entity)
         {
-            Position = position;
-            EventName = eventName;
+            entity.IsTransitable = true;
         }
-        public void OnEnter(IEntity entity)
+
+        public override Type Transit(BasicCharacter entity, string token, params object[] parameters)
         {
-            _entityOriginalCollisionMask = ((DynamicEntity0)entity).CollisionMask;
-            _entityOriginalTransitableState = ((DynamicEntity0)entity).IsTransitable;
-            ((DynamicEntity0)entity).CollisionMask = 0;
-            ((DynamicEntity0)entity).IsTransitable = false;
-            ((BasicDynamicEntity)entity).TargetPosition = Position;
-            ((BasicDynamicEntity)entity).CallbackOnTargetReached = EventName;
-            entity.StrategyManager.AddStrategy<StraightForwardDirection>(StrategyGroup.PhysicsProcessStrategy);
+            return token switch
+            {
+                "HardwareInput" => typeof(CharacterHardwareInputControlState),
+                _ => null,
+            };
         }
-        public void OnExit(IEntity entity)
+        protected override void InitializeStrategies()
         {
-            ((DynamicEntity0)entity).CollisionMask = _entityOriginalCollisionMask;
-            ((DynamicEntity0)entity).IsTransitable = _entityOriginalTransitableState;
-            entity.StrategyManager.RemoveStrategy<StraightForwardDirection>(StrategyGroup.PhysicsProcessStrategy);
+            AddStrategy<StraightForwardDirection>(StrategyGroup.PhysicsProcessStrategy);
         }
-        public void OnHandleStateTransition(IEntity entity, string input, params object[] args) { }
     }
 }

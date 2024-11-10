@@ -1,54 +1,73 @@
 ﻿using Godot;
-using MyGame.Component;
 using MyGame.Entity;
+using MyGame.State;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MyGame.Manager
 {
     public class StateManager
     {
         private readonly IEntity _entity;
-        private readonly Dictionary<string, IState> _states;
 
-        public StateManager(IEntity entity, Dictionary<string, IState> states = null)
+        private readonly Dictionary<Type, IState> _states = new();
+
+        public List<Type> States
         {
-            _entity = entity;
-            if (states != null)
+            get
             {
-                _states = states;
-                foreach (var state in states.Values)
+                return _states.Select(s => s.Key).ToList();
+            }
+            set
+            {
+                foreach (var t in value)
                 {
-                    state.Enter(_entity);
+                    AddState(t);
                 }
             }
-            else
-            {
-                _states = new();
-            }
         }
 
-        public void HandleStateTransition(string stateName, string input, params object[] args)
+        public StateManager(IEntity entity) { _entity = entity; }
+
+        public void AddState(Type type)
         {
-            if (_states.ContainsKey(stateName))
+            if(_states.ContainsKey(type))
             {
-                _states[stateName].HandleStateTransition(_entity, input, args);
+                GD.PrintErr($"Add duplicate state: {type.FullName}");
+                return;
             }
-            else
-            {
-                GD.PrintErr($"{stateName} not exist in {_entity.EntityName}, unable to transit state");
-            }
+            _states[type] = StateInstanceManager.Instance.GetInstance(type);
+            _states[type].Enter(_entity);
         }
 
-        public void ChangeState(string stateName, IState state)
+        public void RemoveState(Type type)
         {
-            if (_states.TryGetValue(stateName, out var currentState))
+            if(!_states.ContainsKey(type))
             {
-                currentState.Exit(_entity);
+                GD.PrintErr($"{type.FullName} is not exist when remove state");
+                return;
             }
-            _states[stateName] = state;
-            state.Enter(_entity);
+            _states[type].Exit(_entity);
+            _states.Remove(type);
         }
 
-        public Dictionary<string, IState> GetStates() { return _states; }
+        public void Transit(Type type, string token, params object[] parameters)
+        {
+            if (!_states.TryGetValue(type, out IState state))
+            {
+                GD.PrintErr($"State '{type.FullName}' is not exist when transit");
+                return;
+            }
+            Type transitType = state.Transit(_entity, token, parameters);
+            AddState(transitType);
+            RemoveState(type);
+        }
+
+        public void Transit<T>(string token, params object[] parameters) where T : IState
+        {
+            Type type = typeof(T);
+            Transit(type, token, parameters);
+        }
     }
 }

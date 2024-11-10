@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxg5hmoh60ci5"]
+[gd_scene load_steps=6 format=3 uid="uid://bxg5hmoh60ci5"]
 
 [ext_resource type="Script" path="res://stage/game_play/GamePlay.cs" id="1_5xubu"]
 [ext_resource type="PackedScene" uid="uid://ch2dmkohs60hi" path="res://manager/map_transition/map_transition.tscn" id="2_2ixxv"]
 [ext_resource type="PackedScene" uid="uid://cboym0bymht8x" path="res://manager/strategy/strategy_instance_manager.tscn" id="2_ftf6p"]
+[ext_resource type="PackedScene" uid="uid://bltrxto5377y0" path="res://manager/state/state_instance_manager.tscn" id="3_k5ymc"]
 [ext_resource type="PackedScene" uid="uid://dxb7x8had3y5j" path="res://manager/interface/interface_manager.tscn" id="3_pndir"]
 
 [node name="GamePlay" type="Node" node_paths=PackedStringArray("_mapTransition")]
@@ -10,6 +11,8 @@ script = ExtResource("1_5xubu")
 _mapTransition = NodePath("MapTransition")
 
 [node name="StrategyInstanceManager" parent="." instance=ExtResource("2_ftf6p")]
+
+[node name="StateInstanceManager" parent="." instance=ExtResource("3_k5ymc")]
 
 [node name="InterfaceManager" parent="." instance=ExtResource("3_pndir")]
 

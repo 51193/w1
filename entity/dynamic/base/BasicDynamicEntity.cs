@@ -27,21 +27,8 @@ namespace MyGame.Entity
 		{
 			EntityName = GetType().Name;
 			StrategyManager = new(this);
+			StateManager = new(this);
 		}
-
-		public virtual void InitializeStates(Dictionary<string, IState> states)
-		{
-            {
-                if (states == null)
-                {
-                    StateManager = new(this);
-                }
-                else
-                {
-                    StateManager = new(this, states);
-                }
-            }
-        }
 
 		public virtual ISaveComponent SaveData(ISaveComponent saveComponent = null)
 		{

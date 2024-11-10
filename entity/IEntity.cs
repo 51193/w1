@@ -18,15 +18,6 @@ namespace MyGame.Entity
         public EventManager EventManager { get; set; }
         public StrategyManager StrategyManager { get; set; }
         public string EntityName { get; init; }
-        public void InitializeStates(Dictionary<string, IState> states = null);
-        public Dictionary<string, IState> GetStates()
-        {
-            return StateManager.GetStates();
-        }
-        public void HandleStateTransition(string stateName, string input, params object[] args)
-        {
-            StateManager.HandleStateTransition(stateName, input, args);
-        }
         public ISaveComponent SaveData(ISaveComponent saveComponent = null);
         public ISaveComponent LoadData(ISaveComponent saveComponent);
         public void InitializeEvent(Dictionary<string, Stack<EventIndex>> events = null)

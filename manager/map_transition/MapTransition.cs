@@ -83,7 +83,7 @@ namespace MyGame.Manager
 			{
 				entity.RegistrateEvent("OnReachedTarget", typeof(MapTransitionEvents), "InvokeManagers", transition);
 			}
-			entity.HandleStateTransition("ControlState", "GoStraight", exitPosition);
+			entity.StateManager.Transit<CharacterHardwareInputControlState>("GoStraight", exitPosition, "OnReachedTarget");
 		}
 
 		private void OnMapManagerComplete()

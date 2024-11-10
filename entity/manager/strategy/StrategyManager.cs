@@ -19,15 +19,14 @@ namespace MyGame.Entity
         private readonly List<IStrategy> _delayAddStrategies = new();
         private readonly List<Type> _delayRemoveStrategies = new();
 
-        public void AddStrategy<T>() where T : IStrategy, new()
+        public void AddStrategy(IStrategy strategy)
         {
-            IStrategy instance = StrategyInstanceManager.Instance.GetInstance<T>();
-            _delayAddStrategies.Add(instance);
+            _delayAddStrategies.Add(strategy);
         }
 
-        public void RemoveStrategy<T>() where T : IStrategy
+        public void RemoveStrategy(Type type)
         {
-            _delayRemoveStrategies.Add(typeof(T));
+            _delayRemoveStrategies.Add(type);
         }
 
         public void CallStrategies(IEntity entity, double dt = 0)
@@ -79,9 +78,9 @@ namespace MyGame.Entity
 
         public StrategyManager(IEntity entity) { _entity = entity; }
 
-        private void InsertToStrategy<T>(IStrategy instance) where T : IStrategy
+        private void InsertToStrategy(IStrategy instance)
         {
-            Type type = typeof(T);
+            Type type = instance.GetType();
             if (_strategies.ContainsKey(type))
             {
                 GD.PrintErr($"Duplicate strategy type in StrategyManager: {type.FullName}");
@@ -90,9 +89,8 @@ namespace MyGame.Entity
             _strategies[type] = instance;
         }
 
-        private void EraseFromStrategy<T>() where T : IStrategy
+        private void EraseFromStrategy(Type type)
         {
-            Type type = typeof(T);
             if (!_strategies.ContainsKey(type))
             {
                 GD.PrintErr($"Invalid strategy type to earse in StrategyManager: {type.FullName}");
@@ -101,49 +99,64 @@ namespace MyGame.Entity
             _strategies.Remove(type);
         }
 
-        public void AddStrategy<T>(StrategyGroup strategyGroup) where T : IStrategy, new()
+        public void AddStrategy(IStrategy strategy, StrategyGroup strategyGroup)
         {
-            IStrategy instance = StrategyInstanceManager.Instance.GetInstance<T>();
-
             switch (strategyGroup)
             {
                 case StrategyGroup.NormalStrategy:
-                    InsertToStrategy<T>(instance);
+                    InsertToStrategy(strategy);
                     break;
                 case StrategyGroup.ProcessStrategy:
-                    _processStrategies.AddStrategy<T>();
+                    _processStrategies.AddStrategy(strategy);
                     break;
                 case StrategyGroup.PhysicsProcessStrategy:
-                    _physicsProcessStrategies.AddStrategy<T>();
+                    _physicsProcessStrategies.AddStrategy(strategy);
+                    break;
+            }
+        }
+
+        public void AddStrategy<T>(StrategyGroup strategyGroup) where T : IStrategy, new()
+        {
+            IStrategy instance = StrategyInstanceManager.Instance.GetInstance<T>();
+            AddStrategy(instance, strategyGroup);
+        }
+
+        public void RemoveStrategy(Type type, StrategyGroup strategyGroup)
+        {
+            switch (strategyGroup)
+            {
+                case StrategyGroup.NormalStrategy:
+                    EraseFromStrategy(type);
+                    break;
+                case StrategyGroup.ProcessStrategy:
+                    _processStrategies.RemoveStrategy(type);
+                    break;
+                case StrategyGroup.PhysicsProcessStrategy:
+                    _physicsProcessStrategies.RemoveStrategy(type);
                     break;
             }
         }
 
         public void RemoveStrategy<T>(StrategyGroup strategyGroup) where T : IStrategy
         {
-            switch (strategyGroup)
-            {
-                case StrategyGroup.NormalStrategy:
-                    EraseFromStrategy<T>();
-                    break;
-                case StrategyGroup.ProcessStrategy:
-                    _processStrategies.RemoveStrategy<T>();
-                    break;
-                case StrategyGroup.PhysicsProcessStrategy:
-                    _physicsProcessStrategies.RemoveStrategy<T>();
-                    break;
-            }
+            Type type = typeof(T);
+            RemoveStrategy(type, strategyGroup);
         }
 
-        public void ActivateStrategy<T>() where T : IStrategy
+        public void ActivateStrategy(Type type)
         {
-            Type type = typeof(T);
             if (!_strategies.ContainsKey(type))
             {
                 GD.PrintErr($"Activate invalid strategy in Strategy Manager: {type.FullName}");
                 return;
             }
             _strategies[type].Activate(_entity);
+        }
+
+        public void ActivateStrategy<T>() where T : IStrategy
+        {
+            Type type = typeof(T);
+            ActivateStrategy(type);
         }
 
         public void Process(double dt)

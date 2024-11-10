@@ -1,4 +1,5 @@
 using Godot;
+using MyGame.State;
 using MyGame.Strategy;
 using System;
 using System.Collections.Generic;
@@ -9,15 +10,20 @@ namespace MyGame.Manager
 	{
 		private readonly Dictionary<Type, IStrategy> _strategyInstances = new();
 
-		public T GetInstance<T>() where T : IStrategy, new()
-		{
-			Type type = typeof(T);
-			if (!_strategyInstances.ContainsKey(type))
-			{
-				_strategyInstances[type] = new T();
-			}
-			return (T)_strategyInstances[type];
-		}
+        public IStrategy GetInstance(Type type)
+        {
+            if (!_strategyInstances.ContainsKey(type))
+            {
+                _strategyInstances[type] = (IStrategy)Activator.CreateInstance(type);
+            }
+            return _strategyInstances[type];
+        }
+
+        public T GetInstance<T>() where T : IStrategy, new()
+        {
+            Type type = typeof(T);
+            return (T)GetInstance(type);
+        }
 
         private static StrategyInstanceManager _instance;
         public static StrategyInstanceManager Instance

@@ -1,34 +1,32 @@
 ﻿using Godot;
 using MyGame.Component;
+using MyGame.State;
 using MyGame.Strategy;
 using MyGame.Util;
+using System;
 namespace MyGame.Entity
 {
-    public class CharacterDefaultState : IState
+    public class CharacterDefaultState : BasicState<BasicCharacter>
     {
-        private Ref<string> _animationPlayed = new();
-        public string AnimationPlayed
+        public override void Enter(BasicCharacter entity)
         {
-            get
-            {
-                return _animationPlayed.Value;
-            }
-            set
-            {
-                _animationPlayed.Value = value;
-            }
         }
 
-        public void OnEnter(IEntity entity)
+        public override void Exit(BasicCharacter entity)
         {
-            BasicCharacter character = entity as BasicCharacter;
-            character.StrategyManager.AddStrategy<FourFaceDirection>(StrategyGroup.ProcessStrategy);
-            character.StrategyManager.AddStrategy<FourFaceAnimation>(StrategyGroup.ProcessStrategy);
-
-            character.StrategyManager.AddStrategy<DefaultVelocity>(StrategyGroup.PhysicsProcessStrategy);
-            character.StrategyManager.AddStrategy<MoveAndSlidePosition>(StrategyGroup.PhysicsProcessStrategy);
         }
-        public void OnExit(IEntity entity) { }
-        public void OnHandleStateTransition(IEntity entity, string input, params object[] args) { }
+
+        public override Type Transit(BasicCharacter entity, string token, params object[] parameters)
+        {
+            return null;
+        }
+
+        protected override void InitializeStrategies()
+        {
+            AddStrategy<FourFaceDirection>(StrategyGroup.ProcessStrategy);
+            AddStrategy<FourFaceAnimation>(StrategyGroup.ProcessStrategy);
+            AddStrategy<DefaultVelocity>(StrategyGroup.PhysicsProcessStrategy);
+            AddStrategy<MoveAndSlidePosition>(StrategyGroup.PhysicsProcessStrategy);
+        }
     }
 }

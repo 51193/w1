@@ -1,32 +1,42 @@
 ﻿using Godot;
-using MyGame.Component;
+using MyGame.State;
 using MyGame.Strategy;
 using MyGame.Util;
+using System;
 
 namespace MyGame.Entity
 {
-    public class CharacterHardwareInputControlState : IState
+    public class CharacterHardwareInputControlState : BasicState<BasicCharacter>
     {
-        public void OnEnter(IEntity entity)
+        public override void Enter(BasicCharacter entity)
         {
-            entity.StrategyManager.AddStrategy<InputDirection>(StrategyGroup.PhysicsProcessStrategy);
         }
-        public void OnExit(IEntity entity) 
+
+        public override void Exit(BasicCharacter entity)
         {
-            entity.StrategyManager.RemoveStrategy<InputDirection>(StrategyGroup.PhysicsProcessStrategy);
         }
-        public void OnHandleStateTransition(IEntity entity, string input, params object[] args)
+
+        public override Type Transit(BasicCharacter entity, string token, params object[] parameters)
         {
-            switch (input)
+            switch (token)
             {
                 case "GoStraight":
-                    if (args.Length > 0 && args[0] is Vector2 position)
+                    if (parameters.Length > 0 && parameters[0] is Vector2 position && parameters[1] is string callbackName)
                     {
-                        entity.RegistrateEvent("OnReachedTarget", typeof(BasicCharacterEvents), "ChangeControlStateToHardwareInputControlState");
-                        entity.StateManager.ChangeState("ControlState", new CharacterStraightForwardControlState(position, "OnReachedTarget"));
+                        entity.TargetPosition = position;
+                        entity.CallbackOnTargetReached = callbackName;
+                        entity.EventManager.RegistrateEvent("OnReachedTarget", typeof(BasicCharacterEvents), "ChangeControlStateToHardwareInputControlState");
+                        return typeof(CharacterStraightForwardControlState);
                     }
-                    break;
+                    return null;
+                default:
+                    return null;
             }
+        }
+
+        protected override void InitializeStrategies()
+        {
+            AddStrategy<InputDirection>(StrategyGroup.PhysicsProcessStrategy);
         }
     }
 }

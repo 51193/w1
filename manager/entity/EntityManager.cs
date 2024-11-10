@@ -1,6 +1,7 @@
 using Godot;
 using MyGame.Component;
 using MyGame.Entity;
+using System;
 using System.Collections.Generic;
 
 namespace MyGame.Manager
@@ -17,6 +18,28 @@ namespace MyGame.Manager
 		[Signal]
 		public delegate void EntityTransitionCompleteEventHandler();
 
+		public EntityManager()
+		{
+			BaseSaveComponent head = new()
+			{
+				Position = new Vector2(0, 0),
+				States = new List<Type>() { typeof(CharacterDefaultState), typeof(CharacterHardwareInputControlState) },
+				Events = null
+			};
+
+			CharacterSaveComponent save = new()
+			{
+				ItemNameList = new List<string>() { "TestItem0" }
+			};
+
+			head.Next = save;
+
+			GlobalEntityInstanceInfoDictionary["Map0"] = new List<EntityInstanceInfo>()
+			{
+				new("DynamicEntity0", head)
+			};
+		}
+
 		public void InitializeEntities(string mapName)
 		{
 			SpawnAllWaitingEntitiesFromMapRecord(mapName);
@@ -28,7 +51,7 @@ namespace MyGame.Manager
 		private void SpawnEntityWithEntranceAnimation(EntityInstanceInfo instanceInfo, Vector2 toPosition)
 		{
 			IEntity entity = SpawnEntity(instanceInfo);
-			entity.HandleStateTransition("ControlState", "GoStraight", toPosition);
+			entity.StateManager.Transit<CharacterHardwareInputControlState>("GoStraight", toPosition, "OnReachedTarget");
 		}
 
 		public void OnMapChanged(IEntity entity, string currentMapName, string nextMapName, Vector2 fromPosition, Vector2 ToPosition)
