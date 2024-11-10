@@ -1,5 +1,6 @@
 ﻿using Godot;
 using MyGame.Component;
+using MyGame.Strategy;
 using MyGame.Util;
 
 namespace MyGame.Entity
@@ -23,18 +24,15 @@ namespace MyGame.Entity
             _entityOriginalTransitableState = ((DynamicEntity0)entity).IsTransitable;
             ((DynamicEntity0)entity).CollisionMask = 0;
             ((DynamicEntity0)entity).IsTransitable = false;
-            ((DynamicEntity0)entity).LoadStrategy(() =>
-            {
-                return new StraightForwardToTargetNavigator((BasicDynamicEntity)entity, Position, () =>
-                {
-                    entity.EventManager.TriggerEvent(EventName);
-                });
-            });
+            ((BasicDynamicEntity)entity).TargetPosition = Position;
+            ((BasicDynamicEntity)entity).CallbackOnTargetReached = EventName;
+            entity.StrategyManager.AddStrategy<StraightForwardDirection>(StrategyGroup.PhysicsProcessStrategy);
         }
         public void OnExit(IEntity entity)
         {
             ((DynamicEntity0)entity).CollisionMask = _entityOriginalCollisionMask;
             ((DynamicEntity0)entity).IsTransitable = _entityOriginalTransitableState;
+            entity.StrategyManager.RemoveStrategy<StraightForwardDirection>(StrategyGroup.PhysicsProcessStrategy);
         }
         public void OnHandleStateTransition(IEntity entity, string input, params object[] args) { }
     }

@@ -33,31 +33,6 @@
             }
           }
         ]
-      },
-      {
-        "EntityType": "DoorOpenable",
-        "SaveHead": [
-          {
-            "Type": "MyGame.Component.BaseSaveComponent",
-            "Property": {
-              "Position": {
-                "X": 24,
-                "Y": -16
-              },
-              "States": {
-                "OpenState": {
-                  "Type": "MyGame.Entity.DoorOpenableDoorClosedState",
-                  "Property": {}
-                },
-                "StrategyState": {
-                  "Type": "MyGame.Entity.DoorOpenableDefaultStrategyState",
-                  "Property": {}
-                }
-              },
-              "Events": {}
-            }
-          }
-        ]
       }
     ],
     "Map1": [
@@ -68,14 +43,14 @@
             "Type": "MyGame.Component.BaseSaveComponent",
             "Property": {
               "Position": {
-                "X": -29.319635,
-                "Y": 44.67559
+                "X": 33.164642,
+                "Y": 47.555115
               },
               "States": {
                 "OverallState": {
                   "Type": "MyGame.Entity.CharacterDefaultState",
                   "Property": {
-                    "AnimationPlayed": "idle-4"
+                    "AnimationPlayed": "idle-2"
                   }
                 },
                 "ControlState": {

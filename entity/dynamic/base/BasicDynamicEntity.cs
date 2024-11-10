@@ -1,7 +1,6 @@
 using Godot;
 using MyGame.Component;
 using MyGame.Manager;
-using System;
 using System.Collections.Generic;
 
 namespace MyGame.Entity
@@ -10,35 +9,24 @@ namespace MyGame.Entity
 	{
 		public StateManager StateManager { get; set; }
         public EventManager EventManager { get; set; }
+		public StrategyManager StrategyManager { get; set; }
 
-        public LazyLoader<IAnimationPlayer> AnimationPlayer;
-        public LazyLoader<IVelocityAlgorithm> VelocityAlgorithm;
-        public LazyLoader<INavigator> Navigator;
-
-        public void LoadStrategy(Func<IAnimationPlayer> factory)
-        {
-            AnimationPlayer = new LazyLoader<IAnimationPlayer>(factory);
-        }
-        public void LoadStrategy(Func<IVelocityAlgorithm> factory)
-        {
-            VelocityAlgorithm = new LazyLoader<IVelocityAlgorithm>(factory);
-        }
-        public void LoadStrategy(Func<INavigator> factory)
-		{
-			Navigator = new LazyLoader<INavigator>(factory);
-		}
-
-        public string RenderingOrderGroupName { get; set; }
 		public bool IsTransitable = true;
 
 		public string EntityName { get; init; }
 
 		public Vector2 Direction = Vector2.Zero;
-		private Vector2 _lastFramePosition = Vector2.Zero;
+		public Vector2 TargetPosition = Vector2.Zero;
+		public string CallbackOnTargetReached;
+
+		public float MaxVelocity = 100;
+		public float Acceleration = 2000;
+		public float Friction = 1000;
 
         public BasicDynamicEntity()
 		{
 			EntityName = GetType().Name;
+			StrategyManager = new(this);
 		}
 
 		public virtual void InitializeStates(Dictionary<string, IState> states)
@@ -69,44 +57,6 @@ namespace MyGame.Entity
 			return saveComponent.Next;
 		}
 
-        private void UpdateDirection()
-		{
-			if(Navigator == null) return;
-			Direction = Navigator.Invoke(navigator => navigator.UpdateDirection());
-		}
-
-		private void UpdateVelocity(double delta)
-		{
-			if (VelocityAlgorithm == null) return;
-			Velocity = VelocityAlgorithm.Invoke(algorithm => algorithm.UpdateVelocity(delta));
-		}
-
-		private void UpdateAnimation(double delta)
-		{
-			if (AnimationPlayer == null) return;
-			AnimationPlayer.Invoke(player => player.UpdateAnimation(Direction, delta));
-		}
-
-		private void UpdateAnimation()
-		{
-			if( AnimationPlayer == null) return;
-			AnimationPlayer.Invoke(player => player.InitializeAnimation(Direction));
-		}
-
-        private void UpdatePosition()
-		{
-			MoveAndSlide();
-			if(_lastFramePosition != Position)
-            {
-				WhenPositionChange();
-                _lastFramePosition = Position;
-            }
-        }
-
-		protected virtual void WhenPositionChange()
-		{
-        }
-
 		public override void _EnterTree()
 		{
 			GD.Print($"Dynamic entity enter: {EntityName}");
@@ -117,19 +67,17 @@ namespace MyGame.Entity
 			GD.Print($"Dynamic entity exit: {EntityName}");
 		}
 
-		public override void _PhysicsProcess(double delta)
+        public override void _Process(double delta)
+        {
+            StrategyManager.Process(delta);
+        }
+
+        public override void _PhysicsProcess(double delta)
 		{
-			UpdateDirection();
-			UpdateAnimation(delta);
-			UpdateVelocity(delta);
-			UpdatePosition();
+			StrategyManager.PhysicsProcess(delta);
 		}
 
-		public void EntityInitializeProcess()
-		{
-			UpdateAnimation();
-			WhenPositionChange();
-		}
+		public virtual void EntityInitializeProcess() { }
 
 		public virtual void AfterInitialize() { }
     }

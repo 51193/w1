@@ -1,10 +1,11 @@
 ﻿using Godot;
+using MyGame.Entity;
 
-namespace MyGame.Component
+namespace MyGame.Strategy
 {
-    public class InputNavigator : INavigator
+    public class InputDirection : BasicStrategy<BasicDynamicEntity>
     {
-        public Vector2 UpdateDirection()
+        protected override void Activate(BasicDynamicEntity entity, double dt = 0)
         {
             Vector2 direction = Vector2.Zero;
             if (Input.IsActionPressed("move_right"))
@@ -23,7 +24,7 @@ namespace MyGame.Component
             {
                 direction.Y -= 1;
             }
-            return direction.Normalized();
+            entity.Direction = direction.Normalized();
         }
     }
 }

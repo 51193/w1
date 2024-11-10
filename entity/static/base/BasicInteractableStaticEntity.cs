@@ -9,13 +9,6 @@ namespace MyGame.Entity
         [Export]
         public Label Tip;
 
-        public LazyLoader<IInteractionStrategy> InteractionStrategy { get; set; }
-
-        public void LoadStrategy(Func<IInteractionStrategy> factory)
-        {
-            InteractionStrategy = new LazyLoader<IInteractionStrategy>(factory);
-        }
-
         public virtual void ShowTip()
         {
             Tip.Show();

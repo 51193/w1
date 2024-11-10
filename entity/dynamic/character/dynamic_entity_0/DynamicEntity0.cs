@@ -40,9 +40,9 @@ namespace MyGame.Entity
 			//Do nothing
 		}
 
-		public override void AfterInitialize()
-		{
+        public override void AfterInitialize()
+        {
 			FocusedCharacterManager.Instance.FocusedCharacter = this;
-		}
-	}
+        }
+    }
 }

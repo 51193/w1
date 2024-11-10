@@ -17,6 +17,12 @@ namespace MyGame.Entity
         [Export]
         private SpeechBubble _speechBubble;
 
+        public string AnimationName = "idle";
+
+        public int FaceDirection = 2;
+        public double FaceDirectionTransitCooldown = 0.1;
+        public double FaceDirectionTransitTimer = 0;
+
         public BasicCharacter()
         {
             InteractionManager = new(this);
@@ -38,12 +44,6 @@ namespace MyGame.Entity
         }
 
         public abstract HashSet<string> GetInteractionTags();
-
-        protected override void WhenPositionChange()
-        {
-            base.WhenPositionChange();
-            InteractionManager.ResortEntitiesOrder();
-        }
 
         public void InitializeInventory(List<string> ItemNameList)
         {

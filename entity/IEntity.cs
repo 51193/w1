@@ -16,6 +16,7 @@ namespace MyGame.Entity
         public Vector2 Position { get; set; }
         public StateManager StateManager { get; set; }
         public EventManager EventManager { get; set; }
+        public StrategyManager StrategyManager { get; set; }
         public string EntityName { get; init; }
         public void InitializeStates(Dictionary<string, IState> states = null);
         public Dictionary<string, IState> GetStates()

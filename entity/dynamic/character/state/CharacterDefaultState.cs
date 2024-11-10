@@ -1,5 +1,6 @@
 ﻿using Godot;
 using MyGame.Component;
+using MyGame.Strategy;
 using MyGame.Util;
 namespace MyGame.Entity
 {
@@ -21,14 +22,11 @@ namespace MyGame.Entity
         public void OnEnter(IEntity entity)
         {
             BasicCharacter character = entity as BasicCharacter;
-            character.LoadStrategy(() =>
-            {
-                return new CharacterAnimationPlayer(character.AnimatedSprite2DNode, _animationPlayed);
-            });
-            character.LoadStrategy(() =>
-            {
-                return new FrictionVelocityAlgorithm(character, 100, 2000, 1000);
-            });
+            character.StrategyManager.AddStrategy<FourFaceDirection>(StrategyGroup.ProcessStrategy);
+            character.StrategyManager.AddStrategy<FourFaceAnimation>(StrategyGroup.ProcessStrategy);
+
+            character.StrategyManager.AddStrategy<DefaultVelocity>(StrategyGroup.PhysicsProcessStrategy);
+            character.StrategyManager.AddStrategy<MoveAndSlidePosition>(StrategyGroup.PhysicsProcessStrategy);
         }
         public void OnExit(IEntity entity) { }
         public void OnHandleStateTransition(IEntity entity, string input, params object[] args) { }

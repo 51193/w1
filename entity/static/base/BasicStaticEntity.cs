@@ -9,8 +9,7 @@ namespace MyGame.Entity
     {
         public StateManager StateManager { get; set; }
         public EventManager EventManager { get; set; }
-
-        public string RenderingOrderGroupName { get; set; }
+        public StrategyManager StrategyManager { get; set; }
 
         public string EntityName { get; init;}
 
@@ -57,7 +56,7 @@ namespace MyGame.Entity
             GD.Print($"Static entity exit: {EntityName}");
         }
 
-        public void EntityInitializeProcess() { }
+        public virtual void EntityInitializeProcess() { }
 
         public virtual void AfterInitialize() { }
     }
