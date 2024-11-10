@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace MyGame.Util
 {
-    public static class EventInitiator
+    public static class EventInitializer
     {
         private static readonly Dictionary<Type, IEventProvider> _eventProviders = new();
 

@@ -37,7 +37,7 @@ namespace MyGame.Entity
 
         public Action GetEvent(IEntity entity)
         {
-            return EventInitiator.GetEvent(EventProviderType, EventName, new object[] { entity }.Concat(Parameters.Parameters.ToArray()).ToArray());
+            return EventInitializer.GetEvent(EventProviderType, EventName, new object[] { entity }.Concat(Parameters.Parameters.ToArray()).ToArray());
         }
 
         public void Invoke(IEntity entity)
