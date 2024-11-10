@@ -25,7 +25,6 @@ namespace MyGame.Entity
                     {
                         entity.TargetPosition = position;
                         entity.CallbackOnTargetReached.AddEvent(typeof(BasicCharacterEvents), "ChangeControlStateToHardwareInputControlState");
-
                         return typeof(CharacterStraightForwardControlState);
                     }
                     return null;

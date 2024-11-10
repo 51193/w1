@@ -13,9 +13,21 @@ namespace MyGame.Entity
         PhysicsProcessStrategy
     }
 
+    internal class StrategyWithRefCount
+    {
+        public int RefCount;
+        public IStrategy Strategy;
+
+        public StrategyWithRefCount(IStrategy strategy)
+        {
+            RefCount = 0;
+            Strategy = strategy;
+        }
+    }
+
     internal class SafeStrategyDictionary
     {
-        private readonly Dictionary<Type, IStrategy> _strategies = new();
+        private readonly Dictionary<Type, StrategyWithRefCount> _strategies = new();
         private readonly List<IStrategy> _delayAddStrategies = new();
         private readonly List<Type> _delayRemoveStrategies = new();
 
@@ -33,7 +45,7 @@ namespace MyGame.Entity
         {
             foreach (var strategy in _strategies.Values)
             {
-                strategy.Activate(entity, dt);
+                strategy.Strategy.Activate(entity, dt);
             }
         }
 
@@ -42,14 +54,11 @@ namespace MyGame.Entity
             foreach (var add in _delayAddStrategies)
             {
                 Type type = add.GetType();
-                if (_strategies.ContainsKey(type))
+                if (!_strategies.ContainsKey(type))
                 {
-                    GD.PrintErr($"Add duplicate strategy: {type.FullName}");
+                    _strategies[type] = new StrategyWithRefCount(add);
                 }
-                else
-                {
-                    _strategies[type] = add;
-                }
+                _strategies[type].RefCount++;
             }
             _delayAddStrategies.Clear();
 
@@ -61,7 +70,11 @@ namespace MyGame.Entity
                 }
                 else
                 {
-                    _strategies.Remove(remove);
+                    _strategies[remove].RefCount--;
+                    if (_strategies[remove].RefCount <= 0)
+                    {
+                        _strategies.Remove(remove);
+                    }
                 }
             }
             _delayRemoveStrategies.Clear();
@@ -72,7 +85,7 @@ namespace MyGame.Entity
     {
         private readonly IEntity _entity;
 
-        private readonly Dictionary<Type, IStrategy> _strategies = new();
+        private readonly Dictionary<Type, StrategyWithRefCount> _strategies = new();
         private readonly SafeStrategyDictionary _processStrategies = new();
         private readonly SafeStrategyDictionary _physicsProcessStrategies = new();
 
@@ -81,12 +94,11 @@ namespace MyGame.Entity
         private void InsertToStrategy(IStrategy instance)
         {
             Type type = instance.GetType();
-            if (_strategies.ContainsKey(type))
+            if (!_strategies.ContainsKey(type))
             {
-                GD.PrintErr($"Duplicate strategy type in StrategyManager: {type.FullName}");
-                return;
+                _strategies[type] = new StrategyWithRefCount(instance);
             }
-            _strategies[type] = instance;
+            _strategies[type].RefCount++;
         }
 
         private void EraseFromStrategy(Type type)
@@ -96,7 +108,11 @@ namespace MyGame.Entity
                 GD.PrintErr($"Invalid strategy type to earse in StrategyManager: {type.FullName}");
                 return;
             }
-            _strategies.Remove(type);
+            _strategies[type].RefCount--;
+            if (_strategies[type].RefCount <= 0)
+            {
+                _strategies.Remove(type);
+            }
         }
 
         public void AddStrategy(IStrategy strategy, StrategyGroup strategyGroup)
@@ -150,7 +166,7 @@ namespace MyGame.Entity
                 GD.PrintErr($"Activate invalid strategy in Strategy Manager: {type.FullName}");
                 return;
             }
-            _strategies[type].Activate(_entity);
+            _strategies[type].Strategy.Activate(_entity);
         }
 
         public void ActivateStrategy<T>() where T : IStrategy
