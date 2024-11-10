@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace MyGame.Entity
 {
@@ -9,6 +10,11 @@ namespace MyGame.Entity
         public void AddEvent(EventIndex index)
         {
             _events.Push(index);
+        }
+
+        public void AddEvent(Type eventProviderType, string eventName, params object[] parameters)
+        {
+            AddEvent(new EventIndex(eventProviderType, eventName, parameters));
         }
 
         public void ActivateEvents(IEntity entity)

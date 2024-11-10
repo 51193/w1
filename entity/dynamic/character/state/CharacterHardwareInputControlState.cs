@@ -24,7 +24,7 @@ namespace MyGame.Entity
                     if (parameters.Length > 0 && parameters[0] is Vector2 position)
                     {
                         entity.TargetPosition = position;
-                        entity.CallbackOnTargetReached.AddEvent(new EventIndex(typeof(BasicCharacterEvents), "ChangeControlStateToHardwareInputControlState"));
+                        entity.CallbackOnTargetReached.AddEvent(typeof(BasicCharacterEvents), "ChangeControlStateToHardwareInputControlState");
 
                         return typeof(CharacterStraightForwardControlState);
                     }

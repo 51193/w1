@@ -81,7 +81,7 @@ namespace MyGame.Manager
 			}
 			if (entity is BasicDynamicEntity dynamicEntity)
 			{
-				dynamicEntity.CallbackOnTargetReached.AddEvent(new EventIndex(typeof(MapTransitionEvents), "InvokeManagers", transition));
+				dynamicEntity.CallbackOnTargetReached.AddEvent(typeof(MapTransitionEvents), "InvokeManagers", transition);
 			}
 			entity.StateManager.Transit<CharacterHardwareInputControlState>("GoStraight", exitPosition, "OnReachedTarget");
 		}
