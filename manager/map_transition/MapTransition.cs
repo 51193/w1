@@ -79,9 +79,9 @@ namespace MyGame.Manager
 			{
 				GD.PrintErr($"No transition found for: {departureName}-{exitName}");
 			}
-			if (entity is BasicDynamicEntity)
+			if (entity is BasicDynamicEntity dynamicEntity)
 			{
-				entity.RegistrateEvent("OnReachedTarget", typeof(MapTransitionEvents), "InvokeManagers", transition);
+				dynamicEntity.CallbackOnTargetReached.AddEvent(new EventIndex(typeof(MapTransitionEvents), "InvokeManagers", transition));
 			}
 			entity.StateManager.Transit<CharacterHardwareInputControlState>("GoStraight", exitPosition, "OnReachedTarget");
 		}

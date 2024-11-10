@@ -8,7 +8,6 @@ namespace MyGame.Entity
 	public abstract partial class BasicStaticEntity : StaticBody2D, IEntity
     {
         public StateManager StateManager { get; set; }
-        public EventManager EventManager { get; set; }
         public StrategyManager StrategyManager { get; set; }
 
         public string EntityName { get; init;}

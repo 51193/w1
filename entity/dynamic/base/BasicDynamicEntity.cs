@@ -8,7 +8,6 @@ namespace MyGame.Entity
 	public abstract partial class BasicDynamicEntity: CharacterBody2D, IEntity
 	{
 		public StateManager StateManager { get; set; }
-        public EventManager EventManager { get; set; }
 		public StrategyManager StrategyManager { get; set; }
 
 		public bool IsTransitable = true;
@@ -17,7 +16,7 @@ namespace MyGame.Entity
 
 		public Vector2 Direction = Vector2.Zero;
 		public Vector2 TargetPosition = Vector2.Zero;
-		public string CallbackOnTargetReached;
+		public EventContainer CallbackOnTargetReached = new();
 
 		public float MaxVelocity = 100;
 		public float Acceleration = 2000;

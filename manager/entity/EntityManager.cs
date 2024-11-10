@@ -23,8 +23,7 @@ namespace MyGame.Manager
 			BaseSaveComponent head = new()
 			{
 				Position = new Vector2(0, 0),
-				States = new List<Type>() { typeof(CharacterDefaultState), typeof(CharacterHardwareInputControlState) },
-				Events = null
+				States = new List<Type>() { typeof(CharacterDefaultState), typeof(CharacterHardwareInputControlState) }
 			};
 
 			CharacterSaveComponent save = new()
