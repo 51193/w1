@@ -1,5 +1,6 @@
 ﻿using Godot;
 using MyGame.Entity;
+using MyGame.Entity.Data;
 using System;
 using System.Collections.Generic;
 
@@ -7,6 +8,19 @@ namespace MyGame.Strategy
 {
     public class FourFaceDirection : BasicStrategy<BasicCharacter>
     {
+        public override List<Type> DataNeeded
+        {
+            get
+            {
+                return new List<Type>()
+                {
+                    typeof(SimpleDirectionData),
+                    typeof(SimpleFaceDirectionData),
+                    typeof(FaceDirectionTimerData)
+                };
+            }
+        }
+
         private readonly int[] _directionSuffix = { 6, 8, 4, 2 };
         private readonly Dictionary<int, (float min, float max)> _angleToDirectionSuffix = new()
         {
@@ -17,11 +31,13 @@ namespace MyGame.Strategy
         };
 
         private bool IsReadyToTransitDirection(BasicCharacter entity, double dt)
-        { 
-            entity.FaceDirectionTransitTimer += dt;
-            if(entity.FaceDirectionTransitTimer > entity.FaceDirectionTransitCooldown)
+        {
+            FaceDirectionTimerData timerData = AccessData<FaceDirectionTimerData>(entity);
+
+            timerData.FaceDirectionTransitTimer += dt;
+            if (timerData.FaceDirectionTransitTimer > timerData.FaceDirectionTransitCooldown)
             {
-                entity.FaceDirectionTransitTimer = 0;
+                timerData.FaceDirectionTransitTimer -= timerData.FaceDirectionTransitCooldown;
                 return true;
             }
             else
@@ -71,9 +87,12 @@ namespace MyGame.Strategy
 
         protected override void Activate(BasicCharacter entity, double dt = 0)
         {
-            if (!entity.Direction.IsZeroApprox() && IsReadyToTransitDirection(entity, dt))
+            SimpleDirectionData directionData = AccessData<SimpleDirectionData>(entity);
+            SimpleFaceDirectionData faceDirectionData = AccessData<SimpleFaceDirectionData>(entity);
+
+            if (!directionData.Direction.IsZeroApprox() && IsReadyToTransitDirection(entity, dt))
             {
-                entity.FaceDirection = GetNextDirectionSuffix(entity.FaceDirection, GetTargetDirectionSuffix(entity.Direction));
+                faceDirectionData.FaceDirection = GetNextDirectionSuffix(faceDirectionData.FaceDirection, GetTargetDirectionSuffix(directionData.Direction));
             }
         }
     }

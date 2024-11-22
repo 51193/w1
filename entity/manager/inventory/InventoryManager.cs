@@ -4,7 +4,7 @@ using MyGame.Manager;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MyGame.Entity
+namespace MyGame.Entity.Manager
 {
     public class InventoryManager
     {

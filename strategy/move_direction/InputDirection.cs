@@ -1,10 +1,24 @@
 ﻿using Godot;
 using MyGame.Entity;
+using MyGame.Entity.Data;
+using System;
+using System.Collections.Generic;
 
 namespace MyGame.Strategy
 {
     public class InputDirection : BasicStrategy<BasicDynamicEntity>
     {
+        public override List<Type> DataNeeded
+        {
+            get
+            {
+                return new List<Type>
+                {
+                    typeof(SimpleDirectionData)
+                };
+            }
+        }
+
         protected override void Activate(BasicDynamicEntity entity, double dt = 0)
         {
             Vector2 direction = Vector2.Zero;
@@ -24,7 +38,7 @@ namespace MyGame.Strategy
             {
                 direction.Y -= 1;
             }
-            entity.Direction = direction.Normalized();
+            AccessData<SimpleDirectionData>(entity).Direction = direction.Normalized();
         }
     }
 }

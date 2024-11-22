@@ -1,5 +1,6 @@
 using Godot;
 using MyGame.Entity;
+using MyGame.Entity.Data;
 using MyGame.Util;
 using System;
 using System.Collections.Generic;
@@ -79,11 +80,9 @@ namespace MyGame.Manager
 			{
 				GD.PrintErr($"No transition found for: {departureName}-{exitName}");
 			}
-			if (entity is BasicDynamicEntity dynamicEntity)
-			{
-				dynamicEntity.CallbackOnTargetReached.AddEvent(typeof(MapTransitionEvents), "InvokeManagers", transition);
-			}
 			entity.StateManager.Transit<CharacterHardwareInputControlState>("GoStraight", exitPosition, "OnReachedTarget");
+
+			entity.DataManager.Get<GoStraightData>().CallbackOnTargetReached.AddEvent(typeof(MapTransitionEvents), "InvokeManagers", transition);
 		}
 
 		private void OnMapManagerComplete()
@@ -135,7 +134,6 @@ namespace MyGame.Manager
 			_entityManager.OnMapFresh(saveData.CurrentMapName);
 			_mapManager.LoadMap(saveData.CurrentMapName);
 		}
-
 
         private static MapTransition _instance;
         public static MapTransition Instance

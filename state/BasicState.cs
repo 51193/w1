@@ -1,5 +1,6 @@
 ﻿using Godot;
 using MyGame.Entity;
+using MyGame.Entity.Manager;
 using MyGame.Manager;
 using MyGame.Strategy;
 using System;
@@ -43,16 +44,19 @@ namespace MyGame.State
             foreach (var strategy in _strategies)
             {
                 entity.StrategyManager.AddStrategy(strategy, StrategyGroup.NormalStrategy);
+                entity.DataManager.LoadStrategyData(strategy);
             }
 
             foreach (var strategy in _processStrategies)
             {
                 entity.StrategyManager.AddStrategy(strategy, StrategyGroup.ProcessStrategy);
+                entity.DataManager.LoadStrategyData(strategy);
             }
 
             foreach(var strategy in _physicsProcessStrategies)
             {
                 entity.StrategyManager.AddStrategy(strategy, StrategyGroup.PhysicsProcessStrategy);
+                entity.DataManager.LoadStrategyData(strategy);
             }
         }
 
@@ -61,16 +65,19 @@ namespace MyGame.State
             foreach (var strategy in _strategies)
             {
                 entity.StrategyManager.RemoveStrategy(strategy.GetType(), StrategyGroup.NormalStrategy);
+                entity.DataManager.UnloadStrategyData(strategy);
             }
 
             foreach (var strategy in _processStrategies)
             {
                 entity.StrategyManager.RemoveStrategy(strategy.GetType(), StrategyGroup.ProcessStrategy);
+                entity.DataManager.UnloadStrategyData(strategy);
             }
 
             foreach (var strategy in _physicsProcessStrategies)
             {
                 entity.StrategyManager.RemoveStrategy(strategy.GetType(), StrategyGroup.PhysicsProcessStrategy);
+                entity.DataManager.UnloadStrategyData(strategy);
             }
         }
 
@@ -106,7 +113,7 @@ namespace MyGame.State
 
         public abstract void Exit(T entity);
 
-        public Type Transit(IEntity entity, string token, params object[] parameters)
+        public Tuple<Type, Action> Transit(IEntity entity, string token, params object[] parameters)
         {
             if (entity is T typedEntity)
             {
@@ -120,6 +127,6 @@ namespace MyGame.State
             }
         }
 
-        public abstract Type Transit(T entity, string token, params object[] parameters);
+        public abstract Tuple<Type, Action> Transit(T entity, string token, params object[] parameters);
     }
 }

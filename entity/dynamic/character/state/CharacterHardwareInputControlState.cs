@@ -1,4 +1,6 @@
 ﻿using Godot;
+using MyGame.Entity.Data;
+using MyGame.Entity.Manager;
 using MyGame.State;
 using MyGame.Strategy;
 using MyGame.Util;
@@ -16,16 +18,19 @@ namespace MyGame.Entity
         {
         }
 
-        public override Type Transit(BasicCharacter entity, string token, params object[] parameters)
+        public override Tuple<Type, Action> Transit(BasicCharacter entity, string token, params object[] parameters)
         {
             switch (token)
             {
                 case "GoStraight":
                     if (parameters.Length > 0 && parameters[0] is Vector2 position)
                     {
-                        entity.TargetPosition = position;
-                        entity.CallbackOnTargetReached.AddEvent(typeof(BasicCharacterEvents), "ChangeControlStateToHardwareInputControlState");
-                        return typeof(CharacterStraightForwardControlState);
+                        return new Tuple<Type, Action>(typeof(CharacterStraightForwardControlState),
+                            () =>
+                            {
+                                entity.DataManager.Get<GoStraightData>().TargetPosition = position;
+                                entity.DataManager.Get<GoStraightData>().CallbackOnTargetReached.AddEvent(typeof(BasicCharacterEvents), "ChangeControlStateToHardwareInputControlState");
+                            });
                     }
                     return null;
                 default:

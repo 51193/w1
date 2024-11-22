@@ -1,4 +1,5 @@
-﻿using MyGame.State;
+﻿using MyGame.Entity.Manager;
+using MyGame.State;
 using MyGame.Strategy;
 using System;
 
@@ -16,11 +17,11 @@ namespace MyGame.Entity
             entity.IsTransitable = true;
         }
 
-        public override Type Transit(BasicCharacter entity, string token, params object[] parameters)
+        public override Tuple<Type, Action> Transit(BasicCharacter entity, string token, params object[] parameters)
         {
             return token switch
             {
-                "HardwareInput" => typeof(CharacterHardwareInputControlState),
+                "HardwareInput" => new Tuple<Type, Action>(typeof(CharacterHardwareInputControlState), () => { }),
                 _ => null,
             };
         }

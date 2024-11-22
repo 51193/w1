@@ -7,6 +7,6 @@ namespace MyGame.State
     {
         public void Enter(IEntity entity);
         public void Exit(IEntity entity);
-        public Type Transit(IEntity entity, string token, params object[] parameters);
+        public Tuple<Type, Action> Transit(IEntity entity, string token, params object[] parameters);
     }
 }

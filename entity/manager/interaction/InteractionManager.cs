@@ -1,7 +1,7 @@
 using MyGame.Component;
 using System.Collections.Generic;
 
-namespace MyGame.Manager
+namespace MyGame.Entity.Manager
 {
 	public class InteractionManager
 	{

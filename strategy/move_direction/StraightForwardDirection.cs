@@ -1,24 +1,42 @@
 ﻿using Godot;
 using MyGame.Entity;
+using MyGame.Entity.Data;
+using MyGame.Entity.Manager;
+using System;
+using System.Collections.Generic;
 
 namespace MyGame.Strategy
 {
     public class StraightForwardDirection : BasicStrategy<BasicDynamicEntity>
     {
+        public override List<Type> DataNeeded
+        {
+            get
+            {
+                return new List<Type>()
+                {
+                    typeof(SimpleDirectionData),
+                    typeof(GoStraightData)
+                };
+            }
+        }
+
         protected override void Activate(BasicDynamicEntity entity, double dt = 0)
         {
             Vector2 position = entity.Position;
-            Vector2 target = entity.TargetPosition;
-            EventContainer callback = entity.CallbackOnTargetReached;
+            Vector2 target = AccessData<GoStraightData>(entity).TargetPosition;
+            EventContainer callback = AccessData<GoStraightData>(entity).CallbackOnTargetReached;
+
+            SimpleDirectionData directionData = AccessData<SimpleDirectionData>(entity);
 
             if ((target - position).Length() < 10)
             {
-                entity.Direction = Vector2.Zero;
+                directionData.Direction = Vector2.Zero;
                 callback.ActivateEvents(entity);
             }
             else
             {
-                entity.Direction = (target - position).Normalized();
+                directionData.Direction = (target - position).Normalized();
             }
         }
     }

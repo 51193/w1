@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MyGame.Entity
+namespace MyGame.Entity.Manager
 {
     public class EventContainer
     {

@@ -1,7 +1,6 @@
 using Godot;
 using MyGame.Component;
-using MyGame.Manager;
-using System.Collections.Generic;
+using MyGame.Entity.Manager;
 
 namespace MyGame.Entity
 {
@@ -9,24 +8,18 @@ namespace MyGame.Entity
 	{
 		public StateManager StateManager { get; set; }
 		public StrategyManager StrategyManager { get; set; }
+		public DataManager DataManager { get; set; }
 
 		public bool IsTransitable = true;
 
 		public string EntityName { get; init; }
-
-		public Vector2 Direction = Vector2.Zero;
-		public Vector2 TargetPosition = Vector2.Zero;
-		public EventContainer CallbackOnTargetReached = new();
-
-		public float MaxVelocity = 100;
-		public float Acceleration = 2000;
-		public float Friction = 1000;
 
         public BasicDynamicEntity()
 		{
 			EntityName = GetType().Name;
 			StrategyManager = new(this);
 			StateManager = new(this);
+			DataManager = new();
 		}
 
 		public virtual ISaveComponent SaveData(ISaveComponent saveComponent = null)

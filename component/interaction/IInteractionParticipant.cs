@@ -1,5 +1,5 @@
 ﻿using Godot;
-using MyGame.Manager;
+using MyGame.Entity.Manager;
 using System.Collections.Generic;
 
 namespace MyGame.Component

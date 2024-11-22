@@ -1,5 +1,5 @@
 ﻿using Godot;
-using MyGame.Entity;
+using MyGame.Entity.Manager;
 using System;
 using System.Collections.Generic;
 using System.Text.Json;

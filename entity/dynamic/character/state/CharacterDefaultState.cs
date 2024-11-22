@@ -1,8 +1,6 @@
-﻿using Godot;
-using MyGame.Component;
+﻿using MyGame.Entity.Manager;
 using MyGame.State;
 using MyGame.Strategy;
-using MyGame.Util;
 using System;
 namespace MyGame.Entity
 {
@@ -16,7 +14,7 @@ namespace MyGame.Entity
         {
         }
 
-        public override Type Transit(BasicCharacter entity, string token, params object[] parameters)
+        public override Tuple<Type, Action> Transit(BasicCharacter entity, string token, params object[] parameters)
         {
             return null;
         }

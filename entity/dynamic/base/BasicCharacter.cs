@@ -1,7 +1,7 @@
 ﻿using Godot;
 using MyGame.Component;
+using MyGame.Entity.Manager;
 using MyGame.Interface;
-using MyGame.Manager;
 using System.Collections.Generic;
 
 namespace MyGame.Entity
@@ -16,12 +16,6 @@ namespace MyGame.Entity
 
         [Export]
         private SpeechBubble _speechBubble;
-
-        public string AnimationName = "idle";
-
-        public int FaceDirection = 2;
-        public double FaceDirectionTransitCooldown = 0.1;
-        public double FaceDirectionTransitTimer = 0;
 
         public BasicCharacter()
         {

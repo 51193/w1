@@ -1,20 +1,39 @@
 ﻿using MyGame.Entity;
+using MyGame.Entity.Data;
+using System;
+using System.Collections.Generic;
 
 namespace MyGame.Strategy
 {
     public class FourFaceAnimation : BasicStrategy<BasicCharacter>
     {
+        public override List<Type> DataNeeded
+        {
+            get
+            {
+                return new List<Type>()
+                {
+                    typeof(SimpleAnimationNameData),
+                    typeof(SimpleFaceDirectionData),
+                };
+            }
+        }
+
         protected override void Activate(BasicCharacter entity, double dt = 0)
         {
-            if(entity.Velocity.IsZeroApprox())
+            SimpleAnimationNameData animationNameData = AccessData<SimpleAnimationNameData>(entity);
+            SimpleFaceDirectionData faceDirectionData = AccessData<SimpleFaceDirectionData>(entity);
+
+            if (entity.Velocity.IsZeroApprox())
             {
-                entity.AnimationName = "idle";
+                animationNameData.AnimationName = "idle";
             }
             else
             {
-                entity.AnimationName = "run";
+                animationNameData.AnimationName = "run";
             }
-            entity.AnimatedSprite2DNode.Play($"{entity.AnimationName}-{entity.FaceDirection}");
+            string AnimationFullName = $"{animationNameData.AnimationName}-{faceDirectionData.FaceDirection}";
+            entity.AnimatedSprite2DNode.Play(AnimationFullName);
         }
     }
 }

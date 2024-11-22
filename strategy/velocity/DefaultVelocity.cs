@@ -1,18 +1,36 @@
 ﻿using Godot;
 using MyGame.Entity;
+using MyGame.Entity.Data;
 using MyGame.Strategy;
+using System;
+using System.Collections.Generic;
 
 namespace MyGame.Strategy
 {
     public class DefaultVelocity : BasicStrategy<BasicDynamicEntity>
     {
+        public override List<Type> DataNeeded
+        {
+            get
+            {
+                return new List<Type>()
+                {
+                    typeof(SimpleDirectionData),
+                    typeof(VelocityWithFrictionData)
+                };
+            }
+        }
+
         protected override void Activate(BasicDynamicEntity entity, double dt = 0)
         {
+            SimpleDirectionData directionData = AccessData<SimpleDirectionData>(entity);
+            VelocityWithFrictionData velocityWithFrictionData = AccessData<VelocityWithFrictionData>(entity);
+
             Vector2 velocity = entity.Velocity;
-            Vector2 direction = entity.Direction;
-            float maxVelocity = entity.MaxVelocity;
-            float acceleration = entity.Acceleration;
-            float friction = entity.Friction;
+            Vector2 direction = directionData.Direction;
+            float maxVelocity = velocityWithFrictionData.MaxVelocity;
+            float acceleration = velocityWithFrictionData.Acceleration;
+            float friction = velocityWithFrictionData.Friction;
 
             if (acceleration < friction)
             {

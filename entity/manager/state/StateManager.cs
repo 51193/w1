@@ -1,11 +1,11 @@
 ﻿using Godot;
-using MyGame.Entity;
+using MyGame.Manager;
 using MyGame.State;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MyGame.Manager
+namespace MyGame.Entity.Manager
 {
     public class StateManager
     {
@@ -59,9 +59,11 @@ namespace MyGame.Manager
                 GD.PrintErr($"State '{type.FullName}' is not exist when transit");
                 return;
             }
-            Type transitType = state.Transit(_entity, token, parameters);
+            var tuple = state.Transit(_entity, token, parameters);
+            Type transitType = tuple.Item1;
             AddState(transitType);
             RemoveState(type);
+            tuple.Item2.Invoke();
         }
 
         public void Transit<T>(string token, params object[] parameters) where T : IState
