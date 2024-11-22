@@ -103,14 +103,6 @@ namespace MyGame.Manager
             }
         }
 
-        protected void CallAllLivingEntitiesInitializeProcess()
-        {
-            foreach (var entity in _instances)
-            {
-                entity.EntityInitializeProcess();
-            }
-        }
-
         public async void AfterTransitionComplete()
         {
             await Task.Delay(1);

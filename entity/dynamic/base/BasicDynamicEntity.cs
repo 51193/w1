@@ -56,8 +56,6 @@ namespace MyGame.Entity
 			StrategyManager.PhysicsProcess(delta);
 		}
 
-		public virtual void EntityInitializeProcess() { }
-
 		public virtual void AfterInitialize() { }
     }
 }

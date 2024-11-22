@@ -22,7 +22,6 @@ namespace MyGame.Entity
         public string EntityName { get; init; }
         public ISaveComponent SaveData(ISaveComponent saveComponent = null);
         public ISaveComponent LoadData(ISaveComponent saveComponent);
-        public void EntityInitializeProcess();
         public void AfterInitialize();
     }
 }

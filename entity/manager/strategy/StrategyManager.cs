@@ -177,14 +177,14 @@ namespace MyGame.Entity.Manager
 
         public void Process(double dt)
         {
-            _processStrategies.CallStrategies(_entity, dt);
             _processStrategies.ApplyDelayOperations();
+            _processStrategies.CallStrategies(_entity, dt);
         }
 
         public void PhysicsProcess(double dt)
         {
-            _physicsProcessStrategies.CallStrategies(_entity, dt);
             _physicsProcessStrategies.ApplyDelayOperations();
+            _physicsProcessStrategies.CallStrategies(_entity, dt);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace MyGame.Entity.Manager
 
         private readonly Dictionary<Type, IState> _states = new();
 
-        public List<Type> States
+        public List<Type> StateTypes
         {
             get
             {

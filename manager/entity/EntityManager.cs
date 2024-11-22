@@ -23,7 +23,8 @@ namespace MyGame.Manager
 			BaseSaveComponent head = new()
 			{
 				Position = new Vector2(0, 0),
-				States = new List<Type>() { typeof(CharacterDefaultState), typeof(CharacterHardwareInputControlState) }
+				States = new List<Type>() { typeof(CharacterDefaultState), typeof(CharacterHardwareInputControlState) },
+				Data = new()
 			};
 
 			CharacterSaveComponent save = new()
@@ -33,16 +34,30 @@ namespace MyGame.Manager
 
 			head.Next = save;
 
+			BaseSaveComponent wallHead0 = new()
+			{
+				Position = new Vector2(-32, -16),
+				States = new(),
+				Data = new()
+			};
+			BaseSaveComponent wallHead1 = new()
+			{
+				Position = new Vector2(48, 0),
+				States = new(),
+				Data = new()
+			};
+
 			GlobalEntityInstanceInfoDictionary["Map0"] = new List<EntityInstanceInfo>()
 			{
-				new("DynamicEntity0", head)
+				new("DynamicEntity0", head),
+				new("Map0Wall0", wallHead0),
+				new("Map0Wall1", wallHead1)
 			};
 		}
 
 		public void InitializeEntities(string mapName)
 		{
 			SpawnAllWaitingEntitiesFromMapRecord(mapName);
-			CallAllLivingEntitiesInitializeProcess();
 			SetAllLivingEntitiesPhysicsProcess(false);
 			EmitSignal(SignalName.EntityTransitionComplete);
 		}
@@ -69,7 +84,6 @@ namespace MyGame.Manager
 
 			SpawnAllWaitingEntitiesFromMapRecord(nextMapName);
 			SetAllLivingEntitiesPhysicsProcess(false);
-			CallAllLivingEntitiesInitializeProcess();
 
 			ClearAllEntitiesFromMapRecord(nextMapName);
 			RecordAllLivingEntitiesToMapRecord(nextMapName);
@@ -83,7 +97,6 @@ namespace MyGame.Manager
 			ClearAllLivingEntities();
 			SpawnAllWaitingEntitiesFromMapRecord(currentMapName);
 			SetAllLivingEntitiesPhysicsProcess(false);
-			CallAllLivingEntitiesInitializeProcess();
 
 			EmitSignal(SignalName.EntityTransitionComplete);
 			GD.Print($"Entities in {currentMapName} loaded");

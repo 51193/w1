@@ -44,8 +44,6 @@ namespace MyGame.Entity
             GD.Print($"Static entity exit: {EntityName}");
         }
 
-        public virtual void EntityInitializeProcess() { }
-
         public virtual void AfterInitialize() { }
     }
 }

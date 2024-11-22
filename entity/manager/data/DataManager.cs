@@ -8,21 +8,41 @@ namespace MyGame.Entity.Manager
 {
     public class DataManager
     {
-        public Dictionary<Type, BasicData> DataDict = new();
+        private readonly Dictionary<Type, BasicData> _dataDict = new();
+        public Dictionary<Type, BasicData> DataDict
+        {
+            get
+            {
+                return _dataDict;
+            }
+            set
+            {
+                foreach (var item in value)
+                {
+                    if(_dataDict.ContainsKey(item.Key))
+                    {
+                        GD.Print($"{item.Key.FullName} is overrided by data loading");
+                        _dataDict[item.Key] = item.Value;
+                    }
+                }
+            }
+        }
 
         public void AddData(Type type)
         {
-            if (!DataDict.TryGetValue(type, out var data))
+            GD.Print($"{type.FullName} added once to DataManager");
+            if (!_dataDict.TryGetValue(type, out var data))
             {
                 data = (BasicData)Activator.CreateInstance(type);
-                DataDict[type] = data;
+                _dataDict[type] = data;
             }
             data.RefCount++;
         }
 
         public void RemoveData(Type type)
         {
-            if (!DataDict.TryGetValue(type, out var data))
+            GD.Print($"{type.FullName} removed once from DataManager");
+            if (!_dataDict.TryGetValue(type, out var data))
             {
                 GD.PrintErr($"Fail to remove data {type.FullName}, because it's not exist");
                 return;
@@ -32,7 +52,7 @@ namespace MyGame.Entity.Manager
 
             if (data.RefCount == 0)
             {
-                DataDict.Remove(type);
+                _dataDict.Remove(type);
             }
         }
 
@@ -49,7 +69,7 @@ namespace MyGame.Entity.Manager
         public T Get<T>() where T : BasicData
         {
             Type type = typeof(T);
-            if (DataDict.TryGetValue(type, out var data))
+            if (_dataDict.TryGetValue(type, out var data))
             {
                 return data as T;
             }
