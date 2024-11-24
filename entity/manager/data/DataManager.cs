@@ -3,6 +3,7 @@ using MyGame.Entity.Data;
 using MyGame.Entity.Strategy;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MyGame.Entity.Manager
 {
@@ -13,7 +14,7 @@ namespace MyGame.Entity.Manager
         {
             get
             {
-                return _dataDict;
+                return _dataDict.Where(kvp => kvp.Value.IsSavable).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             }
             set
             {

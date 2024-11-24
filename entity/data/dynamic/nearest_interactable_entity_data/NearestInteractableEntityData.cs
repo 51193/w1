@@ -4,6 +4,7 @@ namespace MyGame.Entity.Data
 {
     public class NearestInteractableEntityData : BasicData
     {
-        public IInteractableEntity NearestEntity;
+        public override bool IsSavable => false;
+        public IInteractableEntity NearestEntity { get; set; }
     }
 }

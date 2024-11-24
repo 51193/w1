@@ -16,9 +16,11 @@ namespace MyGame.Util
                 PropertyNameCaseInsensitive = true,
                 Converters =
                 {
+                    new TypeConverter(),
                     new Vector2Converter(),
                     new VariableLengthParameterConverter(),
-                    new ISaveComponentConverter()
+                    new ISaveComponentConverter(),
+                    new TypeBasicDataDictionaryConverter()
                 }
             };
             return JsonSerializer.Serialize(saveData, options);
@@ -32,9 +34,11 @@ namespace MyGame.Util
                 PropertyNameCaseInsensitive = true,
                 Converters =
                 {
+                    new TypeConverter(),
                     new Vector2Converter(),
                     new VariableLengthParameterConverter(),
-                    new ISaveComponentConverter()
+                    new ISaveComponentConverter(),
+                    new TypeBasicDataDictionaryConverter()
                 }
             };
             return JsonSerializer.Deserialize<SaveData>(json, options);

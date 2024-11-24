@@ -4,6 +4,6 @@ namespace MyGame.Entity.Data
 {
     public class SimpleDirectionData : BasicData
     {
-        public Vector2 Direction = Vector2.Zero;
+        public Vector2 Direction { get; set; } = Vector2.Zero;
     }
 }

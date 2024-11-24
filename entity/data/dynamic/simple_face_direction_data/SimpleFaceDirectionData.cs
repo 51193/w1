@@ -2,6 +2,6 @@
 {
     public class SimpleFaceDirectionData : BasicData
     {
-        public int FaceDirection = 2;
+        public int FaceDirection { get; set; } = 2;
     }
 }

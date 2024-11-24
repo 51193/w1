@@ -19,57 +19,6 @@ namespace MyGame.Manager
 		[Signal]
 		public delegate void EntityTransitionCompleteEventHandler();
 
-		public EntityManager()
-		{
-			BaseSaveComponent head = new()
-			{
-				Position = new Vector2(0, 0),
-				States = new Dictionary<string, Type>()
-                {
-					{ "General", typeof(PlayerDefaultState) },
-					{ "Input", typeof(PlayerHardwareInputControlState) }
-				},
-				Data = new()
-			};
-
-			CharacterSaveComponent save = new()
-			{
-				ItemNameList = new List<string>() { "TestItem0" }
-			};
-
-			head.Next = save;
-
-			BaseSaveComponent wallHead0 = new()
-			{
-				Position = new Vector2(-32, -16),
-				States = new(),
-				Data = new()
-			};
-			BaseSaveComponent wallHead1 = new()
-			{
-				Position = new Vector2(48, 0),
-				States = new(),
-				Data = new()
-			};
-            BaseSaveComponent doorHead1 = new()
-            {
-                Position = new Vector2(24, -16),
-                States = new()
-				{
-					{"OpenState", typeof(DoorClosedState) }
-				},
-                Data = new()
-            };
-
-			GlobalEntityInstanceInfoDictionary["Map0"] = new List<EntityInstanceInfo>()
-			{
-				new("DynamicEntity0", head),
-				new("Map0Wall0", wallHead0),
-				new("Map0Wall1", wallHead1),
-				new("DoorOpenable", doorHead1)
-			};
-		}
-
 		public void InitializeEntities(string mapName)
 		{
 			SpawnAllWaitingEntitiesFromMapRecord(mapName);

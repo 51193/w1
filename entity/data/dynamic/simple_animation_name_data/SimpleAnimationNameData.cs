@@ -2,6 +2,6 @@
 {
     public class SimpleAnimationNameData : BasicData
     {
-        public string AnimationName = "idle";
+        public string AnimationName { get; set; } = "idle";
     }
 }

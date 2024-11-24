@@ -10,8 +10,7 @@ namespace MyGame.Stage
 
 		private void InitMap()
 		{
-			_mapTransition.InitMapProcess("Map0");
-			//_mapTransition.FromSaveData("test.json");
+			_mapTransition.FromSaveData("test.json");
 		}
 
 		public override void _Ready()

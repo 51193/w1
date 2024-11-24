@@ -2,8 +2,8 @@
 {
     public class VelocityWithFrictionData : BasicData
     {
-        public float MaxVelocity = 100;
-        public float Acceleration = 2000;
-        public float Friction = 1000;
+        public float MaxVelocity { get; set; } = 100;
+        public float Acceleration { get; set; } = 2000;
+        public float Friction { get; set; } = 1000;
     }
 }

@@ -1,7 +1,66 @@
 {
-  "CurrentMapName": "Map1",
+  "CurrentMapName": "Map0",
   "GlobalEntityInstanceInfo": {
     "Map0": [
+      {
+        "EntityType": "DynamicEntity0",
+        "SaveHead": [
+          {
+            "Type": "MyGame.Component.BaseSaveComponent",
+            "Property": {
+              "Position": {
+                "X": -19.407364,
+                "Y": 36.013912
+              },
+              "States": {
+                "General": "MyGame.Entity.State.PlayerDefaultState",
+                "Input": "MyGame.Entity.State.PlayerHardwareInputControlState"
+              },
+              "Data": {
+                "MyGame.Entity.Data.SimpleDirectionData": {
+                  "Direction": {
+                    "X": 0,
+                    "Y": 0
+                  },
+                  "RefCount": 3,
+                  "IsSavable": true
+                },
+                "MyGame.Entity.Data.SimpleFaceDirectionData": {
+                  "FaceDirection": 6,
+                  "RefCount": 2,
+                  "IsSavable": true
+                },
+                "MyGame.Entity.Data.FaceDirectionTimerData": {
+                  "FaceDirectionTransitCooldown": 0.1,
+                  "FaceDirectionTransitTimer": 0.07262515151514848,
+                  "RefCount": 1,
+                  "IsSavable": true
+                },
+                "MyGame.Entity.Data.SimpleAnimationNameData": {
+                  "AnimationName": "idle",
+                  "RefCount": 1,
+                  "IsSavable": true
+                },
+                "MyGame.Entity.Data.VelocityWithFrictionData": {
+                  "MaxVelocity": 100,
+                  "Acceleration": 2000,
+                  "Friction": 1000,
+                  "RefCount": 1,
+                  "IsSavable": true
+                }
+              }
+            }
+          },
+          {
+            "Type": "MyGame.Component.CharacterSaveComponent",
+            "Property": {
+              "ItemNameList": [
+                "TestItem0"
+              ]
+            }
+          }
+        ]
+      },
       {
         "EntityType": "Map0Wall0",
         "SaveHead": [
@@ -13,7 +72,7 @@
                 "Y": -16
               },
               "States": {},
-              "Events": {}
+              "Data": {}
             }
           }
         ]
@@ -29,50 +88,36 @@
                 "Y": 0
               },
               "States": {},
-              "Events": {}
+              "Data": {}
             }
           }
         ]
-      }
-    ],
-    "Map1": [
+      },
       {
-        "EntityType": "DynamicEntity0",
+        "EntityType": "DoorOpenable",
         "SaveHead": [
           {
             "Type": "MyGame.Component.BaseSaveComponent",
             "Property": {
               "Position": {
-                "X": 33.164642,
-                "Y": 47.555115
+                "X": 24,
+                "Y": -16
               },
               "States": {
-                "OverallState": {
-                  "Type": "MyGame.Entity.CharacterDefaultState",
-                  "Property": {
-                    "AnimationPlayed": "idle-2"
-                  }
-                },
-                "ControlState": {
-                  "Type": "MyGame.Entity.CharacterHardwareInputControlState",
-                  "Property": {}
-                }
+                "OpenState": "MyGame.Entity.State.DoorOpenedState"
               },
-              "Events": {
-                "OnReachedTarget": []
+              "Data": {
+                "MyGame.Entity.Data.InteractionStrategyTypeData": {
+                  "InteractionStrategyType": "MyGame.Entity.Strategy.DoorInteraction",
+                  "RefCount": 1,
+                  "IsSavable": true
+                }
               }
-            }
-          },
-          {
-            "Type": "MyGame.Component.CharacterSaveComponent",
-            "Property": {
-              "ItemNameList": [
-                "TestItem0"
-              ]
             }
           }
         ]
       }
-    ]
+    ],
+    "Map1": []
   }
 }

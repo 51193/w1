@@ -2,7 +2,7 @@
 {
     public class FaceDirectionTimerData : BasicData
     {
-        public double FaceDirectionTransitCooldown = 0.1;
-        public double FaceDirectionTransitTimer = 0;
+        public double FaceDirectionTransitCooldown { get; set; } = 0.1;
+        public double FaceDirectionTransitTimer { get; set; } = 0;
     }
 }
