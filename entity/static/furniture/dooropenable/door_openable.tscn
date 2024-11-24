@@ -1,8 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://dwq3inbi6xfyd"]
+[gd_scene load_steps=15 format=3 uid="uid://dwq3inbi6xfyd"]
 
 [ext_resource type="Script" path="res://entity/static/furniture/dooropenable/DoorOpenable.cs" id="1_skhds"]
 [ext_resource type="Texture2D" uid="uid://8kfwynx2rwf7" path="res://assets/spritesheet/furniture/moderninterior/animated_door_big_1.png" id="2_omisn"]
-[ext_resource type="PackedScene" uid="uid://dr6q1mng2r3km" path="res://component/interaction/interaction_detector.tscn" id="3_wxcma"]
 
 [sub_resource type="Animation" id="Animation_nlein"]
 resource_name = "closed"
@@ -214,9 +213,6 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o6oie"]
 size = Vector2(16, 6)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_7omkd"]
-radius = 14.0
-
 [node name="DoorOpenable" type="StaticBody2D" node_paths=PackedStringArray("AnimationPlayerNode", "Tip")]
 script = ExtResource("1_skhds")
 AnimationPlayerNode = NodePath("AnimationPlayer")
@@ -236,12 +232,6 @@ animation = &"open"
 position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_o6oie")
 
-[node name="InteractionDetector" parent="." instance=ExtResource("3_wxcma")]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionDetector"]
-position = Vector2(0, -3)
-shape = SubResource("CircleShape2D_7omkd")
-
 [node name="Label" type="Label" parent="."]
 visible = false
 offset_left = -14.0
@@ -249,3 +239,5 @@ offset_top = -30.0
 offset_right = 43.0
 offset_bottom = -7.0
 scale = Vector2(0.5, 0.5)
+horizontal_alignment = 1
+autowrap_mode = 2

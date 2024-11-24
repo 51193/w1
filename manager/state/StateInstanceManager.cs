@@ -1,5 +1,5 @@
 using Godot;
-using MyGame.State;
+using MyGame.Entity.State;
 using System;
 using System.Collections.Generic;
 

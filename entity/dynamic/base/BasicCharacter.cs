@@ -6,9 +6,8 @@ using System.Collections.Generic;
 
 namespace MyGame.Entity
 {
-    public abstract partial class BasicCharacter : BasicInteractableDynamicEntity, IInteractionParticipant
+    public abstract partial class BasicCharacter : DynamicEntity
     {
-        public InteractionManager InteractionManager { get; init; }
         public InventoryManager InventoryManager { get; set; }
 
         [Export]
@@ -16,11 +15,6 @@ namespace MyGame.Entity
 
         [Export]
         private SpeechBubble _speechBubble;
-
-        public BasicCharacter()
-        {
-            InteractionManager = new(this);
-        }
 
         public void Say(string text, float duration = 2)
         {
@@ -36,8 +30,6 @@ namespace MyGame.Entity
         {
             return HandleLoadData<CharacterSaveComponent>(saveComponent);
         }
-
-        public abstract HashSet<string> GetInteractionTags();
 
         public void InitializeInventory(List<string> ItemNameList)
         {

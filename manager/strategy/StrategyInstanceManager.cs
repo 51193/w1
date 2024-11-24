@@ -1,6 +1,5 @@
 using Godot;
-using MyGame.State;
-using MyGame.Strategy;
+using MyGame.Entity.Strategy;
 using System;
 using System.Collections.Generic;
 

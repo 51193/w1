@@ -1,6 +1,6 @@
 ﻿using Godot;
 using MyGame.Entity.Data;
-using MyGame.Strategy;
+using MyGame.Entity.Strategy;
 using System;
 using System.Collections.Generic;
 
@@ -30,9 +30,9 @@ namespace MyGame.Entity.Manager
 
         public void AddData(Type type)
         {
-            GD.Print($"{type.FullName} added once to DataManager");
             if (!_dataDict.TryGetValue(type, out var data))
             {
+                GD.Print($"{type.FullName} added to DataManager");
                 data = (BasicData)Activator.CreateInstance(type);
                 _dataDict[type] = data;
             }
@@ -41,7 +41,6 @@ namespace MyGame.Entity.Manager
 
         public void RemoveData(Type type)
         {
-            GD.Print($"{type.FullName} removed once from DataManager");
             if (!_dataDict.TryGetValue(type, out var data))
             {
                 GD.PrintErr($"Fail to remove data {type.FullName}, because it's not exist");
@@ -53,6 +52,7 @@ namespace MyGame.Entity.Manager
             if (data.RefCount == 0)
             {
                 _dataDict.Remove(type);
+                GD.Print($"{type.FullName} removed from DataManager");
             }
         }
 
@@ -74,6 +74,16 @@ namespace MyGame.Entity.Manager
                 return data as T;
             }
             GD.PrintErr($"Get a not exist data {type.FullName}");
+            return null;
+        }
+
+        public T TryGet<T>() where T : BasicData
+        {
+            Type type = typeof(T);
+            if (_dataDict.TryGetValue(type, out var data))
+            {
+                return data as T;
+            }
             return null;
         }
     }

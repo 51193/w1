@@ -1,6 +1,7 @@
 using Godot;
 using MyGame.Component;
 using MyGame.Entity;
+using MyGame.Entity.State;
 using System;
 using System.Collections.Generic;
 
@@ -23,7 +24,11 @@ namespace MyGame.Manager
 			BaseSaveComponent head = new()
 			{
 				Position = new Vector2(0, 0),
-				States = new List<Type>() { typeof(CharacterDefaultState), typeof(CharacterHardwareInputControlState) },
+				States = new Dictionary<string, Type>()
+                {
+					{ "General", typeof(PlayerDefaultState) },
+					{ "Input", typeof(PlayerHardwareInputControlState) }
+				},
 				Data = new()
 			};
 
@@ -46,12 +51,22 @@ namespace MyGame.Manager
 				States = new(),
 				Data = new()
 			};
+            BaseSaveComponent doorHead1 = new()
+            {
+                Position = new Vector2(24, -16),
+                States = new()
+				{
+					{"OpenState", typeof(DoorClosedState) }
+				},
+                Data = new()
+            };
 
 			GlobalEntityInstanceInfoDictionary["Map0"] = new List<EntityInstanceInfo>()
 			{
 				new("DynamicEntity0", head),
 				new("Map0Wall0", wallHead0),
-				new("Map0Wall1", wallHead1)
+				new("Map0Wall1", wallHead1),
+				new("DoorOpenable", doorHead1)
 			};
 		}
 
@@ -65,7 +80,7 @@ namespace MyGame.Manager
 		private void SpawnEntityWithEntranceAnimation(EntityInstanceInfo instanceInfo, Vector2 toPosition)
 		{
 			IEntity entity = SpawnEntity(instanceInfo);
-			entity.StateManager.Transit<CharacterHardwareInputControlState>("GoStraight", toPosition, "OnReachedTarget");
+			entity.StateManager.Transit("Input", "GoStraight", toPosition);
 		}
 
 		public void OnMapChanged(IEntity entity, string currentMapName, string nextMapName, Vector2 fromPosition, Vector2 ToPosition)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://cf0wdm7mxq0eu"]
+[gd_scene load_steps=55 format=3 uid="uid://cf0wdm7mxq0eu"]
 
 [ext_resource type="Script" path="res://entity/dynamic/character/dynamic_entity_0/DynamicEntity0.cs" id="1_221tw"]
 [ext_resource type="Texture2D" uid="uid://c0ori51psg66d" path="res://assets/spritesheet/character/teacher/teacher.png" id="2_pbl4b"]
@@ -386,11 +386,15 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_sc62u"]
 radius = 5.0
 
-[node name="DynamicEntity0" type="CharacterBody2D" node_paths=PackedStringArray("AnimatedSprite2DNode", "_speechBubble")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_wtdfk"]
+radius = 12.0416
+
+[node name="DynamicEntity0" type="CharacterBody2D" node_paths=PackedStringArray("ScanningArea", "AnimatedSprite2DNode", "_speechBubble")]
 up_direction = Vector2(0, 1)
 slide_on_ceiling = false
 platform_floor_layers = 4294967040
 script = ExtResource("1_221tw")
+ScanningArea = NodePath("Area2D")
 AnimatedSprite2DNode = NodePath("AnimatedSprite2D")
 _speechBubble = NodePath("SpeechBubble")
 
@@ -411,3 +415,8 @@ limit_smoothed = true
 offset_top = -25.0
 offset_bottom = -25.0
 scale = Vector2(0.4, 0.4)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_wtdfk")

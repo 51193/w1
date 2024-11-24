@@ -1,6 +1,6 @@
 ﻿using Godot;
+using MyGame.Entity.Strategy;
 using MyGame.Manager;
-using MyGame.Strategy;
 using System;
 using System.Collections.Generic;
 
@@ -91,7 +91,7 @@ namespace MyGame.Entity.Manager
 
         public StrategyManager(IEntity entity) { _entity = entity; }
 
-        private void InsertToStrategy(IStrategy instance)
+        private void AddToStrategy(IStrategy instance)
         {
             Type type = instance.GetType();
             if (!_strategies.ContainsKey(type))
@@ -101,7 +101,7 @@ namespace MyGame.Entity.Manager
             _strategies[type].RefCount++;
         }
 
-        private void EraseFromStrategy(Type type)
+        private void RemoveFromStrategy(Type type)
         {
             if (!_strategies.ContainsKey(type))
             {
@@ -120,7 +120,7 @@ namespace MyGame.Entity.Manager
             switch (strategyGroup)
             {
                 case StrategyGroup.NormalStrategy:
-                    InsertToStrategy(strategy);
+                    AddToStrategy(strategy);
                     break;
                 case StrategyGroup.ProcessStrategy:
                     _processStrategies.AddStrategy(strategy);
@@ -142,7 +142,7 @@ namespace MyGame.Entity.Manager
             switch (strategyGroup)
             {
                 case StrategyGroup.NormalStrategy:
-                    EraseFromStrategy(type);
+                    RemoveFromStrategy(type);
                     break;
                 case StrategyGroup.ProcessStrategy:
                     _processStrategies.RemoveStrategy(type);

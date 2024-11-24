@@ -1,4 +1,5 @@
 ﻿using MyGame.Entity;
+using MyGame.Entity.State;
 using System;
 
 namespace MyGame.Util
@@ -15,7 +16,7 @@ namespace MyGame.Util
                         {
                             return () =>
                             {
-                                entity.StateManager.Transit<CharacterStraightForwardControlState>("HardwareInput");
+                                entity.StateManager.Transit("Input", "HardwareInput");
                             };
                         }
                         break;

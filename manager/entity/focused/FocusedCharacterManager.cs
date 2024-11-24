@@ -55,11 +55,11 @@ namespace MyGame.Manager
 		{
 			if (FocusedCharacter != null)
 			{
-				FocusedCharacter.InteractionManager.ShowNearestTip();
-				if (Input.IsActionJustReleased("activate"))
-				{
-					FocusedCharacter.InteractionManager.Interact();
-				}
+				//FocusedCharacter.InteractionManager.ShowNearestTip();
+				//if (Input.IsActionJustReleased("activate"))
+				//{
+				//	FocusedCharacter.InteractionManager.Interact();
+				//}
 			}
 
 			if (Input.IsActionJustReleased("save"))
