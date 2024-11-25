@@ -1,8 +1,8 @@
 ﻿using Godot;
-using MyGame.Component;
 using MyGame.Entity.Manager;
+using MyGame.Entity.Save;
 
-namespace MyGame.Entity
+namespace MyGame.Entity.MainBody
 {
     public interface IEntity
     {

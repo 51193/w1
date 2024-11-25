@@ -1,6 +1,6 @@
-using MyGame.Entity;
+using MyGame.Entity.MainBody;
 
-namespace MyGame.Component
+namespace MyGame.Entity.Save
 {
 	public interface ISaveComponent
 	{

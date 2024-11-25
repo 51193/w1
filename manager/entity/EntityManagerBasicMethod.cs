@@ -1,5 +1,5 @@
 ﻿using Godot;
-using MyGame.Entity;
+using MyGame.Entity.MainBody;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

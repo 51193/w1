@@ -1,7 +1,6 @@
-using MyGame.Component;
 using MyGame.Manager;
 
-namespace MyGame.Entity
+namespace MyGame.Entity.MainBody
 {
 	public partial class DynamicEntity0 : BasicPlayer
 	{

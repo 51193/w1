@@ -2,7 +2,7 @@
 using MyGame.Entity.Component;
 using System.Collections.Generic;
 
-namespace MyGame.Entity
+namespace MyGame.Entity.MainBody
 {
     public partial class BasicPlayer : BasicCharacter, IInteractableEntityScanner
     {

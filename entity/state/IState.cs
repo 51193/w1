@@ -1,4 +1,4 @@
-﻿using MyGame.Entity;
+﻿using MyGame.Entity.MainBody;
 using System;
 
 namespace MyGame.Entity.State

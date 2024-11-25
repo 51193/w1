@@ -1,10 +1,10 @@
 ﻿using Godot;
-using MyGame.Entity;
 using MyGame.Entity.Data;
+using MyGame.Entity.MainBody;
 using System;
 using System.Collections.Generic;
 
-namespace MyGame.Component
+namespace MyGame.Entity.Save
 {
     public class BaseSaveComponent : ISaveComponent
     {

@@ -1,4 +1,4 @@
-﻿using MyGame.Component;
+﻿using MyGame.Entity.Save;
 
 namespace MyGame.Manager
 {

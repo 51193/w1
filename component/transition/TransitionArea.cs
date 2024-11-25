@@ -1,5 +1,5 @@
 using Godot;
-using MyGame.Entity;
+using MyGame.Entity.MainBody;
 using MyGame.Manager;
 
 namespace MyGame.Map

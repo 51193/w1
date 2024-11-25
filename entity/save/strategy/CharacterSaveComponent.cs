@@ -1,7 +1,7 @@
-﻿using MyGame.Entity;
+﻿using MyGame.Entity.MainBody;
 using System.Collections.Generic;
 
-namespace MyGame.Component
+namespace MyGame.Entity.Save
 {
     public class CharacterSaveComponent : ISaveComponent
     {

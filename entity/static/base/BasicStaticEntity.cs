@@ -1,6 +1,7 @@
 using Godot;
-using MyGame.Component;
+using MyGame.Entity.MainBody;
 using MyGame.Entity.Manager;
+using MyGame.Entity.Save;
 
 namespace MyGame.Entity
 {

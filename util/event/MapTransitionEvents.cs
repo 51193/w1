@@ -1,5 +1,4 @@
-﻿using Godot;
-using MyGame.Entity;
+﻿using MyGame.Entity.MainBody;
 using MyGame.Manager;
 using System;
 

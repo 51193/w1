@@ -6,11 +6,11 @@
         "EntityType": "DynamicEntity0",
         "SaveHead": [
           {
-            "Type": "MyGame.Component.BaseSaveComponent",
+            "Type": "MyGame.Entity.Save.BaseSaveComponent",
             "Property": {
               "Position": {
-                "X": -19.407364,
-                "Y": 36.013912
+                "X": -31.230001,
+                "Y": -10.198206
               },
               "States": {
                 "General": "MyGame.Entity.State.PlayerDefaultState",
@@ -26,13 +26,13 @@
                   "IsSavable": true
                 },
                 "MyGame.Entity.Data.SimpleFaceDirectionData": {
-                  "FaceDirection": 6,
+                  "FaceDirection": 8,
                   "RefCount": 2,
                   "IsSavable": true
                 },
                 "MyGame.Entity.Data.FaceDirectionTimerData": {
                   "FaceDirectionTransitCooldown": 0.1,
-                  "FaceDirectionTransitTimer": 0.07262515151514848,
+                  "FaceDirectionTransitTimer": 0.020790030303024284,
                   "RefCount": 1,
                   "IsSavable": true
                 },
@@ -52,7 +52,7 @@
             }
           },
           {
-            "Type": "MyGame.Component.CharacterSaveComponent",
+            "Type": "MyGame.Entity.Save.CharacterSaveComponent",
             "Property": {
               "ItemNameList": [
                 "TestItem0"
@@ -65,7 +65,7 @@
         "EntityType": "Map0Wall0",
         "SaveHead": [
           {
-            "Type": "MyGame.Component.BaseSaveComponent",
+            "Type": "MyGame.Entity.Save.BaseSaveComponent",
             "Property": {
               "Position": {
                 "X": -32,
@@ -81,7 +81,7 @@
         "EntityType": "Map0Wall1",
         "SaveHead": [
           {
-            "Type": "MyGame.Component.BaseSaveComponent",
+            "Type": "MyGame.Entity.Save.BaseSaveComponent",
             "Property": {
               "Position": {
                 "X": 48,
@@ -97,14 +97,14 @@
         "EntityType": "DoorOpenable",
         "SaveHead": [
           {
-            "Type": "MyGame.Component.BaseSaveComponent",
+            "Type": "MyGame.Entity.Save.BaseSaveComponent",
             "Property": {
               "Position": {
                 "X": 24,
                 "Y": -16
               },
               "States": {
-                "OpenState": "MyGame.Entity.State.DoorOpenedState"
+                "OpenState": "MyGame.Entity.State.DoorClosedState"
               },
               "Data": {
                 "MyGame.Entity.Data.InteractionStrategyTypeData": {

@@ -1,5 +1,5 @@
 using Godot;
-using MyGame.Component;
+using MyGame.Item.Strategy;
 
 namespace MyGame.Item
 {

@@ -1,5 +1,4 @@
-﻿using MyGame.Entity;
-using MyGame.Entity.State;
+﻿using MyGame.Entity.MainBody;
 using System;
 
 namespace MyGame.Util

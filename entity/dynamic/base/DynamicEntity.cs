@@ -1,6 +1,6 @@
-﻿using MyGame.Component;
+﻿using MyGame.Entity.Save;
 
-namespace MyGame.Entity
+namespace MyGame.Entity.MainBody
 {
     public abstract partial class DynamicEntity : BasicDynamicEntity
     {

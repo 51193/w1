@@ -1,7 +1,6 @@
-﻿using MyGame.Entity;
-using MyGame.Item;
+﻿using MyGame.Entity.MainBody;
 
-namespace MyGame.Component
+namespace MyGame.Item.Strategy
 {
     public class TestCheckItem : IItemOperation
     {

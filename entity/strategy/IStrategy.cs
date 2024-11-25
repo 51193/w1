@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyGame.Entity.MainBody;
+using System;
 using System.Collections.Generic;
 
 namespace MyGame.Entity.Strategy

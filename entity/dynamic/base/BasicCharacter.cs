@@ -1,10 +1,10 @@
 ﻿using Godot;
-using MyGame.Component;
 using MyGame.Entity.Manager;
+using MyGame.Entity.Save;
 using MyGame.Interface;
 using System.Collections.Generic;
 
-namespace MyGame.Entity
+namespace MyGame.Entity.MainBody
 {
     public abstract partial class BasicCharacter : DynamicEntity
     {

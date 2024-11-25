@@ -1,8 +1,6 @@
 using Godot;
-using MyGame.Component;
-using MyGame.Entity;
-using MyGame.Entity.State;
-using System;
+using MyGame.Entity.MainBody;
+using MyGame.Entity.Save;
 using System.Collections.Generic;
 
 namespace MyGame.Manager

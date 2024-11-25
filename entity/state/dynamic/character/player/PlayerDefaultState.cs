@@ -1,4 +1,5 @@
-﻿using MyGame.Entity.Manager;
+﻿using MyGame.Entity.MainBody;
+using MyGame.Entity.Manager;
 using MyGame.Entity.Strategy;
 using MyGame.Strategy;
 using System;
