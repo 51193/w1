@@ -45,13 +45,12 @@
                 "Y": -16
               },
               "States": {
-                "OpenState": "MyGame.Entity.State.DoorClosedState"
+                "OpenState": "MyGame.Entity.State.DoorOpenedState"
               },
               "Data": {
                 "MyGame.Entity.Data.InteractionStrategyTypeData": {
                   "InteractionStrategyType": "MyGame.Entity.Strategy.DoorInteraction",
-                  "RefCount": 1,
-                  "IsSavable": true
+                  "RefCount": 1
                 }
               }
             }
@@ -67,8 +66,8 @@
             "Type": "MyGame.Entity.Save.BaseSaveComponent",
             "Property": {
               "Position": {
-                "X": 52.43734,
-                "Y": 48.656162
+                "X": 37.8237,
+                "Y": 39.519188
               },
               "States": {
                 "General": "MyGame.Entity.State.PlayerDefaultState",
@@ -80,31 +79,26 @@
                     "X": 0,
                     "Y": 0
                   },
-                  "RefCount": 3,
-                  "IsSavable": true
+                  "RefCount": 3
                 },
                 "MyGame.Entity.Data.SimpleFaceDirectionData": {
-                  "FaceDirection": 6,
-                  "RefCount": 2,
-                  "IsSavable": true
+                  "FaceDirection": 8,
+                  "RefCount": 2
                 },
                 "MyGame.Entity.Data.FaceDirectionTimerData": {
                   "FaceDirectionTransitCooldown": 0.1,
-                  "FaceDirectionTransitTimer": 0.07603734199133343,
-                  "RefCount": 1,
-                  "IsSavable": true
+                  "FaceDirectionTransitTimer": 0.024456038961028072,
+                  "RefCount": 1
                 },
                 "MyGame.Entity.Data.SimpleAnimationNameData": {
                   "AnimationName": "idle",
-                  "RefCount": 1,
-                  "IsSavable": true
+                  "RefCount": 1
                 },
                 "MyGame.Entity.Data.VelocityWithFrictionData": {
                   "MaxVelocity": 100,
                   "Acceleration": 2000,
                   "Friction": 1000,
-                  "RefCount": 1,
-                  "IsSavable": true
+                  "RefCount": 1
                 }
               }
             }
