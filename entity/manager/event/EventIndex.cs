@@ -29,6 +29,8 @@ namespace MyGame.Entity.Manager
         public string EventName { get; set; }
         public VariableLengthParameter Parameters { get; set; }
 
+        public EventIndex() { }
+
         public EventIndex(Type type, string eventName, params object[] parameters)
         {
             EventProviderType = type;

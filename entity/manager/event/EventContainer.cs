@@ -6,11 +6,11 @@ namespace MyGame.Entity.Manager
 {
     public class EventContainer
     {
-        private readonly Stack<EventIndex> _events = new();
+        public Stack<EventIndex> Events { get; set; } = new();
 
         public void AddEvent(EventIndex index)
         {
-            _events.Push(index);
+            Events.Push(index);
         }
 
         public void AddEvent(Type eventProviderType, string eventName, params object[] parameters)
@@ -20,9 +20,9 @@ namespace MyGame.Entity.Manager
 
         public void ActivateEvents(IEntity entity)
         {
-            while (_events.Count > 0)
+            while (Events.Count > 0)
             {
-                EventIndex index = _events.Pop();
+                EventIndex index = Events.Pop();
                 index.Invoke(entity);
             }
         }
