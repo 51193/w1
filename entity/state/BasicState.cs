@@ -40,7 +40,7 @@ namespace MyGame.Entity.State
 
         protected abstract void InitializeStrategies();
 
-        private void LoadStrategies(IEntity entity)
+        public void LoadStrategies(IEntity entity)
         {
             foreach (var strategy in _strategies)
             {
@@ -61,7 +61,7 @@ namespace MyGame.Entity.State
             }
         }
 
-        private void UnloadStrategies(IEntity entity)
+        public void UnloadStrategies(IEntity entity)
         {
             foreach (var strategy in _strategies)
             {
@@ -86,7 +86,6 @@ namespace MyGame.Entity.State
         {
             if (entity is T typedEntity)
             {
-                LoadStrategies(entity);
                 Enter(typedEntity);
                 GD.Print($"{entity.EntityName} enter state: {GetType().Name}");
             }
@@ -103,7 +102,6 @@ namespace MyGame.Entity.State
             if (entity is T typedEntity)
             {
                 Exit(typedEntity);
-                UnloadStrategies(entity);
                 GD.Print($"{entity.EntityName} exit state: {GetType().Name}");
             }
             else

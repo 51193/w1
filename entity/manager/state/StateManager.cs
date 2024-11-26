@@ -30,14 +30,16 @@ namespace MyGame.Entity.Manager
 
         public StateManager(IEntity entity) { _entity = entity; }
 
-        public void TransitState(string name, Type type)
+        private void TransitState(string name, Type type)
         {
             IState newState = StateInstanceManager.Instance.GetInstance(type);
-            newState.Enter(_entity);
-            if(_states.ContainsKey(name))
+            newState.LoadStrategies(_entity);
+            if (_states.ContainsKey(name))
             {
                 _states[name].Exit(_entity);
+                _states[name].UnloadStrategies(_entity);
             }
+            newState.Enter(_entity);
             _states[name] = newState;
         }
 
