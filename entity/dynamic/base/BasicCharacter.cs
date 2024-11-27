@@ -11,7 +11,7 @@ namespace MyGame.Entity.MainBody
         public InventoryManager InventoryManager { get; set; }
 
         [Export]
-        public AnimatedSprite2D AnimatedSprite2DNode;
+        public AnimationPlayer AnimationPlayerNode;
 
         [Export]
         private SpeechBubble _speechBubble;

@@ -9,8 +9,8 @@
             "Type": "MyGame.Entity.Save.BaseSaveComponent",
             "Property": {
               "Position": {
-                "X": -22.328249,
-                "Y": -9.670454
+                "X": 19.146729,
+                "Y": -9.720021
               },
               "States": {
                 "General": "MyGame.Entity.State.PlayerDefaultState",
@@ -25,16 +25,20 @@
                   "RefCount": 3
                 },
                 "MyGame.Entity.Data.SimpleFaceDirectionData": {
-                  "FaceDirection": 4,
+                  "FaceDirection": 6,
                   "RefCount": 2
                 },
                 "MyGame.Entity.Data.FaceDirectionTimerData": {
                   "FaceDirectionTransitCooldown": 0.1,
-                  "FaceDirectionTransitTimer": 0.07436982683981398,
+                  "FaceDirectionTransitTimer": 0.04671719047616711,
                   "RefCount": 1
                 },
                 "MyGame.Entity.Data.SimpleAnimationNameData": {
                   "AnimationName": "idle",
+                  "RefCount": 1
+                },
+                "MyGame.Entity.Data.AnimationTimelineData": {
+                  "CurrentAnimationPosition": 0.618181818181821,
                   "RefCount": 1
                 },
                 "MyGame.Entity.Data.VelocityWithFrictionData": {
@@ -103,7 +107,7 @@
               },
               "Data": {
                 "MyGame.Entity.Data.AnimationTimelineData": {
-                  "CurrentAnimationPosition": 0.6909090909090917,
+                  "CurrentAnimationPosition": 0.654545454545455,
                   "RefCount": 1
                 }
               }

@@ -14,7 +14,13 @@ namespace MyGame.Entity.Manager
         {
             get
             {
-                return _dataDict.Where(kvp => kvp.Value.IsSavable).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+                Dictionary<Type, BasicData> dict = 
+                    _dataDict.Where(kvp => kvp.Value.IsSavable).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+                foreach (var data in dict.Values)
+                {
+                    data.ResetFlags();
+                }
+                return dict;
             }
             set
             {

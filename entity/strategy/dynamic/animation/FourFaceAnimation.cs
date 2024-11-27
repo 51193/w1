@@ -33,7 +33,7 @@ namespace MyGame.Entity.Strategy
                 animationNameData.AnimationName = "run";
             }
             string AnimationFullName = $"{animationNameData.AnimationName}-{faceDirectionData.FaceDirection}";
-            entity.AnimatedSprite2DNode.Play(AnimationFullName);
+            entity.AnimationPlayerNode.Play(AnimationFullName);
         }
     }
 }

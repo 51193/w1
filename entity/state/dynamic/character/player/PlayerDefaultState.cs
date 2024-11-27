@@ -32,6 +32,8 @@ namespace MyGame.Entity.State
             AddStrategy<FindNearestInteractableEntity>(StrategyGroup.PhysicsProcessStrategy);
             AddStrategy<DisplayNearestInteractableEntityTip>(StrategyGroup.ProcessStrategy);
             AddStrategy<PressActivateButtonTrigerInteraction>(StrategyGroup.ProcessStrategy);
+
+            AddStrategy<CharacterAnimationTimelineStorage>(StrategyGroup.ProcessStrategy);
         }
     }
 }

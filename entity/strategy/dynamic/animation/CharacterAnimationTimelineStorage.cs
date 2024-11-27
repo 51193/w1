@@ -1,11 +1,12 @@
 ﻿using Godot;
 using MyGame.Entity.Data;
+using MyGame.Entity.MainBody;
 using System;
 using System.Collections.Generic;
 
 namespace MyGame.Entity.Strategy
 {
-    public class DoorAnimationTimelineStorage : BasicStrategy<DoorOpenable>
+    public class CharacterAnimationTimelineStorage : BasicStrategy<BasicCharacter>
     {
         public override List<Type> DataNeeded
         {
@@ -18,7 +19,7 @@ namespace MyGame.Entity.Strategy
             }
         }
 
-        protected override void Activate(DoorOpenable entity, double dt = 0)
+        protected override void Activate(BasicCharacter entity, double dt = 0)
         {
             AnimationTimelineData timelineData = AccessData<AnimationTimelineData>(entity);
             if (timelineData.HaveInitialized == false)
