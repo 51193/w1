@@ -1,4 +1,6 @@
 ﻿using Godot;
+using MyGame.Entity.Manager;
+using MyGame.Entity.Strategy;
 using MyGame.Util;
 using System;
 
@@ -24,6 +26,9 @@ namespace MyGame.Entity.State
             return new Tuple<Type, Action>(typeof(DoorOpenedState), () => { });
         }
 
-        protected override void InitializeStrategies() { }
+        protected override void InitializeStrategies()
+        {
+            AddStrategy<DoorAnimationTimelineStorage>(StrategyGroup.ProcessStrategy);
+        }
     }
 }

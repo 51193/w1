@@ -17,7 +17,6 @@
     <None Include=".editorconfig" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="component\save\" />
     <Folder Include="entity\data\static\" />
   </ItemGroup>
 </Project>

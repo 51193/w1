@@ -45,6 +45,16 @@ namespace MyGame.Entity
             GD.Print($"Static entity exit: {EntityName}");
         }
 
+        public override void _Process(double delta)
+        {
+            StrategyManager.Process(delta);
+        }
+
+        public override void _PhysicsProcess(double delta)
+        {
+            StrategyManager.PhysicsProcess(delta);
+        }
+
         public virtual void AfterInitialize() { }
     }
 }
