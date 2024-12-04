@@ -9,8 +9,8 @@
             "Type": "MyGame.Entity.Save.BaseSaveComponent",
             "Property": {
               "Position": {
-                "X": 19.146729,
-                "Y": -9.720021
+                "X": -9.23636,
+                "Y": 16.512924
               },
               "States": {
                 "General": "MyGame.Entity.State.PlayerDefaultState",
@@ -25,12 +25,12 @@
                   "RefCount": 3
                 },
                 "MyGame.Entity.Data.SimpleFaceDirectionData": {
-                  "FaceDirection": 6,
+                  "FaceDirection": 2,
                   "RefCount": 2
                 },
                 "MyGame.Entity.Data.FaceDirectionTimerData": {
                   "FaceDirectionTransitCooldown": 0.1,
-                  "FaceDirectionTransitTimer": 0.04671719047616711,
+                  "FaceDirectionTransitTimer": 0.02851797835495487,
                   "RefCount": 1
                 },
                 "MyGame.Entity.Data.SimpleAnimationNameData": {
@@ -38,7 +38,8 @@
                   "RefCount": 1
                 },
                 "MyGame.Entity.Data.AnimationTimelineData": {
-                  "CurrentAnimationPosition": 0.618181818181821,
+                  "HaveInitialized": false,
+                  "CurrentAnimationPosition": 0.7331256060606016,
                   "RefCount": 1
                 },
                 "MyGame.Entity.Data.VelocityWithFrictionData": {
@@ -103,11 +104,11 @@
                 "Y": -16
               },
               "States": {
-                "OpenState": "MyGame.Entity.State.DoorOpeningState"
+                "OpenState": "MyGame.Entity.State.DoorClosedState"
               },
               "Data": {
-                "MyGame.Entity.Data.AnimationTimelineData": {
-                  "CurrentAnimationPosition": 0.654545454545455,
+                "MyGame.Entity.Data.InteractionStrategyTypeData": {
+                  "InteractionStrategyType": "MyGame.Entity.Strategy.DoorInteraction",
                   "RefCount": 1
                 }
               }

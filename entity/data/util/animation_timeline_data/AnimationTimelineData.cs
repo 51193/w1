@@ -4,7 +4,6 @@ namespace MyGame.Entity.Data
 {
     public class AnimationTimelineData: BasicData
     {
-        [JsonIgnore]
         public bool HaveInitialized { get; set; } = false;
         public double CurrentAnimationPosition { get; set; } = 0;
 
