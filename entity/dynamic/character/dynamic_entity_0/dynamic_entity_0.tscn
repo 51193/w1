@@ -681,6 +681,7 @@ zoom = Vector2(5, 5)
 limit_smoothed = true
 
 [node name="SpeechBubble" parent="." instance=ExtResource("3_n2a4x")]
+z_index = 4096
 offset_top = -25.0
 offset_bottom = -25.0
 scale = Vector2(0.4, 0.4)

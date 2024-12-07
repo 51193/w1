@@ -4,24 +4,24 @@ using MyGame.Manager;
 
 namespace MyGame.Interface
 {
-	public partial class InterfaceManager : Node 
-	{
-		[Export]
-		private CanvasLayer _canvasLayer;
-		[Export]
-		private Inventory _inventory;
-		[Export]
-		private ItemPopupMenuManager _itemPopupMenuManager;
+    public partial class InterfaceManager : Node
+    {
+        [Export]
+        private CanvasLayer _canvasLayer;
+        [Export]
+        private Inventory _inventory;
+        [Export]
+        private ItemPopupMenuManager _itemPopupMenuManager;
 
-		public void InitializeInventoryInterface(BasicCharacter character, int visibleSlotCount)
-		{
-			_inventory.Initialize(character, visibleSlotCount);
-		}
+        public void InitializeInventoryInterface(BasicCharacter character, int visibleSlotCount)
+        {
+            _inventory.Initialize(character, visibleSlotCount);
+        }
 
-		public BasicItemPopupMenu GetItemPopupMenu(string itemPopupMenuName)
-		{
-			return _itemPopupMenuManager.GetItemPopupMenu(itemPopupMenuName);
-		}
+        public BasicItemPopupMenu GetItemPopupMenu(string itemPopupMenuName)
+        {
+            return _itemPopupMenuManager.GetItemPopupMenu(itemPopupMenuName);
+        }
 
         private static InterfaceManager _instance;
         public static InterfaceManager Instance
@@ -53,6 +53,19 @@ namespace MyGame.Interface
             if (_instance == this)
             {
                 _instance = null;
+            }
+        }
+
+        public override void _Process(double delta)
+        {
+            if (Input.IsActionJustReleased("save"))
+            {
+                MapTransition.Instance.ToSaveData("test.json");
+            }
+
+            if (Input.IsActionJustReleased("load"))
+            {
+                MapTransition.Instance.FromSaveData("test.json");
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using Godot;
 using MyGame.Entity.Component;
+using MyGame.Interface;
 using System.Collections.Generic;
 
 namespace MyGame.Entity.MainBody
@@ -13,6 +14,11 @@ namespace MyGame.Entity.MainBody
         public override void _Ready()
         {
             this.InitializeInteractableScanner();
+        }
+
+        public override void AfterInitialize()
+        {
+            InterfaceManager.Instance.InitializeInventoryInterface(this, 10);
         }
     }
 }

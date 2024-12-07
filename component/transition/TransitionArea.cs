@@ -14,9 +14,9 @@ namespace MyGame.Map
 		private void OnBodyEntered(Node body)
 		{
 			if (body is BasicDynamicEntity entity && entity.IsTransitable)
-            {
-                //May upgrade in future, need use different method-call for focused character and non-focused character.
-                if (entity == FocusedCharacterManager.Instance.FocusedCharacter)
+			{
+				//May upgrade in future, need use different method-call for focused character and non-focused character.
+				if (entity is BasicPlayer)
 				{
 					MapTransition.Instance.TransitionProcess(_map.GetMapName(), ExitName, Position, entity);
 					GD.Print("Transitable entity entered transition area.");
