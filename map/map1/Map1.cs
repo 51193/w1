@@ -1,4 +1,4 @@
 namespace MyGame.Map
 {
-	public partial class Map1 : BaseMap { }
+	public partial class Map1 : BasicMap { }
 }

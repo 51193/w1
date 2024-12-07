@@ -9,7 +9,7 @@ namespace MyGame.Map
 		[Export]
 		string ExitName;
 		[Export]
-		private BaseMap _map;
+		private BasicMap _map;
 
 		private void OnBodyEntered(Node body)
 		{

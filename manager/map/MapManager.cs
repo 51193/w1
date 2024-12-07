@@ -14,7 +14,7 @@ namespace MyGame.Manager
 
 		public Vector2 GetLandmarkPosition(string landmarkName)
 		{
-			if (_currentMap is BaseMap map)
+			if (_currentMap is BasicMap map)
 			{
 				return map.GetLandmarkPosition(landmarkName);
 			}
@@ -48,7 +48,7 @@ namespace MyGame.Manager
 
 		public void AfterTransitionComplete()
 		{
-			GD.Print($"Map transit to {((BaseMap)_currentMap).GetMapName()} complete");
+			GD.Print($"Map transit to {((BasicMap)_currentMap).GetMapName()} complete");
 		}
 	}
 }

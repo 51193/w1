@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ggwwggiih6ci"]
+
+[ext_resource type="Script" path="res://map/base/landmark_group/LandmarkGroup.cs" id="1_qp4g1"]
+
+[node name="LandmarkGroup" type="Node"]
+script = ExtResource("1_qp4g1")

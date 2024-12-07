@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfqfrh68hpqtb"]
+
+[ext_resource type="Script" path="res://map/base/tile_map_layer_group/TileMapLayerGroup.cs" id="1_kx82f"]
+
+[node name="TileMapLayerGroup" type="Node"]
+script = ExtResource("1_kx82f")
