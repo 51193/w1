@@ -1,5 +1,4 @@
 ﻿using Godot;
-using System.Collections.Generic;
 
 namespace MyGame.Map
 {
@@ -9,7 +8,7 @@ namespace MyGame.Map
         [Export]
         private LandmarkGroup _landmarkGroup;
         [Export]
-        private TileMapLayerGroup _tilemapGroup;
+        private TileMapLayerGroup _tileMapLayerGroup;
 
         public BasicMap()
         {
@@ -25,7 +24,7 @@ namespace MyGame.Map
 
         public Rect2I GetUsedRect()
         {
-            return _tilemapGroup.GetUsedRect();
+            return _tileMapLayerGroup.GetUsedRect();
         }
     }
 }
