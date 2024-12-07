@@ -8,7 +8,7 @@ namespace MyGame.Map
 	{
 		[Export]
 		string ExitName;
-
+		[Export]
 		private BaseMap _map;
 
 		private void OnBodyEntered(Node body)
@@ -31,7 +31,6 @@ namespace MyGame.Map
 
 		public override void _Ready()
 		{
-			_map = GetParent<BaseMap>();
 			BodyEntered += OnBodyEntered;
 		}
 	}
