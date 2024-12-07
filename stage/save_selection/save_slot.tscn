@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://cmlbo3a2onnkc"]
+
+[node name="SaveSlot" type="Button"]
+offset_right = 336.0
+offset_bottom = 396.0

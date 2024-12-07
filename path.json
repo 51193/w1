@@ -10,6 +10,11 @@
 		"Description": "This is where the game run."
 	},
 	{
+		"Name": "SaveSelection",
+		"Path": "res://stage/save_selection/save_selection.tscn",
+		"Description": "This is where select saving profile."
+	},
+	{
 		"Name": "Map0",
 		"Path": "res://map/map0/map_0.tscn",
 		"Description": "This is a test map."
