@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace MyGame.Entity.Data
+﻿namespace MyGame.Entity.Data
 {
     public class AnimationTimelineData: BasicData
     {
