@@ -15,7 +15,7 @@ namespace MyGame.Map
             _name = GetType().Name;
         }
 
-        public string GetMapName() {  return _name; }
+        public string GetMapName() { return _name; }
 
         public Vector2 GetLandmarkPosition(string landmarkName)
         {

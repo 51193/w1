@@ -7,61 +7,61 @@ using System.Collections.Generic;
 
 namespace MyGame.Item
 {
-	public abstract partial class BasicItem : Node2D
-	{
-		private readonly Dictionary<string, LazyLoader<IItemOperation>> _itemStrategeies = new();
-		[Export]
-		public string ItemPopupMenuName = "DefaultItemPopupMenu";
-		[Export]
-		private AnimationPlayer _iconAnimationPlayer;
-		
-		public string ItemName;
-		public abstract Vector2 Size { get; }
+    public abstract partial class BasicItem : Node2D
+    {
+        private readonly Dictionary<string, LazyLoader<IItemOperation>> _itemStrategeies = new();
+        [Export]
+        public string ItemPopupMenuName = "DefaultItemPopupMenu";
+        [Export]
+        private AnimationPlayer _iconAnimationPlayer;
 
-		public BasicItem()
-		{
-			ItemName = GetType().Name;
-			GD.Print($"{ItemName} initialized");
-		}
+        public string ItemName;
+        public abstract Vector2 Size { get; }
 
-		protected void AddItemStrategy(string key, Func<IItemOperation> factory)
-		{
-			if (_itemStrategeies.ContainsKey(key))
-			{
-				GD.PrintErr($"Duplicate item strategy name '{key}' in '{ItemName}'");
-				return;
-			}
+        public BasicItem()
+        {
+            ItemName = GetType().Name;
+            GD.Print($"{ItemName} initialized");
+        }
 
-			_itemStrategeies[key] = new LazyLoader<IItemOperation>(factory);
-		}
+        protected void AddItemStrategy(string key, Func<IItemOperation> factory)
+        {
+            if (_itemStrategeies.ContainsKey(key))
+            {
+                GD.PrintErr($"Duplicate item strategy name '{key}' in '{ItemName}'");
+                return;
+            }
 
-		public void ActivateItemStrategy(BasicCharacter character, string key)
-		{
-			if (!_itemStrategeies.ContainsKey(key))
-			{
-				GD.PrintErr($"Invalid item strategy name '{key}' in '{ItemName}'");
-			}
+            _itemStrategeies[key] = new LazyLoader<IItemOperation>(factory);
+        }
 
-			_itemStrategeies[key].Invoke(strategy => strategy.Activate(character, this));
-		}
+        public void ActivateItemStrategy(BasicCharacter character, string key)
+        {
+            if (!_itemStrategeies.ContainsKey(key))
+            {
+                GD.PrintErr($"Invalid item strategy name '{key}' in '{ItemName}'");
+            }
 
-		public abstract void InitializeStrategy();
-		public abstract void InitializeAnimation();
+            _itemStrategeies[key].Invoke(strategy => strategy.Activate(character, this));
+        }
 
-		public void ChangeIconAnimation(string animationName)
-		{
-			_iconAnimationPlayer.Play(animationName);
-		}
+        public abstract void InitializeStrategy();
+        public abstract void InitializeAnimation();
 
-		public AnimationPlayer GetIconAnimationPlayer()
-		{
-			return _iconAnimationPlayer;
-		}
+        public void ChangeIconAnimation(string animationName)
+        {
+            _iconAnimationPlayer.Play(animationName);
+        }
 
-		public override void _Ready()
-		{
-			InitializeStrategy();
-			InitializeAnimation();
-		}
-	}
+        public AnimationPlayer GetIconAnimationPlayer()
+        {
+            return _iconAnimationPlayer;
+        }
+
+        public override void _Ready()
+        {
+            InitializeStrategy();
+            InitializeAnimation();
+        }
+    }
 }

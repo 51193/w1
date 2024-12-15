@@ -15,7 +15,7 @@ namespace MyGame.Entity.State
             ((Label)entity.Tip).Text = "Closing...";
         }
 
-        public override void Exit(DoorOpenable entity) 
+        public override void Exit(DoorOpenable entity)
         {
             GDUtil.ClearAllSignalConnections(entity.AnimationPlayerNode, "animation_finished");
             ((Label)entity.Tip).Text = "";

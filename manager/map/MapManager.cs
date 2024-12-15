@@ -4,51 +4,51 @@ using System.Collections.Generic;
 
 namespace MyGame.Manager
 {
-	public partial class MapManager : Node
-	{
-		private Node _currentMap;
-		private readonly Dictionary<string, PackedScene> _loadedMaps = new();
+    public partial class MapManager : Node
+    {
+        private Node _currentMap;
+        private readonly Dictionary<string, PackedScene> _loadedMaps = new();
 
-		[Signal]
-		public delegate void MapTransitionCompleteEventHandler();
+        [Signal]
+        public delegate void MapTransitionCompleteEventHandler();
 
-		public Vector2 GetLandmarkPosition(string landmarkName)
-		{
-			if (_currentMap is BasicMap map)
-			{
-				return map.GetLandmarkPosition(landmarkName);
-			}
-			else
-			{
-				GD.PrintErr("Invalid current map when getting landmark position in MapManager");
-				return new Vector2(0, 0);
-			}
-		}
+        public Vector2 GetLandmarkPosition(string landmarkName)
+        {
+            if (_currentMap is BasicMap map)
+            {
+                return map.GetLandmarkPosition(landmarkName);
+            }
+            else
+            {
+                GD.PrintErr("Invalid current map when getting landmark position in MapManager");
+                return new Vector2(0, 0);
+            }
+        }
 
-		public void LoadMap(string mapName)
-		{
-			if (!_loadedMaps.TryGetValue(mapName, out var map))
-			{
-				map = ResourceManager.Instance.GetResource(mapName);
-				_loadedMaps[mapName] = map;
-			}
+        public void LoadMap(string mapName)
+        {
+            if (!_loadedMaps.TryGetValue(mapName, out var map))
+            {
+                map = ResourceManager.Instance.GetResource(mapName);
+                _loadedMaps[mapName] = map;
+            }
 
-			if (_currentMap != null)
-			{
-				_currentMap.QueueFree();
-				_currentMap = null;
-			}
+            if (_currentMap != null)
+            {
+                _currentMap.QueueFree();
+                _currentMap = null;
+            }
 
-			_currentMap = map.Instantiate();
-			AddChild(_currentMap);
+            _currentMap = map.Instantiate();
+            AddChild(_currentMap);
 
-			EmitSignal(SignalName.MapTransitionComplete);
-			GD.Print($"Map loaded successfully: {mapName}");
-		}
+            EmitSignal(SignalName.MapTransitionComplete);
+            GD.Print($"Map loaded successfully: {mapName}");
+        }
 
-		public void AfterTransitionComplete()
-		{
-			GD.Print($"Map transit to {((BasicMap)_currentMap).GetMapName()} complete");
-		}
-	}
+        public void AfterTransitionComplete()
+        {
+            GD.Print($"Map transit to {((BasicMap)_currentMap).GetMapName()} complete");
+        }
+    }
 }

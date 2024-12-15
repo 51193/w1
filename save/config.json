@@ -1,0 +1,20 @@
+[
+  {
+    "Title": "Save 1",
+    "IsNew": false,
+    "Timestamp": "2024-12-15 20:15:06",
+    "FileName": "save1/"
+  },
+  {
+    "Title": "Save 2",
+    "IsNew": false,
+    "Timestamp": "2024-12-15 20:20:48",
+    "FileName": "save2/"
+  },
+  {
+    "Title": "Save 3",
+    "IsNew": true,
+    "Timestamp": "",
+    "FileName": "save3/"
+  }
+]

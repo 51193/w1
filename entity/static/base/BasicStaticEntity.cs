@@ -5,13 +5,13 @@ using MyGame.Entity.Save;
 
 namespace MyGame.Entity
 {
-	public abstract partial class BasicStaticEntity : StaticBody2D, IEntity
+    public abstract partial class BasicStaticEntity : StaticBody2D, IEntity
     {
         public StateManager StateManager { get; set; }
         public StrategyManager StrategyManager { get; set; }
         public DataManager DataManager { get; set; }
 
-        public string EntityName { get; init;}
+        public string EntityName { get; init; }
 
         public BasicStaticEntity()
         {

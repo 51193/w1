@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://krve65rxaau4"]
+[gd_scene load_steps=3 format=3 uid="uid://krve65rxaau4"]
 
 [ext_resource type="Script" path="res://manager/stage/StageManager.cs" id="1_3w7fg"]
+[ext_resource type="PackedScene" uid="uid://kux3m7emmqqy" path="res://manager/save/save_manager.tscn" id="2_fxgr0"]
 
 [node name="StageManager" type="Node"]
 script = ExtResource("1_3w7fg")
+
+[node name="SaveManager" parent="." instance=ExtResource("2_fxgr0")]

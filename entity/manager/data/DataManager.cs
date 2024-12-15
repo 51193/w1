@@ -14,7 +14,7 @@ namespace MyGame.Entity.Manager
         {
             get
             {
-                Dictionary<Type, BasicData> dict = 
+                Dictionary<Type, BasicData> dict =
                     _dataDict.Where(kvp => kvp.Value.IsSavable).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
                 foreach (var data in dict.Values)
                 {
@@ -26,7 +26,7 @@ namespace MyGame.Entity.Manager
             {
                 foreach (var item in value)
                 {
-                    if(_dataDict.ContainsKey(item.Key))
+                    if (_dataDict.ContainsKey(item.Key))
                     {
                         GD.Print($"{item.Key.FullName} is overrided by data loading");
                         _dataDict[item.Key] = item.Value;

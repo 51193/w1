@@ -1,22 +1,20 @@
-using Godot;
-
 namespace MyGame.Interface
 {
-	public partial class DefaultItemPopupMenu : BasicItemPopupMenu
-	{
-		protected override void InitializePopupItems()
-		{
-			AddItem("Check", 0);
-		}
+    public partial class DefaultItemPopupMenu : BasicItemPopupMenu
+    {
+        protected override void InitializePopupItems()
+        {
+            AddItem("Check", 0);
+        }
 
-		protected override void OnPopupMenuPressed(long id)
-		{
-			switch(id)
-			{
-				case 0:
-					_item.ActivateItemStrategy(_character, "check");
-					break;
-			}
-		}
-	}
+        protected override void OnPopupMenuPressed(long id)
+        {
+            switch (id)
+            {
+                case 0:
+                    _item.ActivateItemStrategy(_character, "check");
+                    break;
+            }
+        }
+    }
 }

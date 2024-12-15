@@ -1,5 +1,4 @@
 ﻿using Godot;
-using System;
 using System.Collections.Generic;
 
 namespace MyGame.Entity.Component
@@ -14,7 +13,8 @@ namespace MyGame.Entity.Component
     {
         public static void InitializeInteractableScanner(this IInteractableEntityScanner scanner)
         {
-            if (scanner.ScanningArea == null){
+            if (scanner.ScanningArea == null)
+            {
                 GD.PrintErr("ScanningArea is not set in InteractableEntityScanner");
                 return;
             }

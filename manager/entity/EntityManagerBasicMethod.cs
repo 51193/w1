@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MyGame.Manager
 {
-    public partial class EntityManager: Node
+    public partial class EntityManager : Node
     {
         public void ClearAllEntitiesFromMapRecord(string mapName)
         {

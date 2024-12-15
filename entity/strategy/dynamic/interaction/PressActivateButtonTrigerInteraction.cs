@@ -25,7 +25,7 @@ namespace MyGame.Entity.Strategy
             if (Input.IsActionJustReleased("activate"))
             {
                 IInteractableEntity nearestEntity = AccessData<NearestInteractableEntityData>(entity).NearestEntity;
-                if(nearestEntity == null) return;
+                if (nearestEntity == null) return;
                 nearestEntity.Interact();
             }
         }

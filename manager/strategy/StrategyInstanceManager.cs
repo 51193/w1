@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace MyGame.Manager
 {
-	public partial class StrategyInstanceManager : Node
-	{
-		private readonly Dictionary<Type, IStrategy> _strategyInstances = new();
+    public partial class StrategyInstanceManager : Node
+    {
+        private readonly Dictionary<Type, IStrategy> _strategyInstances = new();
 
         public IStrategy GetInstance(Type type)
         {
@@ -39,22 +39,22 @@ namespace MyGame.Manager
 
         public override void _EnterTree()
         {
-			if (_instance == null)
-			{
-				_instance = this;
-			}
-			else
-			{
-				GD.PrintErr("Duplicate StrategyInstanceManager entered the tree, this is not allowed");
-			}
+            if (_instance == null)
+            {
+                _instance = this;
+            }
+            else
+            {
+                GD.PrintErr("Duplicate StrategyInstanceManager entered the tree, this is not allowed");
+            }
         }
 
         public override void _ExitTree()
         {
-            if(_instance == this)
-			{
-				_instance = null;
-			}
+            if (_instance == this)
+            {
+                _instance = null;
+            }
         }
     }
 }

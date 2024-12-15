@@ -4,7 +4,7 @@ using MyGame.Item;
 
 namespace MyGame.Interface
 {
-    public abstract partial class BasicItemPopupMenu: PopupMenu
+    public abstract partial class BasicItemPopupMenu : PopupMenu
     {
         protected BasicCharacter _character;
         protected BasicItem _item;

@@ -54,7 +54,7 @@ namespace MyGame.Entity.State
                 entity.StrategyManager.AddStrategy(strategy, StrategyGroup.ProcessStrategy);
             }
 
-            foreach(var strategy in _physicsProcessStrategies)
+            foreach (var strategy in _physicsProcessStrategies)
             {
                 entity.DataManager.LoadStrategyData(strategy);
                 entity.StrategyManager.AddStrategy(strategy, StrategyGroup.PhysicsProcessStrategy);

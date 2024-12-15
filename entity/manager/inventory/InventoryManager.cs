@@ -37,7 +37,7 @@ namespace MyGame.Entity.Manager
 
         public void DeleteAllItems()
         {
-            foreach(var item in Items)
+            foreach (var item in Items)
             {
                 item.QueueFree();
             }

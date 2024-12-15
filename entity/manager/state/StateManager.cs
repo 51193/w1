@@ -45,7 +45,7 @@ namespace MyGame.Entity.Manager
 
         public void RemoveState(string name)
         {
-            if(!_states.ContainsKey(name))
+            if (!_states.ContainsKey(name))
             {
                 GD.PrintErr($"State name '{name}' is not exist when removing state");
                 return;

@@ -55,18 +55,5 @@ namespace MyGame.Interface
                 _instance = null;
             }
         }
-
-        public override void _Process(double delta)
-        {
-            if (Input.IsActionJustReleased("save"))
-            {
-                MapTransition.Instance.ToSaveData("test.json");
-            }
-
-            if (Input.IsActionJustReleased("load"))
-            {
-                MapTransition.Instance.FromSaveData("test.json");
-            }
-        }
     }
 }

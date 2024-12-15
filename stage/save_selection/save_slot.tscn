@@ -1,5 +1,9 @@
-[gd_scene format=3 uid="uid://cmlbo3a2onnkc"]
+[gd_scene load_steps=2 format=3 uid="uid://cmlbo3a2onnkc"]
+
+[ext_resource type="Script" path="res://stage/save_selection/SaveSlot.cs" id="1_frh45"]
 
 [node name="SaveSlot" type="Button"]
 offset_right = 336.0
 offset_bottom = 396.0
+theme_override_font_sizes/font_size = 50
+script = ExtResource("1_frh45")
