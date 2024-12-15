@@ -99,5 +99,13 @@ namespace MyGame.Manager
         {
             PushStage("MainMenu");
         }
+
+        public override void _Process(double delta)
+        {
+            if (Input.IsActionJustReleased("quit"))
+            {
+                PopStage();
+            }
+        }
     }
 }
