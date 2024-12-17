@@ -1,4 +1,4 @@
 namespace MyGame.Stage
 {
-    public partial class MainMenu : BasicStage { }
+	public partial class MainMenu : BasicStage { }
 }

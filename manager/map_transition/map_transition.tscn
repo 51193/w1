@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ch2dmkohs60hi"]
+[gd_scene load_steps=5 format=3 uid="uid://ch2dmkohs60hi"]
 
 [ext_resource type="Script" path="res://manager/map_transition/MapTransition.cs" id="1_8gvrd"]
 [ext_resource type="PackedScene" uid="uid://dnnltoeicsh36" path="res://manager/map/map_manager.tscn" id="2_tvav1"]
 [ext_resource type="PackedScene" uid="uid://bqjy86ul5sr4g" path="res://manager/entity/entity_manager.tscn" id="3_jpfh3"]
+[ext_resource type="PackedScene" uid="uid://djqpe27syv318" path="res://manager/fog/fog_manager.tscn" id="4_eawtu"]
 
 [node name="MapTransition" type="Node" node_paths=PackedStringArray("_mapManager", "_entityManager")]
 script = ExtResource("1_8gvrd")
@@ -12,3 +13,5 @@ _entityManager = NodePath("EntityManager")
 [node name="MapManager" parent="." instance=ExtResource("2_tvav1")]
 
 [node name="EntityManager" parent="." instance=ExtResource("3_jpfh3")]
+
+[node name="FogManager" parent="." instance=ExtResource("4_eawtu")]

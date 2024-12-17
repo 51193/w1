@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://djqpe27syv318"]
+
+[ext_resource type="Script" path="res://manager/fog/FogManager.cs" id="1_k4m43"]
+
+[node name="FogManager" type="Node" node_paths=PackedStringArray("_fogSprite")]
+script = ExtResource("1_k4m43")
+_fogSprite = NodePath("FogSprite")
+
+[node name="FogSprite" type="Sprite2D" parent="."]
+z_index = 4090
