@@ -123,12 +123,12 @@ namespace MyGame.Manager
                 CurrentMapName = _currentMapName,
                 GlobalEntityInstanceInfo = _entityManager.GlobalEntityInstanceInfoDictionary
             };
-            JsonUtil.WriteToFile(filePath, JsonUtil.SerializeSaveData(saveData));
+            FileUtil.WriteToFile(filePath, JsonUtil.SerializeSaveData(saveData));
         }
 
         public void FromSaveData(string filePath)
         {
-            SaveData saveData = JsonUtil.DeserializeSaveData(JsonUtil.ReadFromFile(filePath));
+            SaveData saveData = JsonUtil.DeserializeSaveData(FileUtil.ReadFromFile(filePath));
             _currentMapName = saveData.CurrentMapName;
             _entityManager.GlobalEntityInstanceInfoDictionary = saveData.GlobalEntityInstanceInfo;
             _entityManager.OnMapFresh(saveData.CurrentMapName);

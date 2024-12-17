@@ -1,6 +1,5 @@
 using Godot;
 using MyGame.Manager;
-using System;
 
 namespace MyGame.Stage
 {
@@ -14,40 +13,19 @@ namespace MyGame.Stage
         public void InitMap(SaveConfig config)
         {
             _saveConfig = config;
-            string filePrefix;
-            if (_saveConfig.IsNew)
-            {
-                filePrefix = "new/";
-            }
-            else
-            {
-                filePrefix = _saveConfig.FileName;
-            }
-            _mapTransition.FromSaveData("save/" + filePrefix + "data.json");
+            SaveManager.Instance.Load(_saveConfig);
         }
 
         public override void _Process(double delta)
         {
             if (Input.IsActionJustReleased("save"))
             {
-                _saveConfig.IsNew = false;
-                _saveConfig.Timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                MapTransition.Instance.ToSaveData("save/" + _saveConfig.FileName + "data.json");
-                SaveManager.Instance.SaveToFile();
+                SaveManager.Instance.Save(_saveConfig);
             }
 
             if (Input.IsActionJustReleased("load"))
             {
-                string filePrefix;
-                if (_saveConfig.IsNew)
-                {
-                    filePrefix = "new/";
-                }
-                else
-                {
-                    filePrefix = _saveConfig.FileName;
-                }
-                _mapTransition.FromSaveData("save/" + filePrefix + "data.json");
+                SaveManager.Instance.Load(_saveConfig);
             }
         }
     }
