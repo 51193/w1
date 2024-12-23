@@ -80,7 +80,7 @@ namespace MyGame.Manager
             {
                 GD.PrintErr($"No transition found for: {departureName}-{exitName}");
             }
-            entity.StateManager.Transit("Input", "GoStraight", exitPosition);
+            entity.StateManager.Transit("Move", "GoStraight", exitPosition);
 
             entity.DataManager.Get<GoStraightData>().CallbackOnTargetReached.AddEvent(typeof(MapTransitionEvents), "InvokeManagers", transition);
         }

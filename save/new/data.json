@@ -14,7 +14,7 @@
               },
               "States": {
                 "General": "MyGame.Entity.State.PlayerDefaultState",
-                "Input": "MyGame.Entity.State.PlayerHardwareInputControlState"
+                "Move": "MyGame.Entity.State.PlayerHardwareInputControlState"
               },
               "Data": {
                 "MyGame.Entity.Data.SimpleDirectionData": {

@@ -27,8 +27,6 @@ namespace MyGame.Manager
 
             _fogRect.Size = (Vector2I)_fogTexture.GetSize();
             _fogRect.Position = position;
-            GD.PrintErr("FogSprite Global Position: ", _fogSprite.GlobalPosition);
-            GD.PrintErr("FogRect Position: ", _fogRect.Position + " " + _fogRect.Size);
         }
 
         public void EraseFog(Image bitMap, Vector2I bitmapPosition)
@@ -70,10 +68,6 @@ namespace MyGame.Manager
             }
 
             Image afterErase = Image.CreateFromData(intersectionRect.Size.X, intersectionRect.Size.Y, false, Image.Format.Rgba8, fogData);
-            GD.PrintErr("BlitRect Parameters:");
-            GD.PrintErr(" - Source Image: afterErase");
-            GD.PrintErr(" - Source Rect: ", new Rect2I(Vector2I.Zero, intersectionRect.Size));
-            GD.PrintErr(" - Destination Position: ", fogOffset);
             _fogImage.BlitRect(afterErase, new Rect2I(Vector2I.Zero, intersectionRect.Size), fogOffset);
             _fogTexture.Update(_fogImage);
         }

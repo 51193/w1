@@ -15,7 +15,7 @@ namespace MyGame.Util
                         {
                             return () =>
                             {
-                                entity.StateManager.Transit("Input", "HardwareInput");
+                                entity.StateManager.Transit("Move", "HardwareInput");
                             };
                         }
                         break;

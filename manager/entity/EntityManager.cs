@@ -27,7 +27,7 @@ namespace MyGame.Manager
         private void SpawnEntityWithEntranceAnimation(EntityInstanceInfo instanceInfo, Vector2 toPosition)
         {
             IEntity entity = SpawnEntity(instanceInfo);
-            entity.StateManager.Transit("Input", "GoStraight", toPosition);
+            entity.StateManager.Transit("Move", "GoStraight", toPosition);
         }
 
         public void OnMapChanged(IEntity entity, string currentMapName, string nextMapName, Vector2 fromPosition, Vector2 ToPosition)

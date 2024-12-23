@@ -1,14 +1,14 @@
 [
   {
     "Title": "Save 1",
-    "IsNew": false,
-    "Timestamp": "2024-12-15 20:35:06",
+    "IsNew": true,
+    "Timestamp": "",
     "FileName": "save1/"
   },
   {
     "Title": "Save 2",
-    "IsNew": false,
-    "Timestamp": "2024-12-17 18:20:01",
+    "IsNew": true,
+    "Timestamp": "",
     "FileName": "save2/"
   },
   {
