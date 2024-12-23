@@ -12,14 +12,17 @@ namespace MyGame.Manager
 
         private Rect2I _fogRect;
 
-        public void CreateFogTexture(Vector2I size)
+        public void CreateFogImage(Vector2I size)
         {
             _fogImage = Image.CreateEmpty(size.X, size.Y, false, Image.Format.Rgba8);
             _fogImage.Fill(Colors.Black);
-
-            _fogTexture = ImageTexture.CreateFromImage(_fogImage);
         }
 
+        public void ApplyFogImage()
+        {
+            _fogTexture = ImageTexture.CreateFromImage(_fogImage);
+        }
+        
         public void ApplyFogTexture(Vector2I position)
         {
             _fogSprite.Texture = _fogTexture;
@@ -72,25 +75,29 @@ namespace MyGame.Manager
             _fogTexture.Update(_fogImage);
         }
 
-
-        public Image GenerateEraseBitmap(Vector2I center, int radius)
+        public void SaveFogImage(string filePath)
         {
-            int size = radius * 2;
-            Image bitmap = Image.CreateEmpty(size, size, false, Image.Format.Rgba8);
-            bitmap.Fill(Colors.Black);
-
-            for (int y = 0; y < size; y++)
+            if(_fogImage == null)
             {
-                for (int x = 0; x < size; x++)
-                {
-                    if (center.DistanceTo(new Vector2I(x, y)) <= radius)
-                    {
-                        bitmap.SetPixel(x, y, new Color(0, 0, 0, 0));
-                    }
-                }
+                GD.PrintErr("Fog image is not exist, cannot save");
+                return;
             }
 
-            return bitmap;
+            Error err = _fogImage.SavePng(filePath);
+            if (err != Error.Ok)
+            {
+                GD.PrintErr($"Failed to save fog image to file: {filePath}; Error: {err}");
+            }
+        }
+
+        public void LoadFogImage(string filePath)
+        {
+            _fogImage = new Image();
+            Error err = _fogImage.Load(filePath);
+            if (err != Error.Ok)
+            {
+                GD.PrintErr($"Failed to load fog image from file: {filePath}; Error: {err}");
+            }
         }
     }
 }

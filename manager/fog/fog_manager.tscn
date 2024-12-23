@@ -3,8 +3,6 @@
 [ext_resource type="Script" path="res://manager/fog/FogManager.cs" id="1_k4m43"]
 [ext_resource type="PackedScene" uid="uid://b1g6b0xdpiiw" path="res://manager/fog/fog.tscn" id="2_w24e8"]
 
-[node name="FogManager" type="Node" node_paths=PackedStringArray("_fog")]
+[node name="FogManager" type="Node"]
 script = ExtResource("1_k4m43")
-_fog = NodePath("Fog")
-
-[node name="Fog" parent="." instance=ExtResource("2_w24e8")]
+_fogTemplate = ExtResource("2_w24e8")

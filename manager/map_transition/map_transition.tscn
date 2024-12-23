@@ -5,10 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://bqjy86ul5sr4g" path="res://manager/entity/entity_manager.tscn" id="3_jpfh3"]
 [ext_resource type="PackedScene" uid="uid://djqpe27syv318" path="res://manager/fog/fog_manager.tscn" id="4_eawtu"]
 
-[node name="MapTransition" type="Node" node_paths=PackedStringArray("_mapManager", "_entityManager")]
+[node name="MapTransition" type="Node" node_paths=PackedStringArray("_mapManager", "_entityManager", "_fogManager")]
 script = ExtResource("1_8gvrd")
 _mapManager = NodePath("MapManager")
 _entityManager = NodePath("EntityManager")
+_fogManager = NodePath("FogManager")
 
 [node name="MapManager" parent="." instance=ExtResource("2_tvav1")]
 

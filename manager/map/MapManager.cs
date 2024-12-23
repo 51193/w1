@@ -6,7 +6,7 @@ namespace MyGame.Manager
 {
     public partial class MapManager : Node
     {
-        private Node _currentMap;
+        private BasicMap _currentMap;
         private readonly Dictionary<string, PackedScene> _loadedMaps = new();
 
         [Signal]
@@ -14,15 +14,12 @@ namespace MyGame.Manager
 
         public Vector2 GetLandmarkPosition(string landmarkName)
         {
-            if (_currentMap is BasicMap map)
-            {
-                return map.GetLandmarkPosition(landmarkName);
-            }
-            else
-            {
-                GD.PrintErr("Invalid current map when getting landmark position in MapManager");
-                return new Vector2(0, 0);
-            }
+            return _currentMap.GetLandmarkPosition(landmarkName);
+        }
+
+        public Rect2I GetUsedRect()
+        {
+            return _currentMap.GetUsedRect();
         }
 
         public void LoadMap(string mapName)
@@ -39,7 +36,7 @@ namespace MyGame.Manager
                 _currentMap = null;
             }
 
-            _currentMap = map.Instantiate();
+            _currentMap = map.Instantiate<BasicMap>();
             AddChild(_currentMap);
 
             EmitSignal(SignalName.MapTransitionComplete);
@@ -48,7 +45,7 @@ namespace MyGame.Manager
 
         public void AfterTransitionComplete()
         {
-            GD.Print($"Map transit to {((BasicMap)_currentMap).GetMapName()} complete");
+            GD.Print($"Map transit to {_currentMap.GetMapName()} complete");
         }
     }
 }

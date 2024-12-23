@@ -43,7 +43,7 @@ namespace MyGame.Manager
         {
             saveConfig.IsNew = false;
             saveConfig.Timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            MapTransition.Instance.ToSaveData(_saveFilePath + saveConfig.FileName + "data.json");
+            MapTransition.Instance.ToSaveData(_saveFilePath + saveConfig.FileName);
             SaveConfigToFile();
         }
 
@@ -58,7 +58,7 @@ namespace MyGame.Manager
             {
                 filePrefix = saveConfig.FileName;
             }
-            MapTransition.Instance.FromSaveData(_saveFilePath + filePrefix + "data.json");
+            MapTransition.Instance.FromSaveData(_saveFilePath + filePrefix);
         }
 
         private static SaveManager _instance;

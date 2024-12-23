@@ -34,6 +34,8 @@ namespace MyGame.Entity.State
             AddStrategy<PressActivateButtonTrigerInteraction>(StrategyGroup.ProcessStrategy);
 
             AddStrategy<CharacterAnimationTimelineStorage>(StrategyGroup.ProcessStrategy);
+
+            AddStrategy<EraseRoundFog>(StrategyGroup.ProcessStrategy);
         }
     }
 }

@@ -25,6 +25,8 @@ namespace MyGame.Manager
         private MapManager _mapManager;
         [Export]
         private EntityManager _entityManager;
+        [Export]
+        private FogManager _fogManager;
 
         private string _currentMapName;
 
@@ -57,13 +59,6 @@ namespace MyGame.Manager
             }
         }
 
-        public void InitMapProcess(string mapName)
-        {
-            _currentMapName = mapName;
-            _mapManager.LoadMap(mapName);
-            _entityManager.InitializeEntities(mapName);
-        }
-
         public void InvokeManagers(string destinationName, string fromLandmarkName, string toLandmarkName, BasicDynamicEntity entity)
         {
             string currentMapName = _currentMapName;
@@ -72,6 +67,7 @@ namespace MyGame.Manager
             Vector2 fromLandmarkPosition = _mapManager.GetLandmarkPosition(fromLandmarkName);
             Vector2 toLandmarkPosition = _mapManager.GetLandmarkPosition(toLandmarkName);
             _entityManager.OnMapChanged(entity, currentMapName, destinationName, fromLandmarkPosition, toLandmarkPosition);
+            _fogManager.TryLoadFog(destinationName, _mapManager.GetUsedRect());
         }
 
         public void TransitionProcess(string departureName, string exitName, Vector2 exitPosition, IEntity entity)
@@ -113,8 +109,11 @@ namespace MyGame.Manager
             _entityManager.AfterTransitionComplete();
         }
 
-        public void ToSaveData(string filePath)
+        public void ToSaveData(string folderPath)
         {
+            string dataFilePath = folderPath + "data.json";
+            string fogFilePath = folderPath + "fog";
+
             _entityManager.ClearAllEntitiesFromMapRecord(_currentMapName);
             _entityManager.RecordAllLivingEntitiesToMapRecord(_currentMapName);
 
@@ -123,16 +122,24 @@ namespace MyGame.Manager
                 CurrentMapName = _currentMapName,
                 GlobalEntityInstanceInfo = _entityManager.GlobalEntityInstanceInfoDictionary
             };
-            FileUtil.WriteToFile(filePath, JsonUtil.SerializeSaveData(saveData));
+            FileUtil.WriteToFile(dataFilePath, JsonUtil.SerializeSaveData(saveData));
+
+            _fogManager.SaveAllFogImagesToFolder(fogFilePath);
         }
 
-        public void FromSaveData(string filePath)
+        public void FromSaveData(string folderPath)
         {
-            SaveData saveData = JsonUtil.DeserializeSaveData(FileUtil.ReadFromFile(filePath));
+            string dataFilePath = folderPath + "data.json";
+            string fogFilePath = folderPath + "fog";
+
+            SaveData saveData = JsonUtil.DeserializeSaveData(FileUtil.ReadFromFile(dataFilePath));
             _currentMapName = saveData.CurrentMapName;
             _entityManager.GlobalEntityInstanceInfoDictionary = saveData.GlobalEntityInstanceInfo;
-            _entityManager.OnMapFresh(saveData.CurrentMapName);
             _mapManager.LoadMap(saveData.CurrentMapName);
+            _entityManager.OnMapFresh(saveData.CurrentMapName);
+
+            _fogManager.LoadAllFogImagesFromFolder(fogFilePath);
+            _fogManager.TryLoadFog(saveData.CurrentMapName, _mapManager.GetUsedRect());
         }
 
         private static MapTransition _instance;

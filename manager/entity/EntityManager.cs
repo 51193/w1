@@ -11,18 +11,11 @@ namespace MyGame.Manager
         public Node2D _entityYSorter;
 
         public Dictionary<string, List<EntityInstanceInfo>> GlobalEntityInstanceInfoDictionary = new();
-        protected readonly Dictionary<string, PackedScene> _loadedEntities = new();
-        protected readonly List<IEntity> _instances = new();
+        private readonly Dictionary<string, PackedScene> _loadedEntities = new();
+        private readonly List<IEntity> _instances = new();
 
         [Signal]
         public delegate void EntityTransitionCompleteEventHandler();
-
-        public void InitializeEntities(string mapName)
-        {
-            SpawnAllWaitingEntitiesFromMapRecord(mapName);
-            SetAllLivingEntitiesPhysicsProcess(false);
-            EmitSignal(SignalName.EntityTransitionComplete);
-        }
 
         private void SpawnEntityWithEntranceAnimation(EntityInstanceInfo instanceInfo, Vector2 toPosition)
         {

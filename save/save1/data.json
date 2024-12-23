@@ -1,0 +1,122 @@
+{
+  "CurrentMapName": "Map0",
+  "GlobalEntityInstanceInfo": {
+    "Map0": [
+      {
+        "EntityType": "DynamicEntity0",
+        "SaveHead": [
+          {
+            "Type": "MyGame.Entity.Save.BaseSaveComponent",
+            "Property": {
+              "Position": {
+                "X": 26.932167,
+                "Y": -49.372192
+              },
+              "States": {
+                "General": "MyGame.Entity.State.PlayerDefaultState",
+                "Move": "MyGame.Entity.State.PlayerHardwareInputControlState"
+              },
+              "Data": {
+                "MyGame.Entity.Data.SimpleDirectionData": {
+                  "Direction": {
+                    "X": 0,
+                    "Y": 0
+                  },
+                  "RefCount": 3
+                },
+                "MyGame.Entity.Data.SimpleFaceDirectionData": {
+                  "FaceDirection": 8,
+                  "RefCount": 2
+                },
+                "MyGame.Entity.Data.FaceDirectionTimerData": {
+                  "FaceDirectionTransitCooldown": 0.1,
+                  "FaceDirectionTransitTimer": 0.03444385858585618,
+                  "RefCount": 1
+                },
+                "MyGame.Entity.Data.SimpleAnimationNameData": {
+                  "AnimationName": "idle",
+                  "RefCount": 1
+                },
+                "MyGame.Entity.Data.AnimationTimelineData": {
+                  "HaveInitialized": false,
+                  "CurrentAnimationPosition": 0.9650654545454562,
+                  "RefCount": 1
+                },
+                "MyGame.Entity.Data.VelocityWithFrictionData": {
+                  "MaxVelocity": 100,
+                  "Acceleration": 2000,
+                  "Friction": 1000,
+                  "RefCount": 1
+                }
+              }
+            }
+          },
+          {
+            "Type": "MyGame.Entity.Save.CharacterSaveComponent",
+            "Property": {
+              "ItemNameList": [
+                "TestItem0"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "EntityType": "Map0Wall0",
+        "SaveHead": [
+          {
+            "Type": "MyGame.Entity.Save.BaseSaveComponent",
+            "Property": {
+              "Position": {
+                "X": -32,
+                "Y": -16
+              },
+              "States": {},
+              "Data": {}
+            }
+          }
+        ]
+      },
+      {
+        "EntityType": "Map0Wall1",
+        "SaveHead": [
+          {
+            "Type": "MyGame.Entity.Save.BaseSaveComponent",
+            "Property": {
+              "Position": {
+                "X": 48,
+                "Y": 0
+              },
+              "States": {},
+              "Data": {}
+            }
+          }
+        ]
+      },
+      {
+        "EntityType": "DoorOpenable",
+        "SaveHead": [
+          {
+            "Type": "MyGame.Entity.Save.BaseSaveComponent",
+            "Property": {
+              "Position": {
+                "X": 24,
+                "Y": -16
+              },
+              "States": {
+                "OpenState": "MyGame.Entity.State.DoorOpenedState"
+              },
+              "Data": {
+                "MyGame.Entity.Data.InteractionStrategyTypeData": {
+                  "InteractionStrategyType": "MyGame.Entity.Strategy.DoorInteraction",
+                  "RefCount": 1
+                }
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "Map1": []
+  }
+}
