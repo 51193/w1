@@ -53,7 +53,6 @@ namespace MyGame.Entity.Strategy
             }
 
             faceDirectionData.FaceDirection = resultAngle;
-            GD.Print($"!{resultAngle}");
         }
     }
 }
