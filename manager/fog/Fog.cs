@@ -105,7 +105,7 @@ namespace MyGame.Manager
 
         public void SaveFogImage(string filePath)
         {
-            if(_fogImage == null)
+            if (_fogImage == null)
             {
                 GD.PrintErr("Fog image is not exist, cannot save");
                 return;

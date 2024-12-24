@@ -40,7 +40,7 @@ namespace MyGame.Manager
 
         public void EraseCurrentFog(Image bitMap, Vector2I bitmapPosition)
         {
-            if(_currentFog == null)
+            if (_currentFog == null)
             {
                 GD.PrintErr("Current map is invalid, cannot erase fog");
                 return;
@@ -76,7 +76,7 @@ namespace MyGame.Manager
 
         public void LoadAllFogImagesFromFolder(string folderPath)
         {
-            foreach(var fog in _globalFogDictionary.Values)
+            foreach (var fog in _globalFogDictionary.Values)
             {
                 fog.QueueFree();
             }
