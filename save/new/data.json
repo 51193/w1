@@ -28,9 +28,8 @@
                   "FaceDirection": 2,
                   "RefCount": 2
                 },
-                "MyGame.Entity.Data.FaceDirectionTimerData": {
-                  "FaceDirectionTransitCooldown": 0.1,
-                  "FaceDirectionTransitTimer": 0,
+                "MyGame.Entity.Data.TurningCircleRadiusData": {
+                  "Radius": 6.2831855,
                   "RefCount": 1
                 },
                 "MyGame.Entity.Data.SimpleAnimationNameData": {
@@ -39,7 +38,7 @@
                 },
                 "MyGame.Entity.Data.AnimationTimelineData": {
                   "HaveInitialized": false,
-                  "CurrentAnimationPosition": 0,
+                  "CurrentAnimationPosition": 0.3901413030303051,
                   "RefCount": 1
                 },
                 "MyGame.Entity.Data.VelocityWithFrictionData": {

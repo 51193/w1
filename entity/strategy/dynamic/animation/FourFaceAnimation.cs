@@ -1,7 +1,9 @@
-﻿using MyGame.Entity.Data;
+﻿using Godot;
+using MyGame.Entity.Data;
 using MyGame.Entity.MainBody;
 using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata;
 
 namespace MyGame.Entity.Strategy
 {
@@ -32,7 +34,28 @@ namespace MyGame.Entity.Strategy
             {
                 animationNameData.AnimationName = "run";
             }
-            string AnimationFullName = $"{animationNameData.AnimationName}-{faceDirectionData.FaceDirection}";
+            string suffix;
+            float angle = faceDirectionData.FaceDirection;
+            angle = Mathf.Wrap(angle, -Mathf.Pi, Mathf.Pi);
+
+            if (angle >= -Mathf.Pi / 4 && angle < Mathf.Pi / 4)
+            {
+                suffix = "6";
+            }
+            else if (angle >= Mathf.Pi / 4 && angle < 3 * Mathf.Pi / 4)
+            {
+                suffix = "2";
+            }
+            else if (angle >= 3 * Mathf.Pi / 4 || angle < -3 * Mathf.Pi / 4)
+            {
+                suffix = "4";
+            }
+            else
+            {
+                suffix = "8";
+            }
+
+            string AnimationFullName = $"{animationNameData.AnimationName}-{suffix}";
             entity.AnimationPlayerNode.Play(AnimationFullName);
         }
     }

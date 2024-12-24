@@ -23,7 +23,7 @@ namespace MyGame.Entity.State
 
         protected override void InitializeStrategies()
         {
-            AddStrategy<FourFaceDirection>(StrategyGroup.ProcessStrategy);
+            AddStrategy<FaceDirectionTurning>(StrategyGroup.ProcessStrategy);
             AddStrategy<FourFaceAnimation>(StrategyGroup.ProcessStrategy);
 
             AddStrategy<DefaultVelocity>(StrategyGroup.PhysicsProcessStrategy);
