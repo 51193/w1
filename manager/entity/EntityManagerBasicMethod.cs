@@ -38,7 +38,19 @@ namespace MyGame.Manager
             }
         }
 
+        //This method will free all living entities in next loop, which means they will finish all their rest work in this loop.
         public void ClearAllLivingEntities()
+        {
+            _instances.RemoveAll
+                (i =>
+                {
+                    i.GetNode().QueueFree();
+                    return true;
+                });
+        }
+
+        //This method will free all living entities now, all their rest work will be shut down.
+        public void ShutAllLivingEntities()
         {
             _instances.RemoveAll
                 (i =>

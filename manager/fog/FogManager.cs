@@ -84,7 +84,7 @@ namespace MyGame.Manager
 
             if (!Directory.Exists(folderPath))
             {
-                GD.PrintErr($"Folder does not exist: {folderPath}");
+                GD.Print($"Folder does not exist when loading fog: {folderPath}; Will generate new fog when needed");
                 return;
             }
 

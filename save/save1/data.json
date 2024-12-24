@@ -1,66 +1,7 @@
 {
-  "CurrentMapName": "Map0",
+  "CurrentMapName": "Map1",
   "GlobalEntityInstanceInfo": {
     "Map0": [
-      {
-        "EntityType": "DynamicEntity0",
-        "SaveHead": [
-          {
-            "Type": "MyGame.Entity.Save.BaseSaveComponent",
-            "Property": {
-              "Position": {
-                "X": -31.666672,
-                "Y": 0
-              },
-              "States": {
-                "General": "MyGame.Entity.State.PlayerDefaultState",
-                "Move": "MyGame.Entity.State.PlayerHardwareInputControlState"
-              },
-              "Data": {
-                "MyGame.Entity.Data.SimpleDirectionData": {
-                  "Direction": {
-                    "X": 0,
-                    "Y": 0
-                  },
-                  "RefCount": 3
-                },
-                "MyGame.Entity.Data.SimpleFaceDirectionData": {
-                  "FaceDirection": 6,
-                  "RefCount": 2
-                },
-                "MyGame.Entity.Data.FaceDirectionTimerData": {
-                  "FaceDirectionTransitCooldown": 0.1,
-                  "FaceDirectionTransitTimer": 0.08522727272727244,
-                  "RefCount": 1
-                },
-                "MyGame.Entity.Data.SimpleAnimationNameData": {
-                  "AnimationName": "idle",
-                  "RefCount": 1
-                },
-                "MyGame.Entity.Data.AnimationTimelineData": {
-                  "HaveInitialized": false,
-                  "CurrentAnimationPosition": 0.7212121212121222,
-                  "RefCount": 1
-                },
-                "MyGame.Entity.Data.VelocityWithFrictionData": {
-                  "MaxVelocity": 100,
-                  "Acceleration": 2000,
-                  "Friction": 1000,
-                  "RefCount": 1
-                }
-              }
-            }
-          },
-          {
-            "Type": "MyGame.Entity.Save.CharacterSaveComponent",
-            "Property": {
-              "ItemNameList": [
-                "TestItem0"
-              ]
-            }
-          }
-        ]
-      },
       {
         "EntityType": "Map0Wall0",
         "SaveHead": [
@@ -117,6 +58,66 @@
         ]
       }
     ],
-    "Map1": []
+    "Map1": [
+      {
+        "EntityType": "DynamicEntity0",
+        "SaveHead": [
+          {
+            "Type": "MyGame.Entity.Save.BaseSaveComponent",
+            "Property": {
+              "Position": {
+                "X": 78.67827,
+                "Y": 34.844456
+              },
+              "States": {
+                "General": "MyGame.Entity.State.PlayerDefaultState",
+                "Move": "MyGame.Entity.State.PlayerHardwareInputControlState"
+              },
+              "Data": {
+                "MyGame.Entity.Data.SimpleDirectionData": {
+                  "Direction": {
+                    "X": 0,
+                    "Y": 0
+                  },
+                  "RefCount": 3
+                },
+                "MyGame.Entity.Data.SimpleFaceDirectionData": {
+                  "FaceDirection": 6,
+                  "RefCount": 2
+                },
+                "MyGame.Entity.Data.FaceDirectionTimerData": {
+                  "FaceDirectionTransitCooldown": 0.1,
+                  "FaceDirectionTransitTimer": 0.06361278787878534,
+                  "RefCount": 1
+                },
+                "MyGame.Entity.Data.SimpleAnimationNameData": {
+                  "AnimationName": "idle",
+                  "RefCount": 1
+                },
+                "MyGame.Entity.Data.AnimationTimelineData": {
+                  "HaveInitialized": false,
+                  "CurrentAnimationPosition": 0.4119799999999973,
+                  "RefCount": 1
+                },
+                "MyGame.Entity.Data.VelocityWithFrictionData": {
+                  "MaxVelocity": 100,
+                  "Acceleration": 2000,
+                  "Friction": 1000,
+                  "RefCount": 1
+                }
+              }
+            }
+          },
+          {
+            "Type": "MyGame.Entity.Save.CharacterSaveComponent",
+            "Property": {
+              "ItemNameList": [
+                "TestItem0"
+              ]
+            }
+          }
+        ]
+      }
+    ]
   }
 }

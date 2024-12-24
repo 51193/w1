@@ -49,7 +49,7 @@ namespace MyGame.Manager
 
         public void OnMapFresh(string currentMapName)
         {
-            ClearAllLivingEntities();
+            ShutAllLivingEntities();
             SpawnAllWaitingEntitiesFromMapRecord(currentMapName);
             SetAllLivingEntitiesPhysicsProcess(false);
 

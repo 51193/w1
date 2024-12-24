@@ -139,7 +139,6 @@ namespace MyGame.Manager
             _entityManager.OnMapFresh(saveData.CurrentMapName);
 
             _fogManager.LoadAllFogImagesFromFolder(fogFilePath);
-            //CallDeferred(nameof(_fogManager.TryLoadFog), saveData.CurrentMapName, _mapManager.GetUsedRect());
             _fogManager.TryLoadFog(saveData.CurrentMapName, _mapManager.GetUsedRect());
         }
 
