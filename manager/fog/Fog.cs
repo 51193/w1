@@ -16,15 +16,43 @@ namespace MyGame.Manager
         {
             _fogImage = Image.CreateEmpty(size.X, size.Y, false, Image.Format.Rgba8);
             _fogImage.Fill(Colors.Black);
+
+            if (_fogTexture == null)
+            {
+                _fogTexture = ImageTexture.CreateFromImage(_fogImage);
+            }
+            else
+            {
+                _fogTexture.Update(_fogImage);
+            }
         }
 
         public void ApplyFogImage()
         {
-            _fogTexture = ImageTexture.CreateFromImage(_fogImage);
+            if (_fogImage == null)
+            {
+                GD.PrintErr("Fog image is not initialized before applying.");
+                return;
+            }
+
+            if (_fogTexture == null)
+            {
+                _fogTexture = ImageTexture.CreateFromImage(_fogImage);
+            }
+            else
+            {
+                _fogTexture.Update(_fogImage);
+            }
         }
-        
+
         public void ApplyFogTexture(Vector2I position)
         {
+            if (_fogTexture == null)
+            {
+                GD.PrintErr("Fog texture is not initialized before applying to sprite.");
+                return;
+            }
+
             _fogSprite.Texture = _fogTexture;
             Position = position;
 

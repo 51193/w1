@@ -49,29 +49,6 @@ namespace MyGame.Manager
             _currentFog.EraseFog(bitMap, bitmapPosition);
         }
 
-        public void LoadAllFogImagesFromFolder(string folderPath)
-        {
-            if (!Directory.Exists(folderPath))
-            {
-                GD.PrintErr($"Folder does not exist: {folderPath}");
-                return;
-            }
-
-            string[] files = Directory.GetFiles(folderPath, "*.png");
-            foreach (string filePath in files)
-            {
-                string fileName = Path.GetFileName(filePath);
-                string key = Path.GetFileNameWithoutExtension(fileName);
-
-                Fog fog = _fogTemplate.Instantiate<Fog>();
-                fog.LoadFogImage(filePath);
-
-                _globalFogDictionary[key] = fog;
-            }
-
-            GD.Print($"All fogs loaded from folder: {folderPath}");
-        }
-
         public void SaveAllFogImagesToFolder(string folderPath)
         {
             if (!Directory.Exists(folderPath))
@@ -95,6 +72,35 @@ namespace MyGame.Manager
             }
 
             GD.Print($"All fogs saved to folder: {folderPath}");
+        }
+
+        public void LoadAllFogImagesFromFolder(string folderPath)
+        {
+            foreach(var fog in _globalFogDictionary.Values)
+            {
+                fog.QueueFree();
+            }
+            _globalFogDictionary.Clear();
+
+            if (!Directory.Exists(folderPath))
+            {
+                GD.PrintErr($"Folder does not exist: {folderPath}");
+                return;
+            }
+
+            string[] files = Directory.GetFiles(folderPath, "*.png");
+            foreach (string filePath in files)
+            {
+                string fileName = Path.GetFileName(filePath);
+                string key = Path.GetFileNameWithoutExtension(fileName);
+
+                Fog fog = _fogTemplate.Instantiate<Fog>();
+                fog.LoadFogImage(filePath);
+
+                _globalFogDictionary[key] = fog;
+            }
+
+            GD.Print($"All fogs loaded from folder: {folderPath}");
         }
 
         private static FogManager _instance;

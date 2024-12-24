@@ -675,11 +675,6 @@ animation = &"run-8"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_sc62u")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, 6)
-zoom = Vector2(5, 5)
-limit_smoothed = true
-
 [node name="SpeechBubble" parent="." instance=ExtResource("3_n2a4x")]
 z_index = 4096
 offset_top = -25.0

@@ -6,9 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://bltrxto5377y0" path="res://manager/state/state_instance_manager.tscn" id="3_k5ymc"]
 [ext_resource type="PackedScene" uid="uid://dxb7x8had3y5j" path="res://manager/interface/interface_manager.tscn" id="3_pndir"]
 
-[node name="GamePlay" type="Node" node_paths=PackedStringArray("_mapTransition")]
+[node name="GamePlay" type="Node" node_paths=PackedStringArray("_mapTransition", "_camera2D")]
 script = ExtResource("1_5xubu")
 _mapTransition = NodePath("MapTransition")
+_camera2D = NodePath("Camera2D")
 
 [node name="StrategyInstanceManager" parent="." instance=ExtResource("2_ftf6p")]
 
@@ -17,3 +18,8 @@ _mapTransition = NodePath("MapTransition")
 [node name="InterfaceManager" parent="." instance=ExtResource("3_pndir")]
 
 [node name="MapTransition" parent="." instance=ExtResource("2_2ixxv")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, 6)
+zoom = Vector2(5, 5)
+limit_smoothed = true

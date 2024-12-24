@@ -130,7 +130,7 @@ namespace MyGame.Manager
         public void FromSaveData(string folderPath)
         {
             string dataFilePath = folderPath + "data.json";
-            string fogFilePath = folderPath + "fog";
+            string fogFilePath = folderPath + "fog/";
 
             SaveData saveData = JsonUtil.DeserializeSaveData(FileUtil.ReadFromFile(dataFilePath));
             _currentMapName = saveData.CurrentMapName;
@@ -139,6 +139,7 @@ namespace MyGame.Manager
             _entityManager.OnMapFresh(saveData.CurrentMapName);
 
             _fogManager.LoadAllFogImagesFromFolder(fogFilePath);
+            //CallDeferred(nameof(_fogManager.TryLoadFog), saveData.CurrentMapName, _mapManager.GetUsedRect());
             _fogManager.TryLoadFog(saveData.CurrentMapName, _mapManager.GetUsedRect());
         }
 

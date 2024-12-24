@@ -43,7 +43,7 @@ namespace MyGame.Manager
             _instances.RemoveAll
                 (i =>
                 {
-                    i.GetNode().QueueFree();
+                    i.GetNode().Free();
                     return true;
                 });
         }

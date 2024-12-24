@@ -4,4 +4,4 @@
 
 [node name="SaveManager" type="Node"]
 script = ExtResource("1_1qips")
-_saveFilePath = "save\\"
+_saveFilePath = "save/"

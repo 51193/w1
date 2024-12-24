@@ -9,8 +9,8 @@
             "Type": "MyGame.Entity.Save.BaseSaveComponent",
             "Property": {
               "Position": {
-                "X": 26.932167,
-                "Y": -49.372192
+                "X": -31.666672,
+                "Y": 0
               },
               "States": {
                 "General": "MyGame.Entity.State.PlayerDefaultState",
@@ -25,12 +25,12 @@
                   "RefCount": 3
                 },
                 "MyGame.Entity.Data.SimpleFaceDirectionData": {
-                  "FaceDirection": 8,
+                  "FaceDirection": 6,
                   "RefCount": 2
                 },
                 "MyGame.Entity.Data.FaceDirectionTimerData": {
                   "FaceDirectionTransitCooldown": 0.1,
-                  "FaceDirectionTransitTimer": 0.03444385858585618,
+                  "FaceDirectionTransitTimer": 0.08522727272727244,
                   "RefCount": 1
                 },
                 "MyGame.Entity.Data.SimpleAnimationNameData": {
@@ -39,7 +39,7 @@
                 },
                 "MyGame.Entity.Data.AnimationTimelineData": {
                   "HaveInitialized": false,
-                  "CurrentAnimationPosition": 0.9650654545454562,
+                  "CurrentAnimationPosition": 0.7212121212121222,
                   "RefCount": 1
                 },
                 "MyGame.Entity.Data.VelocityWithFrictionData": {
@@ -104,7 +104,7 @@
                 "Y": -16
               },
               "States": {
-                "OpenState": "MyGame.Entity.State.DoorOpenedState"
+                "OpenState": "MyGame.Entity.State.DoorClosedState"
               },
               "Data": {
                 "MyGame.Entity.Data.InteractionStrategyTypeData": {

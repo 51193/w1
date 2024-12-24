@@ -18,7 +18,8 @@ namespace MyGame.Entity.Strategy
 
         protected override void Activate(BasicDynamicEntity entity, double dt = 0)
         {
-            FogManager.Instance.EraseCurrentFog(GenerateEraseBitmap(new Vector2I(100, 100), 100), (Vector2I)(entity.Position - new Vector2(100, 100)));
+            int radius = 10;
+            FogManager.Instance.EraseCurrentFog(GenerateEraseBitmap(new Vector2I(radius, radius), radius), (Vector2I)(entity.Position - new Vector2(radius, radius)));
         }
 
         private static Image GenerateEraseBitmap(Vector2I center, int radius)

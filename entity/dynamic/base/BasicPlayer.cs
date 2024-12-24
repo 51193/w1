@@ -1,6 +1,7 @@
 ﻿using Godot;
 using MyGame.Entity.Component;
 using MyGame.Interface;
+using MyGame.Manager;
 using System.Collections.Generic;
 
 namespace MyGame.Entity.MainBody
@@ -14,6 +15,7 @@ namespace MyGame.Entity.MainBody
         public override void _Ready()
         {
             this.InitializeInteractableScanner();
+            StageManager.Instance.GamePlayStage.SetCameraTarget(this);
         }
 
         public override void AfterInitialize()
